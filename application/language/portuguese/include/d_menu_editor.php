@@ -14,3 +14,4 @@ $lang['ME_articulos en timeout']							='Artículos en timeout';
 $lang['ME_modificar contenido']							='Modificar Contenido';
 $lang['ME_revistas']							='Revistas';
 $lang['ME_opcion']							='Evaluar revisores';
+$lang['ME_configuracion']							='Configuraciones Generales';

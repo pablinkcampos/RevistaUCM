@@ -23,6 +23,75 @@
        $this->load->view('include/footer');
      }
 
+     public function cambiar_configuracion() {
+        $this->load->view('include/head');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_configuracion');
+        $this->load->view('include/footer');
+     }
+
+     public function insert_configuracion() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            if (isset($_POST['go'])) {
+                $formatos = array('.jpg', '.jpeg', '.png', '.tiff', '.JPG', '.JPEG', '.PNG', '.TIFF');
+                $nombrearchivo = $_FILES['image_revista']['name'];
+                $ext = '.' . pathinfo($nombrearchivo, PATHINFO_EXTENSION);
+                $nombretemparchivo = $_FILES['image_revista']['tmp_name'];
+                if (in_array($ext, $formatos)) {
+                    if (move_uploaded_file($nombretemparchivo, "img/logo.png") == true) {
+                        $form['titulo_revista'] = $this->input->post('t_rev');
+                        $form['fecha_publicacion'] = $this->input->post('f_rev');
+                        $form['logo_revista'] = $name_rev;
+
+                        if ($this->Articulo_Model->new_magazine($form) == true) {
+                           $aviso = array('title' => '¡Revista creada!',
+                               'text' => 'Ha creado una revista',
+                               'tipoaviso' => 'success',
+                               'windowlocation' => base_url() . "index.php/System/editor_magazine"
+                           );
+                           $this->load->view('include/aviso', $aviso);
+                           $this->load->view('include/footer_esencial');
+                        } else {
+                            echo '<script type="text/javascript">';
+                            echo 'setTimeout(function () { swal("Opsss... ocurrio un error","","error");';
+                            echo '}, 350);</script>';
+                            $this->load->view('include/head');
+                            $this->load->view('include/header_editor');
+                            $this->load->view('view_home_editor');
+                            $this->load->view('include/footer');
+                        }
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta mas tarde. De persistir favor contactarnos.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+                } else {
+                    echo '<script type="text/javascript">';
+                    echo 'setTimeout(function () { swal("Formato no Admitido","Formatos aceptados: Jpeg, Png, Jpg y Tiff","warning");';
+                    echo '}, 350);</script>';
+
+                    $this->load->view('include/head');
+                    $this->load->view('include/header_editor');
+                    $this->load->view('view_newm');
+                    $this->load->view('include/footer');
+                }
+            }
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
      public function mod_articulo($id_articulo){
         $data["campo"] = $this->Articulo_Model->campos_investigacion();
         $data["datos"] = $this->Articulo_Model->articulo($id_articulo);
