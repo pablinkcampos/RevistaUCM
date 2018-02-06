@@ -257,6 +257,24 @@
          }
      }
 
+     public function editor_cambia_mensaje_a() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $data["texto"] = $this->Articulo_Model->obtener_contenido("mensaje aceptacion");
+            $this->load->view('view_modificar_mensaje_aceptacion', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
      public function insert_logo() {
          $user_data = $this->session->userdata('userdata');
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
@@ -1008,6 +1026,39 @@
              $this->load->view('include/aviso', $aviso);
          }
      }
+
+     public function modifica_mensaje_aceptacion() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['texto_espanol'] = $this->input->post('ta_ma');
+            $nosotros = "mensaje aceptacion";
+                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                       $aviso = array('title' => '¡Información cambiada!',
+                           'text' => 'Hecho.',
+                           'tipoaviso' => 'success',
+                           'windowlocation' => base_url() . "index.php/System/editor_contenido"
+                       );
+                       $this->load->view('include/aviso', $aviso);
+                       $this->load->view('include/footer_esencial');
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta más tarde.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+        } else {
+            $aviso = array('title' => 'Acceso denegado',
+                'text' => 'Acceso denegado',
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
 
      public function editar_revista() {
        $this->load->view('include/head');

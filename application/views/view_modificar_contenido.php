@@ -14,8 +14,10 @@
                 <a href="<?php echo base_url(); ?>index.php/System/editor_modificar_politica_editorial" class="button button-3d button-rounded button-green center"><?php echo lang('vmc_politicas editorial');?></a>
                 <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_imagen" class="button button-3d button-rounded button-red center"><?php echo lang('vmc_logo del sistema');?></a>
                 <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_plantilla" class="button button-3d button-rounded button-yellow center"><?php echo lang('vmc_estructura base');?></a>
-
+                <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_plantilla" class="button button-3d button-rounded button-blue center"><?php echo lang('vmc_Mensaje recepcion de articulos');?></a>
+                <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_mensaje_a" class="button button-3d button-rounded button-red center"><?php echo lang('vmc_Mensaje aceptacion de articulo');?></a>
                 <a href="<?php echo base_url(); ?>index.php/System/editor_crud_campos" class="button button-3d button-rounded button-brown center">Editar Campos de Investigación</a>
+                <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_plantilla" class="button button-3d button-rounded button-blue center"><?php echo lang('vmc_Mensaje publicacion efectiva');?></a>
             </div>
 
         </div>
