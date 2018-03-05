@@ -99,6 +99,12 @@ include 'views/d_view_registro_revisor.php';
 include 'views/d_view_registro_revisor_a_autor.php';
 include 'views/d_view_revista_en_sesion.php';
 include 'views/d_view_revistas.php';
+include 'views/d_view_configuracion.php';
+include 'views/d_view_modificar_mensaje_aceptacion.php';
+include 'views/d_view_modificar_mensaje_publicacion.php';
+include 'views/d_view_modificar_mensaje_recepcion.php';
+include 'views/d_view_modificar_datos_revista.php';
+
 
 //views articulo
 

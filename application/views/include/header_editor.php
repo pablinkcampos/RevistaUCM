@@ -106,7 +106,7 @@
                             <li><a href="<?php echo base_url(); ?>index.php/System/editor"><div> <?php echo lang('HE_pagina de inicio'); ?> </div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><div> <?php echo lang('HE_sobre nosotros'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><div> <?php echo lang('HE_politica editorial'); ?></div></a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HE_numeros publicados'); ?></div></a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HE_Publicación efectiva'); ?></div></a></li>
 
                         </ul>
                         <!--

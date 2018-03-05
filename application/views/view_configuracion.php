@@ -26,7 +26,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vc_diamaxarti');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="m_art" value="" id="m_art" placeholder="<?php echo lang('vc_diamaxartip');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                                <input type="text" class="form-control" name="max_dia_asig_art" value="" id="max_dia_asig_art" placeholder="<?php echo lang('vc_diamaxartip');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
                             </div>
                         </div>
                         <div class="form-group col_full">
@@ -34,7 +34,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vc_canmaxrevi');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="number" max=3 min=1 class="form-control" name="m_rev" value="" id="m_rev" placeholder="<?php echo lang('vc_canmaxrevip');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                                <input type="number" max=3 min=1 class="form-control" name="max_revi_art" value="" id="max_revi_art" placeholder="<?php echo lang('vc_canmaxrevip');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
                             </div>
                         </div>
                         <div class="form-group col_full">
@@ -42,7 +42,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vc_diamax');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="number" max=30 min=1 class="form-control" name="m_dia" value="" id="m_dia" placeholder="<?php echo lang('vc_diamaxp');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                                <input type="number" max=30 min=1 class="form-control" name="max_dia_res_art" value="" id="max_dia_res_art" placeholder="<?php echo lang('vc_diamaxp');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
                             </div>
                         </div>
 
@@ -51,7 +51,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vc_diamaxri');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="number" max=30 min=1 class="form-control" name="m_diar" value="" id="m_diar" placeholder="<?php echo lang('vc_diamaxri');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                                <input type="number" max=30 min=1 class="form-control" name="max_dia_edi_rev_art" value="" id="max_dia_edi_rev_art" placeholder="<?php echo lang('vc_diamaxri');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
                             </div>
                         </div>
 

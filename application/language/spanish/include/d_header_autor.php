@@ -26,6 +26,6 @@ $lang['HA_adios']				='Adiós';
 $lang['HA_pagina de inicio']							='página de inicio';
 $lang['HA_sobre nosotros']							='Sobre nosotros';
 $lang['HA_politica editorial']					='Política editorial';
-$lang['HA_numeros publicados']					='Números publicados';
+$lang['HA_Publicación efectiva']					='Publicación efectiva';
 $lang['HA_consulta arbitraje']					='Consulta Arbitraje';
 $lang['HA_contacto']							='Contacto';

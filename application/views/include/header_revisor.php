@@ -113,7 +113,7 @@
                             <li><a href="<?php echo base_url(); ?>"><div><?php echo lang('HR_pagina de inicio');?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><div><?php echo lang('HR_sobre nosotros');?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><div><?php echo lang('HR_politica editorial');?></div></a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div><?php echo lang('HR_numeros publicados');?></div></a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div><?php echo lang('HR_Publicación efectiva');?></div></a></li>
 
                         </ul>
                         <!--

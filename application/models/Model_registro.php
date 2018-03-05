@@ -34,6 +34,15 @@ class Model_registro extends CI_Model {
           return false;
       }
     }
+    function ingresar_lector_login($data) {
+        $this->db->insert('login', $data);
+  
+        if($this->db->affected_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
+      }
 
     function ingresar_revisor($data) {
       $this->db->insert('revisor', $data);
@@ -44,6 +53,16 @@ class Model_registro extends CI_Model {
           return false;
       }
     }
+
+    function ingresar_lector($data) {
+        $this->db->insert('lector', $data);
+  
+        if($this->db->affected_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
+      }
     function ingresar_nuevo_campo_usuario($data) {
       $this->db->insert('campo_usuario', $data);
 
@@ -53,6 +72,16 @@ class Model_registro extends CI_Model {
           return false;
       }
     }
+
+    function ingresar_nuevo_tema_usuario($data) {
+        $this->db->insert('temas_usuario', $data);
+  
+        if($this->db->affected_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
+      }
 
     function ingresar_nuevo_campo_revisor($data) {
       $this->db->insert('campo_revisor', $data);
@@ -96,6 +125,21 @@ class Model_registro extends CI_Model {
       }
     }
 
+    function get_id_lector($correo)
+    {
+      $query = $this->db->query("SELECT ID from lector WHERE email = ?", array($correo));
+
+      $result = $query->row();
+
+      if ($result)
+      {
+          return $result;
+      }
+      else
+      {
+          return false;
+      }
+    }
     function get_existe_usuario($correo)
     {
       $query = $this->db->query("SELECT correo from login WHERE correo = ?", array($correo));

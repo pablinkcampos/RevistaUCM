@@ -7,6 +7,7 @@
      function __construct() {
          parent::__construct();
          $this->load->model('Articulo_Model');
+         $this->load->model('Configuracion_Model');
          $this->load->model('Model_for_login');
          $this->load->library('grocery_CRUD');
      }
@@ -30,59 +31,45 @@
         $this->load->view('include/footer');
      }
 
-     public function insert_configuracion() {
+     public function agregar_configuracion() {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
             if (isset($_POST['go'])) {
-                $formatos = array('.jpg', '.jpeg', '.png', '.tiff', '.JPG', '.JPEG', '.PNG', '.TIFF');
-                $nombrearchivo = $_FILES['image_revista']['name'];
-                $ext = '.' . pathinfo($nombrearchivo, PATHINFO_EXTENSION);
-                $nombretemparchivo = $_FILES['image_revista']['tmp_name'];
-                if (in_array($ext, $formatos)) {
-                    if (move_uploaded_file($nombretemparchivo, "img/logo.png") == true) {
-                        $form['titulo_revista'] = $this->input->post('t_rev');
-                        $form['fecha_publicacion'] = $this->input->post('f_rev');
-                        $form['logo_revista'] = $name_rev;
+                $form['max_dia_asig_art'] = $this->input->post('max_dia_asig_art');
+                $form['max_revi_art'] = $this->input->post('max_revi_art');
+                $form['max_dia_res_art'] = $this->input->post('max_dia_res_art');
+                $form['max_dia_edi_rev_art'] = $this->input->post('max_dia_edi_rev_art');
 
-                        if ($this->Articulo_Model->new_magazine($form) == true) {
-                           $aviso = array('title' => '¡Revista creada!',
-                               'text' => 'Ha creado una revista',
-                               'tipoaviso' => 'success',
-                               'windowlocation' => base_url() . "index.php/System/editor_magazine"
-                           );
-                           $this->load->view('include/aviso', $aviso);
-                           $this->load->view('include/footer_esencial');
-                        } else {
-                            echo '<script type="text/javascript">';
-                            echo 'setTimeout(function () { swal("Opsss... ocurrio un error","","error");';
-                            echo '}, 350);</script>';
-                            $this->load->view('include/head');
-                            $this->load->view('include/header_editor');
-                            $this->load->view('view_home_editor');
-                            $this->load->view('include/footer');
-                        }
-                    } else {
-                        echo '<script type="text/javascript">';
-                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta mas tarde. De persistir favor contactarnos.","error");';
-                        echo '}, 350);</script>';
-
-                        $this->load->view('include/head');
-                        $this->load->view('include/header_editor');
-                        $this->load->view('view_home_editor');
-                        $this->load->view('include/footer');
-                    }
+                if ($this->Configuracion_Model->insert_configuracion($form) == true) {
+                    $aviso = array('title' => '¡configuración creada!',
+                    'text' => 'Ha creado una nueva configuración del sistema',
+                    'tipoaviso' => 'success',
+                    'windowlocation' => base_url() . "index.php/System/editor_magazine"
+                );
+                $this->load->view('include/aviso', $aviso);
+                $this->load->view('include/footer_esencial');
                 } else {
                     echo '<script type="text/javascript">';
-                    echo 'setTimeout(function () { swal("Formato no Admitido","Formatos aceptados: Jpeg, Png, Jpg y Tiff","warning");';
+                    echo 'setTimeout(function () { swal("Opsss... ocurrio un error","","error");';
+                    echo '}, 350);</script>';
+                    $this->load->view('include/head');
+                    $this->load->view('include/header_editor');
+                    $this->load->view('view_home_editor');
+                    $this->load->view('include/footer');
+                }
+                    
+            } else {
+                    echo '<script type="text/javascript">';
+                    echo 'setTimeout(function () { swal("problema al enviar informacion","warning");';
                     echo '}, 350);</script>';
 
                     $this->load->view('include/head');
                     $this->load->view('include/header_editor');
                     $this->load->view('view_newm');
                     $this->load->view('include/footer');
-                }
             }
-        } else {
+        }    
+        else {
             $aviso = array('title' => lang("tswal_acceso denegado"),
                 'text' => lang("cswal_acceso denegado"),
                 'tipoaviso' => 'error',
@@ -90,6 +77,7 @@
             );
             $this->load->view('include/aviso', $aviso);
         }
+    
     }
 
      public function mod_articulo($id_articulo){
@@ -275,6 +263,64 @@
         }
     }
 
+    public function editor_cambia_datos_r() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $data["editor"] = $this->Articulo_Model->obtener_contenido("editor");
+            $data["coeditor"] = $this->Articulo_Model->obtener_contenido("coeditor");
+            $data["comite_editor"] = $this->Articulo_Model->obtener_contenido("comite editor");
+            $data["comite_editor_asesor"] = $this->Articulo_Model->obtener_contenido("comite editor asesor");
+            $data["produccion_editorial"] = $this->Articulo_Model->obtener_contenido("produccion editorial");
+            $this->load->view('view_modificar_datos_revista', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+
+    public function editor_cambia_mensaje_r() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $data["texto"] = $this->Articulo_Model->obtener_contenido("mensaje recepcion");
+            $this->load->view('view_modificar_mensaje_recepcion', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function editor_cambia_mensaje_p() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $data["texto"] = $this->Articulo_Model->obtener_contenido("mensaje publicacion");
+            $this->load->view('view_modificar_mensaje_publicacion', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
      public function insert_logo() {
          $user_data = $this->session->userdata('userdata');
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
@@ -405,6 +451,24 @@
         $this->load->view('include/head_gc');
         $this->load->view('include/header_editor');
         $this->load->view('view_modificar_campos',$output);
+        $this->load->view('include/footer');
+
+     }
+     public function editor_crud_temas(){
+        $crud = new grocery_CRUD();
+        $crud->set_theme('bootstrap');
+        $crud->set_table('temas');
+        $crud->set_relation('nombre_campo', 'campo_investigacion', 'nombre_campo');
+        $crud->set_language('spanish');
+        $crud->unset_read();
+        $crud->unset_export();
+        $crud->unset_print();
+        $crud->set_crud_url_path(site_url('index.php/System/editor_crud_temas'));
+        $output = $crud->render();
+
+        $this->load->view('include/head_gc');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_modificar_temas',$output);
         $this->load->view('include/footer');
 
      }
@@ -1032,6 +1096,125 @@
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
             $data['texto_espanol'] = $this->input->post('ta_ma');
             $nosotros = "mensaje aceptacion";
+                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                       $aviso = array('title' => '¡Información cambiada!',
+                           'text' => 'Hecho.',
+                           'tipoaviso' => 'success',
+                           'windowlocation' => base_url() . "index.php/System/editor_contenido"
+                       );
+                       $this->load->view('include/aviso', $aviso);
+                       $this->load->view('include/footer_esencial');
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta más tarde.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+        } else {
+            $aviso = array('title' => 'Acceso denegado',
+                'text' => 'Acceso denegado',
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function modifica_datos_revista() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['texto_espanol'] = $this->input->post('ta_e');
+            $nosotros = "editor";
+            $ok=$this->Articulo_Model->upd_contenido($nosotros, $data);
+           
+            $data['texto_espanol'] = $this->input->post('ta_ce');
+            $nosotros = "coeditor";
+            $ok= $this->Articulo_Model->upd_contenido($nosotros, $data);
+           
+
+            $data['texto_espanol'] = $this->input->post('ta_cea');
+            $nosotros = "comite editor asesor";
+            $this->Articulo_Model->upd_contenido($nosotros, $data);
+            
+            $data['texto_espanol'] = $this->input->post('ta_coe');
+            $nosotros = "comite editor asesor";
+            $ok=$this->Articulo_Model->upd_contenido($nosotros, $data);
+            
+            $data['texto_espanol'] = $this->input->post('ta_pe');
+            $nosotros = "produccion editorial";
+
+
+                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                       $aviso = array('title' => '¡Información cambiada!',
+                           'text' => 'Hecho.',
+                           'tipoaviso' => 'success',
+                           'windowlocation' => base_url() . "index.php/System/editor_contenido"
+                       );
+                       $this->load->view('include/aviso', $aviso);
+                       $this->load->view('include/footer_esencial');
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta más tarde.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+        } else {
+            $aviso = array('title' => 'Acceso denegado',
+                'text' => 'Acceso denegado',
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function modifica_mensaje_recepcion() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['texto_espanol'] = $this->input->post('ta_mr');
+            $nosotros = "mensaje recepcion";
+                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                       $aviso = array('title' => '¡Información cambiada!',
+                           'text' => 'Hecho.',
+                           'tipoaviso' => 'success',
+                           'windowlocation' => base_url() . "index.php/System/editor_contenido"
+                       );
+                       $this->load->view('include/aviso', $aviso);
+                       $this->load->view('include/footer_esencial');
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta más tarde.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+        } else {
+            $aviso = array('title' => 'Acceso denegado',
+                'text' => 'Acceso denegado',
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+
+    public function modifica_mensaje_publicacion() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['texto_espanol'] = $this->input->post('ta_mp');
+            $nosotros = "mensaje publicacion";
                     if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
                        $aviso = array('title' => '¡Información cambiada!',
                            'text' => 'Hecho.',

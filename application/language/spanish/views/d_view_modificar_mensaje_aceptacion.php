@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-//prefijo: vma_
+//prefijo: vmma_
 
-$lang['vma_modificar_mensaje'] ='Modificar Mensaje de Aceptación de Artículo en versión final';
-$lang['vma_ingrese_texto']		= 'Ingrese Mensaje';
-$lang['vma_modificar']			='Modificar';
+$lang['vmma_modificar mensaje']							='Modificar Mensaje de Aceptación de Artículo en versión final';
+$lang['vmma_ingrese_texto']							='Ingrese Mensaje';
+$lang['vmma_modificar']							='Modificar';

@@ -111,7 +111,7 @@
                             <li><a href="<?php echo base_url(); ?>"><div> <?php echo lang('HA_pagina de inicio'); ?> </div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><div> <?php echo lang('HA_sobre nosotros'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><div> <?php echo lang('HA_politica editorial'); ?></div></a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HA_numeros publicados'); ?></div></a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HA_Publicación efectiva'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/plantilla"><div> <?php echo lang('HP_base'); ?></div></a></li>
                         </ul>
                         </ul>

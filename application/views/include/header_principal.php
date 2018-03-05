@@ -44,8 +44,8 @@
                             <i class="i-medium i-circled i-bordered icon-thumbs-up2 nomargin"></i>
 
                             <div class="he-text">
-                                <?php echo lang('HP_autor'); ?>
-                                <span><?php echo lang('HP_registro'); ?></span>
+                                <?php echo lang('HP_envio'); ?>
+                                <span><?php echo lang('HP_articulo'); ?></span>
                             </div>
                         </a>
                     </li>
@@ -54,8 +54,19 @@
                             <i class="i-medium i-circled i-bordered icon-thumbs-up2 nomargin"></i>
 
                             <div class="he-text">
-                                <?php echo lang('HP_revisor'); ?>
-                                <span><?php echo lang('HP_registro'); ?></span>
+                                <?php echo lang('HP_cadastro'); ?>
+                                <span><?php echo lang('HP_revisor'); ?></span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>index.php/registro_lector">
+                            <i class="i-medium i-circled i-bordered icon-thumbs-up2 nomargin"></i>
+
+                            <div class="he-text">
+                                <?php echo lang('HP_registro'); ?>
+                                <span><?php echo lang('HP_lector'); ?></span>
                             </div>
                         </a>
                     </li>
@@ -64,8 +75,8 @@
                             <i class="i-medium i-circled i-bordered icon-truck2 nomargin"></i>
 
                             <div class="he-text">
-                                <?php echo lang('HP_login'); ?>
-                                <span><?php echo lang('HP_inicia sesion'); ?></span>
+                                <?php echo lang('HP_inicia sesion'); ?>
+                                
                             </div>
                         </a>
                     </li>
@@ -82,7 +93,7 @@
                             <li><a href="<?php echo base_url(); ?>"><div> <?php echo lang('HP_pagina de inicio'); ?> </div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><div> <?php echo lang('HP_sobre nosotros'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><div> <?php echo lang('HP_politica editorial'); ?></div></a></li>
-                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HP_numeros publicados'); ?></div></a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HP_Publicación efectiva'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/plantilla"><div> <?php echo lang('HP_base'); ?></div></a></li>
                         </ul>
                     </div>

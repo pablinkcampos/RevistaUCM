@@ -11,3 +11,4 @@ $lang['vmc_estructura base']							='Estructura Base';
 $lang['vmc_Mensaje recepcion de articulos']							='Mensaje estándar de Recepción de Artículos';
 $lang['vmc_Mensaje aceptacion de articulo']							='Mensaje estándar de Aceptación del Artículo en su versión final';
 $lang['vmc_Mensaje publicacion efectiva']							='Mensaje estándar de Publicación efectiva';
+$lang['vmc_datos_revista']							='Datos Revista';

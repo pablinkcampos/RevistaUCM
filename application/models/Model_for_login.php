@@ -76,6 +76,19 @@ class Model_for_login extends CI_Model {
         }
     }
 
+    function get_temas() {
+        $this->db->select('*');
+        $this->db->from('temas');
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return FALSE;
+        }
+    }
+
     function modify_pass($correo) {
         $query = $this->db->query("UPDATE login SET clave = ? WHERE correo = ?", array($correo['clave'], $correo['correo']));
 

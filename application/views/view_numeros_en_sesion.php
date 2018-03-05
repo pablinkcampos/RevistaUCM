@@ -254,7 +254,7 @@ left:0;
         <div class="sidebar nobottommargin clearfix">
             <div class="sidebar-widgets-wrap">
                 <div class="widget clearfix">
-                        <a href="<?php echo base_url(); ?>img/img_num_publi.jpg" data-lightbox="image"><img class="image_fade" src="<?php echo base_url(); ?>img/img_num_publi.JPG" alt="NÚmeros publicados"></a>
+                        <a href="<?php echo base_url(); ?>img/img_num_publi.jpg" data-lightbox="image"><img class="image_fade" src="<?php echo base_url(); ?>img/img_num_publi.JPG" alt="Publicación efectiva"></a>
                 </div>
             </div>
         </div>
