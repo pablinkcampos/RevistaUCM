@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2018 a las 07:10:04
+-- Tiempo de generación: 05-03-2018 a las 08:17:02
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.0.27
 
@@ -109,8 +109,17 @@ CREATE TABLE `configuracion` (
   `max_dia_asig_art` int(11) NOT NULL,
   `max_revi_art` int(11) NOT NULL,
   `max_dia_res_art` int(11) NOT NULL,
-  `max_dia_edi_rev_art` int(11) NOT NULL
+  `max_dia_edi_rev_art` int(11) NOT NULL,
+  `fecha_configuracion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `configuracion`
+--
+
+INSERT INTO `configuracion` (`id_configuracion`, `max_dia_asig_art`, `max_revi_art`, `max_dia_res_art`, `max_dia_edi_rev_art`, `fecha_configuracion`) VALUES
+(1, 1, 2, 3, 4, '2018-02-06 06:46:24'),
+(2, 1, 2, 3, 4, '2018-02-14 01:35:39');
 
 -- --------------------------------------------------------
 
@@ -130,9 +139,17 @@ CREATE TABLE `contenidos` (
 --
 
 INSERT INTO `contenidos` (`contenido`, `texto_espanol`, `texto_ingles`, `texto_portugues`) VALUES
+('coeditor', '<p>Pablo Campos 2</p>\r\n', 'co-edit', 'co-editiñao'),
+('comite editor', 'comite editor', 'comite editor', 'comite editor'),
+('comite editor asesor', '<p>Pablo Campos 1</p>\r\n\r\n<p>Pablo Campos 2</p>\r\n\r\n<p>Pablo Campos 3</p>\r\n', 'comite editor asesor', 'comite editor asesor'),
+('editor', '<p>Pablo Campos</p>\r\n', 'edit', 'editiño'),
+('mensaje aceptación', '<p>mensaje por defecto</p>\r\n', '', ''),
+('mensaje publicacion', 'mensaje por defecto', '', ''),
+('mensaje recepcion', '<p>se ha recepcionado el art&iacute;culo satisfactoriamente</p>\r\n', '', ''),
 ('nosotros', '<p align=\"justify\"><b>Bienvenidos a la Revista Educación de Calidad en Ingeneiría</b> ,  una revista electrónica   publicada en español y portugués por la Facultad de Ciencias de la Ingeniería de la Universidad Católica del Maule.  La revista \r\n publica trabajos originales e innovadores   de académicos y profesionales que contribuyan, desde diferentes perpectivas,  con la calidad de los resultados  del proceso formativo de ingeniería.</p>\r\n\r\n<p align=\"justify\">La revista fue  creada en 2017  con el propósito de difundir un amplio espectro de temas relacionados, por ejemplo,   con  la formación de los estudiantes de ingeniería, la gestión curricular, experiencias de enseñanza aprendizaje,  vinculación con el medio, y efectividad y resultados del proceso de  formativo.  </p>', 'Changed to english', 'cambious to portuguese'),
 ('numeros', 'Algo de utilidad puede tener, añadir lo que se desee en este item.', 'Changed to English', 'Camboya to portugueses'),
-('politicas', '<!DOCTYPE html>\r\n<html>\r\n 	<body align=\"justify\">\r\n<h2> Normas y políticas editoriales</h2>\r\n		<ol>\r\n			<li>Exclusividad</li>\r\n				<ul>\r\n					<li>Los artículos deben ser resultado de investigaciones de alto nivel académico y/o profesional, que aportan conocimiento original e inédito</li>\r\n					<li> El artículo enviado a la revista no deben estar en proceso de evaluación en otra revista</li>\r\n					<li>Todo colaborador deberá entregar firmada una “Declaración de originalidad del trabajo escrito”, cuyo formato está disponible en la guía del autor</li>\r\n					<li>Se admiten textos en español y portugués. </li>\r\n				</ul>\r\n<br>\r\n			<li>Evaluación</li>\r\n				<ul>	                                     \r\n<li>Todos los artículos serán sometidos a una valoración editorial preliminar por parte del Comité de Redacción, que se reserva el derecho de determinar si los artículos se ajustan a las líneas de interés de la Revista y cumplen con los requisitos indispensables de un artículo científico, así como con todos y cada uno de los lineamientos editoriales aquí establecidos.</li>\r\n 					<li>Las resoluciones del proceso de dictamen son</li>\r\n                                             <ul>\r\n					                     <li>Aprobado para publicar sin cambios</li>\r\n					                       <li>Condicionado a cambios obligatorios sujeto a reenvío. El editor informa  un plazo máximo para enviar las modificaciones. Las correcciones  se colocan al final del archivo, explican los ajustes realizado. Independiente de las evaluaciones de los revisores, el editor tiene la  última opción de aceptar o rechazar el artículo. el autor deberá atender puntualmente las observaciones, adiciones, correcciones, ampliaciones o aclaraciones sugeridas por los árbitros. La/el autor/a tendrá como máximo treinta días naturales como límite para hacer las correcciones. Una vez que el artículo sea corregido siguiendo las recomendaciones, será remitido a los dictaminadores y serán ellos quienes lo consideren finalmente publicable</li>\r\n					                          <li>Rechazado. </li>\r\n                                        </ul>\r\n                       <br>\r\n\r\n                                        </ul>\r\n\r\n			<li>Publicación</li>\r\n				<ul>\r\n					<li>El trabajo podrá ser publicado siempre y cuando su contenido sea compatible con los tiempos, líneas editoriales y temáticas que la Revista dicte en su momento.</li>\r\n					<li> Todo colaborador deberá entregar firmada una “Declaración de originalidad del trabajo escrito”, cuyo formato está disponible en la guía del autor</li>\r\n				</ul>\r\n\r\n\r\n\r\n<br>\r\n			<li>Corrección y edición</li>\r\n				<ul>\r\n					<li>La Revista  Educación de Calidad en Ingeniería se reserva el derecho de incorporar los cambios editoriales y las correcciones de estilo que considere pertinentes de conformidad con los criterios de la Editora y/o de su Comité de Redacción</li>\r\n					 \r\n				</ul>\r\n\r\n\r\n\r\n\r\n\r\n<br>\r\n			<li>Cesión de derechos y difusión del material publicado</li>\r\n				<ul>\r\n					<li>La publicación del artículo implica la cesión por parte de la/el autor/a de los derechos patrimoniales de su artículo, así como su permiso a difundirlo por los medios que se consideren pertinentes, ya sean impresos o electrónicos. Para tal efecto, una vez aceptado el trabajo para su publicación, cada autor deberá firmar una carta de cesión de derechos.</li>\r\n					<li>Sin la \"carta de cesión de derechos\"  no se podrá proceder a la publicación del material</li>\r\n                                         <li>La Revista  autoriza a sus colaboradores a que ofrezcan en sus webs personales o en cualquier repositorio de acceso abierto, una copia de sus trabajos publicados siempre y cuando se mencione específicamente a la Revista Educación de Calidad en Ingeniería como fuente original de procedencia, citando el año y número del ejemplar respectivo y añadiendo el enlace a la página web  de la revista. </li>\r\n				</ul>\r\n\r\n\r\n\r\n\r\n\r\n<br>\r\n			<li>Información para autoras/es</li>\r\n				<ul>\r\n					<li>Descargar la guía del autor: http://45.55.94.205/mak_hum/index.php/Home_principal/plantilla</li>\r\n					 \r\n				</ul>\r\n\r\n\r\n		</ol>\r\n		\r\n	</body>\r\n</html> ', 'Changed to english', 'cambuite to portuguese');
+('politicas', '<!DOCTYPE html>\r\n<html>\r\n 	<body align=\"justify\">\r\n<h2> Normas y políticas editoriales</h2>\r\n		<ol>\r\n			<li>Exclusividad</li>\r\n				<ul>\r\n					<li>Los artículos deben ser resultado de investigaciones de alto nivel académico y/o profesional, que aportan conocimiento original e inédito</li>\r\n					<li> El artículo enviado a la revista no deben estar en proceso de evaluación en otra revista</li>\r\n					<li>Todo colaborador deberá entregar firmada una “Declaración de originalidad del trabajo escrito”, cuyo formato está disponible en la guía del autor</li>\r\n					<li>Se admiten textos en español y portugués. </li>\r\n				</ul>\r\n<br>\r\n			<li>Evaluación</li>\r\n				<ul>	                                     \r\n<li>Todos los artículos serán sometidos a una valoración editorial preliminar por parte del Comité de Redacción, que se reserva el derecho de determinar si los artículos se ajustan a las líneas de interés de la Revista y cumplen con los requisitos indispensables de un artículo científico, así como con todos y cada uno de los lineamientos editoriales aquí establecidos.</li>\r\n 					<li>Las resoluciones del proceso de dictamen son</li>\r\n                                             <ul>\r\n					                     <li>Aprobado para publicar sin cambios</li>\r\n					                       <li>Condicionado a cambios obligatorios sujeto a reenvío. El editor informa  un plazo máximo para enviar las modificaciones. Las correcciones  se colocan al final del archivo, explican los ajustes realizado. Independiente de las evaluaciones de los revisores, el editor tiene la  última opción de aceptar o rechazar el artículo. el autor deberá atender puntualmente las observaciones, adiciones, correcciones, ampliaciones o aclaraciones sugeridas por los árbitros. La/el autor/a tendrá como máximo treinta días naturales como límite para hacer las correcciones. Una vez que el artículo sea corregido siguiendo las recomendaciones, será remitido a los dictaminadores y serán ellos quienes lo consideren finalmente publicable</li>\r\n					                          <li>Rechazado. </li>\r\n                                        </ul>\r\n                       <br>\r\n\r\n                                        </ul>\r\n\r\n			<li>Publicación</li>\r\n				<ul>\r\n					<li>El trabajo podrá ser publicado siempre y cuando su contenido sea compatible con los tiempos, líneas editoriales y temáticas que la Revista dicte en su momento.</li>\r\n					<li> Todo colaborador deberá entregar firmada una “Declaración de originalidad del trabajo escrito”, cuyo formato está disponible en la guía del autor</li>\r\n				</ul>\r\n\r\n\r\n\r\n<br>\r\n			<li>Corrección y edición</li>\r\n				<ul>\r\n					<li>La Revista  Educación de Calidad en Ingeniería se reserva el derecho de incorporar los cambios editoriales y las correcciones de estilo que considere pertinentes de conformidad con los criterios de la Editora y/o de su Comité de Redacción</li>\r\n					 \r\n				</ul>\r\n\r\n\r\n\r\n\r\n\r\n<br>\r\n			<li>Cesión de derechos y difusión del material publicado</li>\r\n				<ul>\r\n					<li>La publicación del artículo implica la cesión por parte de la/el autor/a de los derechos patrimoniales de su artículo, así como su permiso a difundirlo por los medios que se consideren pertinentes, ya sean impresos o electrónicos. Para tal efecto, una vez aceptado el trabajo para su publicación, cada autor deberá firmar una carta de cesión de derechos.</li>\r\n					<li>Sin la \"carta de cesión de derechos\"  no se podrá proceder a la publicación del material</li>\r\n                                         <li>La Revista  autoriza a sus colaboradores a que ofrezcan en sus webs personales o en cualquier repositorio de acceso abierto, una copia de sus trabajos publicados siempre y cuando se mencione específicamente a la Revista Educación de Calidad en Ingeniería como fuente original de procedencia, citando el año y número del ejemplar respectivo y añadiendo el enlace a la página web  de la revista. </li>\r\n				</ul>\r\n\r\n\r\n\r\n\r\n\r\n<br>\r\n			<li>Información para autoras/es</li>\r\n				<ul>\r\n					<li>Descargar la guía del autor: http://45.55.94.205/mak_hum/index.php/Home_principal/plantilla</li>\r\n					 \r\n				</ul>\r\n\r\n\r\n		</ol>\r\n		\r\n	</body>\r\n</html> ', 'Changed to english', 'cambuite to portuguese'),
+('produccion editorial', '<p>Pablo Campos</p>\r\n', 'produccion editorial', 'produccion editorial');
 
 -- --------------------------------------------------------
 
@@ -190,6 +207,33 @@ INSERT INTO `final_magazine` (`ID`, `ID_articulo`, `ID_magazine`, `titulo`, `pag
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `lector`
+--
+
+CREATE TABLE `lector` (
+  `ID` int(11) NOT NULL,
+  `email` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_1` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido_2` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `titulo_academico` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `organizacion` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(250) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `lector`
+--
+
+INSERT INTO `lector` (`ID`, `email`, `nombre`, `apellido_1`, `apellido_2`, `titulo_academico`, `organizacion`, `telefono`) VALUES
+(1, 'x_pablo_acm@hotmail.cpm', 'pablo', 'lector', 'lector', 'estudiante', 'ucm', '123456789'),
+(2, 'x_pablo_acm@hotmail.com', 'pablo', 'lector', 'lector', 'alumno', 'ucm', '123456789'),
+(3, 'x_pablo_acm@hotmail.com', 'pablo', 'lector', 'lector', 'alumno', 'ucm', '123456789'),
+(4, 'x_pablo_acm@hotmail.com', 'pablo', 'lector', 'lector', 'alumno', 'ucm', '123456789');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `login`
 --
 
@@ -215,7 +259,8 @@ INSERT INTO `login` (`ID`, `correo`, `clave`, `rol_fk`, `rol2_fk`, `rol3_fk`) VA
 (16, 'a@b.com', '7465671ffdf66dcc67aa36faecb3f6f76dfd3069', 2, NULL, NULL),
 (17, 'marcotoranzo@hotmail.com', 'ec9b2638a2fd1b542fd317b0fcc8b81ec2347337', 3, NULL, NULL),
 (20, 'pablo@hotmail.com', 'a2e6a7551733e70a75592fa760ce9d82b2855d55', 1, 2, 3),
-(21, 'asda@hotmail.com', '71c81485cc9b67391285223b32f1ae06bafb2e9b', 3, NULL, NULL);
+(21, 'asda@hotmail.com', '71c81485cc9b67391285223b32f1ae06bafb2e9b', 3, NULL, NULL),
+(22, 'x_pablo_acm@hotmail.com', 'a2e6a7551733e70a75592fa760ce9d82b2855d55', 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -558,7 +603,7 @@ INSERT INTO `revista` (`ID`, `titulo_revista`, `version`, `email_autor`, `id_cam
 (13, 'gajajsn', 2, 'moises.intech@gmail.com', 9, 8, 'sdsddfsds', 'ssdfss', 'Moises Flores Estay', '', '', '', 'gajajsnmoises_intech@gmail_com2017-12-10_12_42_14.docx', '', '2017-12-10 15:54:38', '2017-12-10 15:42:14', 'a@b.com', 'No Asignado', 'No Asignado', 'HOLA ESTE PAPER TIENE UN PEQUEÑO DETALLE, ESTA MALO.', NULL, NULL, 'ASAsAS', '2017-12-13 00:00:00', NULL),
 (14, 'asdasdsa', 1, 'moises.intech@gmail.com', 9, 3, 'aSDasdasd', 'asdasdasd', 'Moises Flores Estay', '', '', '', 'asdasdsamoises_intech@gmail_com2017-12-10_12_50_34.docx', '', '2018-02-02 02:37:36', '2017-12-10 15:50:34', 'a@a.com', 'a@b.com', 'No Asignado', NULL, NULL, NULL, NULL, NULL, NULL),
 (15, 'Practica Docente en la asignatura Algoritmos y Estructuras de Datos', 1, 'marcotoranzo@hotmail.com', 26, 3, 'competencia', 'La formación basada en competencias corresponde a una modelo de formación profesional de alta relevancia en la actualidad. El objetivo de este trabajo es presentar la evolución que ha tenido un programa de formación de competencias genéricas en la Universidad de Talca a partir de la experiencia de los autores como docentes de una carrera de ingeniería. Esta evolución, luego de más de 10 años de su inicio, se expresa en tres versiones. Se concluye que no obstante la existencia de un proceso de maduración y mejoramiento continuo, siguen abiertos espacios para mejoras significativas con miras a su consolidación.', 'Rodolfo Schmal', 'Sabino Rivero', 'Cristian Vidal-Silva', '', 'Practica_Docente_en_la_asignatura_Algoritmos_y_Estructuras_de_Datosmarcotoranzo@hotmail_com2017-12-12_09_26_59.doc', '', '2018-02-05 03:10:21', '2017-12-12 12:26:59', 'a@b.com', 'a@a.com', 'No Asignado', NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 'asdasd', 1, 'asda@hotmail.com', 10, 6, 'sadasd', 'sadasd', 'sdfsdf sdfsd sdfsdf', 'asdas', 'sadas', 'asdasd', 'asdasdasda@hotmail.com2018-01-28_05_36_46.docx', 'asdasdaf', '2018-02-02 02:35:36', '2018-01-28 08:36:46', 'a@a.com', 'a@b.com', 'No Asignado', NULL, NULL, NULL, 'fjhhj', '2018-02-23 00:00:00', NULL);
+(16, 'asdasd', 1, 'asda@hotmail.com', 10, 9, 'sadasd', 'sadasd', 'sdfsdf sdfsd sdfsdf', 'asdas', 'sadas', 'asdasd', 'asdasdasda@hotmail.com2018-01-28_05_36_46.docx', 'asdasdaf', '2018-03-04 17:13:51', '2018-01-28 08:36:46', 'a@a.com', 'a@b.com', 'No Asignado', NULL, NULL, NULL, 'fjhhj', '2018-02-23 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -580,6 +625,48 @@ INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES
 (2, 'Revisor'),
 (3, 'Autor'),
 (4, 'Lector');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temas`
+--
+
+CREATE TABLE `temas` (
+  `id_tema` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_campo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `temas`
+--
+
+INSERT INTO `temas` (`id_tema`, `nombre`, `nombre_campo`) VALUES
+(3, 'tema 1', 10),
+(4, 'tema de vinculacion', 23),
+(6, 'la vida de la U ', 31);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temas_usuario`
+--
+
+CREATE TABLE `temas_usuario` (
+  `id_tema_usuario` int(11) NOT NULL,
+  `id_tema` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `temas_usuario`
+--
+
+INSERT INTO `temas_usuario` (`id_tema_usuario`, `id_tema`, `id_usuario`) VALUES
+(1, 3, 2),
+(2, 4, 2),
+(3, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -663,6 +750,12 @@ ALTER TABLE `final_magazine`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indices de la tabla `lector`
+--
+ALTER TABLE `lector`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indices de la tabla `login`
 --
 ALTER TABLE `login`
@@ -705,6 +798,19 @@ ALTER TABLE `rol`
   ADD PRIMARY KEY (`id_rol`);
 
 --
+-- Indices de la tabla `temas`
+--
+ALTER TABLE `temas`
+  ADD PRIMARY KEY (`id_tema`),
+  ADD KEY `id_campo` (`nombre_campo`) USING BTREE;
+
+--
+-- Indices de la tabla `temas_usuario`
+--
+ALTER TABLE `temas_usuario`
+  ADD PRIMARY KEY (`id_tema_usuario`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -736,7 +842,7 @@ ALTER TABLE `campo_usuario`
 -- AUTO_INCREMENT de la tabla `configuracion`
 --
 ALTER TABLE `configuracion`
-  MODIFY `id_configuracion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_configuracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -751,10 +857,16 @@ ALTER TABLE `final_magazine`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `lector`
+--
+ALTER TABLE `lector`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `magazines`
@@ -793,6 +905,18 @@ ALTER TABLE `rol`
   MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `temas`
+--
+ALTER TABLE `temas`
+  MODIFY `id_tema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `temas_usuario`
+--
+ALTER TABLE `temas_usuario`
+  MODIFY `id_tema_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -813,6 +937,12 @@ ALTER TABLE `campo_revisor`
 --
 ALTER TABLE `campo_usuario`
   ADD CONSTRAINT `fk_campo_usuario_campo` FOREIGN KEY (`id_campo`) REFERENCES `campo_investigacion` (`id_campo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `temas`
+--
+ALTER TABLE `temas`
+  ADD CONSTRAINT `temas_ibfk_1` FOREIGN KEY (`nombre_campo`) REFERENCES `campo_investigacion` (`id_campo`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
