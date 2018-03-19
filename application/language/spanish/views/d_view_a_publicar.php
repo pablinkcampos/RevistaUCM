@@ -16,7 +16,7 @@ $lang['vap_enviar']							='Paginar';
 $lang['vap_importante']							='Importante';
 $lang['vap_part1']							='Descargue el archivo. Después de paginarlo, suba el artículo';
 $lang['vap_part2']							='Los campos con (*) son obligatorios. Si comete un error, vuelva a paginarlo.';
-$lang['vap_part3']							='Puede ingresar hasta un máximo de 4 autores para un artículo. El nombre del autor debe ser 1° nombre, 1° apellido, letra inicial segundo apellido';
+$lang['vap_part3']							='Puede ingresar hasta un máximo de 5 autores para un artículo. El nombre del autor debe ser 1° nombre, 1° apellido, letra inicial segundo apellido';
 $lang['vap_part4']							='Ejemplo';
 $lang['vap_part5']							='sin comillas';
 

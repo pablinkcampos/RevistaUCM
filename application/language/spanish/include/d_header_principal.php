@@ -30,3 +30,4 @@ $lang['HP_Publicación efectiva']					='Publicación efectiva';
 $lang['HP_consulta arbitraje']					='Consulta arbitraje';
 $lang['HP_contacto']							='Contacto';  //2
 $lang['HP_base']							='Guía autor';
+$lang['HP_Cuerpo editorial']							='Cuerpo editorial';

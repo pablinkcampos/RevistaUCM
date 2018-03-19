@@ -1141,14 +1141,15 @@
             $this->Articulo_Model->upd_contenido($nosotros, $data);
             
             $data['texto_espanol'] = $this->input->post('ta_coe');
-            $nosotros = "comite editor asesor";
+            $nosotros = "comite editor";
             $ok=$this->Articulo_Model->upd_contenido($nosotros, $data);
             
             $data['texto_espanol'] = $this->input->post('ta_pe');
             $nosotros = "produccion editorial";
+            $ok=$this->Articulo_Model->upd_contenido($nosotros, $data);
+            $ok = true;
 
-
-                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                    if ($ok == true) {
                        $aviso = array('title' => '¡Información cambiada!',
                            'text' => 'Hecho.',
                            'tipoaviso' => 'success',

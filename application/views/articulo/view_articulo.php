@@ -3,9 +3,7 @@
  $CI = & get_instance();
  $CI->load->library('session');
  $CI->load->model('Articulo_model');
- $data_usuario = $CI->session->userdata('userdata');
- $email_select = $data_usuario['email_usuario'];
- $est1 = $CI->Articulo_model->autor_direct($email_select);
+
 ?>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script type="text/javascript" src="<?php echo base_url(); ?>js/bootstrap-filestyle.min.js"></script>
@@ -14,6 +12,36 @@
     $(":userfile").filestyle();
     $(":userfile").filestyle('icon');
 </script>
+<script type="text/javascript">
+var nextinput = 0;
+function AgregarCampos(){
+    nextinput++;
+    
+    if(nextinput<6){
+        campo = '<div class="form-group col-md-12"><div class="form-group"> <div style="text-align: right;" class="col-md-3"> <label for="autor_add'+nextinput+'"><?php echo lang('aa_autor_adicional'); ?>:</label></div><div class="col-md-9"> <input type="text" value="" class="form-control" name="autor_add'+nextinput+'" id="autor_add'+nextinput+'" placeholder="<?php echo lang('aa_ingrese autor adicional'); ?>"> </div></div></div>';
+        campo_email ='<div class="form-group col-md-12"><div class="form-group"><div style="text-align: right;" class="col-md-3"><label for="email_add'+nextinput+'"><?php echo lang('aa_email_adicional') . ' (*)'; ?>:</label></div><div class="col-md-9"><input type="text" value="" class="form-control" name="email_add'+nextinput+'" id="email_add'+nextinput+'" placeholder="<?php echo lang('aa_ingrese email adicional');?>"></div></div></div>';
+        $("#campos").append(campo+campo_email);
+    }
+}                  
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#area_aplicable").change(function() {
+        $("#area_aplicable option:selected").each(function() {
+            campo = $("#area_aplicable").val();
+            $.post("<?php echo base_url(); ?>index.php/Articulo_autor/selectTema", {
+            area_aplicable : campo
+            }, function(data) {
+                $("#tema_interes").html(data);
+            });
+        });
+    });
+    });
+</script>
+ <script type="text/javascript" src="<?php echo base_url(); ?>vendors/ckeditor/ckeditor.js"></script>
+
 
 <div class="content-wrap">
     <div class="container clearfix">
@@ -35,37 +63,65 @@
                             <input type="text" class="form-control" name="titulo_articulo" value="<?php if (isset($_POST['titulo_articulo'])) echo $_POST['titulo_articulo']; ?>" id="titulo_articulo" placeholder="<?php echo lang('aa_ingrese titulo'); ?>" required="True">
                         </div>
                     </div>
-              
 
                     <div class="form-group col-md-12">
-                    <?php if ($campo) { ?>
                         <div class="form-group">
                             <div style="text-align: right;" class="col-md-3">
-                                <label for="area_aplicable"><?php echo lang('aa_area aplicable'); ?> (*):</label>
+                                <label for="abstract"><?php echo lang('aa_abstract'); ?> (*):</label>
                             </div>
                             <div class="col-md-9">
-                                <select class="form-control" name="area_aplicable" id="area_aplicable" required="required">
-                                    
-                                    <?php
-                                    foreach ($campo->result() as $row) {
-                                        if ($row->id_campo == $_SESSION["area_aplicable"]) {
-                                            $string = ' selected="selected" ';
-                                        } else {
-                                            $string = "";
-                                        }
-                                        echo '<option value="' . $row->id_campo . '" ' . $string . '>' . $row->nombre_campo . '</option>';
-                                    }
-                                    ?>
-                                </select>
+                               
+                                <textarea class="ckeditor" name="abstract" id="abstract" rows="20" cols="100" required="true"></textarea>
                             </div>
                         </div>
-                    <?php
-                        } else {
-                            echo "<label for='area_aplicable'>" . lang("aallav_no hay areas aplicables") . "</label>";
-                            echo "<select class='form-control' name='area_aplicable' id='area_aplicable' required='required'></select>";
-                        }
-                    ?>
                     </div>
+
+                  
+              
+
+           
+
+                    <div class="form-group col-md-12">
+                  
+                  <div class="form-group">
+                      <div style="text-align: right;" class="col-md-3">
+                          <label for="tema"><?php echo lang('aa_area aplicable'); ?> (*):</label>
+                      </div>
+                      <div class="col-md-9">
+                          <select class="form-control" name="area_aplicable" id="area_aplicable" required="required">
+                            <option value="">Selecciona Area Aplicable</option>
+                              <?php
+                              
+                              foreach ($campo->result() as $row) {
+                                  if ($row->id_campo == $_SESSION["area_aplicable"]) {
+                                      $string = ' selected="selected" ';
+                                  } else {
+                                      $string = "";
+                                  }
+                                  echo '<option value="' . $row->id_campo . '" ' . $string . '>' . $row->nombre_campo . '</option>';
+                              }
+                              ?>
+                          </select>
+                      </div>
+                  </div>
+           
+              </div>
+
+              <div class="form-group col-md-12">
+                  
+                  <div class="form-group">
+                      <div style="text-align: right;" class="col-md-3">
+                          <label for="tema_interes"><?php echo lang('aa_tema'); ?> (*):</label>
+                      </div>
+                      <div class="col-md-9">
+                          <select class="form-control" name="tema_interes" id="tema_interes" required="required">
+                              <option value="">Selecciona tema</option>
+                                
+                          </select>
+                      </div>
+                  </div>
+           
+              </div>
                     
                     <div class="form-group col-md-12">
                         <div class="form-group">
@@ -73,21 +129,12 @@
                                 <label for="text"><?php echo lang('aa_palabras claves'); ?> (*):</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" value="<?php if (isset($_POST['palabras_claves'])) echo $_POST['palabras_claves']; ?>" class="form-control" name="palabras_claves" id="palabras_claves" placeholder="<?php echo lang('aa_ingrese palabras claves'); ?>" required="required">
+                                <input type="text" maxlength="80" value="<?php if (isset($_POST['palabras_claves'])) echo $_POST['palabras_claves']; ?>" class="form-control" name="palabras_claves" id="palabras_claves" placeholder="<?php echo lang('aa_ingrese palabras claves'); ?>" required="required">
                             </div>
                         </div>
                     </div>
                     
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="abstract"><?php echo lang('aa_abstract'); ?> (*):</label>
-                            </div>
-                            <div class="col-md-9">
-                                <textarea class="form-control"  name="abstract" id="abstract" rows="3" required="required" placeholder="<?php echo lang('aa_ingrese abstract'); ?>"><?php if (isset($_POST['abstract'])) echo $_POST['abstract']; ?></textarea>
-                            </div>
-                        </div>
-                    </div>
+                    
                     
                     <div class="form-group col-md-12">
                         <div class="form-group">
@@ -95,42 +142,90 @@
                                 <label for="autor_principal"><?php echo lang('aa_autor_prinicipal') . ' (*)'; ?>:</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" value="<?php echo $est1->nombre . " " . $est1->apellido_1 . " " . $est1->apellido_2; ?>" class="form-control" name="autor_principal" id="autor_principal">
+                                <input type="text" value="" class="form-control" name="autor_principal" id="autor_principal" placeholder="<?php echo lang('aa_ingrese autor contacto');?>" required="required"> 
                             </div>
                         </div>
                     </div>
-                    
+
+                  
                     <div class="form-group col-md-12">
                         <div class="form-group">
                             <div style="text-align: right;" class="col-md-3">
-                                <label for="autor_add1"><?php echo lang('aa_autor_adicional'); ?>:</label>
+                                <label for="email_autor"><?php echo lang('aa_email_contacto') . ' (*)'; ?>:</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" value="<?php if (isset($_POST['autor_add_1'])) echo $_POST['autor_add_1'];?>" class="form-control" name="autor_add_1" id="autor_add_1" placeholder="<?php echo lang('aa_ingrese autor adicional'); ?>">
+                                <input type="text" value="" class="form-control" name="email_autor" id="email_autor" placeholder="<?php echo lang('aa_ingrese email contacto');?>" required="required">
+                                <i onclick=AgregarCampos(); class="material-icons orange600" >add_circle </i><span>Añadir Autor </span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="form-group">
+                            <div style="text-align: right;" class="col-md-3">
+                                <label for="fecha_ingreso">Fecha de Ingreso (*):</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" maxlength="80" value="<?php echo date('d-m-Y'); ?>" name="fecha_ingreso" id="fecha_ingreso" disabled="disabled">
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group col-md-12">
+                        <div id="campos" >
+                          
+                        </div>
+                        
+                    </div>
+
                     
+
                     <div class="form-group col-md-12">
                         <div class="form-group">
                             <div style="text-align: right;" class="col-md-3">
-                                <label for="autor_add2"><?php echo lang('aa_autor_adicional'); ?>:</label>
+                                <label for="pais"><?php echo lang('vra_pais');?>:</label>
                             </div>
+                   
                             <div class="col-md-9">
-                                <input type="text" value="<?php  if (isset($_POST['autor_add_2'])) echo $_POST['autor_add_2'];  ?>" class="form-control" name="autor_add_2" id="autor_add_2" placeholder="<?php echo lang('aa_ingrese autor adicional'); ?>">
-                            </div>
+								<select name="pais" id = "pais" value="<?php if (isset($_POST['pais'])) echo $_POST['pais'];?>" class="form-control selectpicker" data-live-search = "true" required="required"> 
+                                    <?php 
+                                    if ($paises){
+                                        foreach ($paises->result() as $row){
+                                            if (isset($_POST['pais']) && $_POST['pais'] == $row->ID)
+                                            {
+                                                echo '<option selected value='. $row->ID . '> ' . $row->nombre . '</option>';
+                                            }
+                                            else
+                                            {
+                                                echo '<option value='. $row->ID . '> ' . $row->nombre . '</option>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+						    </div>
+                        
                         </div>
                     </div>
-                    
-                    <div class="form-group col-md-12">
+
+                  
+                        
+			
+
+                
+                <div class="form-group col-md-12">
                         <div class="form-group">
                             <div style="text-align: right;" class="col-md-3">
-                                <label for="autor_add3"><?php echo lang('aa_autor_adicional'); ?>:</label>
+                                <label for="institucion"><?php echo lang('aa_institucion') . ' (*)'; ?>:</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" value="<?php  if (isset($_POST['autor_add_3'])) echo $_POST['autor_add_3']; ?>" class="form-control" name="autor_add_3" id="autor_add_3" placeholder="<?php echo lang('aa_ingrese autor adicional'); ?>">
+                                <input type="text" value="" class="form-control" name="institucion" id="institucion" placeholder="<?php echo lang('aa_ingrese institucion');?>" required="required">
+
                             </div>
+                            
                         </div>
+                        
                     </div>
                     
                     <div class="form-group col-md-12">
@@ -174,11 +269,7 @@
         
         <div class="sidebar nobottommargin clearfix">
             <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                    <?php
-                     $this->load->view('include/menu_autor');
-                    ?>
-                </div>
+              
             </div>
         </div>
     </div>

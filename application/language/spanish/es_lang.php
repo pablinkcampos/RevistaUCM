@@ -113,6 +113,7 @@ include 'articulo/d_view_administrar_articulos.php'; //nada que traducir
 include 'articulo/d_view_all_articulos.php';
 include 'articulo/d_view_all_articulos_ver.php';
 include 'articulo/d_view_articulo.php';
+include 'articulo/d_view_articulo_recibido.php';
 include 'articulo/d_view_articulos_asignados.php';
 include 'articulo/d_view_articulos_asignados_comentar.php';
 include 'articulo/d_view_articulos_asignados_ver.php';

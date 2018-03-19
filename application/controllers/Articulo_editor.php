@@ -81,6 +81,46 @@ class Articulo_editor extends MY_Controller {
         }
     }
 
+    public function all_articulos_recibidos() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulos_recibidos();
+
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_all_articulos_recibidos', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function all_articulos_recibidos_ver($id_revista) {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_all_articulos_recibidos_ver', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
     public function all_articulos_ver($id_revista) {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {

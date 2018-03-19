@@ -6,7 +6,7 @@
 	   
 		<li><a  class="button button-mini button-3d button-teal col_full" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><?php echo lang('ME_articulos');?></a>
 			<ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
-				<li><a class="button button-mini button-3d button-teal" href="#"><?php echo lang('ME_recibidos');?></a></li>
+				<li><a class="button button-mini button-3d button-teal" href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_recibidos"><?php echo lang('ME_recibidos');?></a></li>
 				<li><a class="button button-mini button-3d button-teal" href="#"><?php echo lang('ME_asignados');?></a></li>
 				<li><a class="button button-mini button-3d button-teal" href="#"><?php echo lang('ME_Revisados');?></a></li>
                 <li><a class="button button-mini button-3d button-teal" href="#"><?php echo lang('ME_Plazo vencido');?></a></a></li>

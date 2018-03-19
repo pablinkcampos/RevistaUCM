@@ -34,6 +34,19 @@ class Articulo_Model extends CI_Model {
             return false;
         }
     }
+    function getTemas($ID) {
+        $query = $this->db->select('*');
+        $query = $this->db->from('temas');
+        $query = $this->db->where('nombre_campo', $ID);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return FALSE;
+        }
+    }
 
     function actualizar_login_revisor_a_valido($correo_revisor) {
         $query1 = $this->db->query("UPDATE login SET rol_fk = 2 WHERE rol_fk = 555 AND md5(CONCAT(correo, 'ox')) = ?", array($correo_revisor));
@@ -506,6 +519,27 @@ class Articulo_Model extends CI_Model {
         }
     }
 
+    function articulo_ver($id) {
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves as palabras_claves, r.archivo as archivo , t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1 as n_autor, r.email_add1 as email_a2, r.autor_2 as n_autor2, r.email_add2 as email_a3,r.autor_3 as n_autor3,r.email_add3 as email_a4 ,r.autor_4 as n_autor4,r.email_add4 as email_a5,r.autor_5 as n_autor5, r.email_add5 as email_a6,r.autor_6 as n_autor6,re.email as rev_1,re2.email as rev_2,re3.email as rev_3, r.comentarios as com_autor, r.comentario_revisor_1 as com_rev1, r.comentario_revisor_2 as com_rev2, r.comentario_revisor_3 as com_rev3, 	r.comentarios_editor as com_edit, r.pais as pais, r.institucion as institucion,p.estado as e_post, r.VerificacionTextoFecha as vertf, r.VerificacionTexto as vert, r.calificaRev1 as cal_rev1, r.calificaRev2 as cal_rev2, r.calificaRev3 as cal_rev3, r.fechaCalificaRev as fecha_cal, r.fechaCalificaFinal as fecha_calf, r.calificaFinal as cal_f, r.fechaReenvioarticulo as fecha_ra, r.Fecha_asig_revision as fecha_asr   FROM revista as r INNER JOIN post as p ON r.id_post = p.id INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado INNER JOIN revisor as re ON r.id_revisor_1 = re.ID INNER JOIN revisor as re2 ON r.id_revisor_2 = re2.ID INNER JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.ID = "+$id+"");
+        if ($query) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+
+
+
+    function articulos_recibidos() {
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE r.id_estado = 1 AND r.id_revisor_1 = 0 AND r.id_revisor_2 = 0 AND r.id_revisor_3 = 0 ORDER by r.fecha_ingreso, t.nombre");
+        if ($query) {
+            return $query;
+        } else {
+            return false;
+        }
+       
+    }
+
     function articulos_incluir_mod($datos) {
         $query = $this->db->select('*');
         $query = $this->db->from('revista');
@@ -593,12 +627,23 @@ class Articulo_Model extends CI_Model {
         $rows = $this->db->affected_rows();
 
         if ($rows > 0) {
-            return true;
+            return $this->db->insert_id();
         } else {
             return false;
         }
     }
 
+    function agregar_post($data) {
+        $query = $this->db->insert('post', $data);
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     //revisor(es)
     function revisores() {
         $query = $this->db->select('*');

@@ -160,6 +160,20 @@
          $this->load->view('view_plantilla');
          $this->load->view('include/footer');
      }
+
+         
+    public function cuerpo_editorial() {
+        $this->load->view('include/head');
+        $data["coeditor"] = $this->Articulo_Model->obtener_contenido("coeditor");
+        $data["editor"] = $this->Articulo_Model->obtener_contenido("editor");
+        $data["comite_editor"] = $this->Articulo_Model->obtener_contenido("comite editor");
+        $data["comite_editor_asesor"] = $this->Articulo_Model->obtener_contenido("comite editor asesor");
+        $data["produccion_editorial"] = $this->Articulo_Model->obtener_contenido("produccion editorial");
+        $this->load->view('include/header_principal');
+        $this->load->view('view_cuerpo', $data);
+        $this->load->view('include/footer');
+    }
+
     public function buscar() {
          $this->load->view('include/head');
          $user_data = $this->session->userdata('userdata');

@@ -40,7 +40,7 @@
 
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>index.php/registro_autor">
+                        <a href="<?php echo base_url(); ?>index.php/articulo_autor/art">
                             <i class="i-medium i-circled i-bordered icon-thumbs-up2 nomargin"></i>
 
                             <div class="he-text">
@@ -94,6 +94,7 @@
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><div> <?php echo lang('HP_sobre nosotros'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><div> <?php echo lang('HP_politica editorial'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HP_Publicación efectiva'); ?></div></a></li>
+                            <li><a href="<?php echo base_url(); ?>index.php/Home_principal/cuerpo_editorial"><div> <?php echo lang('HP_Cuerpo editorial'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/plantilla"><div> <?php echo lang('HP_base'); ?></div></a></li>
                         </ul>
                     </div>

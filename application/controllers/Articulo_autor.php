@@ -7,6 +7,7 @@ class Articulo_autor extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('Articulo_Model');
+        $this->load->model('Model_for_login');
         $this->load->helper(array('form', 'url'));
         $this->load->helper("file");
         $this->load->helper('text');
@@ -42,6 +43,8 @@ class Articulo_autor extends MY_Controller {
             $this->load->view('include/aviso', $aviso);
         }
     }
+
+    
 
     public function mis_articulos_ver($id_revista) {
         $user_data = $this->session->userdata('userdata');
@@ -388,19 +391,36 @@ class Articulo_autor extends MY_Controller {
     
     public function art(){
         $data["campo"] = $this->Articulo_Model->campos_investigacion();
+        $data["paises"] = $this->Model_for_login->get_paises();
         $data['fail'] = "";
         
         $this->load->view('include/head');
-        $this->load->view('include/header_autor');
+        $this->load->view('include/header_principal');
         $this->load->view('articulo/view_articulo', $data);
         $this->load->view('include/footer');
+    }
+
+    public function selectTema(){
+        $tipo=$this->input->post('area_aplicable');
+        if($tipo){
+        $this->load->model('Articulo_Model');
+        $temas=$this->Articulo_Model->getTemas($tipo);
+        if($temas){
+            foreach($temas->result() as $row){
+        
+                echo '<option value="' . $row->id_tema . '" ' . $string . '>' . $row->nombre . '</option>';
+            
+            }
+        }
+      
+        
+        }
     }
     
     //Ingresasr Artículo
     public function ingresar_articulo() {
-        $user_data = $this->session->userdata('userdata');
 
-        if ($user_data['id_rol'] == '3' || $user_data['id_rol2'] == '3' || $user_data['id_rol3'] == '3') {
+        
             if (isset($_POST['upload'])) {
                 if ($_FILES['userfile']['name'] == NULL) {
                     $aviso = array('title' => 'Archivo no subido',
@@ -416,28 +436,38 @@ class Articulo_autor extends MY_Controller {
                     $nombretemparchivo = $_FILES['userfile']['tmp_name'];
 
                     $data['titulo_revista'] = $this->input->post('titulo_articulo');
-                    $data['id_campo'] = $this->input->post('area_aplicable');
+                    $data['id_tema'] = $this->input->post('tema_interes');
                     $data['palabras_claves'] = $this->input->post('palabras_claves');
                     $data['abstract'] = $this->input->post('abstract');
                     $data['autor_1'] = $this->input->post('autor_principal');
                     $data['autor_2'] = $this->input->post('autor_add_1');
                     $data['autor_3'] = $this->input->post('autor_add_2');
                     $data['autor_4'] = $this->input->post('autor_add_3');
+                    $data['autor_5'] = $this->input->post('autor_add_4');
+                    $data['autor_6'] = $this->input->post('autor_add_5');
 
                     $data['comentarios'] = $this->input->post('comentarios');
                     $data['version'] = 1;
                     $data['id_estado'] = 1;
-                    $data['email_autor'] = $user_data["email_usuario"];
+                    $data['email_autor'] = $this->input->post('email_autor');
+                    $data['email_add1'] = $this->input->post('email_add1');
+                    $data['email_add2'] = $this->input->post('email_add2');
+                    $data['email_add3'] = $this->input->post('email_add3');
+                    $data['email_add4'] = $this->input->post('email_add4');
+                    $data['email_add5'] = $this->input->post('email_add5');
+                    $data['institucion'] = $this->input->post('institucion');
+                    $data['pais'] = $this->input->post('pais');
                     
                     $nombre_articulo = $data['titulo_revista'] . $data['email_autor']. date('Y-m-d_H_i_s');
                     $nombre_articulo .= $ext;
                     $nombre_articulo = str_replace(' ', '_', $nombre_articulo);
                     $data['archivo'] = $nombre_articulo;
-                    
+                    $data['urlArticuloEnviado']="uploads/$nombre_articulo";
                     if (in_array($ext, $formatos)) {
                         if ($_FILES['userfile']['size'] <= 5120000) {
                             if (move_uploaded_file($nombretemparchivo, "uploads/$nombre_articulo") == true) {
-                                if ($this->Articulo_Model->agregar_articulo($data) == true) {
+                                 $post['id_articulo']= $this->Articulo_Model->agregar_articulo($data);
+                                if ($post['id_articulo'] != 0) {
                                     $subject = "Articulo recibido Revista UCM";
                                     $mensaje = '<html>' .
                                             '<body><h4>Hola <br><br>Hemos recibido tu artículo. Será sometido a un proceso de evaluación. Te avisaremos cuando hayamos terminado.</h4><br>' .
@@ -449,13 +479,30 @@ class Articulo_autor extends MY_Controller {
                                     $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
                                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
-                                    mail($user_data["email_usuario"], $subject, $mensaje, $headers);
+                                    mail($data['email_autor'], $subject, $mensaje, $headers);
+                                    if( $data['email_add1']!=""){
+                                        mail($data['email_add1'], $subject, $mensaje, $headers);
+                                    }
+                                    if( $data['email_add2']!=""){
+                                        mail($data['email_add2'], $subject, $mensaje, $headers);
+                                    }
+                                    if( $data['email_add3']!=""){
+                                        mail($data['email_add3'], $subject, $mensaje, $headers);
+                                    }
+                                    if( $data['email_add4']!=""){
+                                        mail($data['email_add4'], $subject, $mensaje, $headers);
+                                    }
+                                    if( $data['email_add5']!=""){
+                                        mail($data['email_add5'], $subject, $mensaje, $headers);
+                                    }
 
+                                    $this->Articulo_Model->agregar_post($post);
+                              
 
                                     $aviso = array('title' => lang("tswal_subido"),
                                         'text' => lang("cswal_archivo subido con exito"),
                                         'tipoaviso' => 'success',
-                                        'windowlocation' => base_url() . "index.php/System/autor"
+                                        'windowlocation' => base_url() . "index.php/"
                                     );
                                     $this->load->view('include/aviso', $aviso);
                                 }
@@ -466,10 +513,11 @@ class Articulo_autor extends MY_Controller {
                             echo '}, 350);</script>';
 
                             $data["campo"] = $this->Articulo_Model->campos_investigacion();
+                            $data["paises"] = $this->Model_for_login->get_paises();
                             $data["fail"] = "Tamaño no soportado";
 
                             $this->load->view('include/head');
-                            $this->load->view('include/header_autor');
+                            $this->load->view('include/header_principal');
                             $this->load->view('articulo/view_articulo', $data);
                             $this->load->view('include/footer');
                             
@@ -493,14 +541,7 @@ class Articulo_autor extends MY_Controller {
                     }
                 }
             }
-        } else {
-            $aviso = array('title' => lang("tswal_acceso denegado"),
-                'text' => lang("cswal_acceso denegado"),
-                'tipoaviso' => 'error',
-                'windowlocation' => base_url() . "index.php/"
-            );
-            $this->load->view('include/aviso', $aviso);
-        }
+       
     }
 
     public function eliminar_articulo() {
