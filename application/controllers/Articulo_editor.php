@@ -109,7 +109,7 @@ class Articulo_editor extends MY_Controller {
 
             $this->load->view('include/head');
             $this->load->view('include/header_editor');
-            $this->load->view('articulo/view_all_articulos_recibidos_ver', $data);
+            $this->load->view('articulo/view_articulo_recibido_ver', $data);
             $this->load->view('include/footer');
         } else {
             $aviso = array('title' => lang("tswal_acceso denegado"),
@@ -125,11 +125,11 @@ class Articulo_editor extends MY_Controller {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
 
-            $data['datos'] = $this->Articulo_Model->articulo($id_revista);
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
 
             $this->load->view('include/head');
             $this->load->view('include/header_editor');
-            $this->load->view('articulo/view_all_articulos_ver', $data);
+            $this->load->view('articulo/view_articulo_ver', $data);
             $this->load->view('include/footer');
         } else {
             $aviso = array('title' => lang("tswal_acceso denegado"),
