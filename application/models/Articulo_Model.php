@@ -272,12 +272,12 @@ class Articulo_Model extends CI_Model {
         }
     }
 
-    function articulos_asignados($email) {
+    function articulos_asignados_por_id($id) {
         $query = $this->db->select('*');
         $query = $this->db->from('revista');
-        $query = $this->db->where('email_revisor_1', $email);
-        $query = $this->db->or_where('email_revisor_2', $email);
-        $query = $this->db->or_where('email_revisor_3', $email);
+        $query = $this->db->where('id_revisor_1', $id);
+        $query = $this->db->or_where('id_revisor_2', $id);
+        $query = $this->db->or_where('id_revisor_3', $id);
 
         $query = $this->db->get();
 
@@ -318,7 +318,7 @@ class Articulo_Model extends CI_Model {
 
     function que_revisor_soy($datos) {
 
-        $query = $this->db->select('email_revisor_1,email_revisor_2,email_revisor_3');
+        $query = $this->db->select('id_revisor_1,id_revisor_2,id_revisor_3');
         $query = $this->db->from('revista');
         $query = $this->db->where('ID', $datos["id_revista"]);
 
@@ -531,7 +531,27 @@ class Articulo_Model extends CI_Model {
 
 
     function articulos_recibidos() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE r.id_estado = 1 AND r.id_revisor_1 = 0 AND r.id_revisor_2 = 0 AND r.id_revisor_3 = 0 ORDER by r.fecha_ingreso, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1 as autor_1, r.email_add1 as email_add1, r.autor_2 as autor_2, r.email_add2 as email_add2,r.autor_3 as autor_3,r.email_add3 as email_add3,r.autor_4 as autor_4,r.email_add4 as email_add4,r.autor_5 as autor_5, r.email_add5,r.autor_6 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE r.id_estado = 1 AND r.id_revisor_1 = 0 AND r.id_revisor_2 = 0 AND r.id_revisor_3 = 0 ORDER by r.fecha_ingreso, t.nombre");
+        if ($query) {
+            return $query;
+        } else {
+            return false;
+        }
+       
+    }
+
+    function articulos_no_asignados() {
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE r.VerificacionTexto = 1 AND r.id_revisor_1 = 0 AND r.id_revisor_2 = 0 AND r.id_revisor_3 = 0 ORDER by r.fecha_ingreso, t.nombre");
+        if ($query) {
+            return $query;
+        } else {
+            return false;
+        }
+       
+    }
+
+    function articulos_asignados() {
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE r.VerificacionTexto = 1 AND r.id_revisor_1 != 0 AND r.id_revisor_2 != 0 AND r.id_revisor_3 != 0 ORDER by r.fecha_ingreso, t.nombre");
         if ($query) {
             return $query;
         } else {
