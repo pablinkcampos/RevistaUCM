@@ -27,9 +27,9 @@ class Articulo_revisor extends MY_Controller {
         if($user_data['id_rol']=='2'||$user_data['id_rol2']=='2'||$user_data['id_rol3']=='2'){
 
 
-            $email_revisor=$user_data['email_usuario'];
+            $id_revisor=$user_data['ID'];
 
-            $data['datos'] = $this->Articulo_Model->articulos_asignados($email_revisor);
+            $data['datos'] = $this->Articulo_Model->articulos_asignados($id_revisor);
 
             $this->load->view('include/head');
             $this->load->view('include/header_revisor');
