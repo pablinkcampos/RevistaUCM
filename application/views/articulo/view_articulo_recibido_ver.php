@@ -6,8 +6,29 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
+	<script>
+          $(function() {
 
 
+
+            $('input[name="opcion"]').bind('change',function(){
+              var showOrHide = (($(this).val() == "Rechazado")) ? true : false;
+              if(!showOrHide){
+                $("#comentario").hide(1000);
+                document.getElementById("comentarioID").required = false;
+              }else{
+                $("#comentario").show(1000);
+				document.getElementById("comentarioID").show(1000);
+                document.getElementById("comentarioID").required = true;
+              }
+
+            });
+
+
+          });
+
+    </script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>vendors/ckeditor/ckeditor.js"></script>
 	<div class="content-wrap">
 		<div class="container clearfix">
 			<div class="postcontent nobottommargin col_last">
@@ -154,10 +175,45 @@
 
 					<div class="form-group">
 						<div class="col-md-offset-3 col-md-7">
+						<form class="form-horizontal" action="<?php echo base_url(); ?>index.php/articulo_editor/aceptar_rechazar_articulo_recibido/<?php echo $id_revista; ?>" method="POST">
+                                            <div class="col-md-12">
+
+                                                <h3 style = "color: black;"><?php echo lang('acdrar_acep rech articulo'); ?></h3>
+                                                <hr>
+
+                                            </div>
+                                            <div class="col-md-12">
+
+                                                <label class="control-label" for="text"><?php echo lang('acdrar_seleccione opcion'); ?></label>
+
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label class="radio-inline"><input type="radio" name="opcion" id="opcionid" value="Aceptado" required="true"><?php echo lang('aallav_formato_aceptar'); ?></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label  class="radio-inline"><input type="radio" name="opcion" id="opcionid" value="Rechazado" required="true"><?php echo lang('acdrar_rechazado'); ?></label>
+                                            </div>
+
+											<div class="col-md-12" id="comentario">
+							   					<textarea class="ckeditor" style="dislplay:true;" name="comentarioRechazo" id="comentarioID" rows="20" cols="100" required="true"></textarea>
+						   					</div>
+                                          
+
+                                          
+                                            <div class="col-md-offset-1 col-md-7">
+                                                <br><br>
+                                                <input type="submit" class="button button-3d button-mini button-rounded button-green btn-block" value="<?php echo lang('acdrar_ingresar'); ?>" />
+                                            </div>
+
+                            </form>
 							<form action="<?php echo base_url();?>index.php/articulo_editor/all_articulos_recibidos">
-								<input type="submit" class="button button-3d button-mini button-rounded button-blue btn-block" value="<?php echo lang('aallav_regresar'); ?>"
-								/>
+								<div class="col-md-offset-1 col-md-7">
+									<input type="submit" class="button button-3d button-mini button-rounded button-blue btn-block" value="<?php echo lang('aallav_regresar'); ?>"
+									/>
+								</div>
 							</form>
+							
 						</div>
 					</div>
 				</div>

@@ -6,3 +6,4 @@ $lang['aaac_titulo revista']							='Titulo revista';
 $lang['aaac_comentario']							='Comentario';
 $lang['aaac_comentar']							='Comentar';
 $lang['aaac_regresar']							='Regresar';
+$lang['aaac_calificacion']							='Calificación';

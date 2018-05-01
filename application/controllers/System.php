@@ -168,8 +168,8 @@
          $user_data = $this->session->userdata('userdata');
          if ($user_data['id_rol'] == '2' || $user_data['id_rol2'] == '2' || $user_data['id_rol3'] == '2') {
 
-             $this->Articulo_Model->actualizar_articulos_timeout__aceptado_y_sin_modificar_opcional();
-             $this->Articulo_Model->actualizar_articulos_timeout__aceptado_con_comentarios_y_sin_modificar_obligatorio();
+            //  $this->Articulo_Model->actualizar_articulos_timeout__aceptado_y_sin_modificar_opcional();
+            //  $this->Articulo_Model->actualizar_articulos_timeout__aceptado_con_comentarios_y_sin_modificar_obligatorio();
 
              $this->load->view('include/head');
              $this->load->view('include/header_revisor');

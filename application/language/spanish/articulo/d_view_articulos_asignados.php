@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['aaas_sus articulos asignados']							='Sus Artículos Asignados';
 $lang['aaas_titulo']							='Título';
 $lang['aaas_autor']							='Autor';
-$lang['aaas_estado']							='Estado';
+$lang['aaas_tema']							='Tema';
 $lang['aaas_revisor N1']						='Revisor N1';
 $lang['aaas_revisor N2']						='Revisor N2';
 $lang['aaas_revisor N3']						='Revisor N3';

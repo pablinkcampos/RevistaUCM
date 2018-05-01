@@ -5,9 +5,12 @@
     $data_usuario=$CI->session->userdata('userdata');
     $email_select=$data_usuario['email_usuario'];
     $est1 = $CI->Articulo_model->revisor_direct($email_select);
-    foreach ($est1->result() as $row){
-        $nombre=$row->nombre." ".$row->apellido_1." ".$row->apellido_2;
+    $datos=$est1->result();
+    $nombre="";
+    if(isset($est1)){
+        $nombre=$datos[0]->nombre." ".$datos[0]->apellido_1;
     }
+   
  ?>
 <body class="stretched">
     <div class="clearfix">

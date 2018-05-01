@@ -1,36 +1,44 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<link href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/bs-select.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#articulos tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" style="width: 100%; text-align: left;" placeholder="Filtrar" />' );
+        } );
+        
+        var table =   $('#articulos').DataTable({
+            "language": {
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/<?php echo ucwords($this->session->userdata('lang')['route']); ?>.json"
+            },
+            "order": [[1, "desc"]]
 
-            $('#articulos').DataTable({
-                "language": {
-
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/<?php echo ucwords($this->session->userdata('lang')['route']);?>.json"
-                },
-                "order": [[6, "desc"]]
-
-            });
         });
-    </script>
-    <!--
-<script>
-$(function() {
+ 
+    // Apply the search
+        table.columns().every( function () {
+            var that = this;
+ 
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
 
-    setTimeout(function() {
-        $(".successMessage").animate({ height: 'toggle', opacity: 'toggle' }, 1000);
-    }, 3000);
-
-});
--->
-    </script>
+      
+    });
+</script>
 
     <div class="content-wrap">
         <div class="container clearfix">
@@ -111,7 +119,7 @@ $(function() {
                                               echo "</td>";
 
                   						
-                  						echo "<td>"; echo "<a href='".base_url()."index.php/articulo_editor/all_articulos_recibidos_ver/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>zoom_in</i></center></center></a>"; echo "</td>";
+                  						echo "<td>"; echo "<a href='".base_url()."index.php/articulo_editor/all_articulos_recibidos_ver/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>zoom_in</i></center></a>"; echo "</td>";
 
 
                   					echo "</tr>";
@@ -120,6 +128,29 @@ $(function() {
                                 <?php
                               } ?>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                            <th>
+                                    <?php echo lang('aaa_fecha ingreso'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('aar_tema'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('aaa_titulo'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('aaa_estado'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('aaa_autor'); ?>
+                                </th>
+                                <th style="display:none">
+                                    <?php echo lang('allana_asignar'); ?>
+                                </th>
+                               
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 

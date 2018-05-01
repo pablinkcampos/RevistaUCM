@@ -18,8 +18,8 @@ function AgregarCampos(){
     nextinput++;
     
     if(nextinput<6){
-        campo = '<div class="form-group col-md-12"><div class="form-group"> <div style="text-align: right;" class="col-md-3"> <label for="autor_add'+nextinput+'"><?php echo lang('aa_autor_adicional'); ?>:</label></div><div class="col-md-9"> <input type="text" value="" class="form-control" name="autor_add'+nextinput+'" id="autor_add'+nextinput+'" placeholder="<?php echo lang('aa_ingrese autor adicional'); ?>"> </div></div></div>';
-        campo_email ='<div class="form-group col-md-12"><div class="form-group"><div style="text-align: right;" class="col-md-3"><label for="email_add'+nextinput+'"><?php echo lang('aa_email_adicional') . ' (*)'; ?>:</label></div><div class="col-md-9"><input type="text" value="" class="form-control" name="email_add'+nextinput+'" id="email_add'+nextinput+'" placeholder="<?php echo lang('aa_ingrese email adicional');?>"></div></div></div>';
+        campo = '<div class="form-group col-md-12"><div class="form-group"> <div style="text-align: right;" class="col-md-3"> <label for="autor_'+nextinput+'"><?php echo lang('aa_autor_adicional'); ?>:</label></div><div class="col-md-9"> <input type="text" value="" class="form-control" name="autor_'+nextinput+'" id="autor_'+nextinput+'" placeholder="<?php echo lang('aa_ingrese autor adicional'); ?>"> </div></div></div>';
+        campo_email ='<div class="form-group col-md-12"><div class="form-group"><div style="text-align: right;" class="col-md-3"><label for="email_add'+nextinput+'"><?php echo lang('aa_email_adicional') . ' (*)'; ?>:</label></div><div class="col-md-9"><input type="email" value="" class="form-control" name="email_add'+nextinput+'" id="email_add'+nextinput+'" placeholder="<?php echo lang('aa_ingrese email adicional');?>"></div></div></div>';
         $("#campos").append(campo+campo_email);
     }
 }                  
@@ -154,7 +154,7 @@ function AgregarCampos(){
                                 <label for="email_autor"><?php echo lang('aa_email_contacto') . ' (*)'; ?>:</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" value="" class="form-control" name="email_autor" id="email_autor" placeholder="<?php echo lang('aa_ingrese email contacto');?>" required="required">
+                                <input type="email" value="" class="form-control" name="email_autor" id="email_autor" placeholder="<?php echo lang('aa_ingrese email contacto');?>" required="required">
                                 <i onclick=AgregarCampos(); class="material-icons orange600" >add_circle </i><span>Añadir Autor </span>
                             </div>
                             

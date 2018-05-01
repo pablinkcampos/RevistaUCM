@@ -86,11 +86,11 @@
 
 
             <div id="header-wrap">
-                <nav id="primary-menu" class="style-2">
-                    <div class="container clearfix" style="background-color: #F2F2F2">
+                <nav id="primary-menu" class="style-3">
+                    <div class="collapse navbar-collapse" style="background-color: #F2F2F2">
                         <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-                        <ul>
-                            <li><a href="<?php echo base_url(); ?>"><div> <?php echo lang('HP_pagina de inicio'); ?> </div></a></li>
+                        <ul  class="navbar-nav mr-auto">
+                            <li class="nav-item active"><a href="<?php echo base_url(); ?>"><div> <?php echo lang('HP_pagina de inicio'); ?> </div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><div> <?php echo lang('HP_sobre nosotros'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><div> <?php echo lang('HP_politica editorial'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><div> <?php echo lang('HP_Publicación efectiva'); ?></div></a></li>

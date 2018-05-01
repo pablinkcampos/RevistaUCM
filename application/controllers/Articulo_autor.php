@@ -440,11 +440,11 @@ class Articulo_autor extends MY_Controller {
                     $data['palabras_claves'] = $this->input->post('palabras_claves');
                     $data['abstract'] = $this->input->post('abstract');
                     $data['autor_1'] = $this->input->post('autor_principal');
-                    $data['autor_2'] = $this->input->post('autor_add_1');
-                    $data['autor_3'] = $this->input->post('autor_add_2');
-                    $data['autor_4'] = $this->input->post('autor_add_3');
-                    $data['autor_5'] = $this->input->post('autor_add_4');
-                    $data['autor_6'] = $this->input->post('autor_add_5');
+                    $data['autor_2'] = $this->input->post('autor_1');
+                    $data['autor_3'] = $this->input->post('autor_2');
+                    $data['autor_4'] = $this->input->post('autor_3');
+                    $data['autor_5'] = $this->input->post('autor_4');
+                    $data['autor_6'] = $this->input->post('autor_5');
 
                     $data['comentarios'] = $this->input->post('comentarios');
                     $data['version'] = 1;

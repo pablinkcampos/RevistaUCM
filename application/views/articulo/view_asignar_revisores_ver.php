@@ -43,9 +43,9 @@
 					            $fecha_ultima_upd  =   $row->fecha_ultima_upd ;
 
 					            $fecha_ingreso     =   $row->fecha_ingreso;
-								$email_revisor_1		   =   $row->email_revisor_1;
-								$email_revisor_2		   =   $row->email_revisor_2;
-								$email_revisor_3		   =   $row->email_revisor_3;
+								$id_revisor_1		   =   $row->id_revisor_1;
+								$id_revisor_2		   =   $row->id_revisor_2;
+								$id_revisor_3		   =   $row->id_revisor_3;
 								$comentario_revisor_1		   =   $row->comentario_revisor_1;
 								$comentario_revisor_2		   =   $row->comentario_revisor_2;
 								$comentario_revisor_3		   =   $row->comentario_revisor_3;
@@ -155,9 +155,9 @@
 					            //Revisor 1
 					            echo "<tr>";
 					            echo "<th style='text-align: right;'>".lang("aarv_revisor 1").":</th>";
-					            $rev1 = $CI->Articulo_model->revisor_direct($email_revisor_1);
+					            $rev1 = $CI->Articulo_model->revisor_direct($id_revisor_1);
 
-					            if($email_revisor_1!="No Asignado"){
+					            if($id_revisor_1!=0){
 					            	foreach ($rev1->result() as $row){
 						                echo "<td>";
 						                echo $row->nombre;
@@ -178,10 +178,10 @@
 					            //Revisor 2
 					            echo "<tr>";
 					            echo "<th style='text-align: right;'>".lang("aarv_revisor 2").":</th>";
-					            $rev2 = $CI->Articulo_model->revisor_direct($email_revisor_2);
+					            $rev2 = $CI->Articulo_model->revisor_direct($id_revisor_2);
 
 
-					            if($email_revisor_2!="No Asignado"){
+					            if($id_revisor_2!=0){
 					            	foreach ($rev2->result() as $row){
 						                echo "<td>";
 						                echo $row->nombre;
@@ -201,8 +201,8 @@
 					            //Revisor 3
 					            echo "<tr>";
 					            echo "<th style='text-align: right;'>".lang("aarv_revisor 3").":</th>";
-					            $rev3 = $CI->Articulo_model->revisor_direct($email_revisor_3);
-					            if($email_revisor_3!="No Asignado"){
+					            $rev3 = $CI->Articulo_model->revisor_direct($id_revisor_3);
+					            if($id_revisor_3!=0){
 					            	foreach ($rev3->result() as $row){
 						                echo "<td>";
 						                echo $row->nombre;

@@ -30,13 +30,20 @@
                 $content_per_page = 3;
                 $user_data = $this->session->userdata('userdata');
                 $email_autor=$user_data['email_usuario'];
+                $datos = $this->Articulo_Model->id_revisor_email($email_autor);
+                if($datos){
 
-
+                  $id_revisor = $datos->ID;
+                  
+                }
+                else{
+                  $id_revisor = -1;
+                }
                 // Datos get
                 $datas = $this->input->get('page');
 
                 // Cantidad de grupos en total
-                $filas = $this->Articulo_Model->count_articulos_asignados($email_autor);
+                $filas = $this->Articulo_Model->count_articulos_asignados($id_revisor);
 
                 $cant_group = 0;
                 if ($filas)
@@ -67,11 +74,11 @@
 
                 $start = ceil($group_no * $content_per_page);
 
-                $consulta = $this->Articulo_Model->articulos_asignados_limit($email_autor, $start, $content_per_page);
+                $consulta = $this->Articulo_Model->articulos_asignados_limit($id_revisor, $start, $content_per_page);
                 if ($consulta && $filas)
                 {
                     foreach ($consulta as $row) {
-                        $salida_estado = $this->Articulo_Model->obtener_estado_nombre($row->id_estado);
+                        $salida_estado = $row->estado;
                         if ($salida_estado)
                         {
                           echo '<div class="entry clearfix">';
@@ -80,7 +87,7 @@
                           echo '            <h2>'. $row->titulo_revista .'</h2>';
                           echo '        </div>';
                           echo '        <ul class="entry-meta clearfix">';
-                          echo '            <li><span class="label label-success">'. $salida_estado->nombre_estado . '</span></li>';
+                          echo '            <li><span class="label label-success">'. $salida_estado . '</span></li>';
                           echo '            <li><i class="icon-time"></i> '.lang("vhr_actualizado el").''. obtenerFechaEnLetra($row->fecha_ultima_upd) .'</li>';
                           echo '        </ul>';
                           echo '        <div class="entry-content">';

@@ -7,6 +7,7 @@ class Articulo_editor extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('Articulo_Model');
+        $this->load->model('Info_revisor_model');
         $this->load->helper(array('form', 'url'));
         $this->load->helper("file");
         $this->load->library("session");
@@ -81,6 +82,96 @@ class Articulo_editor extends MY_Controller {
         }
     }
 
+    public function all_articulos_asignados() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulos_asignados();
+
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_all_articulos_asignados', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+
+
+    public function all_articulos_asignados_ver($id_revista) {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+            $datos=$data['datos']->result_object();
+            $tema=array_column($datos, 'id_tema');
+            $data['revisores'] = $this->Info_revisor_model->lista_revisores_por_tema(0);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_articulo_asignado_ver', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function all_articulos_noasignados() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulos_no_asignados();
+
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_all_articulos_noasignados', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    
+
+    public function all_articulos_noasignados_ver($id_revista) {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+            $datos=$data['datos']->result_object();
+            $tema=array_column($datos, 'id_tema');
+            $data['revisores'] = $this->Info_revisor_model->lista_revisores_por_tema(0);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_articulo_noasignado_ver', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
     public function all_articulos_recibidos() {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
@@ -110,6 +201,46 @@ class Articulo_editor extends MY_Controller {
             $this->load->view('include/head');
             $this->load->view('include/header_editor');
             $this->load->view('articulo/view_articulo_recibido_ver', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function all_articulos_revisados() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulos_revisados();
+
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_all_articulos_revisados', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function all_articulos_revisados_ver($id_revista) {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_articulo_revisado_ver', $data);
             $this->load->view('include/footer');
         } else {
             $aviso = array('title' => lang("tswal_acceso denegado"),
@@ -704,6 +835,235 @@ class Articulo_editor extends MY_Controller {
         }
     }
 
+    public function aceptar_rechazar_articulo_recibido($id_revista) {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+
+            //Acceso permitido por estado
+            foreach ($data['datos']->result() as $row) {
+                $email_autor = $row->email_autor;
+                
+            }
+
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $opcion = $this->input->post('opcion');
+               
+               if ($opcion == 'Aceptado') {
+                
+                        $now = date('Y-m-d H:i:s');
+
+                        $id_estado = 2;
+                        $estado = 1;
+                        foreach ($data['datos']->result() as $row) {
+                            $datos = array(
+                                'ID' => $row->ID,
+                                'id_estado' => 2,
+                                'VerificacionTexto' => 1,
+                                'VerificacionTextoFecha' => $now
+                            );
+                        }
+                        
+
+                        if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
+                            $aviso = array('title' => lang("tswal_actualizacion realizada con exito"),
+                                'text' => lang("cswal_articulo estado aceptado"),
+                                'tipoaviso' => 'success',
+                                'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_recibidos"
+                            );
+
+                                $correo = $this->Articulo_Model->getmail($datos['ID']);
+                                $subject = "El formato del art&iacuteculo ha sido aceptado - Revista UCM";
+                                $mensaje = '<html>' .
+                                        '<body><h4>Hola <br><br>Se ha aceptado el formato del un art&iacuteculo a&uacuten debe ser revisado por nuestros expertos de revista UCM. Ingrese a la plataforma para ver más detalles.</h4><br>' .
+                                        '<h4>ID de su art&iacuteculo :'.$datos['ID'].'<br> Contrase&ntildea:'.$correo->email_autor.' </h4><br>' .
+                                        '</body>' .
+                                        '</html>';
+                                $mensaje .= "<b>Saludos</br><br>";
+                                $mensaje .= "<b>Equipo Revista UCM</b><br>";
+                                $headers = "From: RevistaUCM@ucm.cl \r\n";
+                                $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                                $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+
+                                mail($correo->email_autor, $subject, $mensaje, $headers);
+
+                                $this->load->view('include/aviso', $aviso);
+                        } else {
+                            $aviso = array('title' => lang("tswal_error"),
+                                'text' => lang("cswal_actualizacion no realizada"),
+                                'tipoaviso' => 'error',
+                                'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_recibidos"
+                            );
+                            //Enviar correo electrónico(Aceptado)
+                            $this->load->view('include/aviso', $aviso);
+                        }
+                        
+                } else{
+                        $comentario = $this->input->post('comentarioRechazo');
+                        $now = date('Y-m-d H:i:s');
+
+                        $id_estado = 4;
+                        $estado = 0;
+                        foreach ($data['datos']->result() as $row) {
+                            $datos = array(
+                                'ID' => $row->ID,
+                                'id_estado' => $id_estado,
+                                'VerificacionTexto' => $estado,
+                                'VerificacionTextoFecha' => $now,
+                                'comentarios_editor' => $comentario
+                            );
+                        }
+
+                        if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
+                            $aviso = array('title' => lang("tswal_actualizacion realizada con exito"),
+                                'text' => lang("cswal_articulo estado rechazado"),
+                                'tipoaviso' => 'success',
+                                'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_recibidos"
+                            );
+                            $correo = $this->Articulo_Model->getmail($datos['ID']);
+                            $subject = "Articulo rechazado - Revista UCM";
+                            $mensaje = '<html>' .
+                                    '<body><h4>Hola <br><br>Se ha rechazado un articulo para la revista UCM. </h4><br>' .
+                                    '<h4>Motivos:'.$comentario.' </h4><br>' .
+                                    '</body>' .
+                                    '</html>';
+                            $mensaje .= "<b>Saludos</br><br>";
+                            $mensaje .= "<b>Equipo Revista UCM</b><br>";
+                            $headers = "From: RevistaUCM@ucm.cl \r\n";
+                            $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+
+                            mail($correo->email_autor, $subject, $mensaje, $headers);
+                            $this->load->view('include/aviso', $aviso);
+                        } else {
+                            $aviso = array('title' => lang("tswal_error"),
+                                'text' => lang("cswal_actualizacion no realizada"),
+                                'tipoaviso' => 'error',
+                                'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_recibidos"
+                            );
+                            //Enviar correo electrónico(Aceptado)
+                            $this->load->view('include/aviso', $aviso);
+                        }
+                    }
+                       
+                }
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+        
+    }
+
+    public function resetear_articulo_revisado($ids) {
+        list($id_revista, $id_revisor) = split("_", $ids, 2);
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+
+            //Acceso permitido por estado
+            foreach ($data['datos']->result() as $row) {
+                $email_autor = $row->email_autor;
+                $id_rev1 = $row->id_rev1;
+                $id_rev2 = $row->id_rev2;
+                $id_rev3 = $row->id_rev3;
+            }
+
+            if ($id_revisor == $id_rev1) {
+                $now = date('Y-m-d H:i:s');
+               
+                foreach ($data['datos']->result() as $row) {
+                    $datos = array(
+                        'ID' => $row->ID,
+                        'id_estado' => 3,
+                        'calificaRev1'=>3,
+                        'Fecha_asig_revision' => $now
+                    );
+                }
+            }
+            elseif($id_revisor == $id_rev2){
+                $now = date('Y-m-d H:i:s');
+                
+                foreach ($data['datos']->result() as $row) {
+                    $datos = array(
+                        'ID' => $row->ID,
+                        'id_estado' => 3,
+                        'calificaRev2'=>3,
+                        'Fecha_asig_revision' => $now
+                    );
+                }
+            }  
+            elseif($id_revisor == $id_rev3){
+                $now = date('Y-m-d H:i:s');
+                $id_estado = 2;
+                $estado = 1;
+                foreach ($data['datos']->result() as $row) {
+                    $datos = array(
+                        'ID' => $row->ID,
+                        'id_estado' => 3,
+                        'calificaRev3'=>3,
+                        'Fecha_asig_revision' => $now
+                    );
+                }
+                   
+
+            }
+            if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
+            
+                $subject = "Articulo asignado Revista UCM";
+                $mensaje = '<html>' .
+                        '<body><h4>Hola <br><br>Se le ha asignado un artículo para ser evaluado. Puede encontrarlo en la plataforma Revista UCM.</h4><br>' .
+                        '</body>' .
+                        '</html>';
+                $mensaje .= "<b>Saludos</br><br>";
+                $mensaje .= "<b>Equipo Revista UCM</b><br>";
+                $headers = "From: RevistaUCM@ucm.cl \r\n";
+                $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        
+                $correo = "";
+                $email_revisor = $this->Articulo_Model->getmailrevisor($id_revisor);
+                $correo .= $email_revisor->email;
+                
+        
+                mail($correo, $subject, $mensaje, $headers);
+        
+                $aviso = array('title' => lang("tswal_asignacion exitosa"),
+                    'text' => lang("cswal_articulo actualizado con exito"),
+                    'tipoaviso' => 'success',
+                    'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_noasignados"
+                );
+        
+        
+                $this->load->view('include/aviso', $aviso);
+            } else {
+                $aviso = array('title' => lang("tswal_error"),
+                    'text' => lang("cswal_actualizacion no realizada"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_noasignados"
+                );
+                $this->load->view('include/aviso', $aviso);
+            }
+            
+
+        }
+        else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }    
+                        
+        
+    }
+
     //Asignar_revisores
 
     public function asignar_revisores() {
@@ -736,6 +1096,375 @@ class Articulo_editor extends MY_Controller {
             $this->load->view('articulo/view_asignar_revisores_ver', $data);
             $this->load->view('include/footer');
         } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function asignar_revisores_editor($id_revista) {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+            
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                
+                $i = 0;
+                $id_revisor_1 = 0;
+                $id_revisor_2 = 0;
+                $id_revisor_3 = 0;
+                foreach ($this->input->post('revisor[]') as $row) {
+                    if($i == 0){
+                        $id_revisor_1 = $this->input->post('revisor[0]');
+                        
+                    }
+                    if($i == 1){
+                        $id_revisor_2 = $this->input->post('revisor[1]');
+                        
+                    }
+                    if($i == 2){
+                        $id_revisor_3 = $this->input->post('revisor[2]');
+                    }
+                    $i++;
+                }
+                $now = date('Y-m-d H:i:s');
+                $datos = array(
+                    'ID' => $id_revista,
+                    'id_revisor_1' => $id_revisor_1,
+                    'id_revisor_2' => $id_revisor_2,
+                    'id_revisor_3' => $id_revisor_3,
+                    'id_estado' => 3,
+                    'Fecha_asig_revision' => $now
+                );
+                
+                
+                if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
+            
+                    $subject = "Articulo asignado Revista UCM";
+                    $mensaje = '<html>' .
+                            '<body><h4>Hola <br><br>Se le ha asignado un artículo para ser evaluado. Puede encontrarlo en la plataforma Revista UCM.</h4><br>' .
+                            '</body>' .
+                            '</html>';
+                    $mensaje .= "<b>Saludos</br><br>";
+                    $mensaje .= "<b>Equipo Revista UCM</b><br>";
+                    $headers = "From: RevistaUCM@ucm.cl \r\n";
+                    $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+            
+                    $correo = "";
+                    if ($id_revisor_1 != 0) {
+                        $email_revisor_1 = $this->Articulo_Model->getmailrevisor($id_revisor_1);
+                        
+                        $correo .= $email_revisor_1->email;
+                        if ($id_revisor_2 != 0) {
+                            $correo .= ", ";
+                            $email_revisor_2 = $this->Articulo_Model->getmailrevisor($id_revisor_2);
+                            
+                            $correo .= $email_revisor_2->email;
+                            if ($id_revisor_3 != 0) {
+                                $correo .= ", ";
+
+                                $email_revisor_3 = $this->Articulo_Model->getmailrevisor($id_revisor_3);
+                                $correo .= $email_revisor_3->email;
+                            }
+                        }
+                    }
+            
+                    mail($correo, $subject, $mensaje, $headers);
+            
+                    $aviso = array('title' => lang("tswal_asignacion exitosa"),
+                        'text' => lang("cswal_articulo actualizado con exito"),
+                        'tipoaviso' => 'success',
+                        'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_noasignados"
+                    );
+            
+            
+                    $this->load->view('include/aviso', $aviso);
+                } else {
+                    $aviso = array('title' => lang("tswal_error"),
+                        'text' => lang("cswal_actualizacion no realizada"),
+                        'tipoaviso' => 'error',
+                        'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_noasignados"
+                    );
+                    $this->load->view('include/aviso', $aviso);
+                }
+                
+  
+            }
+       
+        
+        }
+        else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function reasignar_revisores_editor($id_revista) {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+            //Acceso permitido por estado
+            foreach ($data['datos']->result() as $row) {
+                $id_rev1 = $row->id_rev1;
+                $id_rev2 = $row->id_rev2;
+                $id_rev3 = $row->id_rev3;
+                $cal_rev1 = $row->cal_rev1; 
+                $cal_rev2 = $row->cal_rev2; 
+                $cal_rev3 = $row->cal_rev3;
+
+              
+                
+            }
+            
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                
+                $i = 0;
+                $id_rev1_new = 0;
+                $id_rev2_new = 0;
+                $id_rev3_new = 0;
+                $bloq1=0;
+                $bloq2=0;
+                $bloq3=0;
+                $id_revisor_1 = 0;
+                $id_revisor_2 = 0;
+                $id_revisor_3 = 0;
+                
+                if($cal_rev1 !=3){
+                    $bloq1=1;
+                }
+                if($cal_rev2 !=3){
+                    $bloq2=1;
+                }
+                if($cal_rev3 !=3){
+                    $bloq2=1;
+                }
+                if(empty($this->input->post('revisor[]'))){
+                   
+                }
+                else{
+                    foreach ($this->input->post('revisor[]') as $row) {
+                        if($i == 0){
+                            $id_rev1_new = $this->input->post('revisor[0]');
+                            if($id_rev1_new == $id_rev1){
+                                $id_revisor_1 = $id_rev1_new;
+                                $bloq1=1;
+                            }
+                            else{
+                                if($id_rev1_new == $id_rev2){
+                                    $id_revisor_2 = $id_rev1_new;
+                                    $bloq2=1;
+                                }
+                                else{
+                                    if($id_rev1_new == $id_rev3){
+                                        $id_revisor_3 = $id_rev1_new;
+                                        $bloq3=1;
+                                    }
+                                    else{
+                                        if($id_rev1_new != $id_rev1 && $bloq1 == 0){
+                                            $id_revisor_1 = $id_rev1_new;
+                                            $bloq1=2;
+                                        }
+                                        else{
+                                            if($id_rev1_new != $id_rev2 && $bloq2 == 0){
+                                                $id_revisor_2 = $id_rev1_new;
+                                                $bloq2=2;
+                                            }
+                                            else{
+                                                if($id_rev1_new != $id_rev3 && $bloq3 == 0){
+                                                    $id_revisor_3 = $id_rev1_new;
+                                                    $bloq2=2;
+                                                }
+    
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+    
+                        }
+                        
+                        if($i == 1){
+                            $id_rev2_new = $this->input->post('revisor[1]');
+                            
+                            if($id_rev2_new == $id_rev1){
+                                $id_revisor_1 = $id_rev2_new;
+                                $bloq1=1;
+                            }
+                            else{
+                                if($id_rev2_new == $id_rev2){
+                                    $id_revisor_2 = $id_rev2_new;
+                                    $bloq2=1;
+                                }
+                                else{
+                                    if($id_rev2_new == $id_rev3){
+                                        $id_revisor_3 = $id_rev2_new;
+                                        $bloq3=1;
+                                    }
+                                    else{
+                                        if($id_rev2_new != $id_rev1 && $bloq1 == 0){
+                                            $id_revisor_1 = $id_rev2_new;
+                                            $bloq1=2;
+                                        }
+                                        else{
+                                            if($id_rev2_new != $id_rev2 && $bloq2 == 0){
+                                                $id_revisor_2 = $id_rev2_new;
+                                                $bloq2=2;
+                                            }
+                                            else{
+                                                if($id_rev2_new != $id_rev3 && $bloq3 == 0){
+                                                    $id_revisor_3 = $id_rev2_new;
+                                                    $bloq2=2;
+                                                }
+    
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if($i == 2){
+    
+                            $id_rev3_new = $this->input->post('revisor[2]');
+                            
+                            if($id_rev3_new == $id_rev1){
+                                $id_revisor_1 = $id_rev3_new;
+                                $bloq1=1;
+                            }
+                            else{
+                                if($id_rev3_new == $id_rev2){
+                                    $id_revisor_2 = $id_rev3_new;
+                                    $bloq2=1;
+                                }
+                                else{
+                                    if($id_rev3_new == $id_rev3){
+                                        $id_revisor_3 = $id_rev3_new;
+                                        $bloq3=1;
+                                    }
+                                    else{
+                                        if($id_rev3_new != $id_rev1 && $bloq1 == 0){
+                                            $id_revisor_1 = $id_rev3_new;
+                                            $bloq1=2;
+                                        }
+                                        else{
+                                            if($id_rev3_new != $id_rev2 && $bloq2 == 0){
+                                                $id_revisor_2 = $id_rev3_new;
+                                                $bloq2=2;
+                                            }
+                                            else{
+                                                if($id_rev3_new != $id_rev3 && $bloq3 == 0){
+                                                    $id_revisor_3 = $id_rev3_new;
+                                                    $bloq2=2;
+                                                }
+    
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                        $i++;
+                    }
+                }
+                
+
+                if($id_revisor_1 == 0 && $bloq1 == 1){
+                   $id_revisor_1 = $id_rev1;
+                }
+                if($id_revisor_2 == 0 && $bloq2 == 1){
+                    $id_revisor_2 = $id_rev2;
+                }
+                if($id_revisor_3 == 0 && $bloq3 == 1){
+                    $id_revisor_3 = $id_rev3;
+                }
+               
+                $now = date('Y-m-d H:i:s');
+                $datos = array(
+                    'ID' => $id_revista,
+                    'id_revisor_1' => $id_revisor_1,
+                    'id_revisor_2' => $id_revisor_2,
+                    'id_revisor_3' => $id_revisor_3,
+                    'id_estado' => 3,
+                    'Fecha_asig_revision' => $now
+                );
+                
+                
+                if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
+            
+                    $subject = "Articulo asignado Revista UCM";
+                    $mensaje = '<html>' .
+                            '<body><h4>Hola <br><br>Se le ha asignado un artículo para ser evaluado. Puede encontrarlo en la plataforma Revista UCM.</h4><br>' .
+                            '</body>' .
+                            '</html>';
+                    $mensaje .= "<b>Saludos</br><br>";
+                    $mensaje .= "<b>Equipo Revista UCM</b><br>";
+                    $headers = "From: RevistaUCM@ucm.cl \r\n";
+                    $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+            
+                    $correo = "";
+                    if ($id_revisor_1 != 0 && $bloq1 != 1) {
+                        $email_revisor_1 = $this->Articulo_Model->getmailrevisor($id_revisor_1);
+                       
+                        $correo .= $email_revisor_1->email;
+                    }
+                    if ($id_revisor_2 != 0 && $bloq2 != 1) {
+                        if($bloq1 !=1){
+                            $correo .= ", ";
+                        }    
+                        $email_revisor_2 = $this->Articulo_Model->getmailrevisor($id_revisor_2);
+                        $correo .= $email_revisor_2->email;
+                            
+                    }
+                    if ($id_revisor_3 != 0 && $bloq3 != 1) {
+                        if($bloq2 !=1){
+                            $correo .= ", ";
+                        }  
+
+                        $email_revisor_3 = $this->Articulo_Model->getmailrevisor($id_revisor_3);
+                        
+                        $correo .= $email_revisor_3->email;
+                    }
+                    
+                    if($correo != ""){
+                        mail($correo, $subject, $mensaje, $headers);
+                    }
+                   
+            
+                    $aviso = array('title' => lang("tswal_asignacion exitosa"),
+                        'text' => lang("cswal_articulo actualizado con exito"),
+                        'tipoaviso' => 'success',
+                        'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_asignados"
+                    );
+            
+            
+                    $this->load->view('include/aviso', $aviso);
+                } else {
+                    $aviso = array('title' => lang("tswal_error"),
+                        'text' => lang("cswal_actualizacion no realizada"),
+                        'tipoaviso' => 'error',
+                        'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_asignados"
+                    );
+                    $this->load->view('include/aviso', $aviso);
+                }
+                
+  
+            }
+       
+        
+        }
+        else {
             $aviso = array('title' => lang("tswal_acceso denegado"),
                 'text' => lang("cswal_acceso denegado"),
                 'tipoaviso' => 'error',

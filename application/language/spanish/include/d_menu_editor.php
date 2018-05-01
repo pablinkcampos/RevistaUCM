@@ -19,6 +19,7 @@ $lang['ME_configuracion']							='Configuraciones Generales';
 $lang['ME_articulos']							='Artículos';
 $lang['ME_recibidos']							='Recibidos';
 $lang['ME_asignados']							='Asignados';
+$lang['ME_noasignados']							='No Asignados';
 $lang['ME_Revisados']							='Revisados';
 $lang['ME_Plazo vencido']							='Plazo vencido';
 $lang['ME_Rechazado por Editor']							='Rechazado por Editor';

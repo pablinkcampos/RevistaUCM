@@ -46,9 +46,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <?php
                         $id_revista = $row->ID;
                         $titulo_revista = $row->titulo_revista;
-                        $email_revisor_1 = $row->email_revisor_1;
-                        $email_revisor_2 = $row->email_revisor_2;
-                        $email_revisor_3 = $row->email_revisor_3;
+                        $id_revisor_1 = $row->id_revisor_1;
+                        $id_revisor_2 = $row->id_revisor_2;
+                        $id_revisor_3 = $row->id_revisor_3;
                         ?>
 
 
@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                             foreach ($revisores->result() as $row) {
                                                 echo '<option value="' . $row->email . '" ';
-                                                if ($email_revisor_1 == $row->email)
+                                                if ($id_revisor_1 == $row->email)
                                                     echo "selected";
                                                 echo '>' . $row->nombre . ' ' . $row->apellido_1 . ' ' . $row->apellido_2;
                                                 echo '</option>';
@@ -96,8 +96,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <select class="form-control" name="email_revisor_2" id="email_revisor_2" onchange="showCampo(this.value)">
                                             <?php
                                             foreach ($revisores->result() as $row) {
-                                                echo '<option value="' . $row->email . '" ';
-                                                if ($email_revisor_2 == $row->email)
+                                                echo '<option value="' . $row->id . '" ';
+                                                if ($id_revisor_2 == $row->id)
                                                     echo "selected";
                                                 echo '>' . $row->nombre . ' ' . $row->apellido_1 . ' ' . $row->apellido_2 . '</option>';
                                             }

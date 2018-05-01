@@ -24,6 +24,7 @@ $lang['aallav_comentario revisor 3']							='Comentario revisor 3';
 $lang['aallav_comentarios editor']							='Comentarios Editor';
 $lang['aallav_fecha timeout']							='Fecha TimeOut';
 $lang['aallav_regresar']							='Regresar';
+$lang['aallav_formato_aceptar']							='Aceptar';
 /* <?php echo lang('aallav_'); ?> */
 
 /* ".lang("aallav_")." */

@@ -44,7 +44,7 @@ $(document).ready(function() {
                               <tr>
                                   <th> <?php echo lang('aaas_titulo'); ?></th>
                                   <th><?php echo lang('aaas_autor'); ?></th>
-                                  <th><?php echo lang('aaas_estado'); ?></th>
+                                  <th><?php echo lang('aaas_tema'); ?></th>
                                   <th><?php echo lang('aaas_revisor N1'); ?></th>
                                   <th><?php echo lang('aaas_revisor N2'); ?></th>
                                   <th><?php echo lang('aaas_revisor N3'); ?></th>
@@ -55,118 +55,78 @@ $(document).ready(function() {
                           </thead>
                           <tbody>
                           <?php if($datos){ ?>
-                          	<?php foreach ($datos->result() as $row): ?>
-                  				<?php
+                            <?php foreach ($datos->result() as $row): ?>
+                            <?php
 
-                  					$id_revista		=	$row->ID;
-                  					$titulo_revista	=	$row->titulo_revista;
-                                      $email_autor       =   $row->email_autor;
-                                      $id_estado      =   $row->id_estado;
-                  					$email_revisor_1		=	$row->email_revisor_1;
-                  					$email_revisor_2		=	$row->email_revisor_2;
-                  					$email_revisor_3		=	$row->email_revisor_3;
-                  					$fecha_ingreso	=	$row->fecha_ingreso;
+                                $id_revista = $row->ID;
+                                $titulo_revista = $row->titulo_revista;
+                                $email_autor = $row->email_autor;
+                                $estado = $row->estado;
+                                $tema = $row->tema;
+                                $rev1 = $row->rev_1;
+                                $rev2 = $row->rev_2;
+                                $rev3 = $row->rev_3;
+                                $fecha_ingreso = $row->fecha_ingreso;
+                                $fecha_asignacion = $row->fecha_asignacion;
+                                $fecha_vencimiento = $row->fecha_vencimiento;
+                                $date1 = new DateTime($fecha_asignacion);
+                                $date2 = new DateTime($fecha_vencimiento);
+                                $now = new DateTIme('now');
+                                $diff = $date1->diff($date2);
+                                $diff2 = $date2->diff($now);
+                                $dife = intval($diff2->days);
+                                $limite = intval($diff->days);
+                                
+                                  
 
+                                    echo "<tr>";
+                                    if($dife > $limite/2 ){
+                                       
+                                        echo "<td style='border-left: 6px solid green;'>";
+                                    }
+                                    else{
+                                        if($dife < $limite/2 && $dife > 0 ){
+                                            
+                                            echo "<td style='border-left: 6px solid orange;'>";
+                                        }
+                                        else{
+                                           
+                                            echo "<td style='border-left: 6px solid red;'>";
+                                        }
+                                    }
+                                     
+                                        echo  $titulo_revista;  echo "</td>";                					    
 
-                  					echo "<tr>";
-                  						echo "<td>"; echo $titulo_revista; echo "</td>";
-
-                                          $CI =& get_instance();
-                                          $CI->load->model('Articulo_model');
-
-                                          $aut1 = $CI->Articulo_model->autor_direct($email_autor);
                                               echo "<td>";
-                                              echo $aut1->nombre;
-                                              echo " ";
-                                              echo $aut1->apellido_1;
-                                              echo " ";
-                                              echo $aut1->apellido_2;
+                                              echo $email_autor;
                                               echo "</td>";
-
-                                          $est1 = $CI->Articulo_model->estado($id_estado);
-                                          foreach ($est1->result() as $row){
+                                              echo "<td>"; echo $tema; echo "</td>";
                                               echo "<td>";
-                                              echo $row->nombre_estado;
+                                              echo $rev1;
                                               echo "</td>";
-                                          }
-
-
-
-
-                                          $rev1 = $CI->Articulo_model->revisor_direct($email_revisor_1);
-                                          if($email_revisor_1!="No Asignado"){
-                                              foreach ($rev1->result() as $row){
-                                                  echo "<td>";
-                                                  echo $row->nombre;
-                                                  echo " ";
-                                                  echo $row->apellido_1;
-                                                  echo " ";
-                                                  echo $row->apellido_2;
-                                                  echo "</td>";
-                                              }
-                                          }else{
                                               echo "<td>";
-                                              echo "-";
+                                              echo $rev2;
                                               echo "</td>";
-                                          }
-
-
-
-                                          $rev2 = $CI->Articulo_model->revisor_direct($email_revisor_2);
-
-                                          if($email_revisor_2!="No Asignado"){
-                                               foreach ($rev2->result() as $row){
-                                                  echo "<td>";
-                                                  echo $row->nombre;
-                                                  echo " ";
-                                                  echo $row->apellido_1;
-                                                  echo " ";
-                                                  echo $row->apellido_2;
-                                                  echo "</td>";
-                                              }
-
-                                          }else{
                                               echo "<td>";
-                                              echo "-";
+                                              echo $rev3;
                                               echo "</td>";
-                                          }
+                                              echo "<td>"; echo $fecha_ingreso; echo "</td>";
+                  						
+                  						    echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_ver/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>zoom_in</i></center></a>"; echo "</td>";
 
 
+                                            
+                                                echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_comentar/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>insert_comment</i></center></a>";  echo "</td>";
+                                           
+ 
+                                            
 
-                                          $rev3 = $CI->Articulo_model->revisor_direct($email_revisor_3);
-                                          if($email_revisor_3!="No Asignado"){
-                                              foreach ($rev3->result() as $row){
-                                                  echo "<td>";
-                                                  echo $row->nombre;
-                                                  echo " ";
-                                                  echo $row->apellido_1;
-                                                  echo " ";
-                                                  echo $row->apellido_2;
-                                                  echo "</td>";
-                                              }
-                                          }else{
-                                              echo "<td>";
-                                              echo "-";
-                                              echo "</td>";
-                                          }
-
-                  						echo "<td>"; echo $fecha_ingreso; echo "</td>";
-                  						echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_ver/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>zoom_in</i></center></a>"; echo "</td>";
-
-
-                              if($id_estado==3){
-                                echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_comentar/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>insert_comment</i></center></a>";  echo "</td>";
-                              }else{
-                                echo "<td>"; echo "<center><span class='glyphicon glyphicon-remove icon-2x'></span></center></a>"; echo "</td>";
-                              }
-
-
-
-
-                  					echo "</tr>";
+                  					    echo "</tr>";
                   				?>
-                  			<?php endforeach ?>
-                              <?php } ?>
+                                <?php endforeach ?>
+                                <?php
+                              } ?>
+                  						
                           </tbody>
                       </table>
                   </div>

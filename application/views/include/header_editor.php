@@ -2,48 +2,7 @@
     <div class="clearfix">
         <div id="top-bar">
             <div class="container clearfix">
-                <?php
-                 $user_data = $this->session->userdata('userdata');
-                 if ($user_data['id_rol2'] != NULL || $user_data['id_rol3'] != NULL) {
-                     if (($user_data['id_rol2'] == 2 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol3'] == 2 && $user_data['id_rol2'] == NULL)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol2'] == 3 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol3'] == 3 && $user_data['id_rol2'] == NULL)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a>  / <a href="' . base_url() . 'index.php/System/autor" style="color: #000080;">Autor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol2'] == 3 && $user_data['id_rol3'] == 2) || ($user_data['id_rol2'] == 2 && $user_data['id_rol3'] == 3)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/autor" style="color: #000080;">Autor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol'] == 3 && $user_data['id_rol2'] == 2 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol'] == 3 && $user_data['id_rol3'] == 2 && $user_data['id_rol2'] == NULL)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/autor" style="color: #000080;">Autor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol'] == 3 && $user_data['id_rol2'] == 1 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol'] == 3 && $user_data['id_rol3'] == 1 && $user_data['id_rol2'] == NULL)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/autor" style="color: #000080;">Autor</a>  / <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol'] == 3 && $user_data['id_rol2'] == 2 && $user_data['id_rol3'] == 1) || ($user_data['id_rol'] == 3 && $user_data['id_rol3'] == 2 && $user_data['id_rol2'] == 1)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/autor" style="color: #000080;">Autor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol'] == 2 && $user_data['id_rol2'] == 1 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol'] == 2 && $user_data['id_rol3'] == 1 && $user_data['id_rol2'] == NULL)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol'] == 2 && $user_data['id_rol2'] == 3 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol'] == 2 && $user_data['id_rol3'] == 3 && $user_data['id_rol2'] == NULL)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/autor" style="color: #000080;">Autor</a></p>';
-                         echo '</div>';
-                     } elseif (($user_data['id_rol'] == 2 && $user_data['id_rol2'] == 1 && $user_data['id_rol3'] == 3) || ($user_data['id_rol'] == 2 && $user_data['id_rol3'] == 1 && $user_data['id_rol2'] == 3)) {
-                         echo '<div class="col_half nobottommargin hidden-xs">';
-                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/autor" style="color: #000080;">Autor</a></p>';
-                         echo '</div>';
-                     }
-                 }
-                ?>
+               
                 <?php $this->load->view('include/selector_idioma');?>
             </div>
         </div>
@@ -100,9 +59,10 @@
 
             <div id="header-wrap">
                 <nav id="primary-menu" class="style-2">
-                    <div class="container clearfix" style="background-color: #F2F2F2">
+                    <div class="collapse navbar-collapse" style="background-color: #F2F2F2">
                         <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
                         <ul>
+ 
                             <li><a href="<?php echo base_url(); ?>index.php/System/editor"><div> <?php echo lang('HE_pagina de inicio'); ?> </div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><div> <?php echo lang('HE_sobre nosotros'); ?></div></a></li>
                             <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><div> <?php echo lang('HE_politica editorial'); ?></div></a></li>
@@ -119,5 +79,44 @@
                         -->
                     </div>
                 </nav>
+                <?php
+                 $user_data = $this->session->userdata('userdata');
+                 if ($user_data['id_rol2'] != NULL || $user_data['id_rol3'] != NULL) {
+                     if (($user_data['id_rol2'] == 2 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol3'] == 2 && $user_data['id_rol2'] == NULL)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a></p>';
+                         echo '</div>';
+                     } elseif (($user_data['id_rol2'] == 3 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol3'] == 3 && $user_data['id_rol2'] == NULL)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a>  </p>';
+                         echo '</div>';
+                     } elseif (($user_data['id_rol2'] == 3 && $user_data['id_rol3'] == 2) || ($user_data['id_rol2'] == 2 && $user_data['id_rol3'] == 3)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a> </p>';
+                         echo '</div>';
+                     } elseif (($user_data['id_rol'] == 3 && $user_data['id_rol2'] == 2 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol'] == 3 && $user_data['id_rol3'] == 2 && $user_data['id_rol2'] == NULL)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong>   / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a></p>';
+                         echo '</div>';
+                     } elseif (($user_data['id_rol'] == 3 && $user_data['id_rol2'] == 1 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol'] == 3 && $user_data['id_rol3'] == 1 && $user_data['id_rol2'] == NULL)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong>   / <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a></p>';
+                         echo '</div>';
+                     } elseif (($user_data['id_rol'] == 3 && $user_data['id_rol2'] == 2 && $user_data['id_rol3'] == 1) || ($user_data['id_rol'] == 3 && $user_data['id_rol3'] == 2 && $user_data['id_rol2'] == 1)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong>   / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a></p>';
+                         echo '</div>';
+                     } elseif (($user_data['id_rol'] == 2 && $user_data['id_rol2'] == 1 && $user_data['id_rol3'] == NULL) || ($user_data['id_rol'] == 2 && $user_data['id_rol3'] == 1 && $user_data['id_rol2'] == NULL)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/editor" style="color: #000080;">Editor</a></p>';
+                         echo '</div>';
+   
+                     } elseif (($user_data['id_rol'] == 2 && $user_data['id_rol2'] == 1 && $user_data['id_rol3'] == 3) || ($user_data['id_rol'] == 2 && $user_data['id_rol3'] == 1 && $user_data['id_rol2'] == 3)) {
+                         echo '<div class="col_half nobottommargin hidden-xs">';
+                         echo '    <p class="nobottommargin"><strong>Cambiar a menú: </strong> <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / <a href="' . base_url() . 'index.php/System/revisor" style="color: #000080;">Revisor</a>  / </p>';
+                         echo '</div>';
+                     }
+                 }
+                ?>
             </div>
         </header>

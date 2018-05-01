@@ -25,225 +25,154 @@
 					    <div class="col-md-12">
 					    <table class="table" style="width:100%; text-align: right;">
 					      <?php if($datos){ ?>
-					    	<?php foreach ($datos->result() as $row): ?>
-					    		<?php
+							<?php foreach ($datos->result() as $row): ?>
+                           <?php
+                              $id_revista        =   $row->ID;
+                              $titulo_revista    =   $row->titulo_revista;
+                                       $email_autor          =   $row->email_autor;
+                                       $tema          =   $row->tema;
+                                       $estado         =   $row->estado;
+                              
+                                       $palabras_claves   =   $row->palabras_claves;
+                                       $abstract          =   $row->abstract;
+                              
+                                       $archivo           =   $row->archivo;
+                                       $comentarios       =   $row->com_autor;
+                                       $fecha_ultima_upd  =   $row->fecha_ultima_upd ;
+                              
+                                       $fecha_ingreso     =   $row->fecha_ingreso;
+									   $id_rev1 = $row->id_rev1;
+									   $id_rev2 = $row->id_rev2;
+									   $id_rev3 = $row->id_rev3;
+									   $cal_rev1 = $row->cal_rev1; 
+									   $cal_rev2 = $row->cal_rev2; 
+									   $cal_rev3 = $row->cal_rev3;
+									   $rev_1 = $row->rev_1;
+									   $rev_2 = $row->rev_2;
+									   $rev_3 = $row->rev_3;
+									   $com_rev1 = $row->com_rev1;
+									   $com_rev2 = $row->com_rev2;
+									   $com_rev3 = $row->com_rev3;
+								
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_titulo articulo").":</th>";
+                                       echo "<td>".$titulo_revista."</td>";
+                                       echo "</tr>";
+                              
+                              
+                              
+                                       $CI =& get_instance();
+                                       $CI->load->model('Articulo_model');
+                              
+                                       //Autor
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_autor").":</th>";
+                                     
+                              
+                                           echo "<td>";
+                                           echo $email_autor;
+                                       
+                                           echo "</td>";
+                              
+                                       echo "</tr>";
+                              
+                                       //Campo de investigacion
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_campo de investigacion").":</th>";
+                                 
+                                           echo "<td>";
+                                           echo $tema;
+                                           echo "</td>";
+                                       
+                                       echo "</tr>";
+                              
+                                       //Estado
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_estado").":</th>";
+                              
+                                  
+                                           echo "<td>";
+                                           echo $row->estado;
+                                           echo "</td>";
+                                      
+                                       echo "</tr>";
+                              
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_palabras claves").":</th>";
+                                       echo "<td>".$palabras_claves."</td>";
+                                       echo "</tr>";
+                              
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_abstract").":</th>";
+                                       echo "<td style='text-align: justify;'>".$abstract."</td>";
+                                       echo "</tr>";
+                              
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_archivo:")."</th>";
+                                       echo "<td><a href='".base_url()."uploads/".$archivo."'>".$archivo."</a></td>";
+                                       echo "</tr>";
+                              
+                                       echo "<tr>";
+                                       if($comentarios==""){
+                                       	echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
+                                        echo "<td>-</td>";
+                                        echo "</tr>";
+                                       }else{
+                                       	echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
+                                        echo "<td>".$comentarios."</td>";
+                                        echo "</tr>";
+                              
+									   }
+									   
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_revisor 1").":</th>";
+                                       echo "<td>".$rev_1."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_revisor 2").":</th>";
+                                       echo "<td>".$rev_2."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_revisor 3").":</th>";
+                                       echo "<td>".$rev_3."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allarvv_calificacion revisor 1").":</th>";
+                                       echo "<td>".$cal_rev1."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allarvv_calificacion revisor 2").":</th>";
+                                       echo "<td>".$cal_rev2."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allarvv_calificacion revisor 3").":</th>";
+                                       echo "<td>".$cal_rev3."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allarvv_comentario revisor 1").":</th>";
+                                       echo "<td>".$com_rev1."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allarvv_comentario revisor 2").":</th>";
+                                       echo "<td>".$com_rev2."</td>";
+									   echo "</tr>";
+									   echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allarvv_comentario revisor 3").":</th>";
+                                       echo "<td>".$com_rev3."</td>";
+									   echo "</tr>";
+									   
 
-								$id_revista        =   $row->ID;
-								$titulo_revista    =   $row->titulo_revista;
-					            $version           =   $row->version;
-					            $email_autor          =   $row->email_autor;
-					            $id_campo          =   $row->id_campo;
-					            $id_estado         =   $row->id_estado;
-
-					            $palabras_claves   =   $row->palabras_claves;
-					            $abstract          =   $row->abstract;
-
-					            $archivo           =   $row->archivo;
-					            $comentarios       =   $row->comentarios;
-					            $fecha_ultima_upd  =   $row->fecha_ultima_upd ;
-
-					            $fecha_ingreso     =   $row->fecha_ingreso;
-								$email_revisor_1		   =   $row->email_revisor_1;
-								$email_revisor_2		   =   $row->email_revisor_2;
-								$email_revisor_3		   =   $row->email_revisor_3;
-								$comentario_revisor_1		   =   $row->comentario_revisor_1;
-								$comentario_revisor_2		   =   $row->comentario_revisor_2;
-								$comentario_revisor_3		   =   $row->comentario_revisor_3;
-								$comentarios_editor		   =   $row->comentarios_editor;
-								$fecha_timeout		   =   $row->fecha_timeout;
-
-					            //Imprimir
-
-
-
-
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;' style='text-align: right;'>".lang("aaav_id-articulo").":</th>";
-					            echo "<td >".$id_revista."</td>";
-					            echo "</tr>";
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_titulo articulo").":</th>";
-					            echo "<td>".$titulo_revista."</td>";
-					            echo "</tr>";
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_version").":</th>";
-					            echo "<td>".$version."</td>";
-					            echo "</tr>";
-
-
-					            $CI =& get_instance();
-					            $CI->load->model('Articulo_model');
-
-					            //Autor
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_autor").":</th>";
-					            $aut1 = $CI->Articulo_model->autor_direct($email_autor);
-
-					                echo "<td>";
-					                echo $aut1->nombre;
-					                echo " ";
-					                echo $aut1->apellido_1;
-					                echo " ";
-					                echo $aut1->apellido_2;
-					                echo "</td>";
-
-					            echo "</tr>";
-
-					            //Campo de investigacion
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_campo de investigacion").":</th>";
-					            $aut1 = $CI->Articulo_model->campo_investigacion($id_campo);
-					            foreach ($aut1->result() as $row){
-					                echo "<td>";
-					                echo $row->nombre_campo;
-					                echo "</td>";
-					            }
-					            echo "</tr>";
-
-					            //Estado
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_estado").":</th>";
-					            $est1 = $CI->Articulo_model->estado($id_estado);
-					            foreach ($est1->result() as $row){
-					                echo "<td>";
-					                echo $row->nombre_estado;
-					                echo "</td>";
-					            }
-					            echo "</tr>";
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_palabras claves").":</th>";
-					            echo "<td>".$palabras_claves."</td>";
-					            echo "</tr>";
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_abstract").":</th>";
-					            echo "<td style='text-align: justify;'>".$abstract."</td>";
-					            echo "</tr>";
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_archivo:").":</th>";
-					            echo "<td><a href='".base_url()."uploads/".$archivo."'>".$archivo."</a></td>";
-					            echo "</tr>";
-
-					            echo "<tr>";
-					            if($comentarios==""){
-					            	echo "<th style='text-align: right;'>".lang("aaav_comentarios").":</th>";
-						            echo "<td>-</td>";
-						            echo "</tr>";
-					            }else{
-					            	echo "<th style='text-align: right;'>".lang("aaav_comentarios").":</th>";
-						            echo "<td style='text-align: justify;'>".$comentarios."</td>";
-						            echo "</tr>";
-						            
-					            }
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_fecha ultima actualizacion").":</th>";
-					            echo "<td>".$fecha_ultima_upd."</td>";
-					            echo "</tr>";
-
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_fecha ingreso articulo").":</th>";
-					            echo "<td>".$fecha_ingreso."</td>";
-					            echo "</tr>";
-
-
-					            //Revisor 1
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_revisor 1").":</th>";
-					            $rev1 = $CI->Articulo_model->revisor_direct($email_revisor_1);
-
-					            if($email_revisor_1!="No Asignado"){
-					            	foreach ($rev1->result() as $row){
-						                echo "<td>";
-						                echo $row->nombre;
-						                echo " ";
-						                echo $row->apellido_1;
-						                echo " ";
-						                echo $row->apellido_2;
-						                echo "</td>";
-						            }
-						            echo "</tr>";
-					            }else{
-
-						            echo "<td>-</td>";
-									echo "</tr>";
-					            }
-					            
-
-					            //Revisor 2
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_revisor 2").":</th>";
-					            $rev2 = $CI->Articulo_model->revisor_direct($email_revisor_2);
-
-
-					            if($email_revisor_2!="No Asignado"){
-					            	foreach ($rev2->result() as $row){
-						                echo "<td>";
-						                echo $row->nombre;
-						                echo " ";
-						                echo $row->apellido_1;
-						                echo " ";
-						                echo $row->apellido_2;
-						                echo "</td>";
-						            }
-						            echo "</tr>";
-					            }else{
-
-						            echo "<td>-</td>";
-									echo "</tr>";
-					            }
-
-					            //Revisor 3
-					            echo "<tr>";
-					            echo "<th style='text-align: right;'>".lang("aaav_revisor 3").":</th>";
-					            $rev3 = $CI->Articulo_model->revisor_direct($email_revisor_3);
-					            if($email_revisor_3!="No Asignado"){
-					            	foreach ($rev3->result() as $row){
-						                echo "<td>";
-						                echo $row->nombre;
-						                echo " ";
-						                echo $row->apellido_1;
-						                echo " ";
-						                echo $row->apellido_2;
-						                echo "</td>";
-						            }
-						            echo "</tr>";
-					            }else{
-
-						            echo "<td>-</td>";
-									echo "</tr>";
-					            }
-
-					            echo "<tr>";
-					            if($comentarios_editor==""){
-					            	echo "<th style='text-align: right;'>".lang("aaav_comentarios editor").":</th>";
-						            echo "<td>-</td>";
-						            echo "</tr>";
-					            }else{
-						            echo "<th style='text-align: right;'>".lang("aaav_comentarios editor").":</th>";
-						            echo "<td style='text-align: justify;'>".$comentarios_editor."</td>";
-						            echo "</tr>";
-						          
-					            }
-					            
-
-					            echo "<tr>";
-					            if($fecha_timeout==""){
-					            	echo "<th style='text-align: right;'>".lang("aaav_fecha timeout").":</th>";
-						            echo "<td>-</td>";
-						            echo "</tr>";
-					            }else{
-						            echo "<th style='text-align: right;'>".lang("aaav_fecha timeOout").":</th>";
-						            echo "<td>".$fecha_timeout."</td>";
-						            echo "</tr>";
-						          
-					            }
-					            
+                              
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_fecha ultima actualizacion").":</th>";
+                                       echo "<td>".$fecha_ultima_upd."</td>";
+                                       echo "</tr>";
+                              
+                                       echo "<tr>";
+                                       echo "<th style='text-align: right;'>".lang("allanav_fecha ingreso articulo").":</th>";
+                                       echo "<td>".$fecha_ingreso."</td>";
+                                       echo "</tr>";
+                              
 
 							?>
 						<?php endforeach ?>
