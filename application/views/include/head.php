@@ -15,10 +15,20 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/magnific-popup.css" type="text/css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/sweetalert.css" type="text/css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/responsive.css" type="text/css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>css/bs-select.css" type="text/css" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="<?php echo base_url('js/jquery.js');?>"></script>
 
+        <script src="<?php echo base_url('js/main.js');?>"></script>
+
+
+<script type="text/javascript" src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+        }
+        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        
 
         <!--[if lt IE 9]>
                 <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>

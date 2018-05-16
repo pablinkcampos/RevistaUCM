@@ -72,6 +72,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                   ID
+                                </th>
+                                <th>
                                     <?php echo lang('aaa_fecha ingreso'); ?>
                                 </th>
                                 <th>
@@ -101,7 +104,7 @@
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;
-                                $fecha_ingreso = $row->fecha_ingreso;
+                                $fecha_ingreso = date("d-m-y",strtotime($row->fecha_ingreso));
 
                                       echo "<tr>";
                                         echo "<td>"; echo $fecha_ingreso; echo "</td>";

@@ -1,6 +1,7 @@
 <body class="stretched">
     <div class="clearfix">
         <div id="top-bar">
+            <div id="google_translate_element"></div>
             <div class="container clearfix">
                 <?php $this->load->view('include/selector_idioma');?>
             </div>
@@ -38,6 +39,16 @@
 
                          ?>
 
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>index.php/articulo_autor/login_articulo">
+                            <i class="i-medium i-circled i-bordered icon-thumbs-up2 nomargin"></i>
+
+                            <div class="he-text">
+                                Consultar
+                                <span>Mi artículo</span>
+                            </div>
+                        </a>
                     </li>
                     <li>
                         <a href="<?php echo base_url(); ?>index.php/articulo_autor/art">

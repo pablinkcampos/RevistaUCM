@@ -39,6 +39,7 @@
                 $form['max_revi_art'] = $this->input->post('max_revi_art');
                 $form['max_dia_res_art'] = $this->input->post('max_dia_res_art');
                 $form['max_dia_edi_rev_art'] = $this->input->post('max_dia_edi_rev_art');
+                $form['max_dia_reev_art'] = $this->input->post('max_dia_reev_art');
 
                 if ($this->Configuracion_Model->insert_configuracion($form) == true) {
                     $aviso = array('title' => '¡configuración creada!',

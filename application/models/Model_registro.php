@@ -81,7 +81,17 @@ class Model_registro extends CI_Model {
         }else{
             return false;
         }
-      }
+    }
+
+    function ingresar_nuevo_tema_revisor($data) {
+        $this->db->insert('revisor_tema', $data);
+  
+        if($this->db->affected_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     function ingresar_nuevo_campo_revisor($data) {
       $this->db->insert('campo_revisor', $data);

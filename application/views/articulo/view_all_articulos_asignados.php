@@ -76,10 +76,16 @@ $(function() {
                         <thead>
                             <tr>
                                 <th>
+                                   ID
+                                </th>
+                                <th>
                                     <?php echo lang('allaa_fecha ingreso articulo'); ?>
                                 </th>
                                 <th>
                                     <?php echo lang('aar_tema'); ?>
+                                </th>
+                                <th>
+                                    Versión
                                 </th>
                                 <th>
                                     <?php echo lang('allaa_titulo articulo'); ?>
@@ -108,7 +114,8 @@ $(function() {
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;
-                                $fecha_ingreso = $row->fecha_ingreso;
+                                $version = $row->versiona;
+                                $fecha_ingreso = date("d-m-y",strtotime($row->fecha_ingreso));
                                 $asignados = $row->total_asig;
                                 $calificados = $row->total_rev;
                                 $fecha_asignacion = $row->fecha_asignacion;
@@ -138,9 +145,10 @@ $(function() {
                                             echo "<td style='border-left: 6px solid red;'>";
                                         }
                                     }
-                                     
-                                        echo $fecha_ingreso; echo "</td>";
+                                        echo $id_revista; echo "</td>";
+                                        echo "<td>"; echo $fecha_ingreso; echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
+                                        echo "<td>"; echo $version; echo "</td>";
                   					    echo "<td>"; echo $titulo_revista; echo "</td>";
 
                                               echo "<td>";

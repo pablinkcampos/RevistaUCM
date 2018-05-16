@@ -55,6 +55,14 @@
                             </div>
                         </div>
 
+                         <div class="form-group col_full">
+                            <div style="text-align: right;" class="col-lg-3">
+                                <label class="control-label" for="text">MÁXIMA CANTIDAD DE DIAS PARA REENVIAR UN ARTICULO</label>
+                            </div>
+                            <div class="col-lg-9">
+                                <input type="number" max=30 min=1 class="form-control" name="max_dia_reev_art" value="" id="max_dia_reev_art" placeholder="Ingrese días para reenviar un artículo" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-7">

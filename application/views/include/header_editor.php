@@ -1,59 +1,45 @@
 <body class="stretched">
-    <div class="clearfix">
+    <div class="clearfix-fluid">
         <div id="top-bar">
-            <div class="container clearfix">
+        
+            <div class="container-fluid">
+                <div id="logo">
+                    <a href="<?php echo base_url(); ?>" class="nav-left" data-dark-logo="<?php echo base_url(); ?>img/logo-dark.png"><img src="<?php echo base_url(); ?>img/logo.png" style="max-height:50px; max-widht:70px; margin-left:3; margin-top: -7px;" alt="UCM Logo"></a>
+                </div>
+            
                
-                <?php $this->load->view('include/selector_idioma');?>
+                <div id="header-wrap">
+                <ul  style="text-align:right" class="list-inline">
+          
+                    <li class="dropdown">
+                        <a href="<?php echo base_url(); ?>index.php/Login/pass">
+                            <i class="i-small i-circled i-bordered icon-thumbs-up2 nomargin"> </i>
+                            <p class="text-primary" style="font-size:10px">
+                                Cambiar Password
+                            </p>
+                        </a>
+                    </li>                    
+                    <li class="dropdown">
+                        <a href="<?php echo base_url(); ?>index.php/Login/cerrar_sesion">
+                            <i class="i-small i-circled i-bordered icon-truck2 nomargin"></i>
+                            <p class="text-primary" style="font-size:10px">
+                                <?php echo lang('HE_cerrar sesion'); ?> <?php echo lang('HE_adios'); ?>
+                                
+                            </p>
+                        </a>
+                    </li>
+                 
+                </ul>
+                </div>   
+               
             </div>
         </div>
 
         <header id="header">
-            <div class="container clearfix">
-                <div id="logo">
-                    <a href="<?php echo base_url(); ?>" class="standard-logo" data-dark-logo="<?php echo base_url(); ?>img/logo-dark.png"><img src="<?php echo base_url(); ?>img/logo.png" alt="UCM Logo"></a>
-                </div>
+            <div class="container-fluid">
+                
 
-                <ul class="header-extras">
-                    <!--<li>
-                        <a href="#">
-                            <i class="i-medium i-circled i-bordered icon-thumbs-up2 nomargin"></i>
-
-                            <div class="he-text">
-                                <?php echo lang('HE_configuraciones'); ?>
-                                <span><?php echo lang('HE_generales'); ?></span>
-                            </div>
-                        </a>
-                    </li>
-                    -->
-                    <li>
-                        <a href="<?php echo base_url(); ?>index.php/Login/pass">
-                            <i class="i-medium i-circled i-bordered icon-thumbs-up2 nomargin"></i>
-                            <div class="he-text">
-                                Cambiar
-                                <span>Password</span>
-                            </div>
-                        </a>
-                    </li>                    
-                    <li>
-                        <a href="<?php echo base_url(); ?>index.php/Login/cerrar_sesion">
-                            <i class="i-medium i-circled i-bordered icon-truck2 nomargin"></i>
-
-                            <div class="he-text">
-                                <?php echo lang('HE_cerrar sesion'); ?>
-                                <span><?php echo lang('HE_adios'); ?></span>
-                            </div>
-                        </a>
-                    </li>
-                    <!--
-                    <li>
-                        <i class="i-medium i-circled i-bordered icon-undo nomargin"></i>
-                        <div class="he-text">
-                            Anexo
-                            <span>Anexo</span>
-                        </div>
-                    </li>
-                    -->
-                </ul>
+             
 
             </div>
 
@@ -79,6 +65,7 @@
                         -->
                     </div>
                 </nav>
+                <div class="container-fluid">
                 <?php
                  $user_data = $this->session->userdata('userdata');
                  if ($user_data['id_rol2'] != NULL || $user_data['id_rol3'] != NULL) {
@@ -118,5 +105,6 @@
                      }
                  }
                 ?>
+            </div>
             </div>
         </header>

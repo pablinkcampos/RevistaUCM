@@ -5,11 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-
+<script type="text/javascript" src="<?php echo base_url(); ?>vendors/ckeditor/ckeditor.js"></script>
 
 
 <div class="content-wrap">
-    <div class="container clearfix">
+    <div class="container fluid">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">
             <div class="col-md-12">
@@ -161,21 +161,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     
                                     <div class="form-group">
                                         <label for="comment"><?php echo lang('aaac_comentario'); ?></label>
-                                        <textarea class="form-control" rows="10" id="comentario" name="comentario"  oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido"); ?>')" oninput="setCustomValidity('')"><?php echo $comentario; ?></textarea>
+                                        <textarea class="ckeditor" rows="40" id="comentario" name="comentario" > <?php echo $comentario; ?></textarea>
                                     </div>
                                     <div class="form-group col-md-12">
-                  
                                     <div class="form-group">
+                                    <div style="text-align: left; color:red;" class="col-md-12">
+                                        <h3 style="text-align: left; color:red; bold" >Advertencia: Al Calificar este artículo el sistema asumira que esta revisado.</h3>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                       
                                         <div style="text-align: right;" class="col-md-3">
                                         <label for="calificacion"><?php echo lang('aaac_calificacion'); ?> (*):</label>
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-control" name="calificacion" id="calificacion" >
-                                                <option value="">Selecciona Calificación</option>
-                                                <option value="0">Rechazado</option>
-                                                <option value="1">Rechazado con duda</option>
-                                                <option value="4">Aceptado con Detalles</option>
-                                                <option value="5">Aceptado</option>
+                                                <option value="3">Selecciona Calificación</option>
+                                                <?php
+                              
+                                                foreach ($calificaciones->result() as $row) {
+                                                    if ($row->id_calificacion == $calificacion) {
+                                                    $string = ' selected="selected" ';
+                                                    } else {
+                                                        $string = "";
+                                                    }
+                                                    echo '<option value="' . $row->id_calificacion . '" ' . $string . '>' . $row->calificacion . '</option>';
+                                                }
+                                                ?>
                                 
                                             </select>
                                         </div>

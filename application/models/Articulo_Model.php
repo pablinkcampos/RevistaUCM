@@ -48,6 +48,32 @@ class Articulo_Model extends CI_Model {
         }
     }
 
+    function getCalificaciones() {
+        $query = $this->db->select('*');
+        $query = $this->db->from('calificaciones');
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function getEstados() {
+        $query = $this->db->select('*');
+        $query = $this->db->from('estado');
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return FALSE;
+        }
+    }
+
     function actualizar_login_revisor_a_valido($correo_revisor) {
         $query1 = $this->db->query("UPDATE login SET rol_fk = 2 WHERE rol_fk = 555 AND md5(CONCAT(correo, 'ox')) = ?", array($correo_revisor));
 
@@ -322,6 +348,20 @@ class Articulo_Model extends CI_Model {
         }
     }
 
+    function actualizar_post($datos) {
+
+        $this->db->where('id', $datos['id']);
+        $this->db->update('post', $datos);
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function que_revisor_soy($datos) {
 
         $query = $this->db->select('id_revisor_1,id_revisor_2,id_revisor_3');
@@ -526,7 +566,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulo_ver($id) {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves as palabras_claves, r.archivo as archivo , r.id_tema as id_tema, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1 as n_autor, r.email_add1 as email_a2, r.autor_2 as n_autor2, r.email_add2 as email_a3,r.autor_3 as n_autor3,r.email_add3 as email_a4 ,r.autor_4 as n_autor4,r.email_add4 as email_a5,r.autor_5 as n_autor5, r.email_add5 as email_a6,r.autor_6 as n_autor6,re.email as rev_1,re2.email as rev_2,re3.email as rev_3,re.nombre as n_rev1,re2.nombre as n_rev2,re3.nombre as n_rev3,r.id_revisor_1 as id_rev1,r.id_revisor_2 as id_rev2,r.id_revisor_3 as id_rev3, r.comentarios as com_autor, r.comentario_revisor_1 as com_rev1, r.comentario_revisor_2 as com_rev2, r.comentario_revisor_3 as com_rev3, r.comentarios_editor as com_edit, r.pais as pais, r.institucion as institucion,p.estado as e_post, r.VerificacionTextoFecha as vertf, r.VerificacionTexto as vert, r.calificaRev1 as cal_rev1, r.calificaRev2 as cal_rev2, r.calificaRev3 as cal_rev3, r.fechaCalificaRev as fecha_cal, r.fechaCalificaFinal as fecha_calf, r.calificaFinal as cal_f, r.fechaReenvioarticulo as fecha_ra, r.Fecha_asig_revision as fecha_asr, r.fecha_ultima_upd as fecha_ultima_upd FROM revista as r LEFT JOIN post as p ON r.id_post = p.id LEFT JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.ID = ?", array($id));
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado,r.id_estado as id_estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves as palabras_claves, r.version as versiona, r.archivo as archivo , r.id_tema as id_tema, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1 as n_autor, r.email_add1 as email_a2, r.autor_2 as n_autor2, r.email_add2 as email_a3,r.autor_3 as n_autor3,r.email_add3 as email_a4 ,r.autor_4 as n_autor4,r.email_add4 as email_a5,r.autor_5 as n_autor5, r.email_add5 as email_a6,r.autor_6 as n_autor6,re.email as rev_1,re2.email as rev_2,re3.email as rev_3,re.nombre as n_rev1,re2.nombre as n_rev2,re3.nombre as n_rev3,r.id_revisor_1 as id_rev1,r.id_revisor_2 as id_rev2,r.id_revisor_3 as id_rev3, r.comentarios as com_autor, r.comentario_revisor_1 as com_rev1, r.comentario_revisor_2 as com_rev2, r.comentario_revisor_3 as com_rev3, r.comentarios_editor as com_edit, r.pais as pais, r.institucion as institucion, r.id_post as id_post, p.peticion as peticion, p.fechaUltimaRespuesta as f_post, p.estado as e_post, r.VerificacionTextoFecha as vertf, r.VerificacionTexto as vert, r.calificaRev1 as cal_rev1, r.calificaRev2 as cal_rev2, r.calificaRev3 as cal_rev3, r.fechaCalificaRev as fecha_cal, r.fechaCalificaFinal as fecha_calf, r.calificaFinal as cal_f, r.fechaReenvioarticulo as fecha_ra, r.Fecha_asig_revision as fecha_asr, r.fecha_ultima_upd as fecha_ultima_upd, r.fecha_timeout as fecha_timeout FROM revista as r LEFT JOIN post as p ON r.id_post = p.id LEFT JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.ID = ?", array($id));
         if ($query) {
             return $query;
         } else {
@@ -547,7 +587,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulos_no_asignados() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE r.VerificacionTexto = 1 AND r.id_revisor_1 = 0 AND r.id_revisor_2 = 0 AND r.id_revisor_3 = 0 ORDER by r.fecha_ingreso, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, r.version as versiona, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE r.VerificacionTexto = 1 AND r.id_revisor_1 = 0 AND r.id_revisor_2 = 0 AND r.id_revisor_3 = 0 ORDER by r.fecha_ingreso, t.nombre");
         if ($query) {
             return $query;
         } else {
@@ -557,7 +597,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulos_asignados() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.Fecha_asig_revision as fecha_asignacion, DATE_ADD(r.Fecha_asig_revision,INTERVAL c.max_dia_res_art DAY) as fecha_vencimiento,r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6,re.email as rev_1,re2.email as rev_2,re3.email as rev_3, r.id_revisor_1 as rev1,r.calificaRev1 as cal1, r.id_revisor_2 as rev2,r.calificaRev2 as cal2, r.id_revisor_1 as id_rev1,r.calificaRev2 as cal2, (CASE WHEN r.id_revisor_1 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_2 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_3 !=0 THEN 1 ELSE 0 END) as total_asig, (CASE WHEN r.calificaRev1 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev2 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev3 !=3 THEN 1 ELSE 0 END) as total_rev FROM configuracion as c,  revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado  LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.VerificacionTexto = 1 AND (r.id_revisor_1 != 0 OR r.id_revisor_2 != 0 OR r.id_revisor_3 != 0) AND c.id_configuracion = (SELECT MAX(id_configuracion) FROM configuracion) HAVING total_asig != total_rev ORDER by fecha_vencimiento ASC, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.version as versiona, r.Fecha_asig_revision as fecha_asignacion, DATE_ADD(r.Fecha_asig_revision,INTERVAL c.max_dia_res_art DAY) as fecha_vencimiento,r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6,re.email as rev_1,re2.email as rev_2,re3.email as rev_3, r.id_revisor_1 as rev1,r.calificaRev1 as cal1, r.id_revisor_2 as rev2,r.calificaRev2 as cal2, r.id_revisor_1 as id_rev1,r.calificaRev2 as cal2, (CASE WHEN r.id_revisor_1 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_2 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_3 !=0 THEN 1 ELSE 0 END) as total_asig, (CASE WHEN r.calificaRev1 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev2 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev3 !=3 THEN 1 ELSE 0 END) as total_rev FROM configuracion as c,  revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado  LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.VerificacionTexto = 1 AND (r.id_revisor_1 != 0 OR r.id_revisor_2 != 0 OR r.id_revisor_3 != 0) AND c.id_configuracion = (SELECT MAX(id_configuracion) FROM configuracion) HAVING total_asig != total_rev ORDER by fecha_vencimiento ASC, t.nombre");
         if ($query) {
             return $query;
         } else {
@@ -567,7 +607,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulos_revisados() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.fechaCalificaRev as fecha_revision,DATE_ADD(r.fechaCalificaRev,INTERVAL c.max_dia_res_art DAY) as fecha_vencimiento,r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6, re.email as rev_1,re2.email as rev_2,re3.email as rev_3 FROM configuracion as c,revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE ((r.VerificacionTexto = 1) AND (r.id_revisor_1 != 0 AND r.id_revisor_2 = 0 AND r.id_revisor_3 = 0 AND r.calificaRev1 !=3) OR (r.id_revisor_1 != 0 AND r.id_revisor_2 != 0 AND r.id_revisor_3 = 0 AND calificaRev1 !=3 AND calificaRev2 !=3) OR  (r.id_revisor_1 != 0 AND r.id_revisor_2 != 0 AND r.id_revisor_3 != 0 AND calificaRev1!=3 AND calificaRev2!=3 AND calificaRev3!=3) ) AND c.id_configuracion = (SELECT MAX(id_configuracion) FROM configuracion) ORDER by r.fecha_ingreso, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.version as versiona, r.fechaCalificaRev as fecha_revision,DATE_ADD(r.fechaCalificaRev,INTERVAL c.max_dia_res_art DAY) as fecha_vencimiento,r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6, re.email as rev_1,re2.email as rev_2,re3.email as rev_3 FROM configuracion as c,revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.id_estado = 14 AND c.id_configuracion = (SELECT MAX(id_configuracion) FROM configuracion) ORDER by r.fecha_ingreso, t.nombre");
         if ($query) {
             return $query;
         } else {
@@ -577,7 +617,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulos_rechazados_revisor() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6, re.email as rev_1,re2.email as rev_2,re3.email as rev_3 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE ((r.VerificacionTexto = 1) AND (r.calificaRev1 =0 OR r.calificaRev2 =0 OR r.calificaRev1 =0)) ORDER by r.fecha_ingreso, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.version as versiona, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6, re.email as rev_1,re2.email as rev_2,re3.email as rev_3 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE ((r.VerificacionTexto = 1) AND (r.calificaRev1 =0 OR r.calificaRev2 =0 OR r.calificaRev1 =0)) ORDER by r.fecha_ingreso, t.nombre");
         if ($query) {
             return $query;
         } else {
@@ -587,7 +627,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulos_rechazados() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6, re.email as rev_1,re2.email as rev_2,re3.email as rev_3 FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE (r.VerificacionTexto =0 ) ORDER by r.fecha_ingreso DESC, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.version as versiona, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.fecha_timeout as fecha_timeout, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6, re.email as rev_1,re2.email as rev_2,re3.email as rev_3,r.id_post as id_post, p.peticion as peticion, p.fechaUltimaRespuesta as f_post, p.estado as e_post FROM revista as r LEFT JOIN post as p ON r.id_post = p.id INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE (r.VerificacionTexto = 0 ) OR (r.id_estado = 4 ) OR (r.id_estado = 9 ) ORDER by r.fecha_ingreso DESC, t.nombre");
         if ($query) {
             return $query;
         } else {
@@ -607,7 +647,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulos_espera_vf() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.fechaReenvioarticulo, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6 FROM revista as r   INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado WHERE ((r.VerificacionTexto = 1) AND r.calificaRev1 =3 AND NOW() < r.fechaReenvioarticulo  AND r.fechaReenvioarticulo != 'NULL') ORDER by r.fecha_ingreso DESC, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.version as versiona, r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso,r.fechaCalificaFinal as fecha_calf, r.fecha_timeout as fecha_timeout, r.fechaReenvioarticulo as fecha_reenvio,r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6, re.email as rev_1,re2.email as rev_2,re3.email as rev_3,r.id_post as id_post, p.peticion as peticion, p.fechaUltimaRespuesta as f_post, p.estado as e_post FROM revista as r LEFT JOIN post as p ON r.id_post = p.id INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE (r.id_estado = 6 ) OR (r.id_estado = 10 ) ORDER by r.fechaReenvioarticulo DESC, t.nombre");
         if ($query) {
             return $query;
         } else {
@@ -704,7 +744,7 @@ class Articulo_Model extends CI_Model {
 
     //agregar articulo
     function agregar_articulo($data) {
-        print_r($data);
+       
         $query = $this->db->insert('revista', $data);
 
         $rows = $this->db->affected_rows();
@@ -722,7 +762,7 @@ class Articulo_Model extends CI_Model {
         $rows = $this->db->affected_rows();
 
         if ($rows > 0) {
-            return true;
+            return $this->db->insert_id();
         } else {
             return false;
         }

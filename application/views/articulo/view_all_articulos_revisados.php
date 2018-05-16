@@ -83,6 +83,9 @@ $(function() {
                         <thead>
                             <tr>
                                 <th>
+                                   ID
+                                </th>
+                                <th>
                                     <?php echo lang('allarv_fecha ingreso articulo'); ?>
                                 </th>
                                 <th>
@@ -112,7 +115,7 @@ $(function() {
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;
-                                $fecha_ingreso = $row->fecha_ingreso;
+                                $fecha_ingreso = date("d-m-y",strtotime($row->fecha_ingreso));
                                 $fecha_revision = $row->fecha_revision;
                                 $fecha_vencimiento = $row->fecha_vencimiento;
                                 $date1 = new DateTime($fecha_revision);
@@ -140,8 +143,8 @@ $(function() {
                                             echo "<td style='border-left: 6px solid red;'>";
                                         }
                                     }
-                                     
-                                        echo $fecha_ingreso; echo "</td>";
+                                        echo $id_revista; echo "</td>";
+                                        echo "<td>"; echo $fecha_ingreso; echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
                   					    echo "<td>"; echo $titulo_revista; echo "</td>";
 

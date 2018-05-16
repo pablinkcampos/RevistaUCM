@@ -400,6 +400,216 @@ class Articulo_autor extends MY_Controller {
         $this->load->view('include/footer');
     }
 
+    public function login_articulo(){   
+        $this->load->view('include/head');
+        $this->load->view('view_login_articulo');
+    }
+    public function consultar_articulo(){
+        if ($this->input->post('login-form-id')) {
+            $id_revista = $this->input->post('login-form-id');
+            $contrasena = $this->input->post('login-form-password') ;
+            $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+            foreach ($data['datos']->result() as $row) {
+                $email_autor = $row->email_autor;
+               
+            }
+            $verifica = false;
+            if($contrasena == $email_autor){
+               $verifica = true;
+            }
+
+
+           
+
+            if (!$verifica) {
+                $aviso = array('title' => 'Login Incorrecto',
+                    'text' => 'Datos de artículo incorrectos',
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/articulo_autor/login_articulo"
+                );
+                $this->load->view('include/aviso', $aviso);
+            } else {
+                $datasession = array(
+                    'id_articulo' => $id_revista,
+                    'id_rol' => 3,
+                    'login_ok' => TRUE,
+                );
+
+                // Timer para actualizar el estado
+                
+                $this->load->view('include/head');
+                $this->load->view('include/header_principal');
+                $this->load->view('articulo/view_consulta_articulo',$data); 
+                $this->load->view('include/footer');
+
+
+
+              
+
+            }
+        }
+    }
+    public function editar_articulo($id){
+
+        if (isset($_POST['upload'])) {
+            if ($_FILES['userfile']['name'] == NULL) {
+                $aviso = array('title' => 'Archivo no subido',
+                    'text' => "No existe archivo",
+                    'tipoaviso' => 'error',
+                    'windowlocation' =>  base_url() . "index.php/"
+                );
+                $this->load->view('include/aviso', $aviso);
+            } else {
+                $datos['datos'] = $this->Articulo_Model->articulo_ver($id);
+                foreach ($datos['datos']->result() as $row) {
+                    $email_autor = $row->email_autor;
+                    $version = $row->versiona;
+                }
+                $formatos = array('.doc', '.DOC', '.docx', '.DOCX');
+                $nombrearchivo = $_FILES['userfile']['name'];
+                $ext = '.' . pathinfo($nombrearchivo, PATHINFO_EXTENSION);
+                $nombretemparchivo = $_FILES['userfile']['tmp_name'];
+                $data['ID'] = $id;
+                $data['titulo_revista'] = $this->input->post('titulo_articulo');
+                $data['palabras_claves'] = $this->input->post('palabras_claves');
+                $data['abstract'] = $this->input->post('abstract');
+                $data['comentarios'] = $this->input->post('comentarios');
+                $data['version'] = $version+1;
+                $data['calificaRev1'] = 3;
+                $data['calificaRev2'] = 3;
+                $data['calificaRev3'] = 3;
+                $data['id_estado'] = 3;
+
+                $nombre_articulo = $data['titulo_revista'] . $email_autor. date('Y-m-d_H_i_s');
+                $nombre_articulo .= $ext;
+                $nombre_articulo = str_replace(' ', '_', $nombre_articulo);
+                $data['archivo'] = $nombre_articulo;
+                $data['urlArticuloEnviado']="uploads/$nombre_articulo";
+                if (in_array($ext, $formatos)) {
+                    if ($_FILES['userfile']['size'] <= 5120000) {
+                        if (move_uploaded_file($nombretemparchivo, "uploads/$nombre_articulo") == true) {
+                             
+                            if ($id != 0) {
+                               
+                                
+                        
+                            
+                        
+                                $this->Articulo_Model->actualizar_articulo($data);
+                               
+                         
+                                
+                                
+                                $subject = "Articulo recibido Revista UCM";
+                                $mensaje = '<html>' .
+                                        '<body><h4>Hola <br><br>Hemos recibido tu artículo. Será sometido a un proceso de evaluación. Te avisaremos cuando hayamos terminado.</h4><br>' .
+                                        '</body>' .
+                                        '</html>';
+                                $mensaje .= "<b>Saludos</br><br>";
+                                $mensaje .= "<b>Equipo Revista UCM</b><br>";
+                                $headers = "From: RevistaUCM@ucm.cl \r\n";
+                                $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                                $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+
+                                mail($email_autor, $subject, $mensaje, $headers);
+                                $aviso = array('title' => lang("tswal_actualizacion realizada con exito"),
+                                    'text' => lang("cswal_articulo estado aceptado con comentarios"),
+                                    'tipoaviso' => 'success',
+                                    'windowlocation' => base_url() . "index.php"
+                                );
+                                $this->load->view('include/aviso', $aviso);
+                                
+                               
+                            }
+                        }
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Tamaño no soportado","Archivo no subido.","error");';
+                        echo '}, 350);</script>';
+
+                        $data["campo"] = $this->Articulo_Model->campos_investigacion();
+                        $data["paises"] = $this->Model_for_login->get_paises();
+                        $data["fail"] = "Tamaño no soportado";
+
+                        $this->load->view('include/aviso', $aviso);
+                        /*
+                        $aviso = array('title' => 'Tamaño no soportado',
+                            'text' => lang("cswal_archivo no subido"),
+                            'tipoaviso' => 'error',
+                            'windowlocation' => base_url() . "index.php/Articulo_autor/art"
+                        );
+                        $this->load->view('include/aviso', $aviso);
+                         
+                         */
+                    }
+                } else {
+                    $aviso = array('title' => 'Formato no soportado',
+                        'text' => lang("cswal_archivo no subido"),
+                        'tipoaviso' => 'error',
+                        'windowlocation' => base_url() . "index.php/"
+                    );
+                    $this->load->view('include/aviso', $aviso);
+                }
+            }
+        }
+        
+      
+       
+    }
+
+    public function peticion_articulo($id){
+
+        
+          
+        $datos['datos'] = $this->Articulo_Model->articulo_ver($id);
+        foreach ($datos['datos']->result() as $row) {
+            $email_autor = $row->email_autor;
+            $id_post = $row->id_post;
+            $id_estado = $row->id_estado;
+        }
+            
+        $post['peticion'] = $this->input->post('peticion');
+               
+               
+        if ($id_post != 0) {
+                             
+            $post['id'] = $id_post;
+            $post['estado'] = 1;
+
+            $this->Articulo_Model->actualizar_post($post);
+                  
+                         
+        } else {
+            $post['id_articulo'] = $id;
+            $post['estado'] = 1;
+            $data['id_post'] = $this->Articulo_Model->agregar_post($post);
+            $data['ID'] = $id;
+            $data['id_estado'] = $id_estado;
+            $this->Articulo_Model->actualizar_articulo($data);
+            
+                       
+        }
+        $subject = "Petición recibida Revista UCM";
+            $mensaje = '<html>' .
+            '<body><h4>Hola <br><br>Hemos recibido la petición de su artículo. Será sometida a un proceso de evaluación. Te avisaremos si es aceptada.</h4><br>' .
+            '</body>' .'</html>';
+            $mensaje .= "<b>Saludos</br><br>";
+            $mensaje .= "<b>Equipo Revista UCM</b><br>";
+            $headers = "From: RevistaUCM@ucm.cl \r\n";
+            $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+
+            mail($email_autor, $subject, $mensaje, $headers);
+            $aviso = array('title' => lang("tswal_actualizacion realizada con exito"),
+                    'text' => lang("cswal_articulo estado aceptado con comentarios"),
+                    'tipoaviso' => 'success',
+                    'windowlocation' => base_url() . "index.php"
+            );
+            $this->load->view('include/aviso', $aviso);     
+                
+             
+    }
+
     public function selectTema(){
         $tipo=$this->input->post('area_aplicable');
         if($tipo){
@@ -496,7 +706,7 @@ class Articulo_autor extends MY_Controller {
                                         mail($data['email_add5'], $subject, $mensaje, $headers);
                                     }
 
-                                    $this->Articulo_Model->agregar_post($post);
+                                    
                               
 
                                     $aviso = array('title' => lang("tswal_subido"),

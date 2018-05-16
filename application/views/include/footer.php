@@ -6,6 +6,11 @@
 	Campus Nuestra Señora del Carmen, Curicó Teléfono (56) (75) 2203 100
 
 </div>
+<div class="col-md-12">
+
+	 <div style="text-align:RIGHT" id="google_translate_element"></div>
+
+</div>
 
 <script src="<?php echo base_url('js/main.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/plugins.js"></script>

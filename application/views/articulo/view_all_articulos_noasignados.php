@@ -50,7 +50,7 @@ $(function() {
         <div class="container clearfix">
 
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="sidebar nobottommargin clearfix">
                     <div class="sidebar-widgets-wrap">
                         <div class="widget clearfix">
@@ -62,7 +62,7 @@ $(function() {
                 </div>
             </div>
 
-            <div class="col-md-10">
+            <div class="col-md-9">
 
                 <div class="col-md-12">
                     <div class="col-md-12">
@@ -77,6 +77,9 @@ $(function() {
                     <table id="articulos" class="display" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>
+                                   ID
+                                </th>
                                 <th>
                                     <?php echo lang('allana_fecha ingreso articulo'); ?>
                                 </th>
@@ -107,9 +110,10 @@ $(function() {
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;
-                                $fecha_ingreso = $row->fecha_ingreso;
+                                $fecha_ingreso = date("d-m-y",strtotime($row->fecha_ingreso));
 
                                       echo "<tr>";
+                                        echo "<td>"; echo $id_revista; echo "</td>";
                                         echo "<td>"; echo $fecha_ingreso; echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
                   					    echo "<td>"; echo $titulo_revista; echo "</td>";

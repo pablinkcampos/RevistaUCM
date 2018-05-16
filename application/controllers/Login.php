@@ -11,7 +11,7 @@ class Login extends MY_Controller {
     }
 
     public function index() {
-        $this->Articulo_Model->actualizar_articulos_timeout__aceptado_y_sin_modificar_opcional();
+        
         $this->Articulo_Model->actualizar_articulos_timeout__aceptado_con_comentarios_y_sin_modificar_obligatorio();
 
         $user_data = $this->session->userdata('userdata');

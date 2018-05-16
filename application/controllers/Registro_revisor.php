@@ -18,14 +18,16 @@ class Registro_revisor extends MY_Controller {
         $this->load->library('form_validation');
 
         $q = $this->Model_for_login->get_areas();
+        $t = $this->Model_for_login->get_temas();
         $i = 0;
         $mensaje_error = "Seleccionado";
         $data['mensaje_error'] = $mensaje_error;
         $not_valid = 0;
-        if ($q) {
 
-            foreach ($q->result() as $row) {
-                if ($this->input->post('c' . $row->id_campo)) {
+        if ($t) {
+
+            foreach ($t->result() as $row) {
+                if ($this->input->post('c' . $row->id_tema)) {
                     $i++;
                 }
             }
@@ -39,7 +41,8 @@ class Registro_revisor extends MY_Controller {
             }
         }
 
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[2]|alpha|max_length[50]');
+        $this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[2]|max_length[50]');
+
         $this->form_validation->set_rules('apellido1', 'Apellido paterno', 'required|min_length[2]|max_length[50]|alpha');
         $this->form_validation->set_rules('apellido2', 'Apellido materno', 'required|min_length[2]|max_length[50]|alpha');
         $this->form_validation->set_rules('titulo', 'Titulo profesional', 'required|min_length[2]|max_length[50]');
@@ -93,18 +96,23 @@ class Registro_revisor extends MY_Controller {
                 $this->Model_registro->ingresar_revisor($formulario);
 
 
-                $consulta = $this->Model_for_login->get_areas();
+                $consulta = $this->Model_for_login->get_temas();
                 if ($consulta) {
                     $id_revisor = $this->Model_registro->get_id_revisor($this->input->post('correo'));
-
-                    foreach ($consulta->result() as $row) {
-                        if ($this->input->post('c' . $row->id_campo)) {
-                            $d['id_campo'] = $row->id_campo;
+                    
+                    foreach ($consulta->result() as $row) { 
+                        if ($this->input->post('c' . $row->id_tema)) {
+                            $d['id_tema'] = $row->id_tema;
                             $d['id_revisor'] = $id_revisor->ID;
 
-                            $this->Model_registro->ingresar_nuevo_campo_revisor($d);
+                            $this->Model_registro->ingresar_nuevo_tema_revisor($d);
                         }
                     }
+                    
+                   
+                        
+                       
+                    
                 }
 
                 // Ingresar revisor en login

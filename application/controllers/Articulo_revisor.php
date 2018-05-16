@@ -81,9 +81,22 @@ class Articulo_revisor extends MY_Controller {
 
     public function articulos_asignados_comentar($id_revista) {
         $user_data = $this->session->userdata('userdata');
+
         if($user_data['id_rol']=='2'||$user_data['id_rol2']=='2'||$user_data['id_rol3']=='2'){
 
             $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+            foreach ($data['datos']->result() as $row) {
+                $email_autor = $row->email_autor;
+                $rev1 = $row->id_rev1;
+                $rev2 = $row->id_rev2;
+                $rev3 = $row->id_rev3;
+                $cal_rev1 = $row->cal_rev1; 
+			    $cal_rev2 = $row->cal_rev2; 
+				$cal_rev3 = $row->cal_rev3;
+                
+
+            }
+            $now   = date('Y-m-d H:i:s');
             $email_revisor=$user_data['email_usuario'];
             $datos = $this->Articulo_Model->id_revisor_email($email_revisor);
             if($datos){
@@ -99,7 +112,7 @@ class Articulo_revisor extends MY_Controller {
                 $email_autor=$user_data['email_usuario'];
                 $comentario   = $this->input->post('comentario');
                 $calificacion   = $this->input->post('calificacion');
-                print_r($calificacion);
+                
 
 
                 $datos          = array(
@@ -108,21 +121,22 @@ class Articulo_revisor extends MY_Controller {
                     'comentario'        => $comentario
 
                     );
+                
+                $estado = 3;
 
-                $revisores=$this->Articulo_Model->que_revisor_soy($datos);
-
-                foreach ($revisores->result() as $row) {
-                    $rev1=$row->id_revisor_1;
-                    $rev2=$row->id_revisor_2;
-                    $rev3=$row->id_revisor_3;
-                }
 
                 if($rev1==$id_revisor){
+                    $cal_rev1 = $calificacion;
+                    if(($rev1 != 0 && $rev2 == 0 && $rev3 == 0 && $cal_rev1 !=3) || ($rev1 != 0 && $rev2 == 0 && $rev3 != 0 && $cal_rev1 !=3 && $cal_rev3 !=3) || ($rev1 != 0 && $rev2 != 0 && $rev3 == 0 && $cal_rev1 !=3 && $cal_rev2 !=3) ||  ($rev1 != 0 && $rev2 != 0 && $rev3 != 0 && $cal_rev1!=3 && $cal_rev2!=3 && $cal_rev3!=3) ){
+                        $estado=14;
+                    }
                     $datos          = array(
                         'ID'        => $id_revista,
                         'calificaRev1'     => $calificacion,
-                        'comentario_revisor_1'        => $comentario
-    
+                        'comentario_revisor_1'        => $comentario,
+                        'id_estado' => $estado,
+                        'fechaCalificaRev' => $now
+
                     );
                     if($this->Articulo_Model->actualizar_articulo_estado($datos)){
                  
@@ -141,12 +155,17 @@ class Articulo_revisor extends MY_Controller {
                         $this->load->view('include/aviso',$aviso);
                     }
                 }
-                if($rev2==$id_revisor){
+                elseif($rev2==$id_revisor){
+                    $cal_rev2 = $calificacion;
+                    if(($rev1 == 0 && $rev2 != 0 && $rev3 == 0 && $cal_rev2 !=3)  || ($rev1 != 0 && $rev2 != 0 && $rev3 == 0 && $cal_rev1 !=3 && $cal_rev2 !=3) || ($rev1 == 0 && $rev2 != 0 && $rev3 != 0 && $cal_rev2 !=3 &&  $cal_rev3 !=3)  || ($rev1 != 0 && $rev2 != 0 && $rev3 != 0 && $cal_rev1!=3 && $cal_rev2!=3 && $cal_rev3!=3) ){
+                        $estado=14;
+                    }
                     $datos          = array(
                         'ID'        => $id_revista,
                         'calificaRev2'     => $calificacion,
-                        'comentario_revisor_2'        => $comentario
-    
+                        'comentario_revisor_2'        => $comentario,
+                        'id_estado' => $estado,
+                        'fechaCalificaRev' => $now
                     );
                     if($this->Articulo_Model->actualizar_articulo_estado($datos)){
                         $aviso =array ('title' => lang("tswal_comentario subido con exito"),
@@ -164,12 +183,17 @@ class Articulo_revisor extends MY_Controller {
                         $this->load->view('include/aviso',$aviso);
                     }
                 }
-                if($rev3==$id_revisor){
+                elseif($rev3==$id_revisor){
+                    $cal_rev3 = $calificacion;
+                    if(($rev1 == 0 && $rev2 == 0 && $rev3 != 0 && $cal_rev3 !=3) || ($rev1 != 0 && $rev2 = 0 && $rev3 != 0  && $cal_rev1!=3 && $cal_rev3!=3) || ($rev1 == 0 && $rev2 != 0 && $rev3 != 0  && $cal_rev2!=3 && $cal_rev3!=3) || ($rev1 != 0 && $rev2 != 0 && $rev3 != 0 && $cal_rev1!=3 && $cal_rev2!=3 && $cal_rev3!=3) ){
+                        $estado=14;
+                    }
                     $datos          = array(
                         'ID'        => $id_revista,
                         'calificaRev3'     => $calificacion,
-                        'comentario_revisor_3'        => $comentario
-    
+                        'comentario_revisor_3'        => $comentario,
+                        'id_estado' => $estado,
+                        'fechaCalificaRev' => $now
                     );
                     if($this->Articulo_Model->actualizar_articulo_estado($datos)){
                         $aviso =array ('title' => lang("tswal_comentario subido con exito"),
@@ -186,6 +210,15 @@ class Articulo_revisor extends MY_Controller {
                             );
                         $this->load->view('include/aviso',$aviso);
                     }
+                }
+                else{
+                    $aviso =array ('title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso'=>'error',
+                    'windowlocation'=> base_url()."index.php/" 
+                    );
+                    $this->load->view('include/aviso',$aviso);
+
                 }
 
             }else{
@@ -197,38 +230,40 @@ class Articulo_revisor extends MY_Controller {
                     'id_revisor'     => $id_revisor,
                     );
 
-                $revisores=$this->Articulo_Model->que_revisor_soy($datos);
-
-                foreach ($revisores->result() as $row) {
-                    $rev1=$row->id_revisor_1;
-                    $rev2=$row->id_revisor_2;
-                    $rev3=$row->id_revisor_3;
-                }
-
-                $revisor_numero=0;
-                if($rev1==$id_revisor){
-                    $revisor_numero=1;
-                }
-                if($rev2==$id_revisor){
-                    $revisor_numero=2;
-                }
-                if($rev3==$id_revisor){
-                    $revisor_numero=3;
+                $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
+                foreach ($data['datos']->result() as $row) {
+                    $email_autor = $row->email_autor;
+                    $rev1 = $row->id_rev1;
+                    $rev2 = $row->id_rev2;
+                    $rev3 = $row->id_rev3;
+                    $cal_rev1 = $row->cal_rev1; 
+                    $cal_rev2 = $row->cal_rev2; 
+                    $cal_rev3 = $row->cal_rev3;
+                    $comentario1=$row->com_rev1;
+                    $comentario2=$row->com_rev2;
+                    $comentario3=$row->com_rev3; 
+        
                 }
                 $comentario="";
-                foreach ($data['datos']->result() as $row) {
-                    if($revisor_numero==1){
-                        $comentario=$row->com_rev1;
-                    }
-                    if($revisor_numero==2){
-                        $comentario=$row->com_rev2;
-                    }
-                    if($revisor_numero==3){
-                        $comentario=$row->com_rev3;
-                    }  
-                }
-                $data['comentario']=$comentario;
+                $calificacion=3;
                 
+                if($rev1==$id_revisor){
+                    $comentario=$comentario1;
+                    $calificacion=$cal_rev1;
+                }
+                if($rev2==$id_revisor){
+                    $comentario=$comentario2;
+                    $calificacion=$cal_rev2;
+                }
+                if($rev3==$id_revisor){
+                    $comentario=$comentario3;
+                    $calificacion=$cal_rev3;
+                }
+                
+                
+                $data['comentario']=$comentario;
+                $data['calificacion']=$calificacion;
+                $data["calificaciones"] = $this->Articulo_Model->getCalificaciones();
 
                 $this->load->view('include/head');
                 $this->load->view('include/header_revisor');

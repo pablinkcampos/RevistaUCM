@@ -1,25 +1,44 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+<link href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/bs-select.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#articulos tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" style="width: 100%; text-align: left;" placeholder="Filtrar" />' );
+        } );
+        
+        var table =   $('#articulos').DataTable({
+            "language": {
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/<?php echo ucwords($this->session->userdata('lang')['route']); ?>.json"
+            },
+            "order": [[1, "desc"]]
 
-            $('#articulos').DataTable({
-                "language": {
-
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/<?php echo ucwords($this->session->userdata('lang')['route']);?>.json"
-                },
-                "order": [[6, "desc"]]
-
-            });
         });
-    </script>
+ 
+    // Apply the search
+        table.columns().every( function () {
+            var that = this;
+ 
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
+
+      
+    });
+</script>
     <!--
 <script>
 $(function() {
@@ -54,7 +73,7 @@ $(function() {
                     <div class="col-md-12">
                         <br>
                         <h3 style="color: black;">
-                            <?php echo lang('aar_articulos recibidos'); ?>
+                            Artículos Rechazados
                             <hr>
                     </div>
                 </div>
@@ -64,6 +83,120 @@ $(function() {
                         <thead>
                             <tr>
                                 <th>
+                                   ID
+                                </th>
+                                <th>
+                                    Fecha plazo de reenvio 
+                                </th>
+                                <th>
+                                    <?php echo lang('aar_tema'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('allarv_titulo articulo'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('allarv_estado'); ?>
+                                </th>
+                                <th>
+                                    <?php echo lang('allarv_autor'); ?>
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if($datos){ 
+                                $i = 0 ?>
+                            <?php foreach ($datos->result() as $row): ?>
+                            <?php
+
+                                $id_revista = $row->ID;
+                                $titulo_revista = $row->titulo_revista;
+                                $email_autor = $row->email_autor;
+                                $estado = $row->estado;
+                                $tema = $row->tema;
+                                $fecha = $row->fecha_timeout;
+                                $e_post = $row->e_post;
+                                $peticion = $row->peticion;
+                                $fecha_reenvio = NULL;
+                                if($fecha != NULL){
+                                    $fecha_reenvio = date("d-m-y",strtotime($fecha));
+                                }
+                                
+                                
+                                $i = $i + 1;
+                                
+                              $url = base_url()."index.php/articulo_editor/aceptar_peticion_articulo/".$id_revista;
+
+                              
+
+                              echo '<div class="modal fade" id="modal_aprobar'.$i.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
+                              echo '  <div class="modal-dialog" role="document">';
+                              echo '    <div class="modal-content">';
+                              echo '      <div class="modal-header">';
+                              echo '        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+                              echo '        <h4 class="modal-title" id="myModalLabel">Confirmación de extensión Plazo</h4>';
+                              echo '      </div>';
+                              echo '      <div class="modal-body">';
+                              echo ' <h4>'.$peticion.'</h4>';
+                              echo ' ¿Está seguro que desea aceptar el plazo extendido?';
+                              echo '      </div>';
+                              echo '      <div class="modal-footer">';
+                              echo '        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>';
+                              echo '        <a href="' . $url . '" "#" class="btn btn-success" role="button">Aceptar</a>';
+                              echo '      </div>';
+                              echo '    </div>';
+                              echo '  </div>';
+                              echo '</div>';
+
+
+                                  
+
+                                    echo "<tr>";
+                                    if($e_post == 1 ){
+                                       
+                                        echo "<td style='border-left: 6px solid green;'>";
+                                    }
+                                    else{
+                                        echo "<td>";   
+                                    }
+                                   
+                            
+                                        echo $id_revista; echo "</td>";
+                                        echo "<td>";echo $fecha_reenvio; echo "</td>";
+                                        echo "<td>"; echo $tema; echo "</td>";
+                  					    echo "<td>"; echo $titulo_revista; echo "</td>";
+
+                                              echo "<td>";
+                                              echo $estado;
+                                              echo "</td>";
+                                         
+
+                                              echo "<td>";
+                                              echo $email_autor;
+                                             
+                                              echo "</td>";
+                                              
+                  						if($e_post == 1){
+                                            echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_aprobar".$i."'><center><i class='material-icons' style='font-size:40px;'>assignment_ind</i></center></span></center></span></a>";  echo "</td>";
+                                        }
+                                              
+                                             
+
+
+                  					echo "</tr>";
+                  				?>
+                                <?php endforeach ?>
+                                <?php
+                              } ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                            <th>
+                                    ID
+                                </th>
+                            <th>
                                     <?php echo lang('aaa_fecha ingreso'); ?>
                                 </th>
                                 <th>
@@ -78,48 +211,9 @@ $(function() {
                                 <th>
                                     <?php echo lang('aaa_autor'); ?>
                                 </th>
-                                <th>
-                                    <?php echo lang('aaa_ver'); ?>
-                                </th>
+                               
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php if($datos){ ?>
-                            <?php foreach ($datos->result() as $row): ?>
-                            <?php
-
-                                $id_revista = $row->ID;
-                                $titulo_revista = $row->titulo_revista;
-                                $email_autor = $row->email_autor;
-                                $estado = $row->estado;
-                                $tema = $row->tema;
-                                $fecha_ingreso = $row->fecha_ingreso;
-
-                                      echo "<tr>";
-                                        echo "<td>"; echo $fecha_ingreso; echo "</td>";
-                                        echo "<td>"; echo $tema; echo "</td>";
-                  					    echo "<td>"; echo $titulo_revista; echo "</td>";
-
-                                              echo "<td>";
-                                              echo $estado;
-                                              echo "</td>";
-                                         
-
-                                              echo "<td>";
-                                              echo $email_autor;
-                                             
-                                              echo "</td>";
-
-                  						
-                  						echo "<td>"; echo "<a href='".base_url()."index.php/articulo_editor/all_articulos_recibidos_ver/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>zoom_in</i></center></center></a>"; echo "</td>";
-
-
-                  					echo "</tr>";
-                  				?>
-                                <?php endforeach ?>
-                                <?php
-                              } ?>
-                        </tbody>
+                        </tfoot>
                     </table>
                 </div>
 

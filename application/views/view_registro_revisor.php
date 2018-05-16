@@ -83,6 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<?php
 							$areas = $this->Model_for_login->get_areas();
+							$temas = $this->Model_for_login->get_temas();
 							if ($areas)
 							{
 
@@ -91,19 +92,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								if ($mensaje_error != "Seleccionado") echo '<div class="alert alert-danger">' . $mensaje_error . '</div>';
 
 								foreach ($areas->result() as $row){
-									$seleccionado = '';
-									if (isset($_POST['c'. $row->id_campo]))
-									{
-										$seleccionado = 'checked';
-									}
+									echo '<h5 style = "color: #3f51b5;">'.$row->nombre_campo.'</h5>';
+					
+									foreach ($temas->result() as $rowt){
+										$seleccionado = '';
+										if (isset($_POST['c'. $rowt->id_tema]))
+										{
+											$seleccionado = 'checked';
+										}
+										if($rowt->nombre_campo==$row->id_campo){
+											echo '<label class="checkbox">';
+											echo '<input '.$seleccionado.' type="checkbox" name= "c'. $rowt->id_tema .'" id= "c'. $rowt->id_tema .'" value='.$rowt->id_tema.'>' . $rowt->nombre;
+											echo '</label>';
 
-									echo '<label class="checkbox">';
-									echo '<input '.$seleccionado.' type="checkbox" name= "c'. $row->id_campo .'" id= "c'. $row->id_campo .'" value='.$row->id_campo.'>' . $row->nombre_campo;
-									echo '</label>';
+										}
+							
+									}
+									
+						
 								}
 							}
 						 ?>
 						<br><br>
+					
 
 						<h3 style = "color: #3f51b5;"><?php echo lang('vrr_biografia');?></h3>
 						<hr>
