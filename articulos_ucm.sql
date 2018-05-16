@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2018 a las 06:40:30
+-- Tiempo de generación: 16-05-2018 a las 12:20:36
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.0.27
 
@@ -21,6 +21,27 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `articulos_ucm`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calificaciones`
+--
+
+CREATE TABLE `calificaciones` (
+  `id_calificacion` int(11) NOT NULL,
+  `calificacion` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `calificaciones`
+--
+
+INSERT INTO `calificaciones` (`id_calificacion`, `calificacion`) VALUES
+(0, 'Rechazado'),
+(3, 'Sin calificar'),
+(1, 'Aceptado'),
+(2, 'Aceptado con Recomendaciones');
 
 -- --------------------------------------------------------
 
@@ -84,7 +105,13 @@ INSERT INTO `campo_revisor` (`id_campo_usuario`, `id_campo`, `id_revisor`) VALUE
 (5, 11, 21),
 (6, 12, 21),
 (7, 10, 21),
-(8, 11, 21);
+(8, 11, 21),
+(9, 10, 26),
+(10, 11, 26),
+(11, 12, 26),
+(12, 10, 27),
+(13, 11, 27),
+(14, 12, 27);
 
 -- --------------------------------------------------------
 
@@ -110,16 +137,18 @@ CREATE TABLE `configuracion` (
   `max_revi_art` int(11) NOT NULL,
   `max_dia_res_art` int(11) NOT NULL,
   `max_dia_edi_rev_art` int(11) NOT NULL,
-  `fecha_configuracion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fecha_configuracion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `max_dia_reev_art` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `configuracion`
 --
 
-INSERT INTO `configuracion` (`id_configuracion`, `max_dia_asig_art`, `max_revi_art`, `max_dia_res_art`, `max_dia_edi_rev_art`, `fecha_configuracion`) VALUES
-(1, 1, 2, 3, 4, '2018-02-06 06:46:24'),
-(2, 1, 2, 3, 4, '2018-02-14 01:35:39');
+INSERT INTO `configuracion` (`id_configuracion`, `max_dia_asig_art`, `max_revi_art`, `max_dia_res_art`, `max_dia_edi_rev_art`, `fecha_configuracion`, `max_dia_reev_art`) VALUES
+(2, 1, 2, 3, 4, '2018-02-14 01:35:39', 0),
+(3, 2, 3, 4, 5, '0000-00-00 00:00:00', 0),
+(4, 20, 3, 20, 20, '2018-05-15 22:18:50', 22);
 
 -- --------------------------------------------------------
 
@@ -167,8 +196,9 @@ CREATE TABLE `estado` (
 --
 
 INSERT INTO `estado` (`id_estado`, `nombre_estado`) VALUES
-(1, 'En Espera'),
-(3, 'Asignado'),
+(1, 'En Espera Revisión Formato'),
+(2, 'No asignado a revisor'),
+(3, 'Asignado a revisor'),
 (4, 'Rechazado'),
 (5, 'Aceptado'),
 (6, 'Aceptado con comentarios'),
@@ -178,7 +208,8 @@ INSERT INTO `estado` (`id_estado`, `nombre_estado`) VALUES
 (10, 'Incluye Modificaciones'),
 (11, 'No incluye Modificaciones'),
 (12, 'Esperando PDF paginado'),
-(13, 'PDF Paginado Recibido');
+(13, 'PDF Paginado Recibido'),
+(14, 'Revisado');
 
 -- --------------------------------------------------------
 
@@ -195,14 +226,6 @@ CREATE TABLE `final_magazine` (
   `pagina_fin` int(11) NOT NULL,
   `file_papper` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `final_magazine`
---
-
-INSERT INTO `final_magazine` (`ID`, `ID_articulo`, `ID_magazine`, `titulo`, `pagina_inicio`, `pagina_fin`, `file_papper`) VALUES
-(6, 10, 4, 'asdasd', 1, 10, 'asdasdmoises_intech@gmail_com2017-12-10_05_01_36.docx.pdf'),
-(7, 13, 4, 'gajajsn', 11, 21, 'gajajsnmoises_intech@gmail_com2017-12-10_12_42_14.docx.pdf');
 
 -- --------------------------------------------------------
 
@@ -260,7 +283,11 @@ INSERT INTO `login` (`ID`, `correo`, `clave`, `rol_fk`, `rol2_fk`, `rol3_fk`) VA
 (17, 'marcotoranzo@hotmail.com', 'ec9b2638a2fd1b542fd317b0fcc8b81ec2347337', 3, NULL, NULL),
 (20, 'pablo@hotmail.com', 'a2e6a7551733e70a75592fa760ce9d82b2855d55', 1, 2, 3),
 (21, 'asda@hotmail.com', '71c81485cc9b67391285223b32f1ae06bafb2e9b', 3, NULL, NULL),
-(22, 'x_pablo_acm@hotmail.com', 'a2e6a7551733e70a75592fa760ce9d82b2855d55', 4, NULL, NULL);
+(22, 'x_pablo_acm@hotmail.com', 'a2e6a7551733e70a75592fa760ce9d82b2855d55', 4, NULL, NULL),
+(23, 'pablo1@gmail.com', '4728f352febe33fd0d155ca61171f2c49aae9ccb', 2, NULL, NULL),
+(24, 'pablo123@gmail.com', '4728f352febe33fd0d155ca61171f2c49aae9ccb', 2, NULL, NULL),
+(25, 'pablo123@g.com', 'a2e6a7551733e70a75592fa760ce9d82b2855d55', 555, NULL, NULL),
+(26, 'pablo1234@gmail.com', 'a2e6a7551733e70a75592fa760ce9d82b2855d55', 555, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -532,15 +559,9 @@ CREATE TABLE `post` (
   `id` int(11) NOT NULL,
   `estado` int(1) NOT NULL DEFAULT '1',
   `id_articulo` int(11) NOT NULL,
-  `fechaUltimaRespuesta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaUltimaRespuesta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `peticion` varchar(500) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `post`
---
-
-INSERT INTO `post` (`id`, `estado`, `id_articulo`, `fechaUltimaRespuesta`) VALUES
-(1, 1, 19, '2018-03-18 23:49:02');
 
 -- --------------------------------------------------------
 
@@ -557,21 +578,66 @@ CREATE TABLE `revisor` (
   `titulo_academico` varchar(250) NOT NULL,
   `organizacion` varchar(250) NOT NULL,
   `telefono` varchar(30) NOT NULL,
-  `biografia` varchar(1000) NOT NULL
+  `biografia` varchar(1000) NOT NULL,
+  `fk_tema` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `revisor`
 --
 
-INSERT INTO `revisor` (`ID`, `email`, `nombre`, `apellido_1`, `apellido_2`, `titulo_academico`, `organizacion`, `telefono`, `biografia`) VALUES
-(0, 'No Asignado', 'No Asignado', '', '', '', '', '', ''),
-(14, 'moises.intech@gmail.com', 'Moises', 'Flores', 'Estay', 'ASDasdas', 'asdasd', '973950383', 'asdasd'),
-(18, 'a@b.com', 'Revisando', 'Paper', 'Pro', 'ICI', 'UCM', '123456789', 'asdasd'),
-(19, 'a@a.com', 'hola', 'mundo', 'pro', 'ici', 'ucm', '123456789', 'asdfasdf'),
-(20, 'x_pablo_acm@hotmail.cpm', 'pablo', 'campos', 'moreno', 'alumno', 'ucm', '123456789', 'sdfsdfsdf'),
-(21, 'x_pablo_acm@hotmail.com', 'pablo', 'campos', 'moreno', 'asca', 'sadasf', '123456789', 'dsfsdfsdf'),
-(22, 'x_pablo_acm@hotmail.com', 'sdfsdf', 'sdfsdf', 'sdfsdfs', 'sdfsdf', 'dsfsdf', '123455677', 'sfsdfsdf');
+INSERT INTO `revisor` (`ID`, `email`, `nombre`, `apellido_1`, `apellido_2`, `titulo_academico`, `organizacion`, `telefono`, `biografia`, `fk_tema`) VALUES
+(0, 'No Asignado', 'No Asignado', '', '', '', '', '', '', 0),
+(14, 'moises.intech@gmail.com', 'Moises', 'Flores', 'Estay', 'ASDasdas', 'asdasd', '973950383', 'asdasd', 0),
+(18, 'a@b.com', 'Revisando', 'Paper', 'Pro', 'ICI', 'UCM', '123456789', 'asdasd', 0),
+(19, 'a@a.com', 'hola', 'mundo', 'pro', 'ici', 'ucm', '123456789', 'asdfasdf', 0),
+(20, 'x_pablo_acm@hotmail.cpm', 'pablo', 'campos', 'moreno', 'alumno', 'ucm', '123456789', 'sdfsdfsdf', 0),
+(21, 'x_pablo_acm@hotmail.com', 'pablo', 'campos', 'moreno', 'asca', 'sadasf', '123456789', 'dsfsdfsdf', 0),
+(22, 'x_pablo_acm@hotmail.com', 'sdfsdf', 'sdfsdf', 'sdfsdfs', 'sdfsdf', 'dsfsdf', '123455677', 'sfsdfsdf', 0),
+(25, 'pablo@hotmail.com', 'Pablo', 'Campos', 'Moreno', 'Estudiante', 'ucm', '123456789', 'biografia', 0),
+(29, 'pablo1234@gmail.com', 'pablo', 'campos', 'moreno', 'estudiante', 'ucm', '918281231', 'asdaasdasd', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `revisor_tema`
+--
+
+CREATE TABLE `revisor_tema` (
+  `id_revisor_tema` int(11) NOT NULL,
+  `id_tema` int(11) NOT NULL,
+  `id_revisor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `revisor_tema`
+--
+
+INSERT INTO `revisor_tema` (`id_revisor_tema`, `id_tema`, `id_revisor`) VALUES
+(1, 3, 29),
+(2, 4, 29),
+(3, 6, 29),
+(4, 3, 14),
+(5, 4, 14),
+(6, 6, 14),
+(7, 3, 18),
+(8, 4, 18),
+(9, 6, 18),
+(10, 3, 19),
+(11, 4, 19),
+(12, 6, 19),
+(13, 3, 20),
+(14, 4, 20),
+(15, 6, 20),
+(16, 3, 21),
+(17, 4, 21),
+(18, 6, 21),
+(19, 3, 22),
+(20, 4, 22),
+(21, 6, 22),
+(22, 3, 25),
+(23, 4, 25),
+(24, 6, 25);
 
 -- --------------------------------------------------------
 
@@ -599,9 +665,9 @@ CREATE TABLE `revista` (
   `id_revisor_1` int(11) DEFAULT '0',
   `id_revisor_2` int(11) DEFAULT '0',
   `id_revisor_3` int(11) DEFAULT '0',
-  `comentario_revisor_1` varchar(250) DEFAULT NULL,
-  `comentario_revisor_2` varchar(250) DEFAULT NULL,
-  `comentario_revisor_3` varchar(250) DEFAULT NULL,
+  `comentario_revisor_1` varchar(1000) DEFAULT NULL,
+  `comentario_revisor_2` varchar(1000) DEFAULT NULL,
+  `comentario_revisor_3` varchar(1000) DEFAULT NULL,
   `comentarios_editor` text,
   `fecha_timeout` datetime DEFAULT NULL,
   `Fecha_asig_revision` datetime DEFAULT NULL,
@@ -615,32 +681,18 @@ CREATE TABLE `revista` (
   `urlArticuloEnviado` varchar(100) NOT NULL,
   `autor_5` varchar(50) DEFAULT NULL,
   `autor_6` varchar(50) DEFAULT NULL,
-  `id_post` int(11) DEFAULT NULL,
-  `id_revista` int(11) NOT NULL,
+  `id_post` int(11) DEFAULT '0',
+  `id_revista` int(11) NOT NULL DEFAULT '0',
   `VerificacionTextoFecha` datetime DEFAULT NULL,
   `VerificacionTexto` int(11) DEFAULT '3',
-  `calificaRev1` int(11) DEFAULT NULL,
-  `calificaRev2` int(11) DEFAULT NULL,
-  `calificaRev3` int(11) DEFAULT NULL,
+  `calificaRev1` int(11) DEFAULT '3',
+  `calificaRev2` int(11) DEFAULT '3',
+  `calificaRev3` int(11) DEFAULT '3',
   `fechaCalificaRev` datetime DEFAULT NULL,
-  `calificaFinal` int(11) DEFAULT NULL,
+  `calificaFinal` int(11) DEFAULT '3',
   `fechaCalificaFInal` datetime DEFAULT NULL,
   `fechaReenvioarticulo` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `revista`
---
-
-INSERT INTO `revista` (`ID`, `titulo_revista`, `version`, `email_autor`, `id_tema`, `id_estado`, `palabras_claves`, `abstract`, `autor_1`, `autor_2`, `autor_3`, `autor_4`, `archivo`, `comentarios`, `fecha_ultima_upd`, `fecha_ingreso`, `id_revisor_1`, `id_revisor_2`, `id_revisor_3`, `comentario_revisor_1`, `comentario_revisor_2`, `comentario_revisor_3`, `comentarios_editor`, `fecha_timeout`, `Fecha_asig_revision`, `pais`, `institucion`, `email_add1`, `email_add2`, `email_add3`, `email_add4`, `email_add5`, `urlArticuloEnviado`, `autor_5`, `autor_6`, `id_post`, `id_revista`, `VerificacionTextoFecha`, `VerificacionTexto`, `calificaRev1`, `calificaRev2`, `calificaRev3`, `fechaCalificaRev`, `calificaFinal`, `fechaCalificaFInal`, `fechaReenvioarticulo`) VALUES
-(10, 'asdasd', 1, 'moises.intech@gmail.com', 9, 8, 'aSDasda', 'asdasd', 'Moises Flores Estay', '', '', '', 'asdasdmoises_intech@gmail_com2017-12-10_05_01_36.docx', '', '2017-12-10 15:54:38', '2017-12-10 05:01:36', 0, 0, 0, NULL, NULL, NULL, NULL, '2018-01-03 00:00:00', NULL, '', '', '', '', '', '', '', '', '', '', 0, 0, '0000-00-00 00:00:00', 0, 0, 0, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(13, 'gajajsn', 2, 'moises.intech@gmail.com', 9, 8, 'sdsddfsds', 'ssdfss', 'Moises Flores Estay', '', '', '', 'gajajsnmoises_intech@gmail_com2017-12-10_12_42_14.docx', '', '2017-12-10 15:54:38', '2017-12-10 12:42:14', 0, 0, 0, 'HOLA ESTE PAPER TIENE UN PEQUEÑO DETALLE, ESTA MALO.', NULL, NULL, 'ASAsAS', '2017-12-13 00:00:00', NULL, '', '', '', '', '', '', '', '', '', '', 0, 0, '0000-00-00 00:00:00', 0, 0, 0, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(14, 'asdasdsa', 1, 'moises.intech@gmail.com', 9, 3, 'aSDasdasd', 'asdasdasd', 'Moises Flores Estay', '', '', '', 'asdasdsamoises_intech@gmail_com2017-12-10_12_50_34.docx', '', '2018-02-02 02:37:36', '2017-12-10 12:50:34', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', 0, 0, '0000-00-00 00:00:00', 0, 0, 0, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(15, 'Practica Docente en la asignatura Algoritmos y Estructuras de Datos', 1, 'marcotoranzo@hotmail.com', 26, 3, 'competencia', 'La formación basada en competencias corresponde a una modelo de formación profesional de alta relevancia en la actualidad. El objetivo de este trabajo es presentar la evolución que ha tenido un programa de formación de competencias genéricas en la Universidad de Talca a partir de la experiencia de los autores como docentes de una carrera de ingeniería. Esta evolución, luego de más de 10 años de su inicio, se expresa en tres versiones. Se concluye que no obstante la existencia de un proceso de maduración y mejoramiento continuo, siguen abiertos espacios para mejoras significativas con miras a su consolidación.', 'Rodolfo Schmal', 'Sabino Rivero', 'Cristian Vidal-Silva', '', 'Practica_Docente_en_la_asignatura_Algoritmos_y_Estructuras_de_Datosmarcotoranzo@hotmail_com2017-12-12_09_26_59.doc', '', '2018-02-05 03:10:21', '2017-12-12 09:26:59', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', 0, 0, '0000-00-00 00:00:00', 0, 0, 0, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(16, 'asdasd', 1, 'asda@hotmail.com', 10, 9, 'sadasd', 'sadasd', 'sdfsdf sdfsd sdfsdf', 'asdas', 'sadas', 'asdasd', 'asdasdasda@hotmail.com2018-01-28_05_36_46.docx', 'asdasdaf', '2018-03-04 17:13:51', '2018-01-28 05:36:46', 0, 0, 0, NULL, NULL, NULL, 'fjhhj', '2018-02-23 00:00:00', NULL, '', '', '', '', '', '', '', '', '', '', 0, 0, '0000-00-00 00:00:00', 0, 0, 0, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(17, 'asdasd', 1, 'pablo.acm.ti@gmail.com', 3, 1, 'asd', '<p>asdfasfasd</p>\r\n', 'asdasd', NULL, NULL, NULL, 'asdasdpablo.acm.ti@gmail.com2018-03-18_06_45_47.docx', 'asdasfas', '2018-03-18 09:45:47', '2018-03-18 06:45:47', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '81', 'asdasfasd', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 'asdfasfas', 1, 'pablo.acm.ti@gmail.com', 3, 1, 'asfasd', '<p>asdasfasd</p>\r\n', 'asfasdasf', NULL, NULL, NULL, 'asdfasfaspablo.acm.ti@gmail.com2018-03-18_07_04_58.docx', 'asfasdasf', '2018-03-18 10:04:58', '2018-03-18 07:04:58', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '81', 'dasfasdaf', NULL, NULL, NULL, NULL, NULL, 'uploads/asdfasfaspablo.acm.ti@gmail.com2018-03-18_07_04_58.docx', NULL, NULL, NULL, 0, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 'articulo nuevo', 1, 'pablo.acm.ti@gmail.com', 3, 1, 'asdasf asdasfa ', '<p>este es un articulo nuevo</p>\r\n', 'pablo campos', NULL, NULL, NULL, 'articulo_nuevopablo.acm.ti@gmail.com2018-03-18_20_49_01.doc', 'asdasfasd', '2018-03-18 23:49:01', '2018-03-18 20:49:01', 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '144', 'ucm', NULL, NULL, NULL, NULL, NULL, 'uploads/articulo_nuevopablo.acm.ti@gmail.com2018-03-18_20_49_01.doc', NULL, NULL, NULL, 0, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -695,15 +747,6 @@ CREATE TABLE `temas_usuario` (
   `id_tema` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `temas_usuario`
---
-
-INSERT INTO `temas_usuario` (`id_tema_usuario`, `id_tema`, `id_usuario`) VALUES
-(1, 3, 2),
-(2, 4, 2),
-(3, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -829,6 +872,12 @@ ALTER TABLE `revisor`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indices de la tabla `revisor_tema`
+--
+ALTER TABLE `revisor_tema`
+  ADD PRIMARY KEY (`id_revisor_tema`);
+
+--
 -- Indices de la tabla `revista`
 --
 ALTER TABLE `revista`
@@ -873,7 +922,7 @@ ALTER TABLE `campo_investigacion`
 -- AUTO_INCREMENT de la tabla `campo_revisor`
 --
 ALTER TABLE `campo_revisor`
-  MODIFY `id_campo_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_campo_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `campo_usuario`
@@ -885,19 +934,19 @@ ALTER TABLE `campo_usuario`
 -- AUTO_INCREMENT de la tabla `configuracion`
 --
 ALTER TABLE `configuracion`
-  MODIFY `id_configuracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_configuracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `final_magazine`
 --
 ALTER TABLE `final_magazine`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `lector`
@@ -909,13 +958,13 @@ ALTER TABLE `lector`
 -- AUTO_INCREMENT de la tabla `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `magazines`
 --
 ALTER TABLE `magazines`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -933,19 +982,25 @@ ALTER TABLE `permiso`
 -- AUTO_INCREMENT de la tabla `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `revisor`
 --
 ALTER TABLE `revisor`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT de la tabla `revisor_tema`
+--
+ALTER TABLE `revisor_tema`
+  MODIFY `id_revisor_tema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `revista`
 --
 ALTER TABLE `revista`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
