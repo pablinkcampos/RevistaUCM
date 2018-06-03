@@ -27,18 +27,15 @@ function AgregarCampos(){
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-    $("#area_aplicable").change(function() {
-        $("#area_aplicable option:selected").each(function() {
-            campo = $("#area_aplicable").val();
-            $.post("<?php echo base_url(); ?>index.php/Articulo_autor/selectTema", {
-            area_aplicable : campo
-            }, function(data) {
-                $("#tema_interes").html(data);
-            });
-        });
-    });
-    });
+  function load(value){
+       
+       $.post("<?php echo base_url(); ?>index.php/Articulo_autor/selectTema", {
+           area_aplicable : value
+       }, 
+       function(data) {
+           $("#tema_interes").html(data);
+       });
+   }        
 </script>
  <script type="text/javascript" src="<?php echo base_url(); ?>vendors/ckeditor/ckeditor.js"></script>
 
@@ -88,7 +85,7 @@ function AgregarCampos(){
                           <label for="tema"><?php echo lang('aa_area aplicable'); ?> (*):</label>
                       </div>
                       <div class="col-md-9">
-                          <select class="form-control" name="area_aplicable" id="area_aplicable" required="required">
+                          <select class="form-control" name="area_aplicable" id="area_aplicable" required="required" onchange="load(this.value)">
                             <option value="">Selecciona Area Aplicable</option>
                               <?php
                               
