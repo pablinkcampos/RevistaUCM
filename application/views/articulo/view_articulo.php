@@ -26,6 +26,7 @@
 
 
 <script type="text/javascript">
+<<<<<<< HEAD
 
 
     function load(value){
@@ -39,6 +40,17 @@
     }        
 
     
+=======
+  function load(value){
+       
+       $.post("<?php echo base_url(); ?>index.php/Articulo_autor/selectTema", {
+           area_aplicable : value
+       }, 
+       function(data) {
+           $("#tema_interes").html(data);
+       });
+   }        
+>>>>>>> f2074b3587940bc898d169daff20d83aabaf17cd
 </script>
 
 <style type="text/css">
@@ -184,8 +196,13 @@
                       <div style="text-align: right;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                           <label for="tema"><?php echo lang('aa_area aplicable'); ?> (*):</label>
                       </div>
+<<<<<<< HEAD
                       <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                           <select class="form-control" id="area_aplicable" name="area_aplicable"  required="required" onchange="load(this.value)">
+=======
+                      <div class="col-md-9">
+                          <select class="form-control" name="area_aplicable" id="area_aplicable" required="required" onchange="load(this.value)">
+>>>>>>> f2074b3587940bc898d169daff20d83aabaf17cd
                             <option value="">Selecciona Area Aplicable</option>
                               <?php
                               
