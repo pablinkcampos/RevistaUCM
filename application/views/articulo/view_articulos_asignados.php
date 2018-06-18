@@ -2,55 +2,93 @@
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
+    $(document).ready(function () {
+        $('#articulos tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" style="width: 100%; text-align: left;" placeholder="Filtrar" />' );
+        } );
+        
+        
 
-    $('#articulos').DataTable({
-      "language": {
+            var table = $('#articulos').DataTable( {
+                dom: 'Bfrtip',
+                responsive: true,
+                buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],    
+            language: {
+            processing:     "Procesando ...",
+            search:         "Buscar:",
+            lengthMenu:    "Mostrar _MENU_ Elementos",
+            info:           "Visualización del elemento _START_ de _END_ en _TOTAL_ elementos",
+            infoEmpty:      "Mostrar 0 elemento 0 en 0 elementos",
+            infoFiltered:   "(filtro de  _MAX_ en total)",
+            infoPostFix:    "",
+            loadingRecords: "Cargando ...",
+            zeroRecords:    "No hay datos disponibles en la tabla",
+            emptyTable:     "No hay datos disponibles en la tabla",
+            paginate: {
+                first:      "Primero",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Último"
+            },
+            aria: {
+                sortAscending:  ": activar para ordenar la columna en orden ascendente",
+                sortDescending: ": active para ordenar la columna en orden descendente"
+            }
+            }
+            } );
+           
+ 
+    // Apply the search
+        table.columns().every( function () {
+            var that = this;
+ 
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
 
-          "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/<?php echo ucwords($this->session->userdata('lang')['route']);?>.json"
-      },
-      "order": [[ 6, "desc" ]]
-
+      
     });
-} );
 </script>
 
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
-              <div class="col-md-12">
-                      <div class="col-md-12">
-                          <br>
-                          <h3 style = "color: black;"><?php echo lang('aaas_sus articulos asignados'); ?></h3>
-                          <hr>
-                      </div>
-                  <div class="col-md-2"></div>
-              </div>
 
-              <div class="col-md-12">
-                  <div class="col-md-12">
-
-
-                  <table id="articulos" class="display" width="100%" cellspacing="0">
+  <section class="content">
+        <div class="container-fluid" style="margin-top: 150px;">
+          
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            
+                            <h2>
+                                <?php echo lang('allaa_articulo_asignado'); ?>
+                            </h2>
+                        
+                        </div>
+                        <div class="body table-responsive">
+                        
+                    <table id="articulos" class="table table-bordered table-striped table-hover dataTable js-exportable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
+                                  <th> ID</th>
                                   <th> <?php echo lang('aaas_titulo'); ?></th>
                                   <th><?php echo lang('aaas_autor'); ?></th>
                                   <th><?php echo lang('aaas_tema'); ?></th>
-                                  <th><?php echo lang('aaas_revisor N1'); ?></th>
-                                  <th><?php echo lang('aaas_revisor N2'); ?></th>
-                                  <th><?php echo lang('aaas_revisor N3'); ?></th>
                                   <th><?php echo lang('aaas_fecha ingreso'); ?></th>
-                                  <th><?php echo lang('aaas_ver'); ?></th>
-                                  <th><?php echo lang('aaas_comentar'); ?></th>
+                                  <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" ><?php echo lang('aaas_ver'); ?></th>
+                                  <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><?php echo lang('aaas_comentar'); ?></th>
                               </tr>
                           </thead>
                           <tbody>
@@ -63,10 +101,8 @@ $(document).ready(function() {
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;
-                                $rev1 = $row->rev_1;
-                                $rev2 = $row->rev_2;
-                                $rev3 = $row->rev_3;
-                                $fecha_ingreso = $row->fecha_ingreso;
+                    
+                                $fecha_ingreso =date("d-m-y",strtotime($row->fecha_ingreso));
                                 $fecha_asignacion = $row->fecha_asignacion;
                                 $fecha_vencimiento = $row->fecha_vencimiento;
                                 $date1 = new DateTime($fecha_asignacion);
@@ -79,44 +115,37 @@ $(document).ready(function() {
                                 
                                   
 
-                                    echo "<tr>";
-                                    if($dife > $limite/2 ){
-                                       
-                                        echo "<td style='border-left: 6px solid green;'>";
+                                echo "<tr>";
+                                if($dife > $limite/2 ){
+                                   
+                                    echo "<td style='border-left: 6px solid green;'>";
+                                }
+                                else{
+                                    if($dife < $limite/2 && $dife > 0 ){
+                                        
+                                        echo "<td style='border-left: 6px solid orange;'>";
                                     }
                                     else{
-                                        if($dife < $limite/2 && $dife > 0 ){
-                                            
-                                            echo "<td style='border-left: 6px solid orange;'>";
-                                        }
-                                        else{
-                                           
-                                            echo "<td style='border-left: 6px solid red;'>";
-                                        }
+                                       
+                                        echo "<td style='border-left: 6px solid red;'>";
                                     }
-                                     
-                                        echo  $titulo_revista;  echo "</td>";                					    
+                                }
+                                             echo  $id_revista;  echo "</td>";                		
+                                             echo "<td>";echo  $titulo_revista;  echo "</td>";                					    
 
                                               echo "<td>";
                                               echo $email_autor;
                                               echo "</td>";
                                               echo "<td>"; echo $tema; echo "</td>";
-                                              echo "<td>";
-                                              echo $rev1;
-                                              echo "</td>";
-                                              echo "<td>";
-                                              echo $rev2;
-                                              echo "</td>";
-                                              echo "<td>";
-                                              echo $rev3;
-                                              echo "</td>";
+                                          
+                                            
                                               echo "<td>"; echo $fecha_ingreso; echo "</td>";
                   						
-                  						    echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_ver/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>zoom_in</i></center></a>"; echo "</td>";
+                  						    echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_ver/".$id_revista."'><center><i class='material-icons' style='font-size:25px;'>zoom_in</i></center></a>"; echo "</td>";
 
 
                                             
-                                                echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_comentar/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>insert_comment</i></center></a>";  echo "</td>";
+                                                echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_comentar/".$id_revista."'><center><i class='material-icons' style='font-size:25px;'>insert_comment</i></center></a>";  echo "</td>";
                                            
  
                                             
@@ -129,22 +158,25 @@ $(document).ready(function() {
                   						
                           </tbody>
                       </table>
-                  </div>
-                  <div class="col-md-2"></div>
-              </div>
-            </div>
-
-
-        </div>
-
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                    <?php
-                     $this->load->view('include/menu_revisor');
-                    ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            <!-- #END# Basic Table -->
+            <!-- Striped Rows -->
+  
+    </section>
+              <!-- menu -->
+
+
+                        <div class="widget clearfix">
+                            <?php
+                     $this->load->view('include/menu_revisor');
+                    ?>
+                        </div>
+          
+
+
+
+
+

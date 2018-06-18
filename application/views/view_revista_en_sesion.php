@@ -110,13 +110,14 @@
 
 </style>
 <br>
-<div class="container clearfix">
 
-    <div class="postcontent col_last nobottommargin">
 
+    <div class="container-fluid  " style="margin-top: 200px;">
+       
         <!-- Portfolio Single Content
         ============================================= -->
-        <div class="col_six portfolio-single-content ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          
             <br>
             <?php
             $id_get = $this->input->get('revista');
@@ -139,14 +140,38 @@
                     if ($magazine->logo_revista) {
                         $logo = true;
                     }
-                    echo '<hr>';
-                    echo '<div class="panel"  style="background-color: #F2F2F2">';
-                    echo '    <h2>' . $magazine->titulo_revista;
+                    
+                   
+                        
+                    echo ' <div class="card">';
+                    
+                  
+                    echo '<div class="header">';
+              
+                    echo ' <center>    <h2>' . $magazine->titulo_revista;
                     echo '        <br>' . $magazine->fecha_publicacion . '</h2>';
-                    echo '</div>';
+                    echo '</div></center>';
 
-                    echo '
-                    <div class="col-lg-12">
+                    echo '<div class="body">';
+                    if ($logo ) {
+                        echo '
+                                <div class="pull-left col-lg-12 col-md-12">
+                
+                                          <a href="#" class="nobg"><div class="bookWrap">
+                                            <div class="book">
+                                              <a href="' . base_url() . 'index.php/Home_principal/publicacion?revista=' . $id_get . '" class="nobg"><img class="cover"
+                                                src="' . base_url() . 'img/' . $magazine->logo_revista . '"></a>
+                                              <div class="spine"></div>
+                                            </div>
+                                          </a>
+                                    
+                                </div>
+                                
+                            ';
+                    }
+                    
+                
+                    echo '<div class="col-lg-12 col-md-12">
                         <center>
                       <p><b>' . lang("vhp_palabras del editor") . '</b><br>
                       <i>"' . $magazine->palabras_editor . '"</i></p>
@@ -157,29 +182,31 @@
                     $row = null;
                     if ($articulos_en_revista) {
                         echo '
-                  <div class="col-lg-2">
+                  <div class="col-lg-2 col-md-2">
                       <p><b>' . lang("vres_pagina") . '</b></p>
                   </div>
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 col-md-6">
                       <p><b>' . lang("vres_titulo") . '</b></p>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-4 col-md-4">
                       <p><b>' . lang("vres_autores") . '</b></p>
                   </div>';
                         foreach ($articulos_en_revista->result() as $row) {
-                            echo '<div class="col-lg-2">';
-                            echo '    <p>' . $row->pagina_inicio . ' - ' . $row->pagina_fin . '</p>';
+                            echo '<div class="col-lg-2 col-md-2">';
                             echo '</div>';
-                            echo '<div class="col-lg-6">';
+                            echo '<div class="col-lg-6 col-md-6">';
                             echo '    <b>' . $row->titulo . '</b>';
                             if ($row->file_papper) {
                                 echo '    <br><a href=' . base_url() . 'uploads/' . $row->file_papper . '><img width="40" height="40" src="' . base_url() . 'img/pdf.png' . '" alt="Descargar_Revista"></a><a href = ' . base_url() . 'uploads/' . $row->file_papper . '>' . lang("vres_descargar pdf") . '</a>';
                             }
                             echo '</div>';
-                            echo '<div class="col-lg-4">';
+                            echo '<div class="col-lg-4 col-md-4">';
                             $nombre = $this->Articulo_Model->getnamee($row->ID_articulo);
                             echo '    <p>' . $nombre->autor_1 . ' <br> ' . $nombre->autor_2 . ' <br> ' . $nombre->autor_3 . ' <br> ' . $nombre->autor_4 . ' </p>';
                             echo '</div>';
+                            
+                            echo '</div>';
+                        
                         }
                     } else {
                         echo '<h4>' . lang("vres_no hay articulos asociados") . '</h4>';
@@ -194,39 +221,16 @@
                 echo '<h3>' . lang("vres_bienvenidos a nuestra plataforma de revistas") . '</h3>';
             }
             ?>
-        </div>
+  
+  
 
-        <div class="clear"></div>
 
-        <div class="divider divider-center"><i class="icon-circle"></i></div>
-    </div>
-
-    <?php
-    if ($logo && $row) {
-        echo '<br><br><div class="sidebar nobottommargin">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                    <div id="post-list-footer">
-
-                          <a href="#" class="nobg"><div class="bookWrap">
-                            <div class="book">
-                              <a href="' . base_url() . 'index.php/Home_principal/publicacion?revista=' . $id_get . '" class="nobg"><img class="cover"
-                                src="' . base_url() . 'img/' . $magazine->logo_revista . '"></a>
-                              <div class="spine"></div>
-                            </div>
-                          </div></a>
-                    </div>
+   <div class="widget clearfix">
+                    <?php
+                     $this->load->view('include/menu_editor');
+                    ?>
                 </div>
-                <div class="widget clearfix">
-                </div>
-            </div>
-        </div>';
-    }
-    ?>
-
-
-
-</div>
+ 
 
 
 <script type="text/javascript">

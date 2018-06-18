@@ -1,12 +1,7 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script type="text/javascript" src="<?php echo base_url(); ?>js/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript">
-    $(":userfile").filestyle();
-    $(":userfile").filestyle('icon');
-</script>
+
 
 <script type="text/javascript">
     function validate_num() {
@@ -38,12 +33,12 @@
         }
     }
 </script>
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
-                <?php
-                $info = $this->Articulo_Model->obtener_info_articulo2($articulo_id);
+
+
+
+<?php
+ defined('BASEPATH') OR exit('No direct script access allowed');
+ $info = $this->Articulo_Model->obtener_info_articulo2($articulo_id);
                 if ($info)
                 {
 
@@ -52,67 +47,98 @@
                 {
                   redirect('index.php/System/editor');
                 }
+?>
 
-                ?>
-                <div class="col-lg-9"><h3><?php echo lang('vap_paginar articulo'); ?>:</h3><h4><?php echo $info->titulo_revista ?></h4>
+<div class="container-fluid  " style="margin-top: 200px;">
+    
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            
+            <div class="card">
+                <div class="header bg-blue">
+                      
+                    <h3>Subir PDF: <?php echo $info->titulo_revista ?></h3>
+                        
+                   
+                </div>
+                <center>
+                <div class="row">
+                <div  style="margin:10px" align='left' class="col-lg-12 clearfix">
+                    <b>Instrucciones:  </b> 
+                    <br>1)descargar Artículo<br> 
+                </div>
+                
+                <div class="col-lg-6" style="margin:10px">
 
+                    <a Download href="<?php echo base_url() . 'uploads/' . $info->archivo ?>" class="button right button-3d button button-rounded button-blue"><i class='material-icons' style='font-size:25px;'>file_download</i><?php echo lang('vap_descargar articulo'); ?></a>
                 </div>
-                <div class="col-lg-3">
-                    <a Download href="<?php echo base_url() . 'uploads/' . $info->archivo ?>" class="button right button-3d button button-rounded button-blue"><?php echo lang('vap_descargar articulo'); ?></a>
+                <div  style="margin:10px" align='left' class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <br>2)subir y convertir Artículo descargado<br>
                 </div>
+                <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="https://v2.convertapi.com/docx/to/pdf?Secret=zLxh3oGBDrQ9kSwI&download=attachment" method="post" enctype="multipart/form-data">
+                   
+                    <div style="text-align: right;" class="col-lg-1">
+                            <label for="final_file">Subir archivo .docx</label>
+                    </div>
+                    <div class="form-group col_full">
+                        <input type="file" name="File"  />
+                    </div>
+                    <div class="form-group m-1" style="margin:10px">
+                        <div class="col-lg-offset-2 col-lg-7">
+                              
+                            <button class="btn btn-info bg-blue waves-effect" type="submit">Convertir</button>
+                        </div>
+                         
+                    </div>
+                   
+                   
+                </form>
+           
+      
+            
                 <hr>
-                <form class="form-horizontal col-lg-9" name="form_23" action="<?php echo base_url(); ?>index.php/Articulo_autor/responder_solicitud" method="POST" onsubmit="return validate_num()" enctype="multipart/form-data">
-                    <div class="form-group col_full">
-                        <div style="text-align: right;" class="col-lg-4">
-                            <label class="control-label" for="text"><?php echo lang('vap_pagina inicial'); ?></label>
-                        </div>
-                        <div class="col-lg-8">
-                            <input type="text" class="form-control" name="p_ini" id="p_ini" value="<?php if (isset($_POST['p_ini'])) echo $_POST['p_ini']; ?>" placeholder="<?php echo lang('vap_ingrese numero de pagina inicial'); ?>">
-                        </div>
+                <div style="margin:10px" align='left' class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <br>3)subir Artículo convertido<br>    
+                </div>
+                <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form_23" action="<?php echo base_url(); ?>index.php/Articulo_autor/responder_solicitud" method="POST" onsubmit="return validate_num()" enctype="multipart/form-data">
+                
+                <div class="form-group col_full">
+                        <input type="hidden" value="<?php echo $articulo_id ?>" name="t_id" />   
                     </div>
+              
                     <div class="form-group col_full">
-                        <div style="text-align: right;" class="col-lg-4">
-                            <label class="control-label" for="text"><?php echo lang('vap_pagina final'); ?></label>
+                        <div style="text-align: right;" class="col-lg-1">
+                            <label for="final_file"><?php echo lang('vap_subir archivo'); ?> PDF</label>
                         </div>
-                        <div class="col-lg-8">
-                            <input type="text" class="form-control" name="p_fin" id="p_fin" value="<?php if (isset($_POST['p_fin'])) echo $_POST['p_fin']; ?>" placeholder="<?php echo lang('vap_ingrese numero de pagina final'); ?>">
-                        </div>
-                    </div>
-                    <div class="form-group col_full">
-                        <div style="text-align: right;" class="col-lg-4">
-                            <label for="final_file"><?php echo lang('vap_subir archivo'); ?></label>
-                        </div>
-                        <div class="col-lg-8">
+                        <div class="col-lg-11">
                             <input type="file" name = "final_file" accept=".pdf" class="filestyle" id="exampleInputFile" required="required" aria-describedby="fileHelp" data-buttonText="<i class='material-icons' style='font-size:20px;vertical-align:bottom'>file_upload</i> <?php echo lang('aa_seleccionar'); ?> ">
                             <small id="fileHelp" class="form-text text-muted"><?php echo lang('vap_formato admitido'); ?> <b>(.pdf)</b></small>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <input type="hidden" value="<?php echo $articulo_id ?>" name="t_id">
-                        <div class="col-lg-offset-2 col-lg-7">
-                            <br><br>
-                            <button type="submit" name="exit" class="button button-3d button button-rounded button-green btn-block"><?php echo lang('vap_enviar'); ?></button>
+                        <div class="form-group m-1" style="margin:10px">
+                            <div class="col-lg-offset-2 col-lg-7">
+                              
+                                <button  type="submit" name="exit" class="btn btn-success waves-effect">subir PDF</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-
-                <div class="col-lg-3 clearfix">
-                    <p><b><?php echo lang('vap_importante'); ?>:</b> <br> <?php echo lang('vap_part1'); ?>.<br> <?php echo lang('vap_part2'); ?><br><br></p>
+                        
+                    </form>
                 </div>
+                </center>
             </div>
-
-
+            
         </div>
+    </div>
 
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
+
+
+
                 <div class="widget clearfix">
                     <?php
                      $this->load->view('include/menu_editor');
                     ?>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+

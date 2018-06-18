@@ -4,10 +4,11 @@
 <?php //echo $id_usuario; echo $nombre_usuario; echo $email_usuario; echo $id_rol;        ?>
 
 
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
+<div class="container-fluid  " style="margin-top: 200px;">
+       
+      
+
+
               <?php
                 function obtenerFechaEnLetra($fecha)
                 {
@@ -34,6 +35,7 @@
                 if($datos){
 
                   $id_revisor = $datos->ID;
+                
                   
                 }
                 else{
@@ -43,21 +45,42 @@
                 $datas = $this->input->get('page');
 
                 // Cantidad de grupos en total
-                $filas = $this->Articulo_Model->count_articulos_asignados($id_revisor);
+                $cantidad = $this->Articulo_Model->count_articulos_asignados($id_revisor);
+         
 
                 $cant_group = 0;
-                if ($filas)
+                if ($cantidad)
                 {
-                  $cant_group_aux = ceil($filas->cantidad/$content_per_page);
+                  $cant_group_aux = ceil($cantidad/$content_per_page);
                   $cant_group = $cant_group_aux;
 
-                  if ($filas->cantidad == 0)
+                  if ($cantidad == 0)
                   {
-                    echo '<div class="entry clearfix">
-                              <div class="entry-title">
-                                  <h2>'.lang("vhr_no tienes articulos asignados").'.</h2>
-                              </div>
-                         </div><br><br><br><br><br><br><br>';
+                    echo ' <div class="card">';
+                   
+                 
+                    echo '<div class="header">';
+              
+                    echo ' <center>    <h2>' ;
+           
+                    echo '</div></center>';
+ 
+                    echo '<div class="row">';
+                    
+                    
+                
+                    echo '<div class="col-lg-12 col-md-12">
+                        <center>
+                        <h2>'.lang("vhr_no tienes articulos asignados").'.</h2>
+                        </center>
+                        </div>';
+                       
+ 
+                        echo '</div>';
+                     echo '<div class="entry clearfix">
+                     
+                      </div>';
+                    
                   }
                 }
 
@@ -75,31 +98,38 @@
                 $start = ceil($group_no * $content_per_page);
 
                 $consulta = $this->Articulo_Model->articulos_asignados_limit($id_revisor, $start, $content_per_page);
-                if ($consulta && $filas)
+                if ($consulta && $cantidad)
                 {
                     foreach ($consulta as $row) {
                         $salida_estado = $row->estado;
                         if ($salida_estado)
                         {
-                          echo '<div class="entry clearfix">';
-                          echo '    <div class="entry-c">';
-                          echo '        <div class="entry-title">';
-                          echo '            <h2>'. $row->titulo_revista .'</h2>';
-                          echo '        </div>';
-                          echo '        <ul class="entry-meta clearfix">';
-                          echo '            <li><span class="label label-success">'. $salida_estado . '</span></li>';
-                          echo '            <li><i class="icon-time"></i> '.lang("vhr_actualizado el").''. obtenerFechaEnLetra($row->fecha_ultima_upd) .'</li>';
-                          echo '        </ul>';
-                          echo '        <div class="entry-content">';
-                          echo '            <div style="text-align: justify"><p> '. $row->abstract . '</p> </div>';
-                          echo '            <form name="input" action="'.base_url().'index.php/System/revisor" method="post">';
-                          echo '            <a href="'. base_url() . $ruta .'/'. $row->archivo.'" class="button button-3d button-mini button-rounded button-blue">'.lang("vhr_ver articulo").'</a>';
-                          echo '            <input type="hidden" value="'. $row->ID .'" name="articulo_id" />';
-                          echo '            ';
-                          echo '          </form>';
-                          echo '        </div>';
-                          echo '    </div>';
-                          echo '</div>';
+                       
+                          echo '  <div class="row fluid">
+                          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                              <div class="card">
+                                  <div class="header bg-blue">
+                                      
+                                      <h2>'. $row->titulo_revista .'</h2>
+                                        <ul class="entry-meta clearfix">
+                                      <li><span class="label label-success">'. $salida_estado . '</span></li>
+                                      <li><i class="icon-time"></i> '.lang("vhr_actualizado el").''. obtenerFechaEnLetra($row->fecha_ultima_upd) .'</li>
+                                    </ul>
+                                      
+                                
+                                  </div>
+                                  <div class="form-group">
+                                            <center>
+                                            <p> '. $row->abstract . '</p>
+                                             <form name="input" action="'.base_url().'index.php/System/revisor" method="post">
+                                             <a href="'. base_url() . $ruta .'/'. $row->archivo.'" class="btn-info">'.lang("vhr_ver articulo").'</a>
+                                             <input type="hidden" value="'. $row->ID .'" name="articulo_id" />
+                                             </center>
+                                           </form>
+                                  </div>
+                              </div>
+                          </div>';
+                      
                         }
                       }
                 }
@@ -134,14 +164,12 @@
 
         </div>
 
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
+
+
+   
                 <div class="widget clearfix">
                     <?php
                      $this->load->view('include/menu_revisor');
                     ?>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+  

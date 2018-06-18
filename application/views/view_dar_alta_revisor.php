@@ -1,68 +1,86 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
-
 
 <script type="text/javascript">
-$(document).ready(function() {
+    $(document).ready(function () {
+        $('#articulos tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" style="width: 100%; text-align: left;" placeholder="Filtrar" />' );
+        } );
+        
+        
 
-    $('#articulos').DataTable({
-      "language": {
+            var table = $('#articulos').DataTable( {
+                dom: 'Bfrtip',
+                responsive: true,
+                buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],    
+            language: {
+            processing:     "Procesando ...",
+            search:         "Buscar:",
+            lengthMenu:    "Mostrar _MENU_ Elementos",
+            info:           "Visualización del elemento _START_ de _END_ en _TOTAL_ elementos",
+            infoEmpty:      "Mostrar 0 elemento 0 en 0 elementos",
+            infoFiltered:   "(filtro de  _MAX_ en total)",
+            infoPostFix:    "",
+            loadingRecords: "Cargando ...",
+            zeroRecords:    "No hay datos disponibles en la tabla",
+            emptyTable:     "No hay datos disponibles en la tabla",
+            paginate: {
+                first:      "Primero",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Último"
+            },
+            aria: {
+                sortAscending:  ": activar para ordenar la columna en orden ascendente",
+                sortDescending: ": active para ordenar la columna en orden descendente"
+            }
+            }
+            } );
+           
+ 
+    // Apply the search
+        table.columns().every( function () {
+            var that = this;
+ 
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
 
-          "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/<?php echo ucwords($this->session->userdata('lang')['route']);?>.json"
-      },
-      "order": [[ 1, "desc" ]]
-
+      
     });
-} );
-</script>
-<!--
-<script>
-$(function() {
-
-    setTimeout(function() {
-        $(".successMessage").animate({ height: 'toggle', opacity: 'toggle' }, 1000);
-    }, 3000);
-
-});
--->
 </script>
 
-<div class="content-wrap">
-    <div class="container clearfix">
 
-        <div class="col-md-3">
-          <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                    <?php
-                     $this->load->view('include/menu_editor');
-                    ?>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-9">
-
-              <div class="col-md-12">
-                      <div class="col-md-12">
-                          <br>
-                          <h3 style = "color: black;"><?php echo lang('aar_asignar ingresar revisores al sistema'); ?></h3>
-                          <hr>
-                      </div>
-                  <div class="col-md-2"></div>
-              </div>
-
-              <div class="col-md-12">
-                  <div class="col-md-12">
-
-
-                  <table id="articulos" class="display" width="100%" cellspacing="0">
+  <section class="content">
+        <div class="container-fluid" style="margin-top: 150px;">
+          
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            
+                  
+                            <h3 style = "color: black;"><?php echo lang('aar_asignar ingresar revisores al sistema'); ?></h3>
+                            
+                        
+                        </div>
+                        <div class="body table-responsive">
+                        
+                        
+                        <table id="articulos" class="table table-bordered table-striped table-hover dataTable js-exportable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
                                   <th> Nombre</th>
@@ -102,7 +120,7 @@ $(function() {
 
                               $url = base_url()."index.php/articulo_editor/aceptar_revisor/".md5($correo .'ox');
 
-                              echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_aprobar".$i."'><center><i class='material-icons' style='font-size:40px;'>assignment_ind</i></center></span></center></span></a>";  echo "</td>";
+                              echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_aprobar".$i."'><center><i class='material-icons' style='font-size:25px;'>assignment_ind</i></center></span></center></span></a>";  echo "</td>";
 
                               echo '<div class="modal fade" id="modal_aprobar'.$i.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
                               echo '  <div class="modal-dialog" role="document">';
@@ -124,7 +142,7 @@ $(function() {
 
 
                               $url_rechazar = base_url()."index.php/articulo_editor/rechazar_revisor/".md5($correo .'ox');
-                              echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_rechazar".$i."'><center><i class='material-icons' style='font-size:40px;color:red'>delete_forever</i></center></span></center></span></a>";  echo "</td>";
+                              echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_rechazar".$i."'><center><i class='material-icons' style='font-size:25px;color:red'>delete_forever</i></center></span></center></span></a>";  echo "</td>";
 
                               echo '<div class="modal fade" id="modal_rechazar'.$i.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
                               echo '  <div class="modal-dialog" role="document">';
@@ -152,12 +170,36 @@ $(function() {
                               } ?>
                           </tbody>
                       </table>
-                  </div>
-                  <div class="col-md-2"></div>
-              </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- #END# Basic Table -->
+            <!-- Striped Rows -->
+  
+    </section>
+              <!-- menu -->
+   <div class="container-fluid  " style="margin-top: 200px;">
+	<div class="row">
+
+
+            <div class="col-md-3">
+                <div class="sidebar nobottommargin clearfix">
+                    <div class="sidebar-widgets-wrap">
+                        <div class="widget clearfix">
+                            <?php
+                     $this->load->view('include/menu_editor');
+                    ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
 
 
         </div>
-</div>
-</div>
+    </div>
+
+
+

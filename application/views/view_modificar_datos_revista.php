@@ -2,19 +2,26 @@
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
- <script type="text/javascript" src="<?php echo base_url(); ?>vendors/ckeditor/ckeditor.js"></script>
 
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
-                <div class="entry clearfix col-lg-12">
-                    <div class="entry-title"><h3><?php echo lang("vmdr_Modificar");?></h3></div>
+
+<div class="container-fluid  " style="margin-top: 200px;">
+    
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            
+            <div class="card">
+                <div class="header">
+                        <div class="col-md-12">
+                          <br>
+                          <h3 style = "color: black;">Modificar Editorial Revista</h3>
+                          <hr>
+                        </div>
+                   
                 </div>
-                <div class="clearfix col-lg-12">
-                    <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_datos_revista" method="POST" enctype="multipart/form-data">
+                <center>
+                <div class="row">
+                   
+                <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_datos_revista" method="POST" enctype="multipart/form-data">
                         <div class="form-group col_full">
                             <div style="text-align: right;" class="col-lg-3">
                                 <label class="control-label" for="ta_e"><?php echo lang("vmdr_editor");?>:</label>
@@ -62,31 +69,29 @@
              
                             </div>
                         </div>
+                        
                         <div class="form-group">
-                            <div class="col-lg-offset-2 col-lg-7">
+                            <div class="col-lg-offset-2 col-lg-7" style="margin:20px; allign:center">
                                 <br><br>
-                                <button type="submit" name="go" class="button button-3d button button-rounded button-green btn-block"><?php echo lang("vmma_modificar");?></button>
+                                <center>
+                                <button type="submit" name="go" class="btn btn-success waves-effect"><?php echo lang("vmma_modificar");?></button>
+                                </center>
                             </div>
                         </div>
+                     
+
                     </form>
+                    
                 </div>
+                </center>
             </div>
-
+            
         </div>
+    </div>
 
-
-            </div>
-
-        </div>
-
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
                 <div class="widget clearfix">
                     <?php
                      $this->load->view('include/menu_editor');
                     ?>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+  

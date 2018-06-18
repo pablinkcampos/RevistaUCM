@@ -62,16 +62,16 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-7">
-                                    <button class="btn btn-default btn-success b10" type="submit" id="form-button-save">
+                                    <button class="btn btn-success waves-effect" type="submit" id="form-button-save">
                                         <i class="fa fa-check"></i>
                                         <?php echo $this->l('form_save'); ?>
                                     </button>
                                     <?php 	if(!$this->unset_back_to_list) { ?>
-                                        <button class="btn btn-info b10" type="button" id="save-and-go-back-button">
+                                        <button class="btn btn-info waves-effect" type="button" id="save-and-go-back-button">
                                             <i class="fa fa-rotate-left"></i>
                                             <?php echo $this->l('form_save_and_go_back'); ?>
                                         </button>
-                                        <button class="btn btn-default cancel-button b10" type="button" id="cancel-button">
+                                        <button class="btn btn-default waves-effect" type="button" id="cancel-button">
                                             <i class="fa fa-warning"></i>
                                             <?php echo $this->l('form_cancel'); ?>
                                         </button>

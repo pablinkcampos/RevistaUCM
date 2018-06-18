@@ -2,8 +2,10 @@
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <?php //echo $id_usuario; echo $nombre_usuario; echo $email_usuario; echo $id_rol;           ?>
-<div class="content-wrap">
-    <div class="container clearfix">
+<<div class="container-fluid  " style="margin-top: 100px;">
+       
+    
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">
                 <?php
@@ -37,15 +39,35 @@
                      $cant_group_aux = ceil($filas->cantidad / $content_per_page);
                      $cant_group = $cant_group_aux;
                      if ($filas->cantidad == 0) {
+                        echo ' <div class="card">';
+                   
+                 
+                        echo '<div class="header">';
+                  
+                        echo ' <center>    <h2>' ;
+               
+                        echo '</div></center>';
+     
+                        echo '<div class="body">';
+                        
+                        
+                    
+                        echo '<div class="col-lg-12 col-md-12">
+                            <center>
+                            <h2>'.lang("vhe_no existen articulos aun").'.</h2>
+                            </center>
+                            </div>';
+                            echo '<div class="col-lg-12 col-md-12">
+                            <center>
+                            <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">artículos por formatear</a>
+                            <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                            </center>
+                            </div>';
+     
+                            echo '</div>';
                          echo '<div class="entry clearfix">
-                                 <div class="col-lg-10">
-                                    <div class="entry-title">
-                                        <h2>'.lang("vla_no existen articulos listos").'.</h2>
-                                    </div>
-                                        <a href="'.base_url().'index.php/System/editor_ve7" class="button button-3d button-rounded button-mini button-teal center">'.lang("vla_articulos por paginar").'</a>
-                                        <a href="'.base_url().'index.php/System/editor_ve13" class="button button-3d button-rounded button-mini button-green center">'.lang("vla_articulos listos").'</a>
-                                 </div>
-                               </div>';
+                         
+                          </div>';
                      }
                  }
 
@@ -62,40 +84,72 @@
 
                  $consulta = $this->Articulo_Model->obtener_articulos_limit_listos2($start, $content_per_page);
                  if ($consulta && $filas) {
-                     echo '<div class="entry clearfix">
-                             <div class="col-lg-8">
-                                <div class="entry-title">
-                                    <h2>'.lang("vla_articulos listos para revista").'</h2>
-                                </div>
-                                    <a href="'.base_url().'index.php/System/editor_ve7" class="button button-3d button-rounded button-mini button-teal center">'.lang("vla_articulos por paginar").'</a>
-                                    <a href="'.base_url().'index.php/System/editor_ve13" class="button button-3d button-rounded button-mini button-green center">'.lang("vla_articulos listos").'</a>
-                             </div>
-                             <div class="col-lg-4">
-                                    <a href="'.base_url().'index.php/System/newm" class="button button-3d button-rounded button-red center">'.lang("vla_crear revista").'</a>
-                             </div>
-                           </div>';
+                    echo ' <div class="card">';
+                   
+                 
+                    echo '<div class="header">';
+              
+                    echo ' <center>    <h2>' ;
+           
+                    echo '</div></center>';
+ 
+                    echo '<div class="body">';
+                    
+                    
+                
+                    echo '<div class="col-lg-12 col-md-12">
+                        <center>
+                        <h2>'.lang("vhe_articulos disponibles").'.</h2>
+                        </center>
+                        </div>';
+                        echo '<div class="col-lg-12 col-md-12">
+                        <center>
+                        <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">Artículos por formatear</a>
+                        <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                        </center>
+                        </div>';
+ 
+                        echo '</div>';
+                     echo '<div class="row">
+                     
+                      </div>    <a href="'. base_url().'index.php/System/newm" ><button type="button"  class="btn bg-green waves-effect">
+                      <i class="material-icons">note_add</i>
+                      <span>Crear Revista</span>
+                        </button></a>';
+                         echo '<div class="row fluid">';
+                            
 
                     foreach ($consulta as $row) {
-                         echo '<div class="entry clearfix">';
-                         echo '    <div class="clearfix">';
-                         echo '        <div class="entry-title">';
-                         echo '            <h2>' . $row->titulo . '</h2>';
-                         echo '        </div>';
-                         echo '        <ul class="entry-meta clearfix">';
-                         echo '            <li><span class="label label-success">'.lang("vla_listo para revista").'</span></li>';
-                         $dat = $this->Articulo_Model->get_fecha_last($row->ID_articulo);
-                         echo '            <li><i class="icon-time"></i> '.lang("vla_actualizado el").' ' . obtenerFechaEnLetra($dat->fecha_ultima_upd) . '</li>';
-                         $dat = $this->Articulo_Model->get_pagina_ini($row->ID_articulo);
-                         $dat2 = $this->Articulo_Model->get_pagina_fin($row->ID_articulo);
-                         echo '            <li><i class="icon-time"></i> '.lang("vla_pagina inicial").':<big><b>' . $dat->pagina_inicio . '</b></big>   ---   '.lang("vla_pagina final").': <big><b>'.$dat2->pagina_fin.'</b></big></li>';
-                         echo '        </ul>';
-                         echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
-                         echo '            <input type="hidden" value="' . $row->ID_articulo . '" name="articulo_id" />';
-                         echo '            <center><button class="submit button button-3d button-rounded button-mini button-blue center">Volver a paginar</button>';
-                         echo '          </center></form>';
-                         echo '    </div>';
-                         echo '</div>';
+                        echo ' <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
+                        <div class="card">
+                            <div class="icon">
+                                <i class="material-icons col-blue">bookmark</i><b>'.$row->titulo .'.</b>
+                               
+                            </div>
+                           
+                                   
+                                    
+                                    <div class="body">';
+                                        
+                                       
+                                        
+                   
+                    echo '            <li><span class="label label-success">'.lang("vla_listo para revista").'</span></li>';
+                    $dat = $this->Articulo_Model->get_fecha_last($row->ID_articulo);
+                    echo '            <li><i class="icon-time"></i> '.lang("vla_actualizado el").' ' . obtenerFechaEnLetra($dat->fecha_ultima_upd) . '</li>';
+             
+                    echo '        </ul>';
+                    echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
+                    echo '            <input type="hidden" value="' .$row->ID_articulo . '" name="articulo_id" />';
+                    echo '            <center><button class="submit btn btn-primary waves-effect center">Volver a formatear</button>';
+                    echo '          </center></form>';
+                 
+                 echo '    </div>';
+                 echo '</div>
+                    </center>
+                    </div>';
                     }
+
                  }
                 ?>
 
@@ -119,14 +173,11 @@
             ?>
 
         </div>
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
+
+ 
                 <div class="widget clearfix">
                     <?php
                      $this->load->view('include/menu_editor');
                     ?>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+      

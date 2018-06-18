@@ -14,20 +14,29 @@ foreach($css_files as $file): ?>
 <?php endforeach; ?>
 
 <style type="text/css">
-    .row{
-        width: 80%;
-    }
-    .modal-backdrop{
-        display: none;
-    }
+ 
+ .modal-backdrop{
+     display: none;
+ }
+ .sidebar{
+     position: absolute;
+     height: 60%
+ }
+ i{
+     font-size:30px;
+ }
 </style>
 
 
 
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
+                    <?php
+                     $this->load->view('include/menu_editor');
+                    ?>
+     
+
+<div class="content">
+    <div class="container-fluid">
+    
 
                       <div class="col-md-12">
                           <br>
@@ -37,16 +46,5 @@ foreach($css_files as $file): ?>
 
                  <?php echo $output; ?>
 
-            </div>
-        </div>
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                    <?php
-                     $this->load->view('include/menu_editor');
-                    ?>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

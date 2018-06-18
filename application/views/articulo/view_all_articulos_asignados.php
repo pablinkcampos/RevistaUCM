@@ -1,20 +1,49 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
 
-    <script type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
     $(document).ready(function () {
         $('#articulos tfoot th').each( function () {
             var title = $(this).text();
             $(this).html( '<input type="text" style="width: 100%; text-align: left;" placeholder="Filtrar" />' );
         } );
         
-        var table =   $('#articulos').DataTable();
+        
+
+            var table = $('#articulos').DataTable( {
+                dom: 'Bfrtip',
+                responsive: true,
+                buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],    
+            language: {
+            processing:     "Procesando ...",
+            search:         "Buscar:",
+            lengthMenu:    "Mostrar _MENU_ Elementos",
+            info:           "Visualización del elemento _START_ de _END_ en _TOTAL_ elementos",
+            infoEmpty:      "Mostrar 0 elemento 0 en 0 elementos",
+            infoFiltered:   "(filtro de  _MAX_ en total)",
+            infoPostFix:    "",
+            loadingRecords: "Cargando ...",
+            zeroRecords:    "No hay datos disponibles en la tabla",
+            emptyTable:     "No hay datos disponibles en la tabla",
+            paginate: {
+                first:      "Primero",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Último"
+            },
+            aria: {
+                sortAscending:  ": activar para ordenar la columna en orden ascendente",
+                sortDescending: ": active para ordenar la columna en orden descendente"
+            }
+            }
+            } );
+           
  
     // Apply the search
         table.columns().every( function () {
@@ -32,47 +61,25 @@
       
     });
 </script>
-    <!--
-<script>
-$(function() {
-
-    setTimeout(function() {
-        $(".successMessage").animate({ height: 'toggle', opacity: 'toggle' }, 1000);
-    }, 3000);
-
-});
--->
-    </script>
-
-    <div class="content-wrap">
-        <div class="container clearfix">
 
 
-            <div class="col-md-3">
-                <div class="sidebar nobottommargin clearfix">
-                    <div class="sidebar-widgets-wrap">
-                        <div class="widget clearfix">
-                            <?php
-                     $this->load->view('include/menu_editor');
-                    ?>
+  <section class="content">
+        <div class="container-fluid" style="margin-top: 150px;">
+          
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            
+                            <h2>
+                                <?php echo lang('allaa_articulo_asignado'); ?>
+                            </h2>
+                        
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-9">
-
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <br>
-                        <h3 style="color: black;">
-                            <?php echo lang('allaa_articulo_asignado'); ?>
-                            <hr>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <table id="articulos" class="display" width="100%" cellspacing="0">
+                        <div class="body table-responsive">
+                        
+                        <table  class="table table-bordered table-striped table-hover dataTable js-exportable" id="articulos" class="display" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>
@@ -129,7 +136,7 @@ $(function() {
                                 $limite = intval($diff->days);
                                 
                                   
-
+                                    //calcula el tiempo que deberia ser asignado y asigna un color
                                     echo "<tr>";
                                     if($dife > $limite/2 ){
                                        
@@ -145,7 +152,7 @@ $(function() {
                                             echo "<td style='border-left: 6px solid red;'>";
                                         }
                                     }
-                                        echo $id_revista; echo "</td>";
+                                         echo $id_revista; echo "</td>";
                                         echo "<td>"; echo $fecha_ingreso; echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
                                         echo "<td>"; echo $version; echo "</td>";
@@ -164,7 +171,7 @@ $(function() {
                                               echo $calificados."/".$asignados;
                                               echo "</td>";
                   						
-                  						    echo "<td>"; echo "<a href='".base_url()."index.php/articulo_editor/all_articulos_asignados_ver/".$id_revista."'><center><i class='material-icons' style='font-size:40px;'>zoom_in</i></center></center></a>"; echo "</td>";
+                  						    echo "<td>"; echo "<a href='".base_url()."index.php/articulo_editor/all_articulos_asignados_ver/".$id_revista."'><center><i class='material-icons' style='font-size:25px;'>zoom_in</i></center></center></a>"; echo "</td>";
 
 
                   					echo "</tr>";
@@ -173,13 +180,21 @@ $(function() {
                                 <?php
                               } ?>
                         </tbody>
+                         <!-- filtros -->
                         <tfoot>
                             <tr>
+                                <th>
+                                    ID
+                                </th>
                                 <th>
                                     <?php echo lang('allaa_fecha ingreso articulo'); ?>
                                 </th>
                                 <th>
                                     <?php echo lang('aar_tema'); ?>
+                                </th>
+                                
+                                <th>
+                                    version
                                 </th>
                                 <th>
                                     <?php echo lang('allaa_titulo articulo'); ?>
@@ -200,9 +215,32 @@ $(function() {
                             </tr>
                         </tfoot>
                     </table>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+            <!-- #END# Basic Table -->
+            <!-- Striped Rows -->
+  
+    </section>
+              <!-- menu -->
+   <div class="container-fluid  " style="margin-top: 200px;">
+	<div class="row">
+
+
+            <div class="col-md-3">
+                <div class="sidebar nobottommargin clearfix">
+                    <div class="sidebar-widgets-wrap">
+                        <div class="widget clearfix">
+                            <?php
+                     $this->load->view('include/menu_editor');
+                    ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
 
 
         </div>

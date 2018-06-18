@@ -115,11 +115,12 @@ left:0;
 
 </style>
 
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
-              <?php
+        <div class="container-fluid  " style="margin-top: 200px;">
+        <h2>
+                                     Revistas Publicadas
+                                    
+        </h2>
+        <?php
                 function obtenerFechaEnLetra($fecha)
                 {
                    $dia= conocerDiaSemanaFecha($fecha);
@@ -138,7 +139,7 @@ left:0;
                }
                 // Parametros
                 $group_no = 0;
-                $content_per_page = 3;
+                $content_per_page = 6;
 
 
                 // Datos get
@@ -155,11 +156,25 @@ left:0;
 
                   if ($filas->cantidad == 0)
                   {
-                    echo '<div class="entry clearfix">
-                              <div class="entry-title">
-                                  <h2>'.lang("vnes_no tienes articulos").'</h2>
+               
+                    echo ' <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <center>
+                              <div class="card">
+                              
+                                  <div class="body">
+                                    <h2>
+                                      .lang("vnes_no tienes articulos").
+                                    
+                                    </h2>
+                                  </div>
                               </div>
-                         </div><br><br><br><br><br><br><br>';
+                              </center>
+                          </div>
+                      </div>';
+                                 
+                          
+                         
                   }
                 }
 
@@ -179,16 +194,22 @@ left:0;
                 $consulta = $this->Articulo_Model->obtener_magazines_limit($start, $content_per_page);
                 if ($consulta)
                 {
+                    $i=0;
                     foreach ($consulta as $row) {
-                          echo '<div class="entry clearfix">';
-                          echo '    <div class="entry-c">';
-                          echo '        <div class="entry-title">';
+                          $i=$i+1;
+                          if($i==1){
+                           
+                            echo ' <div class="row">';
+                          }
+                          echo '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">';
+                          echo '    <div class="card">';
+                          echo '        <div class="header">';
                           echo '            <h2>'. $row->titulo_revista .' <i>('. $row->fecha_publicacion .')'.' </h2>';
                           echo '        </div>';
                           echo '        <ul class="entry-meta clearfix">';
                           echo '            <li><i class="icon-time"></i> '.lang("vnes_creada el").' '. obtenerFechaEnLetra($row->fecha_creacion) .'</li>';
                           echo '        </ul>';
-                          echo '        <div class="entry-content">';
+                          echo '        <div class="body">';
                           //echo '            <div style="text-align: justify"><p> '. $row->abstract .'</div>';
                           if ($row->logo_revista)
                           {
@@ -212,6 +233,10 @@ left:0;
                           echo '        </div>';
                           echo '    </div>';
                           echo '</div>';
+                          if($i==3){
+                           
+                            echo ' </div>';
+                          }
                     }
                 }
                 else
@@ -224,6 +249,11 @@ left:0;
                ?>
 
             </div>
+          
+      </div>
+
+
+
 
             <!-- Pagination
             ============================================= -->
@@ -251,13 +281,9 @@ left:0;
 
         </div>
 
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                        <a href="<?php echo base_url(); ?>img/img_num_publi.jpg" data-lightbox="image"><img class="image_fade" src="<?php echo base_url(); ?>img/img_num_publi.JPG" alt="Publicación efectiva"></a>
-                </div>
-            </div>
-        </div>
+        
+  
+         
     </div>
 </div>
 

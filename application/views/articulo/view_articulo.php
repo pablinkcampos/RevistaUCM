@@ -6,89 +6,186 @@
 
 ?>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script type="text/javascript" src="<?php echo base_url(); ?>js/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/form_valid.js"></script>
+
+
 <script type="text/javascript">
-    $(":userfile").filestyle();
-    $(":userfile").filestyle('icon');
-</script>
-<script type="text/javascript">
-var nextinput = 0;
-function AgregarCampos(){
-    nextinput++;
+    var nextinput = 0;
+    function AgregarCampos(){
+        nextinput++;
     
-    if(nextinput<6){
-        campo = '<div class="form-group col-md-12"><div class="form-group"> <div style="text-align: right;" class="col-md-3"> <label for="autor_'+nextinput+'"><?php echo lang('aa_autor_adicional'); ?>:</label></div><div class="col-md-9"> <input type="text" value="" class="form-control" name="autor_'+nextinput+'" id="autor_'+nextinput+'" placeholder="<?php echo lang('aa_ingrese autor adicional'); ?>"> </div></div></div>';
-        campo_email ='<div class="form-group col-md-12"><div class="form-group"><div style="text-align: right;" class="col-md-3"><label for="email_add'+nextinput+'"><?php echo lang('aa_email_adicional') . ' (*)'; ?>:</label></div><div class="col-md-9"><input type="email" value="" class="form-control" name="email_add'+nextinput+'" id="email_add'+nextinput+'" placeholder="<?php echo lang('aa_ingrese email adicional');?>"></div></div></div>';
-        $("#campos").append(campo+campo_email);
-    }
-}                  
+        if(nextinput<6){
+ 
+            campo = '<h6>Autor adicional '+nextinput+'</h6><label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Nombre Autor adicional:</label><div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><div class="form-line">  <input type="text" value="" class="form-control" placeholder="Nombre autor adicional:" name="autor_'+nextinput+'" id="autor_'+nextinput+'" "> </div></div>';
+            campo_email ='<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Email Autor adicional:</label><div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><div class="form-line"><input type="email" value="" placeholder="<?php echo lang('aa_email_adicional'); ?>:" class="form-control" name="email_add'+nextinput+'" id="email_add'+nextinput+'" "></div></div>';
+            $("#campos").append(campo+campo_email);
+        }
+    }                  
 
 </script>
+
+
 
 <script type="text/javascript">
-    $(document).ready(function() {
-    $("#area_aplicable").change(function() {
-        $("#area_aplicable option:selected").each(function() {
-            campo = $("#area_aplicable").val();
-            $.post("<?php echo base_url(); ?>index.php/Articulo_autor/selectTema", {
-            area_aplicable : campo
-            }, function(data) {
-                $("#tema_interes").html(data);
-            });
+
+
+    function load(value){
+       
+        $.post("<?php echo base_url(); ?>index.php/Articulo_autor/selectTema", {
+            area_aplicable : value
+        }, 
+        function(data) {
+            $("#tema_interes").html(data);
         });
-    });
-    });
+    }        
+
+    
 </script>
- <script type="text/javascript" src="<?php echo base_url(); ?>vendors/ckeditor/ckeditor.js"></script>
+
+<style type="text/css">
+ 
+
+ i{
+     font-size:10px;
+ }
+</style>
 
 
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs col-md-9">
-                <h3 style = "color: black;"><?php echo lang('aa_ingrese informacion de articulo'); ?></h3>
-                <hr>
-                <form name = "form_art" class="form-horizontal"  action="<?php echo base_url();?>index.php/Articulo_autor/ingresar_articulo" method="post" onsubmit="return validateForm()"  enctype="multipart/form-data">
-                    <?php 
-                    if($fail){
-                        echo '<p align="center" style="color: red;"><big><b>'.$fail.'</big></b></p><br>';
-                    }
-                    ?>
-                    <div class="form-group col-md-12">
-                        <div style="text-align: right;" class="col-md-3">
-                            <label class="control-label" for="text"><?php echo lang('aa_titulo'); ?> (*):</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="titulo_articulo" value="<?php if (isset($_POST['titulo_articulo'])) echo $_POST['titulo_articulo']; ?>" id="titulo_articulo" placeholder="<?php echo lang('aa_ingrese titulo'); ?>" required="True">
-                        </div>
-                    </div>
 
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="abstract"><?php echo lang('aa_abstract'); ?> (*):</label>
-                            </div>
-                            <div class="col-md-9">
-                               
-                                <textarea class="ckeditor" name="abstract" id="abstract" rows="20" cols="100" required="true"></textarea>
-                            </div>
-                        </div>
-                    </div>
 
-                  
-              
+   
+<div class="container-fluid  " style="margin-top: 200px;">
+       
+       <div class="row">
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+               <center>
+               <div class="card">
+                   <div class="header">
+                       <h2>
+                       <h3 style = "color: black;"><?php echo lang('aa_ingrese informacion de articulo'); ?></h3>
+                           
+                       </h2>
+                      
+                   </div>
+                   <div class="body">
+     
+                   <form id="wizard_with_validation" name = "wizard_with_validation" action="<?php echo base_url();?>index.php/Articulo_autor/ingresar_articulo" method="POST" enctype="multipart/form-data">
+                             <h3>Información de autor</h3>
+                             <fieldset>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <br><br><br><br><?php echo lang('vap_part3'); ?>.<br><?php echo lang('vap_part4'); ?>: "<b>Pablo Campos M.</b>" <?php echo lang('vap_part5'); ?>.</p>
+                                    </div>
+                                    <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Autor de Contacto:</label>
+                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+									<div class="form-group form-float">
+										
+										<div class="form-line">
+                                            
+											<input type="text" value="" placeholder="Ingrese <?php echo lang('aa_autor_prinicipal') . ' (*)'; ?>:" class="form-control" name="autor_principal" id="autor_principal"  required="required"> 
+										</div>
+									</div>
+                                    </div>
+                                   
+                                    <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Email de Contacto:</label>
+                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                    <div class="form-group ">
+                                        <div class="form-line">
+                                        
+                                        <input type="email" value="" class="form-control" name="email_autor" placeholder="Ingrese <?php echo lang('aa_email_contacto') . ' (*)'; ?>:" id="email_autor"  required="required">
+                                        
+                                        </div>
+                                       
+                                    </div>
+                                    </div>
+                                
+                                            <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="bottom" title="añadir autor adicional">
+                                                <i  onclick=AgregarCampos(); class="material-icons" >add</i>
+                                            </button>
+                           
+                                   
+								 
 
-           
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div id="campos" class="input-group" >
+                          
+                                        </div>
+                                    </div>
+                                    <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Institución:</label>
+                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                              
+                                                <input type="text" value="" class="form-control" name="institucion" id="institucion" placeholder="<?php echo lang('aa_ingrese institucion');?>" required="required">
+										    </div>  
+                                        </div>
+                                    </div>
 
-                    <div class="form-group col-md-12">
+                                 
+                                    <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Pais:</label>
+                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                        <div class="form-group form-float">
+                                       
+                                            <div class="form-line">
+                                           
+                                                   
+                                                    
+                                                     <select  name="pais" id = "pais" value="" class="form-control show-tick"  required="required"> 
+                                                        <?php 
+                                                        if ($paises){
+                                                            foreach ($paises->result() as $row){
+                                                                if (isset($_POST['pais']) && $_POST['pais'] == $row->ID)
+                                                                {
+                                                                    echo '<option selected value='. $row->ID . '> ' . $row->nombre . '</option>';
+                                                                }
+                                                                else
+                                                                {
+                                                                    echo '<option value='. $row->ID . '> ' . $row->nombre . '</option>';
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                        </select> 
+                                                 
+                                             </div>  
+                                        </div>
+                                    </div> 
+
+                             </fieldset>                             
+                                <h3><?php echo lang('aa_ingrese informacion de articulo'); ?></h3>
+                             <fieldset>
+                                <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Titulo artículo:</label>
+                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                    <div class="form-group ">
+                                        <div class="form-line">
+                                        
+                                        <input type="text" class="form-control" name="titulo_articulo" value="<?php if (isset($_POST['titulo_articulo'])) echo $_POST['titulo_articulo']; ?>" id="titulo_articulo" placeholder="<?php echo lang('aa_ingrese titulo'); ?>" required="required">
+                                        
+                                        </div>
+                                       
+                                    </div>
+                                    </div>
+                                  
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								
+										<div class="form-line">
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                            <label for="abstract"><?php echo lang('aa_abstract'); ?> (*):</label>
+                                           
+                                        </div>
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                            <textarea class="ckeditor" name="abstract" id="abstract" rows="20" cols="90" required="requerid" placeholder="ingrese un resumen del articulo" ></textarea>
+                                        </div>
+                                        </div>
+								
+                                    </div>
+
+                                    <div class="form-group col-md-12">
                   
                   <div class="form-group">
-                      <div style="text-align: right;" class="col-md-3">
+                      <div style="text-align: right;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                           <label for="tema"><?php echo lang('aa_area aplicable'); ?> (*):</label>
                       </div>
-                      <div class="col-md-9">
-                          <select class="form-control" name="area_aplicable" id="area_aplicable" required="required">
+                      <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                          <select class="form-control" id="area_aplicable" name="area_aplicable"  required="required" onchange="load(this.value)">
                             <option value="">Selecciona Area Aplicable</option>
                               <?php
                               
@@ -107,170 +204,81 @@ function AgregarCampos(){
            
               </div>
 
-              <div class="form-group col-md-12">
-                  
-                  <div class="form-group">
-                      <div style="text-align: right;" class="col-md-3">
+              <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                 <div style="text-align: right;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                           <label for="tema_interes"><?php echo lang('aa_tema'); ?> (*):</label>
-                      </div>
-                      <div class="col-md-9">
+                  </div>
+                  <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                   
+                  
                           <select class="form-control" name="tema_interes" id="tema_interes" required="required">
                               <option value="">Selecciona tema</option>
                                 
                           </select>
-                      </div>
+                     
                   </div>
            
               </div>
-                    
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="text"><?php echo lang('aa_palabras claves'); ?> (*):</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" maxlength="80" value="<?php if (isset($_POST['palabras_claves'])) echo $_POST['palabras_claves']; ?>" class="form-control" name="palabras_claves" id="palabras_claves" placeholder="<?php echo lang('aa_ingrese palabras claves'); ?>" required="required">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="autor_principal"><?php echo lang('aa_autor_prinicipal') . ' (*)'; ?>:</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" value="" class="form-control" name="autor_principal" id="autor_principal" placeholder="<?php echo lang('aa_ingrese autor contacto');?>" required="required"> 
-                            </div>
-                        </div>
-                    </div>
-
-                  
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="email_autor"><?php echo lang('aa_email_contacto') . ' (*)'; ?>:</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="email" value="" class="form-control" name="email_autor" id="email_autor" placeholder="<?php echo lang('aa_ingrese email contacto');?>" required="required">
-                                <i onclick=AgregarCampos(); class="material-icons orange600" >add_circle </i><span>Añadir Autor </span>
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="fecha_ingreso">Fecha de Ingreso (*):</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" maxlength="80" value="<?php echo date('d-m-Y'); ?>" name="fecha_ingreso" id="fecha_ingreso" disabled="disabled">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <div id="campos" >
-                          
-                        </div>
-                        
-                    </div>
-
-                    
-
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="pais"><?php echo lang('vra_pais');?>:</label>
-                            </div>
+              <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Palabras Clave:</label>	
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                    
-                            <div class="col-md-9">
-								<select name="pais" id = "pais" value="<?php if (isset($_POST['pais'])) echo $_POST['pais'];?>" class="form-control selectpicker" data-live-search = "true" required="required"> 
-                                    <?php 
-                                    if ($paises){
-                                        foreach ($paises->result() as $row){
-                                            if (isset($_POST['pais']) && $_POST['pais'] == $row->ID)
-                                            {
-                                                echo '<option selected value='. $row->ID . '> ' . $row->nombre . '</option>';
-                                            }
-                                            else
-                                            {
-                                                echo '<option value='. $row->ID . '> ' . $row->nombre . '</option>';
-                                            }
-                                        }
-                                    }
-                                    ?>
-                                </select>
-						    </div>
-                        
-                        </div>
-                    </div>
+			    <div class="form-group form-float">
+				    <div class="form-line ">	
+                           									
+                            <input type="text" maxlength="80" value="<?php if (isset($_POST['palabras_claves'])) echo $_POST['palabras_claves']; ?>" class="form-control" name="palabras_claves" id="palabras_claves" placeholder="<?php echo lang('aa_ingrese palabras claves'); ?>" required="required">
+				    </div>
+                    <small>escriba las palabras clave separadas por un espacio</small>
+			    </div>
+                </div> 
 
-                  
-                        
-			
+                                <div class="form-group form-float">
+				                	<div class="form-line">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                            <label for="comentarios">Comentrios (*):</label> 
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                            <textarea class="ckeditor" name="comentarios" id="comentarios" rows="3" placeholder="ingrese comentarios" ><?php  if (isset($_POST['comentarios'])) echo $_POST['comentarios']; ?></textarea>
+                                        </div>
+                                    </div>
+								</div>
+                                   
 
-                
-                <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="institucion"><?php echo lang('aa_institucion') . ' (*)'; ?>:</label>
+                                  
+																							
+                            </fieldset>                             
+                                <h3>Articulo</h3>
+                          <fieldset>
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <div style="text-align: right;" class="col-md-3">
+                                        <label for="exampleInputFile"><?php echo lang('aa_subir archivo'); ?> (*):</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="file" name = "userfile" accept=".doc, .docx" class="filestyle" id="exampleInputFile" required="required" data-buttonText="<i class='material-icons' style='font-size:20px;vertical-align:bottom'>file_upload</i> <?php echo lang('aa_seleccionar'); ?> ">
+                                        <small id="fileHelp" class="form-text text-muted"><?php echo lang('aa_archivos de extension'); ?> .doc o .docx. Max: 5MB</small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <input type="text" value="" class="form-control" name="institucion" id="institucion" placeholder="<?php echo lang('aa_ingrese institucion');?>" required="required">
+                            <div class="form-group col-md-12">
+                                <div class="form-group">
+                                    <div style="text-align: right;" class="col-md-3">
+                                        <label for="fecha_ingreso">Fecha de Ingreso (*):</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" maxlength="80" value="<?php echo date('d-m-Y'); ?>" name="fecha_ingreso" id="fecha_ingreso" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+      
 
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="exampleInputFile"><?php echo lang('aa_subir archivo'); ?> (*):</label>
-                            </div>
-                            <div class="col-md-9">
-                                <input type="file" name = "userfile" accept=".doc, .docx" class="filestyle" id="exampleInputFile" required="required" data-buttonText="<i class='material-icons' style='font-size:20px;vertical-align:bottom'>file_upload</i> <?php echo lang('aa_seleccionar'); ?> ">
-                                <small id="fileHelp" class="form-text text-muted"><?php echo lang('aa_archivos de extension'); ?> .doc o .docx. Max: 5MB</small>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group col-md-12">
-                        <div class="form-group">
-                            <div style="text-align: right;" class="col-md-3">
-                                <label for="comentarios"><?php echo lang('aa_comentarios adicionales'); ?>:</label>
-                            </div>
-                            <div class="col-md-9">
-                                <textarea class="form-control" name="comentarios" id="comentarios" rows="3"><?php  if (isset($_POST['comentarios'])) echo $_POST['comentarios']; ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-7">
-                            <br><br>
-                            <button type="submit" name = "upload" id = "upload" class="button button-3d button-mini button-rounded button-green btn-block"><?php echo lang('aa_ingresar articulo'); ?></button>
-                        </div>
-                    </div>
-  
-                </form>
+													
+                          </fieldset>
+					</form>
+                </div>
             </div>
-            
-            <div class="col-md-3">
-                <br><br><br><br><?php echo lang('vap_part3'); ?>.<br><?php echo lang('vap_part4'); ?>: "<b>Moisés Flores E.</b>" <?php echo lang('vap_part5'); ?>.</p>
-            </div>
-            
-        </div>
-        
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
-              
-            </div>
+            </center>
         </div>
     </div>
 </div>
+
+

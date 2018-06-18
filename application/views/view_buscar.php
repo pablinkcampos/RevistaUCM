@@ -2,23 +2,38 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $('#articulos').DataTable({
-            "language": {
-
-                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/<?php echo ucwords($this->session->userdata('lang')['route']); ?>.json"
-            },
-            "order": [[0, "desc"]]
-
-        });
+        $('#articulos').DataTable( {
+    language: {
+        processing:     "Procesando ...",
+        search:         "Buscar:",
+        lengthMenu:    "Mostrar _MENU_ Elementos",
+        info:           "Visualización del elemento _START_ de _END_ en _TOTAL_ elementos",
+        infoEmpty:      "Mostrar 0 elemento 0 en 0 elementos",
+        infoFiltered:   "(filtro de  _MAX_ en total)",
+        infoPostFix:    "",
+        loadingRecords: "Cargando ...",
+        zeroRecords:    "No hay datos disponibles en la tabla",
+        emptyTable:     "No hay datos disponibles en la tabla",
+        paginate: {
+            first:      "Primero",
+            previous:   "Anterior",
+            next:       "Siguiente",
+            last:       "Último"
+        },
+        aria: {
+            sortAscending:  ": activar para ordenar la columna en orden ascendente",
+            sortDescending: ": active para ordenar la columna en orden descendente"
+        }
+    }
+} );
     });
 </script>
 
@@ -33,15 +48,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </script>
 
-<div class="content col-md-12 ">
-    <div class="container clearfix">
-        <div>
-
-            <div class="col-md-12">
-                <br>
-                <h3 style = "color: black;"><?php echo lang('vb_buscar en todos los articulos'); ?></h3>
-                <hr>
-
+<div class="container-fluid  " style="margin-top: 200px;">
+    
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        
+            <div class="card">
+                <div class="header">
+                    <h3 style = "color: black;"><?php echo lang('vb_buscar en todos los articulos'); ?></h3>
+                   
+                </div>
+                <div class="body">
+                   
                 <table id="articulos" class="display" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -87,7 +105,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         ?>
                     </tbody>
                 </table>
+                    
+                </div>
             </div>
-
+            
         </div>
     </div>
+</div>
+

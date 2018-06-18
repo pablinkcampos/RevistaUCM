@@ -41,38 +41,12 @@ class Registro_revisor extends MY_Controller {
             }
         }
 
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required|min_length[2]|max_length[50]');
+    
+        $this->load->view('view_registro_revisor', $data);
+        $this->load->view('include/footer');
 
-        $this->form_validation->set_rules('apellido1', 'Apellido paterno', 'required|min_length[2]|max_length[50]|alpha');
-        $this->form_validation->set_rules('apellido2', 'Apellido materno', 'required|min_length[2]|max_length[50]|alpha');
-        $this->form_validation->set_rules('titulo', 'Titulo profesional', 'required|min_length[2]|max_length[50]');
-        $this->form_validation->set_rules('organizacion', 'Organización', 'required|min_length[2]|max_length[50]');
-        $this->form_validation->set_rules('biog', 'Biografía', 'required|min_length[5]|max_length[1000]');
-        $this->form_validation->set_rules('correo', 'Correo', 'required|valid_email');
-        $this->form_validation->set_rules('telefono', 'Teléfono', 'min_length[9]|max_length[12]|required|numeric');
-        $this->form_validation->set_rules('clave1', 'Contraseña', 'min_length[4]|max_length[500]|required|matches[clave2]');
-        $this->form_validation->set_rules('clave2', 'Reingresar contraseña', 'min_length[4]|max_length[500]|required');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $this->form_validation->set_message('alpha', lang("fv_solo letras"));
-        $this->form_validation->set_message('required', lang("fv_debes ingresar el campo"));
-        $this->form_validation->set_message('numeric', lang("fv_solo numeros"));
-        $this->form_validation->set_message('min_length', lang("fv_minimo caracteres"));
-        $this->form_validation->set_message('max_length', lang("fv_maximo caracteres"));
-        $this->form_validation->set_message('valid_email', lang("fv_formato valido"));
-        $this->form_validation->set_message('matches', lang("fv_igual en ambos campos"));
-
-        if ($this->form_validation->run() == FALSE || $not_valid == 1) {
-
-            $var_test = $this->input->post('nombre');
-            if (isset($var_test)) {
-                echo '<script type="text/javascript">';
-                echo 'setTimeout(function () { swal("Datos incorrectos","Ingrese todos los campos en el formato requerido","info");';
-                echo '}, 350);</script>';
-            }
-
-            $this->load->view('view_registro_revisor', $data);
-            $this->load->view('include/footer');
-        } else {
             $formulario['nombre'] = $this->input->post('nombre');
             $formulario['apellido_1'] = $this->input->post('apellido1');
             $formulario['apellido_2'] = $this->input->post('apellido2');
@@ -90,8 +64,8 @@ class Registro_revisor extends MY_Controller {
                 echo 'setTimeout(function () { swal("Ya tienes cuenta","Tu correo ya esta registrado en nuestra plataforma","warning");';
                 echo '}, 350);</script>';
 
-                $this->load->view('view_registro_revisor', $data);
-                $this->load->view('include/footer');
+                
+                
             } else {
                 $this->Model_registro->ingresar_revisor($formulario);
 
@@ -143,7 +117,7 @@ class Registro_revisor extends MY_Controller {
                    );
                    $this->load->view('include/aviso', $aviso);
 
-                    $this->load->view('include/footer_esencial');
+                    $this->load->view('include/footer');
                 }
             }
         }

@@ -103,14 +103,15 @@
 
 </style>
 <br>
-<div class="container clearfix">
 
-    <div class="postcontent col_last nobottommargin">
-
-        <!-- Portfolio Single Content
-        ============================================= -->
-        <div class="col_six portfolio-single-content ">
-            <?php
+  <div class="container-fluid  " style="margin-top: 100px;">
+       
+       <!-- Portfolio Single Content
+       ============================================= -->
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         
+           <br>
+           <?php
             $id_get = $this->input->get('revista');
 
             $logo = false;
@@ -128,96 +129,156 @@
 
                     $articulos_en_revista = $this->Articulo_Model->obtener_articulos_en_revista($max_id->numero);
                 }
-                if ($magazine) {
-                    if ($magazine->logo_revista) {
-                        $logo = true;
-                    }
-                    echo '<hr>';
-                    echo '<div class="panel"  style="background-color: #F2F2F2">';
-                    echo '    <h2>' . $magazine->titulo_revista;
-                    echo '        <br>' . $magazine->fecha_publicacion . '</h2>';
-                    echo '</div>';
+               if ($magazine) {
+                   if ($magazine->logo_revista) {
+                       $logo = true;
+                   }
+                   
+                  
+                       
+                   echo ' <div class="card">';
+                   
+                 
+                   echo '<div class="header">';
+             
+                   echo ' <center>    <h2>' . $magazine->titulo_revista;
+                   echo '        <br>' . $magazine->fecha_publicacion . '</h2>';
+                   echo '</div></center>';
 
-                    echo '
-                    <div class="col-lg-12">
-                        <center>
-                      <p><b>' . lang("vhp_palabras del editor") . '</b><br>
-                      <i>"' . $magazine->palabras_editor . '"</i></p>
-                       </center>
-                    </div>';
-
-
-                    $row = null;
-                    if ($articulos_en_revista) {
-                        echo '
-                  <div class="col-lg-2">
-                      <p><b>' . lang("vhp_pagina") . '</b></p>
-                  </div>
-                  <div class="col-lg-6">
-                      <p><b>' . lang("vhp_titulo") . '</b></p>
-                  </div>
-                  <div class="col-lg-4">
-                      <p><b>' . lang("vhp_autores") . '
-                </b></p>
-                  </div>';
-                        foreach ($articulos_en_revista->result() as $row) {
-                            echo '<div class="col-lg-2">';
-                            echo '    <p>' . $row->pagina_inicio . ' - ' . $row->pagina_fin . '</p>';
-                            echo '</div>';
-                            echo '<div class="col-lg-6">';
-                            echo '    <b>' . $row->titulo . '</b>';
-                            if ($row->file_papper) {
-                                echo '    <br><a Download href=' . base_url() . 'uploads/' . $row->file_papper . '><img width="40" height="40" src="' . base_url() . 'img/pdf.png' . '" alt="Descargar_Revista"></a><a Download href = ' . base_url() . 'uploads/' . $row->file_papper . '><b style="color: black">' . lang("vhp_descargar pdf") . '</b></a>';
-                            }
-                            echo '</div>';
-                            echo '<div class="col-lg-4">';
-                            $nombre = $this->Articulo_Model->getnamee($row->ID_articulo);
-                            echo '    <p>' . $nombre->autor_1 . ' <br> ' . $nombre->autor_2 . ' <br> ' . $nombre->autor_3 . ' <br> ' . $nombre->autor_4 . ' </p>';
-                            echo '</div>';
-                        }
-                    } else {
-                        echo '<h4>' . lang("vhp_no hay articulos asociados") . '</h4>';
-                    }
-                } else {
-                    echo '<h3> ' . lang("vhp_revista solicitada no se encuentra disponible") . '.</h3>';
-                }
-            } else {
-                echo '<h3>' . lang("vhp_bienvenidos a nuestra plataforma de revistas") . '</h3>';
-            }
-            ?>
-        </div>
-
-        <div class="clear"></div>
-
-        <div class="divider divider-center"><i class="icon-circle"></i></div>
-    </div>
-
-    <?php
-    if ($logo && $row) {
-        echo '<div class="sidebar nobottommargin">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                    <div id="post-list-footer">
-
-                          <a href="#" class="nobg"><div class="bookWrap">
-                            <div class="book">
-                              <a href="' . base_url() . 'index.php/Login/Index?revista=' . $magazine->ID . '" class="nobg"><img class="cover"
-                                src="' . base_url() . 'img/' . $magazine->logo_revista . '"></a>
-                              <div class="spine"></div>
-                            </div>
-                          </div></a>
-                    </div>
-                </div>
-                <div class="widget clearfix">
-                </div>
-            </div>
-        </div>';
-    }
-    ?>
+                   echo '<div class="row">';
+                   if ($logo ) {
+                       echo '
+                               <div class="pull-left col-lg-12 col-md-12">
+               
+                                         <a href="#" class="nobg"><div class="bookWrap">
+                                           <div class="book">
+                                             <a href="' . base_url() . 'index.php/Home_principal/publicacion?revista=' . $id_get . '" class="nobg"><img class="cover"
+                                               src="' . base_url() . 'img/' . $magazine->logo_revista . '"></a>
+                                             <div class="spine"></div>
+                                           </div>
+                                         </a>
+                                   
+                               </div>
+                               
+                           ';
+                   }
+                   
+               
+                   echo '<div class="col-lg-12 col-md-12">
+                       <center>
+                     <p><b>' . lang("vhp_palabras del editor") . '</b><br>
+                     <i>"' . $magazine->palabras_editor . '"</i></p>
+                      </center>
+                   </div>';
 
 
+                   $row = null;
+                   if ($articulos_en_revista) { ?>
+                    <table id="articulos" class="display" width="100%" cellspacing="0">
+                    <thead>
+                       <tr>
+                          <th align="left";>
+                             titulo
+                          </th>
+                          <th align="left";>
+                             &nbsp;
+                              Resumen
+                             &nbsp;
+                          </th>
+                          <th align="left";>
+                             &nbsp;
+                              Autores
+                             &nbsp;
+                          </th>
+                          <th align="left";>
+                             &nbsp;
+                             Institucion
+                             &nbsp;
+                          </th>
+                          <th align="left";>
+                             &nbsp;
+                             Texto
+                             &nbsp;
+                          </th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                        
+                          <?php 
+                           
+                           foreach ($articulos_en_revista->result() as $row) {
+                                $datos =  $this->Articulo_Model->articulo_ver($row->ID_articulo);
+                                foreach ($datos->result() as $row2): 
+                            
+                              
+                                    $titulo_revista    =   $row2->titulo_revista;
+                                    $autor         =   $row2->n_autor;
+                                    $autor2       =   $row2->n_autor2;
+                                    $autor3         =   $row2->n_autor3;
+                                    $autor4         =   $row2->n_autor4;
+                                    $autor5         =   $row2->n_autor5;
+                                    $tema          =   $row2->tema;
+                                    $palabras_claves   =   $row2->palabras_claves;
+                                    $abstract          =   $row2->abstract;
+                                    $fecha_ultima_upd  =   $row2->fecha_ultima_upd ;
+                                    $institucion  =   $row2->institucion ;
+                                endforeach ;
+                             
+                                                     
+                             echo "<tr>";
+                              //se obtienen los datos de los revisores 
+                              //si el revisor ya califico el checkbox se bloquea
+                           
+                                echo "<td>"; echo $row->titulo; echo '</td>';
+                                echo "<td>"; echo $abstract; echo '</td>';
+                             
+                             
+                             //nombre
+                             echo "
+                             <td align='left'>"; echo $autor; echo '<br>'; echo $autor2; echo '<br>'; echo $autor3; echo '<br>'; echo $autor4; echo '<br>'; echo $autor5; echo "</td>";
+                             //grado academico
+                             echo "
+                             <td align='left'>"; echo $institucion; echo "</td>";
+                             //cantidad de articulos asignados
+                             echo "
+                             <td align='center'>";echo '    <br><a href=' . base_url() . 'uploads/' . $row->file_papper . '><img width="20" height="20" src="' . base_url() . 'img/pdf.png' . '" alt="Descargar_Revista"></a><a href = ' . base_url() . 'uploads/' . $row->file_papper . '>' . lang("vres_descargar pdf") . '</a>';echo "</td>";
+                             echo "
+                             </tr>";
+                             
+                             
+                                 } ?>
+                          
+                        
+                       </div>
+                    </tbody>
+                    
+                   
+                  
+                 </table>
+                 <?php
+                   } else {
+                       echo '<h4>' . lang("vres_no hay articulos asociados") . '</h4>';
+                   }
+               } else {
+                   echo '<br><br>';
+                   echo '<h3> ' . lang("vres_revista solicitada no se encuentra disponible") . '.</h3>';
+                   echo '<br><br><br><br><br>';
+               }
+           } else {
+               echo '<br><br>';
+               echo '<h3>' . lang("vres_bienvenidos a nuestra plataforma de revistas") . '</h3>';
+           }
+           ?>
+      
+    
+      
 
-</div>
+
+ 
+
+
+
+
 
 
 <script type="text/javascript">

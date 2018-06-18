@@ -2,8 +2,10 @@
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <?php //echo $id_usuario; echo $nombre_usuario; echo $email_usuario; echo $id_rol;           ?>
-<div class="content-wrap">
-    <div class="container clearfix">
+<div class="container-fluid  " style="margin-top: 100px;">
+       
+    
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">
                 <?php
@@ -40,14 +42,34 @@
                      $cant_group = $cant_group_aux;
 
                      if ($filas->cantidad == 0) {
+                        echo ' <div class="card">';
+                   
+                 
+                        echo '<div class="header">';
+                  
+                        echo ' <center>    <h2>' ;
+               
+                        echo '</div></center>';
+     
+                        echo '<div class="body">';
+                        
+                        
+                    
+                        echo '<div class="col-lg-12 col-md-12">
+                            <center>
+                            <h2>'.lang("vhe_no existen articulos aun").'.</h2>
+                            </center>
+                            </div>';
+                            echo '<div class="col-lg-12 col-md-12">
+                            <center>
+                            <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">Artículos por formatear</a>
+                            <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                            </center>
+                            </div>';
+     
+                            echo '</div>';
                          echo '<div class="entry clearfix">
-                             <div class="col-lg-10">
-                                <div class="entry-title">
-                                    <h2>'.lang("vpp_no existen articulos por paginar").'.</h2>
-                                </div>
-                                    <a href="'.base_url().'index.php/System/editor_ve7" class="button button-3d button-rounded button-mini button-teal center">'.lang("vpp_articulos por paginar").'</a>
-                                    <a href="'.base_url().'index.php/System/editor_ve13" class="button button-3d button-rounded button-mini button-green center">'.lang("vpp_articulos listos").'</a>
-                             </div>
+                         
                           </div>';
                      }
                  }
@@ -65,38 +87,65 @@
 
                  $consulta = $this->Articulo_Model->obtener_articulos_limit_listos($start, $content_per_page, $num1, $num2);
                  if ($consulta && $filas) {
-                     echo '<div class="entry clearfix">
-                             <div class="col-lg-8">
-                                <div class="entry-title">
-                                    <h2>'.lang("vpp_articulos por paginar").'</h2>
-                                </div>
-                                    <a href="'.base_url().'index.php/System/editor_ve7" class="button button-3d button-rounded button-mini button-teal center">'.lang("vpp_articulos por paginar").'</a>
-                                    <a href="'.base_url().'index.php/System/editor_ve13" class="button button-3d button-rounded button-mini button-green center">'.lang("vpp_articulos listos").'</a>
-                             </div>
-                           </div>';
-
+                        echo ' <div class="card">';
+                   
+                 
+                        echo '<div class="header">';
+              
+                        echo ' <center>    <h2>' ;
+           
+                        echo '</div></center>';
+ 
+                        echo '<div class="body">';
+                    
+                    
+                
+                        echo '<div class="col-lg-12 col-md-12">
+                        <center>
+                        <h2>'.lang("vhe_articulos disponibles").'.</h2>
+                        </center>
+                        </div>';
+                        echo '<div class="col-lg-12 col-md-12">
+                        <center>
+                        <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">artículos por formatear</a>
+                        <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                        </center>
+                        </div>';
+ 
+                        echo '</div>';
+                        echo '<div class="row fluid">';
+                     
+                      
+                     
                     foreach ($consulta as $row) {
-                         echo '<div class="entry clearfix">';
-                         echo '        <div class="entry-title">';
-                         echo '            <h2>' . $row->titulo_revista . '</h2>';
-                         echo '        </div>';
-                         echo '        <ul class="entry-meta clearfix">';
+                        echo ' <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
+                                <div class="card">
+                                    <div class="icon">
+                                        <i class="material-icons col-blue">bookmark</i><b>'.$row->titulo_revista .'.</b>
+                                       
+                                    </div>
+                                   
+                                           
+                                            
+                                            <div class="body">';
+                                                
+                                               
+                                                
+                           
+                       
                          $as = $row->id_estado;
-                         if($as == 5 || $as == 7){
-                            echo '            <li><span class="label label-info">'.lang("vpp_falta paginar").'</span></li>';
-                         }else if($as == 8){
-                            echo '            <li><span class="label label-success">'.lang("vpp_listo para revista").'</span></li>';
+                         if($as == 7 || $as == 5){
+                            echo '            <li><span class="label label-info">falta formatear a pdf</span></li>';
+                            echo '            <li><i class="icon-time"></i> '.lang("vhe_actualizado el").' ' . obtenerFechaEnLetra($row->fecha_ultima_upd) . '</li>';
+                            echo '        </ul>';
+                            echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
+                            echo '            <input type="hidden" value="' . $row->ID . '" name="articulo_id" />';
+                            echo '            <input type="hidden" value="' . $row->email_autor . '" name="email_autors" />';
+                            echo '            <center><button class="submit btn btn-primary waves-effect center">formater artículo</button>';
+                            echo '          </center></form>';
                          }
-                         echo '            <li><i class="icon-time"></i> '.lang("vpp_actualizado el").' ' . obtenerFechaEnLetra($row->fecha_ultima_upd) . '</li>';
-                         echo '        </ul>';
-                         echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
-                         echo '            <input type="hidden" value="' . $row->ID . '" name="articulo_id" />';
-                         echo '            <input type="hidden" value="' . $row->email_autor . '" name="email_autors" />';
-                         echo '            <center><button class="submit button button-3d button-rounded button-mini button-teal center">'.lang("vpp_paginar articulo").'</button>';
-                         echo '          </center></form>';
-                         echo '</div>';
+                        }
                     }
-                 }
                 ?>
 
             </div>
@@ -119,14 +168,10 @@
             ?>
 
         </div>
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
+
                 <div class="widget clearfix">
                     <?php
                      $this->load->view('include/menu_editor');
                     ?>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            

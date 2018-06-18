@@ -1,29 +1,30 @@
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
-                <div class="entry clearfix">
-                    <div class="entry-image">
-                    </div>
-                    <div class="entry-content">
+<div class="container-fluid  " style="margin-top: 200px;">
+    
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        
+            <div class="card">
+                <div class="header">
+                    <a href="<?php echo base_url(); ?>img/about.png" data-sub-html="imagenPolitica">
+                        <img class="img-responsive thumbnail" src="<?php echo base_url(); ?>img/about.png">
+                    </a>
+                   
+                </div>
+                <div class="body">
+                   
                         <p style="text-align: justify">
                           <?php
                            echo $texto->texto;
                            ?>
                         </p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                        <a href="<?php echo base_url(); ?>img/about.png" data-lightbox="image"><img class="image_fade" src="<?php echo base_url(); ?>img/about.png" alt="Sobre nosotros"></a>
+                    
                 </div>
             </div>
+            
         </div>
     </div>
 </div>
+
+
+
+

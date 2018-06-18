@@ -1,17 +1,22 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<div class="content-wrap">
-    <div class="container clearfix">
+
+
+
+<div class="container-fluid  " style="margin-top: 200px;">
+	<div class="row">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">
                 <div class="entry clearfix col-lg-12">
                     <div class="col-lg-9"><h2><?php echo lang('vrev_revistas ucm');?> </h2>
 
                     </div>
-                    <div class="col-lg-3">
-                        <a href="<?php echo base_url(); ?>index.php/System/newm" class="button right button-3d button button-rounded button-green"><?php echo lang('vrev_nueva revista');?></a>
-                    </div>
+                    <a href="<?php echo base_url(); ?>index.php/System/newm" ><button type="button"  class="btn bg-green waves-effect">
+                                    <i class="material-icons">note_add</i>
+                                    <span><?php echo lang('vrev_nueva revista');?></span>
+                    </button></a>
+                    
 
                 </div>
                 <?php
@@ -19,17 +24,37 @@
                     if($ids){
 
                             foreach($ids->result() as $row)   {
-                                echo '<div class="entry clearfix col-lg-6">';
-                                echo     '<div class="entry-title">';
-                                echo         '<h2><a href="'.base_url().'index.php/Home_principal/publicacion?revista=' . $row->ID . '">'.$row->titulo_revista.'</a></h2>';
-                                echo    '</div>';
-                                echo     '<ul class="entry-meta clearfix">';
-                                echo        '<li><i class="icon-calendar3"></i>'.$row->fecha_publicacion.'</li>';
                                 $num = $this->Articulo_Model->count_magaziness($row->ID);
-                                echo        '<li><a href="'.base_url().'index.php/Home_principal/publicacion?revista=' . $row->ID . '"><i class="icon-comments"></i>'.$num->cantidad.' '.lang("vrev_articulos").'</a></li>';
-                                echo   '</ul>';
-                                echo '<a class="button button-small button-3d button-circle" href="'.base_url().'index.php/System/editar?revista=' . $row->ID . '">Editar datos de revista</a>';
-                                echo '</div>';
+                                echo ' <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                <div class="card">
+                                    <div class="icon">
+                                        <i class="material-icons col-blue">bookmark</i>
+                                    </div>
+                                    <div class="header">
+                                 
+                                        <h2>
+                                        <a href="'.base_url().'index.php/Home_principal/publicacion?revista=' . $row->ID . '">'.$row->titulo_revista.'</a>
+                                        </h2>
+                                    </div>
+
+                                           
+                                            
+                                            <div class="body">
+                                                
+                                                <div class="text"> <i class="material-icons">date_range</i>'.$row->fecha_publicacion.'</div>
+                                                <div class="text"><a href="'.base_url().'index.php/Home_principal/publicacion?revista=' . $row->ID . '"><i class="icon-comments"></i>'.$num->cantidad.' '.lang("vrev_articulos").'</a></div>
+                                                <a href="'.base_url().'index.php/System/editar?revista=' . $row->ID . '" ><button type="button"  class="btn bg-amber waves-effect">
+                                                <i class="material-icons">create</i>
+                                                <span>Editar Revista</span>
+                                                
+                                            </div>
+                                </div>
+                                </div>';
+                    
+                  
+                                            
+                                        
+                              
                             }
 
                     }else{
@@ -43,14 +68,10 @@
             </div>
         </div>
 
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
+
                 <div class="widget clearfix">
                     <?php
                      $this->load->view('include/menu_editor');
                     ?>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+ 

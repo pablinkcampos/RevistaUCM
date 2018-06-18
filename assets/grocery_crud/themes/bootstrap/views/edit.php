@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-7">
-                                    <button class="btn btn-default btn-success b10" type="submit" id="form-button-save">
+                                    <button class="btn btn-success waves-effect b10" type="submit" id="form-button-save">
                                         <i class="fa fa-check"></i>
                                         <?php echo $this->l('form_update_changes'); ?>
                                     </button>

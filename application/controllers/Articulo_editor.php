@@ -36,7 +36,7 @@ class Articulo_editor extends MY_Controller {
         $mensaje .= "<b>Saludos</br><br>";
         $mensaje .= "<b>Equipo Revista UCM</b><br>";
         $headers = "From: RevistaUCM@ucm.cl \r\n";
-        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         
         mail($correi->correo, $subject, $mensaje, $headers);
@@ -53,7 +53,7 @@ class Articulo_editor extends MY_Controller {
         $mensaje .= "<b>Saludos</br><br>";
         $mensaje .= "<b>Equipo Revista UCM</b><br>";
         $headers = "From: RevistaUCM@ucm.cl \r\n";
-        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         
         mail($correi->correo, $subject, $mensaje, $headers);
@@ -80,7 +80,7 @@ class Articulo_editor extends MY_Controller {
         $mensaje .= "<b>Saludos</br><br>";
         $mensaje .= "<b>Equipo Revista UCM</b><br>";
         $headers = "From: RevistaUCM@ucm.cl \r\n";
-        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         
         mail($correo->correo, $subject, $mensaje, $headers);
@@ -123,7 +123,7 @@ class Articulo_editor extends MY_Controller {
         $mensaje .= "<b>Saludos</br><br>";
         $mensaje .= "<b>Equipo Revista UCM</b><br>";
         $headers = "From: RevistaUCM@ucm.cl \r\n";
-        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         
         mail($correo->correo, $subject, $mensaje, $headers);
@@ -831,7 +831,7 @@ class Articulo_editor extends MY_Controller {
                                 $mensaje .= "<b>Saludos</br><br>";
                                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                 $headers = "From: RevistaUCM@ucm.cl \r\n";
-                                $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                                $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                                 
                                 mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -897,7 +897,7 @@ class Articulo_editor extends MY_Controller {
                                 $mensaje .= "<b>Saludos</br><br>";
                                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                 $headers = "From: RevistaUCM@ucm.cl \r\n";
-                                $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                                $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                                 
                                 mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -937,7 +937,7 @@ class Articulo_editor extends MY_Controller {
                             $mensaje .= "<b>Saludos</br><br>";
                             $mensaje .= "<b>Equipo Revista UCM</b><br>";
                             $headers = "From: RevistaUCM@ucm.cl \r\n";
-                            $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                            $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                             $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                             
                             mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -1018,7 +1018,7 @@ class Articulo_editor extends MY_Controller {
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
-                        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                         
                         mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -1064,7 +1064,7 @@ class Articulo_editor extends MY_Controller {
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
-                        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                         
                         mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -1119,7 +1119,7 @@ class Articulo_editor extends MY_Controller {
                 $max_dia = $configuracion->max_dia_reev_art;  
                 $hoy = date('d-m-Y');
                 $fecha_reenvio = strtotime($hoy."+ $max_dia days");
-                print $fecha_reenvio; 
+               
                 if ($opcion == 5) {
                     
                     $now = date('Y-m-d H:i:s');
@@ -1140,7 +1140,7 @@ class Articulo_editor extends MY_Controller {
                             'title' => lang("tswal_actualizacion realizada con exito"),
                             'text' => lang("cswal_articulo estado aceptado"),
                             'tipoaviso' => 'success',
-                            'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_recibidos"
+                            'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_revisados"
                         );
                         
                         $correo  = $this->Articulo_Model->getmail($datos['ID']);
@@ -1149,7 +1149,7 @@ class Articulo_editor extends MY_Controller {
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
-                        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                         
                         mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -1195,7 +1195,7 @@ class Articulo_editor extends MY_Controller {
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
-                        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                         
                         mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -1214,8 +1214,7 @@ class Articulo_editor extends MY_Controller {
                 
                 
                 if ($opcion == 6) {
-                    print_r($opcion);
-                    print_r($fecha_reenvio);
+                   
                     $comentario = $this->input->post('comentarioRechazo');
                     $now        = date('Y-m-d H:i:s');
                     
@@ -1243,7 +1242,7 @@ class Articulo_editor extends MY_Controller {
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
-                        $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                        $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                         
                         mail($correo->email_autor, $subject, $mensaje, $headers);
@@ -1332,7 +1331,7 @@ class Articulo_editor extends MY_Controller {
                 $mensaje .= "<b>Saludos</br><br>";
                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                 $headers = "From: RevistaUCM@ucm.cl \r\n";
-                $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                 
                 $correo        = "";
@@ -1461,7 +1460,7 @@ class Articulo_editor extends MY_Controller {
                     $mensaje .= "<b>Saludos</br><br>";
                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                     $headers = "From: RevistaUCM@ucm.cl \r\n";
-                    $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                     
                     $correo = "";
@@ -1522,6 +1521,7 @@ class Articulo_editor extends MY_Controller {
     // controlador para reasignar los revisores de un articulo
     public function reasignar_revisores_editor($id_revista) {
         $user_data = $this->session->userdata('userdata');
+  
         //se asegura de que el usuario sea editor.
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
             $data['datos'] = $this->Articulo_Model->articulo_ver($id_revista);
@@ -1563,6 +1563,7 @@ class Articulo_editor extends MY_Controller {
                     $bloq3 = 1;
                 }
                 
+          
                 if (empty($this->input->post('revisor[]'))) {
                     
                 }
@@ -1607,6 +1608,7 @@ class Articulo_editor extends MY_Controller {
                             
                         }
                         
+                        //segundo revisor se compara con los demas revisores si es distinto se agrega en algun lugar vacio.
                         if ($i == 1) {
                             $id_rev2_new = $this->input->post('revisor[1]');
                             
@@ -1642,7 +1644,7 @@ class Articulo_editor extends MY_Controller {
                                 }
                             }
                         }
-                        
+                        //tercerrevisor se compara con los demas revisores si es distinto se agrega en algun lugar vacio y se bloquea ese lugar.
                         if ($i == 2) {
                             
                             $id_rev3_new = $this->input->post('revisor[2]');
@@ -1684,13 +1686,15 @@ class Articulo_editor extends MY_Controller {
                 }
                 
                 
-                
+                //si todos los revisores calificaron sus articulos pasa a estado revisado
                 if (($id_revisor_1 != 0 && $id_revisor_2 == 0 && $id_revisor_3 == 0 && $cal_rev1 != 3) || ($id_revisor_2 != 0 && $id_revisor_1 == 0 && $id_revisor_3 == 0 && $cal_rev2 != 3) || ($id_revisor_3 != 0 && $id_revisor_2 == 0 && $id_revisor_1 == 0 && $cal_rev3 != 3) || ($id_revisor_1 != 0 && $id_revisor_2 == 0 && $id_revisor_3 != 0 && $cal_rev1 != 3 && $cal_rev3 != 3) || ($id_revisor_1 != 0 && $id_revisor_2 != 0 && $id_revisor_3 == 0 && $cal_rev1 != 3 && $cal_rev2 != 3) || ($id_revisor_3 != 0 && $id_revisor_2 != 0 && $id_revisor_1 == 0 && $cal_rev3 != 3 && $cal_rev2 != 3) || ($id_revisor_1 != 0 && $id_revisor_2 != 0 && $id_revisor_3 != 0 && $cal_rev1 != 3 && $cal_rev2 != 3 && $cal_rev3 != 3)) {
                     $estado = 14;
+                //sino sigue en estado asignado
                 } else {
                     $estado = 3;
                 }
                 
+                //se añaden los nuevos revisores en sus respectivas posiciones
                 $now   = date('Y-m-d H:i:s');
                 $datos = array(
                     'ID' => $id_revista,
@@ -1701,7 +1705,7 @@ class Articulo_editor extends MY_Controller {
                     'Fecha_asig_revision' => $now
                 );
                 
-                
+                 //se actualiza los revisores
                 if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
                     
                     $subject = "Articulo asignado Revista UCM";
@@ -1709,7 +1713,7 @@ class Articulo_editor extends MY_Controller {
                     $mensaje .= "<b>Saludos</br><br>";
                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                     $headers = "From: RevistaUCM@ucm.cl \r\n";
-                    $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                     
                     $correo = "";
@@ -1739,6 +1743,7 @@ class Articulo_editor extends MY_Controller {
                     if ($correo != "") {
                         mail($correo, $subject, $mensaje, $headers);
                     }
+                    //se envia un correo a todos los revisores nuevos
                     
                     
                     $aviso = array(
@@ -1960,7 +1965,7 @@ class Articulo_editor extends MY_Controller {
                                     $mensaje .= "<b>Saludos</br><br>";
                                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                     $headers = "From: RevistaUCM@ucm.cl \r\n";
-                                    $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                                     
                                     $correo = "";
@@ -2065,7 +2070,7 @@ class Articulo_editor extends MY_Controller {
                     $mensaje .= "<b>Saludos</br><br>";
                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                     $headers = "From: RevistaUCM@ucm.cl \r\n";
-                    $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                     
                     mail($corr, $subject, $mensaje, $headers);

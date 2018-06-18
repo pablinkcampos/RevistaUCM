@@ -631,7 +631,7 @@ class Articulo_autor extends MY_Controller {
     public function ingresar_articulo() {
 
         
-            if (isset($_POST['upload'])) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($_FILES['userfile']['name'] == NULL) {
                     $aviso = array('title' => 'Archivo no subido',
                         'text' => "No existe archivo",
@@ -810,6 +810,7 @@ class Articulo_autor extends MY_Controller {
     public function responder_solicitud() {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
             $id_art = $this->input->post('t_id');
             $titulo_art = '';
             $consulta = $this->Articulo_Model->obtener_info_articulo($id_art);
@@ -817,8 +818,8 @@ class Articulo_autor extends MY_Controller {
                 $titulo_art = $consulta->titulo_revista;
             }
             $form_up['titulo'] = $titulo_art;
-            $form_up['pagina_inicio'] = $this->input->post('p_ini');
-            $form_up['pagina_fin'] = $this->input->post('p_fin');
+            $form_up['pagina_inicio'] = 1;
+            $form_up['pagina_fin'] = 1;
             $form_up['ID_articulo'] = $id_art;
             $form_up['ID_magazine'] = 9999;
             $formi['id_estado'] = 7;
@@ -835,7 +836,6 @@ class Articulo_autor extends MY_Controller {
 
                     $archivo = $this->Articulo_Model->obtener_arhivo($id_art);
                     $fotm_dat['id_estado'] = 13;
-
                     if (in_array($ext, $formatos)) {
                         $nombrearchivo = $archivo->archivo;
                         $nombrearchivo .= $ext;

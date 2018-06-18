@@ -14,39 +14,42 @@ foreach($css_files as $file): ?>
 <?php endforeach; ?>
 
 <style type="text/css">
-    .row{
-        width: 80%;
-    }
+ 
     .modal-backdrop{
         display: none;
+    }
+    .sidebar{
+        position: absolute;
+        height: 60%
+    }
+    i{
+        font-size:30px;
     }
 </style>
 
 
 
-<div class="content-wrap">
-    <div class="container clearfix">
-        <div class="postcontent nobottommargin col_last">
-            <div id="posts" class="events small-thumbs">
+
+                    <?php
+                     $this->load->view('include/menu_editor');
+                    ?>
+     
+
+<div class="content">
+    <div class="container-fluid">
+    
 
                       <div class="col-md-12">
                           <br>
-                          <h3 style = "color: black;">Editar Campos de Investigación</h3>
+                          <h3 style = "color: black;">Editar Areas de Investigación</h3>
+                          <small> <a href="<?php echo base_url(); ?>index.php/System/editor_crud_temas" target="_blank">Ir a temas</a></small>
                           <hr>
+                        
                       </div>
 
                  <?php echo $output; ?>
 
-            </div>
-        </div>
-        <div class="sidebar nobottommargin clearfix">
-            <div class="sidebar-widgets-wrap">
-                <div class="widget clearfix">
-                    <?php
-                     $this->load->view('include/menu_editor');
-                    ?>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+
+

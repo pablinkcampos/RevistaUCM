@@ -452,7 +452,7 @@
         $this->load->view('include/head_gc');
         $this->load->view('include/header_editor');
         $this->load->view('view_modificar_campos',$output);
-        $this->load->view('include/footer');
+        $this->load->view('include/footer_gc');
 
      }
      public function editor_crud_temas(){
@@ -470,7 +470,7 @@
         $this->load->view('include/head_gc');
         $this->load->view('include/header_editor');
         $this->load->view('view_modificar_temas',$output);
-        $this->load->view('include/footer');
+        $this->load->view('include/footer_gc');
 
      }
      public function editor_contenido() {
@@ -478,7 +478,7 @@
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
              $this->load->view('include/head');
              $this->load->view('include/header_editor');
-             $this->load->view('view_modificar_contenido');
+             $this->load->view('view_home_editor');
              $this->load->view('include/footer');
          } else {
              $aviso = array('title' => lang("tswal_acceso denegado"),
