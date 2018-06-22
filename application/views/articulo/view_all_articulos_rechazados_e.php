@@ -3,6 +3,7 @@
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript">
     $(document).ready(function () {
         $('#articulos tfoot th').each( function () {
@@ -71,7 +72,7 @@
                         
                         </div>
                         <div class="body table-responsive">
-                        <table id="articulos" class="table table-bordered table-striped" width="100%" cellspacing="0">
+                        <table id="articulos" class="table cell-border" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
@@ -219,24 +220,8 @@
   
     </section>
 
-   <div class="container-fluid  " style="margin-top: 200px;">
-	<div class="row">
 
-
-            <div class="col-md-3">
-                <div class="sidebar nobottommargin clearfix">
-                    <div class="sidebar-widgets-wrap">
-                        <div class="widget clearfix">
                             <?php
                      $this->load->view('include/menu_editor');
                     ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-           
-
-
-        </div>
-    </div>
+         

@@ -3,6 +3,7 @@
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 <script type="text/javascript">
     $(document).ready(function () {
         $('#articulos tfoot th').each( function () {
@@ -71,13 +72,13 @@
                         
                         </div>
                         <div class="body table-responsive">
-                        <table id="articulos" class="display" width="100%" cellspacing="0">
+                        <table id="articulos" class="table cell-border dataTable js-exportable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>
+                                <th width="2%" >
                                    ID
                                 </th>
-                                <th>
+                                <th width="2%">
                                     <?php echo lang('aaa_fecha ingreso'); ?>
                                 </th>
                                 <th>
@@ -86,13 +87,13 @@
                                 <th>
                                     <?php echo lang('aaa_titulo'); ?>
                                 </th>
-                                <th>
+                                <th width="2%">
                                     <?php echo lang('aaa_estado'); ?>
                                 </th>
-                                <th>
+                                <th width="2%">
                                     <?php echo lang('aaa_autor'); ?>
                                 </th>
-                                <th>
+                                <th width="2%">
                                     <?php echo lang('aaa_ver'); ?>
                                 </th>
                             </tr>
@@ -171,24 +172,8 @@
   
     </section>
 
-   <div class="container-fluid  " style="margin-top: 200px;">
-	<div class="row">
-
-
-            <div class="col-md-3">
-                <div class="sidebar nobottommargin clearfix">
-                    <div class="sidebar-widgets-wrap">
-                        <div class="widget clearfix">
+ 
                             <?php
                      $this->load->view('include/menu_editor');
                     ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-           
-
-
-        </div>
-    </div>
+          

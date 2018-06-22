@@ -195,54 +195,9 @@
                                        echo "<td><a href='".base_url()."uploads/".$archivo."'>".$archivo."</a></td>";
                                        echo "</tr>";
                               
-                                       echo "<tr>";
-                                       if($comentarios==""){
-                                       	echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
-                                        echo "<td>-</td>";
-                                        echo "</tr>";
-                                       }else{
-                                       	echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
-                                        echo "<td>".$comentarios."</td>";
-                                        echo "</tr>";
-                              
-									   }
+                                     
 									   
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allanav_revisor 1").":</th>";
-                                       echo "<td>".$rev_1."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allanav_revisor 2").":</th>";
-                                       echo "<td>".$rev_2."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allanav_revisor 3").":</th>";
-                                       echo "<td>".$rev_3."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allarvv_calificacion revisor 1").":</th>";
-                                       echo "<td>".$cal_rev1."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allarvv_calificacion revisor 2").":</th>";
-                                       echo "<td>".$cal_rev2."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allarvv_calificacion revisor 3").":</th>";
-                                       echo "<td>".$cal_rev3."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allarvv_comentario revisor 1").":</th>";
-                                       echo "<td>".$com_rev1."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allarvv_comentario revisor 2").":</th>";
-                                       echo "<td>".$com_rev2."</td>";
-									   echo "</tr>";
-									   echo "<tr>";
-                                       echo "<th style='text-align: right;'>".lang("allarvv_comentario revisor 3").":</th>";
-                                       echo "<td>".$com_rev3."</td>";
-									   echo "</tr>";
+									  
 									   
 
                               
@@ -255,6 +210,17 @@
                                        echo "<th style='text-align: right;'>".lang("allanav_fecha ingreso articulo").":</th>";
                                        echo "<td>".$fecha_ingreso."</td>";
                                        echo "</tr>";
+                                       echo "<tr>";
+                                       if($comentarios==""){
+                                       	echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
+                                        echo "<td>-</td>";
+                                        echo "</tr>";
+                                       }else{
+                                       	echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
+                                        echo "<td>".$comentarios."</td>";
+                                        echo "</tr>";
+                              
+									   }
                               
 
 							?>

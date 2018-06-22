@@ -464,6 +464,7 @@ class Articulo_autor extends MY_Controller {
                 foreach ($datos['datos']->result() as $row) {
                     $email_autor = $row->email_autor;
                     $version = $row->versiona;
+                    $archivo = $row->archivo;
                 }
                 $formatos = array('.doc', '.DOC', '.docx', '.DOCX');
                 $nombrearchivo = $_FILES['userfile']['name'];
@@ -480,14 +481,12 @@ class Articulo_autor extends MY_Controller {
                 $data['calificaRev3'] = 3;
                 $data['id_estado'] = 3;
 
-                $nombre_articulo = $data['titulo_revista'] . $email_autor. date('Y-m-d_H_i_s');
-                $nombre_articulo .= $ext;
-                $nombre_articulo = str_replace(' ', '_', $nombre_articulo);
-                $data['archivo'] = $nombre_articulo;
-                $data['urlArticuloEnviado']="uploads/$nombre_articulo";
+              
+                $data['archivo'] = $archivo;
+                $data['urlArticuloEnviado']="uploads/$archivo";
                 if (in_array($ext, $formatos)) {
                     if ($_FILES['userfile']['size'] <= 5120000) {
-                        if (move_uploaded_file($nombretemparchivo, "uploads/$nombre_articulo") == true) {
+                        if (move_uploaded_file($nombretemparchivo, "uploads/$archivo") == true) {
                              
                             if ($id != 0) {
                                
@@ -501,14 +500,18 @@ class Articulo_autor extends MY_Controller {
                                 
                                 
                                 $subject = "Articulo recibido Revista UCM";
+                                $mensaje_recepcion = $this->Articulo_Model->obtener_contenido("mensaje recepcion");
+                                $msj=$mensaje_recepcion->texto;
+                              
+                                $subject = "Articulo recibido Revista UCM";
                                 $mensaje = '<html>' .
-                                        '<body><h4>Hola <br><br>Hemos recibido tu artículo. Será sometido a un proceso de evaluación. Te avisaremos cuando hayamos terminado.</h4><br>' .
+                                        '<body><h4>'.$msj.'</h4><br>' .
                                         '</body>' .
                                         '</html>';
                                 $mensaje .= "<b>Saludos</br><br>";
                                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                 $headers = "From: RevistaUCM@ucm.cl \r\n";
-                                $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                                $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                                 mail($email_autor, $subject, $mensaje, $headers);
@@ -596,7 +599,7 @@ class Articulo_autor extends MY_Controller {
             $mensaje .= "<b>Saludos</br><br>";
             $mensaje .= "<b>Equipo Revista UCM</b><br>";
             $headers = "From: RevistaUCM@ucm.cl \r\n";
-            $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+            $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
             $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
             mail($email_autor, $subject, $mensaje, $headers);
@@ -668,7 +671,7 @@ class Articulo_autor extends MY_Controller {
                     $data['institucion'] = $this->input->post('institucion');
                     $data['pais'] = $this->input->post('pais');
                     
-                    $nombre_articulo = $data['titulo_revista'] . $data['email_autor']. date('Y-m-d_H_i_s');
+                    $nombre_articulo = substr($data['titulo_revista'], 0, 10) . $data['email_autor']. date('Y-m-d_H_i_s');
                     $nombre_articulo .= $ext;
                     $nombre_articulo = str_replace(' ', '_', $nombre_articulo);
                     $data['archivo'] = $nombre_articulo;
@@ -678,15 +681,18 @@ class Articulo_autor extends MY_Controller {
                             if (move_uploaded_file($nombretemparchivo, "uploads/$nombre_articulo") == true) {
                                  $post['id_articulo']= $this->Articulo_Model->agregar_articulo($data);
                                 if ($post['id_articulo'] != 0) {
+                                    $mensaje_recepcion = $this->Articulo_Model->obtener_contenido("mensaje recepcion");
+                                    $msj=$mensaje_recepcion->texto;
+                                  
                                     $subject = "Articulo recibido Revista UCM";
                                     $mensaje = '<html>' .
-                                            '<body><h4>Hola <br><br>Hemos recibido tu artículo. Será sometido a un proceso de evaluación. Te avisaremos cuando hayamos terminado.</h4><br>' .
+                                            '<body><h4>'.$msj.'</h4><br>' .
                                             '</body>' .
                                             '</html>';
                                     $mensaje .= "<b>Saludos</br><br>";
                                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                     $headers = "From: RevistaUCM@ucm.cl \r\n";
-                                    $headers .= 'Bcc: servicios.intech@gmail.com' . "\r\n";
+                                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                                     mail($data['email_autor'], $subject, $mensaje, $headers);

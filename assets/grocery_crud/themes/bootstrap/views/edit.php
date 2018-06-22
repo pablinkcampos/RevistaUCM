@@ -26,7 +26,7 @@
             <div class="col-md-12">
                 <div class="table-label">
                     <div class="floatL l5">
-                        <?php echo $this->l('form_edit'); ?> <?php echo $subject?>
+                        <?php echo $this->l('form_edit'); ?> Datos
                     </div>
                     <div class="floatR r5 minimize-maximize-container minimize-maximize">
                         <i class="fa fa-caret-up"></i>
@@ -35,7 +35,19 @@
                 </div>
                 <div class="form-container table-container">
                         <?php echo form_open( $update_url, 'method="post" id="crudForm"  enctype="multipart/form-data" class="form-horizontal"'); ?>
-
+                        <style type="text/css">
+ 
+ .modal-backdrop{
+     display: none;
+ }
+ .sidebar{
+     position: absolute;
+     height: 100%
+ }
+ i{
+     font-size:30px;
+ }
+</style>
                             <?php foreach($fields as $field) { ?>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">

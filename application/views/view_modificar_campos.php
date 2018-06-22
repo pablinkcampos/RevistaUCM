@@ -20,7 +20,7 @@ foreach($css_files as $file): ?>
     }
     .sidebar{
         position: absolute;
-        height: 60%
+        height: 100%
     }
     i{
         font-size:30px;
@@ -30,13 +30,10 @@ foreach($css_files as $file): ?>
 
 
 
-                    <?php
-                     $this->load->view('include/menu_editor');
-                    ?>
      
 
 <div class="content">
-    <div class="container-fluid">
+    <div class="container-fluid bg-blue">
     
 
                       <div class="col-md-12">
@@ -51,5 +48,11 @@ foreach($css_files as $file): ?>
 
     </div>
 </div>
+
+
+                    <?php
+                     $this->load->view('include/menu_editor');
+                    ?>
+                    </div>
 
 

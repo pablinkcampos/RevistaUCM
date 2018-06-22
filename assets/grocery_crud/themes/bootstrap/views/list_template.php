@@ -43,10 +43,24 @@
         ),
         $this->l('list_displaying'));
 ?>
+
+<style type="text/css">
+ 
+ .modal-backdrop{
+     display: none;
+ }
+ .sidebar{
+     position: absolute;
+     height: 100%
+ }
+ i{
+     font-size:30px;
+ }
+</style>
 <script type='text/javascript'>
     var base_url = '<?php echo base_url();?>';
 
-    var subject = '<?php echo $subject?>';
+    var subject = 'Dato';
     var ajax_list_info_url = '<?php echo $ajax_list_info_url; ?>';
     var ajax_list_url = '<?php echo $ajax_list_url;?>';
     var unique_hash = '<?php echo $unique_hash; ?>';
@@ -66,7 +80,7 @@
         	<div class="col-md-12 table-section">
                 <div class="table-label">
                     <div class="floatL l5">
-                        <?php echo $subject_plural; ?>
+                       Datos
                     </div>
                     <div class="floatR r5 minimize-maximize-container minimize-maximize">
                         <i class="fa fa-caret-up"></i>

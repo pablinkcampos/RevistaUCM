@@ -58,7 +58,7 @@
 
 	<script src="<?php echo base_url(); ?>js/pages/tables/jquery-datatable.js"></script>
 	<script src="<?php echo base_url(); ?>js/admin.js"></script>
-    <script src="<?php echo base_url(); ?>js/pages/forms/form-wizard.js"></script>
+    
 
     <!-- Demo Js -->
     <script src="<?php echo base_url(); ?>js/demo.js"></script>

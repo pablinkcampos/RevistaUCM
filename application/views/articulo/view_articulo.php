@@ -5,7 +5,7 @@
  $CI->load->model('Articulo_model');
 
 ?>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 
 
 <script type="text/javascript">
@@ -64,7 +64,7 @@
                    </div>
                    <div class="body">
      
-                   <form id="wizard_with_validation" name = "wizard_with_validation" action="<?php echo base_url();?>index.php/Articulo_autor/ingresar_articulo" method="POST" enctype="multipart/form-data">
+                        <form id="wizard_with_validation" name = "wizard_with_validation" action="<?php echo base_url();?>index.php/Articulo_autor/ingresar_articulo" method="POST" enctype="multipart/form-data">
                              <h3>Información de autor</h3>
                              <fieldset>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -230,7 +230,7 @@
                                 <div class="form-group form-float">
 				                	<div class="form-line">
                                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                            <label for="comentarios">Comentrios (*):</label> 
+                                            <label for="comentarios">Comentarios (*):</label> 
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                                             <textarea class="ckeditor" name="comentarios" id="comentarios" rows="3" placeholder="ingrese comentarios" ><?php  if (isset($_POST['comentarios'])) echo $_POST['comentarios']; ?></textarea>

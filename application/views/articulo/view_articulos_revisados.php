@@ -4,6 +4,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -79,15 +80,16 @@
                         </div>
                         <div class="body table-responsive">
                         
-                    <table id="articulos" class="table table-bordered table-striped table-hover dataTable js-exportable" width="100%" cellspacing="0">
+                    <table id="articulos" class="table cell-border dataTable js-exportable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
-                                  <th> ID</th>
+                              <th  width="2%"> ID</th>
                                   <th> <?php echo lang('aaas_titulo'); ?></th>
                                   <th><?php echo lang('aaas_autor'); ?></th>
                                   <th><?php echo lang('aaas_tema'); ?></th>
-                                  <th><?php echo lang('aaas_fecha ingreso'); ?></th>
-                                  <th><?php echo lang('aaas_ver'); ?></th>
+                                  <th  width="2%"><?php echo lang('aaas_fecha ingreso'); ?></th>
+                                  <th  width="2%" ><?php echo lang('aaas_ver'); ?></th>
+                                  
                               </tr>
                           </thead>
                           <tbody>

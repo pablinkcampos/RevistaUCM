@@ -257,7 +257,7 @@
                                     <th style='text-align: right;'>".lang("allanav_abstract").":</th>";
                                     echo "
                                     
-                                    <td style='text-align: right;'>".$abstract."</td>";
+                                    <td style='text-align: justify;'>".$abstract."</td>";
                                     echo "
                                     
                                     </tr>";
@@ -320,7 +320,7 @@
                                     }else{
                                         echo "
                                         
-                                        <th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
+                                        <th style='text-align: justify;'>".lang("allanav_comentarios").":</th>";
                                         echo "
                                         
                                         <td>".$comentarios."</td>";
@@ -354,31 +354,26 @@
                            <div class="panel-body">
                               <div class="col-md-12">
 							  <form class="form-horizontal" action="<?php echo base_url(); ?>index.php/articulo_editor/aceptar_rechazar_articulo_recibido/<?php echo $id_revista; ?>" method="POST">
-                                            <div class="col-md-12">
-
-                                                <h3 style = "color: black;"><?php echo lang('acdrar_acep rech articulo'); ?></h3>
-                                                <hr>
-
-                                            </div>
+                                          
                                             <div class="col-md-12">
 
                                                 <label class="control-label" for="text"><?php echo lang('acdrar_seleccione opcion'); ?></label>
 
                                             </div>
 
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
 												<input name="opcion" id="opcionid1"  type="radio"   value="Aceptado" checked="" required>
-                                				<label for="opcionid1"><?php echo lang('aallav_formato_aceptar'); ?></label>
+                                				<label for="opcionid1">Aceptado</label>
                                                 
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
 												<input name="opcion" id="opcionid2" value="Rechazado" type="radio"  required>
                                 				<label for="opcionid2"><?php echo lang('acdrar_rechazado'); ?></label>
                                                 
                                             </div>
 
-											<div class="col-md-12" id="comentario">
-							   					<textarea class="ckeditor" style="dislplay:true;" name="comentarioRechazo" id="comentarioID" rows="20" cols="100" required="true"></textarea>
+											<div class="col-md-12" id="comentario" style="display:none;">
+							   					<textarea class="ckeditor"  name="comentarioRechazo" id="comentarioID" rows="20" cols="100" required="true"></textarea>
 						   					</div>
                                           
 
@@ -416,10 +411,10 @@
 
 
 				
-					<div class="widget clearfix">
+				
 						<?php
                      $this->load->view('include/menu_editor');
                     ?>
-					</div>
+			  </div>
 		
 		

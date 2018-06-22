@@ -191,6 +191,17 @@
                                     echo "<td><a href='".base_url()."uploads/".$archivo."'>".$archivo."</a></td>";
                                     echo "</tr>";
                            
+                                    
+                           
+                                    echo "<tr>";
+                                    echo "<th style='text-align: right;'>".lang("allanav_fecha ultima actualizacion").":</th>";
+                                    echo "<td>".$fecha_ultima_upd."</td>";
+                                    echo "</tr>";
+                           
+                                    echo "<tr>";
+                                    echo "<th style='text-align: right;'>".lang("allanav_fecha ingreso articulo").":</th>";
+                                    echo "<td>".$fecha_ingreso."</td>";
+                                    echo "</tr>";
                                     echo "<tr>";
                                     if($comentarios==""){
                                         echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
@@ -202,16 +213,6 @@
                                      echo "</tr>";
                            
                                     }
-                           
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_fecha ultima actualizacion").":</th>";
-                                    echo "<td>".$fecha_ultima_upd."</td>";
-                                    echo "</tr>";
-                           
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_fecha ingreso articulo").":</th>";
-                                    echo "<td>".$fecha_ingreso."</td>";
-                                    echo "</tr>";
                            
                            
                            

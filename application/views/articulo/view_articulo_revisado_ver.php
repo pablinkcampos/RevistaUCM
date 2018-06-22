@@ -141,7 +141,7 @@
                               <table class="table" style="width:90%; text-align: right;">
                                  <?php foreach ($datos->result() as $row): ?>
                                  <?php
-                                   $id_revista=$row->ID; $titulo_revista = $row->titulo_revista; $email_autor = $row->email_autor; $tema = $row->tema; $estado = $row->estado; $palabras_claves = $row->palabras_claves; $abstract = $row->abstract; $archivo = $row->archivo; $comentarios = $row->com_autor; $fecha_ultima_upd = $row->fecha_ultima_upd ; $fecha_ingreso = $row->fecha_ingreso; $n_rev1 = $row->rev_1; $n_rev2 = $row->rev_2; $n_rev3 = $row->rev_3; $id_rev1 = $row->id_rev1; $id_rev2 = $row->id_rev2; $id_rev3 = $row->id_rev3; $cal_rev1 = $row->cal_rev1; $cal_rev2 = $row->cal_rev2; $cal_rev3 = $row->cal_rev3; $com_rev1 = $row->com_rev1; $com_rev2 = $row->com_rev2; $com_rev3 = $row->com_rev3;
+                                   $id_revista=$row->ID; $titulo_revista = $row->titulo_revista; $email_autor = $row->email_autor; $tema = $row->tema; $estado = $row->estado; $palabras_claves = $row->palabras_claves; $abstract = $row->abstract; $archivo = $row->archivo; $comentarios = $row->com_autor; $fecha_ultima_upd = $row->fecha_ultima_upd ; $fecha_ingreso = $row->fecha_ingreso; $n_rev1 = $row->n_rev1; $n_rev2 = $row->n_rev2; $n_rev3 = $row->n_rev3; $e_rev1 = $row->rev_1; $e_rev2 = $row->rev_2; $e_rev3 = $row->rev_3; $id_rev1 = $row->id_rev1; $id_rev2 = $row->id_rev2; $id_rev3 = $row->id_rev3; $cal_rev1 = $row->cal_rev1; $cal_rev2 = $row->cal_rev2; $cal_rev3 = $row->cal_rev3; $com_rev1 = $row->com_rev1; $com_rev2 = $row->com_rev2; $com_rev3 = $row->com_rev3;
                                     
                                     echo "
                                     
@@ -239,7 +239,7 @@
                                     <th style='text-align: right;'>".lang("allanav_abstract").":</th>";
                                     echo "
                                     
-                                    <td style='text-align: right;'>".$abstract."</td>";
+                                    <td style='text-align: justify;'>".$abstract."</td>";
                                     echo "
                                     
                                     </tr>";
@@ -259,31 +259,7 @@
                                     
                                     </tr>";
                                     
-                                    echo "
-                                    
-                                    <tr>";
-                                    if($comentarios==""){
-                                    echo "
-                                    
-                                    <th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
-                                    echo "
-                                    
-                                    <td>-</td>";
-                                    echo "
-                                    
-                                    </tr>";
-                                    }else{
-                                    echo "
-                                    
-                                    <th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
-                                    echo "
-                                    
-                                    <td>".$comentarios."</td>";
-                                    echo "
-                                    
-                                    </tr>";
-                                    
-                                    }
+                                
                                     
                                     echo "
                                     
@@ -311,6 +287,31 @@
                                     
                                     </tr>
                                     <br>";
+                                    echo "
+                                    
+                                    <tr>";
+                                    if($comentarios==""){
+                                    echo "
+                                    
+                                    <th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
+                                    echo "
+                                    
+                                    <td>-</td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    }else{
+                                    echo "
+                                    
+                                    <th style='text-align: justify;'>".lang("allanav_comentarios").":</th>";
+                                    echo "
+                                    
+                                    <td>".$comentarios."</td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    }
                                     
                                     
                                     
@@ -333,7 +334,7 @@
                         <div id="collapseTwo_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_1">
                            <div class="panel-body">
                               <div class="col-md-12">
-							  	<table id="articulos" class="display" width="100%" cellspacing="0">
+							  	<table  class="table table-bordered" width="100%" cellspacing="0">
 									<thead>
 										<tr>
 											<th align="left" ;>
@@ -352,7 +353,7 @@
 									</thead>
 									<tbody>
 										<div id='form1'>
-											<?php if($id_rev1 !="" && $cal_rev1 !=3 ){ echo "<tr>"; echo "<td>"; echo $n_rev1; echo "</td>"; foreach ($calificaciones->result() as $row) { if ($row->id_calificacion == $cal_rev1) { echo "
+											<?php if($id_rev1 !="" && $cal_rev1 !=3 ){ echo "<tr>"; echo "<td>"; echo $n_rev1; echo "<br>"; echo $e_rev1; echo "</td>"; foreach ($calificaciones->result() as $row) { if ($row->id_calificacion == $cal_rev1) { echo "
 											<td>"; echo $row->calificacion; echo "</td>"; } } echo "
 											<td>"; echo $com_rev1; echo "</td>"; echo "
 											<td>"; echo "
@@ -362,7 +363,7 @@
 													</center>
 												</a>"; echo "</td>"; echo "</tr>"; } if($id_rev2 != "" && $cal_rev2 !=3 ){ echo "
 											<tr>"; echo "
-												<td>"; echo $n_rev2; echo "</td>"; foreach ($calificaciones->result() as $row) { if ($row->id_calificacion == $cal_rev2) { echo "
+												<td>"; echo $n_rev2; echo "<br>"; echo $e_rev2; echo "</td>"; foreach ($calificaciones->result() as $row) { if ($row->id_calificacion == $cal_rev2) { echo "
 												<td>"; echo $row->calificacion; echo "</td>"; } } echo "
 												<td>"; echo $com_rev2; echo "</td>"; echo "
 												<td>"; echo "
@@ -372,7 +373,7 @@
 														</center>
 													</a>"; echo "</td>"; echo "</tr>"; } if($id_rev3 != "" && $cal_rev3 !=3 ){ echo "
 											<tr>"; echo "
-												<td>"; echo $n_rev3; echo "</td>"; foreach ($calificaciones->result() as $row) { if ($row->id_calificacion == $cal_rev3) { echo "
+												<td>"; echo $n_rev3; echo "<br>"; echo $e_rev3; echo "</td>"; foreach ($calificaciones->result() as $row) { if ($row->id_calificacion == $cal_rev3) { echo "
 												<td>"; echo $row->calificacion; echo "</td>"; } } echo "
 												<td>"; echo $com_rev3; echo "</td>"; echo "
 												<td>"; echo "
@@ -407,32 +408,29 @@
 							?>
 							<div class="container-fluid col-xs-12 ol-sm-12 col-md-12 col-lg-12">
 								<form class="form-horizontal" action="<?php echo base_url(); ?>index.php/articulo_editor/aceptar_rechazar_articulo_revisado/<?php echo $id_revista; ?>" method="POST">
-									<div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
-										<h3 style="color: black;"><?php echo lang('acdrar_acep rech articulo'); ?></h3>
-										<hr>
-									</div>
+							
 
 
 									<div class="col-xs-1 ol-sm-1 col-md-1 col-lg-1">
 										<label class="control-label" for="text">Fecha de Reenvio: </label>
 									</div>
-							        <div class="col-xs-11 ol-sm-11 col-md-11 col-lg-11">
+							        <div class="col-xs-11 ol-sm-11 col-md-4 col-lg-4">
 							            <input type="text" class="form-control" maxlength="80" value="<?php echo date("d-m-Y",$mod_date); ?>" name="fecha_reenvio" id="fecha_reenvio" disabled="disabled">
 							        </div>
 									<div align="left" ; class="col-xs-2 ol-sm-2 col-md-2 col-lg-2">
 										<label  class="control-label" for="text">Decisión de Aceptación: </label>
 									</div>
-									<div class="col-xs-9 ol-sm-9 col-md-9 col-lg-9">
+									<div class="col-xs-9 ol-sm-9 col-md-4 col-lg-4">
 										<select class="form-control" name="opcion" id="opcionid">
 											<option value="3">Selecciona Calificación</option>
 											<?php foreach ($estados->result() as $row) { if($row->id_estado == 4 || $row->id_estado == 5 || $row->id_estado == 6 ){ if ($row->nombre_estado == $estado) { $string = ' selected="selected" '; } else { $string = ""; } echo '
 											<option value="' . $row->id_estado . '" ' . $string . '>' . $row->nombre_estado . '</option>'; } } ?>
 										</select>
 									</div>
-									<div class="col-md-1">
+									<div class="col-md-2">
 										<label class="control-label" for="text">Comentario</label>
 									</div>
-									<div class="col-md-11" id="comentario">
+									<div class="col-md-9" id="comentario">
 										<textarea class="ckeditor" style="dislplay:true;" name="comentarioRechazo" id="comentarioID" rows="20" cols="72" required="true"></textarea>
 									</div>
 									<div class="row" style="position:fixed;left:91%;top:68.3%;"> 

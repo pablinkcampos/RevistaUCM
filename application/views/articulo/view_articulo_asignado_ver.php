@@ -4,6 +4,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 <script language="javascript">
    $(document).ready(function(){
    
@@ -227,7 +228,7 @@
                                     <th style='text-align: right;'>".lang("allanav_abstract").":</th>";
                                     echo "
                                     
-                                    <td style='text-align: right;'>".$abstract."</td>";
+                                    <td style='text-align: justify;'>".$abstract."</td>";
                                     echo "
                                     
                                     </tr>";
@@ -294,7 +295,7 @@
                                         <th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
                                         echo "
                                         
-                                        <td>".$comentarios."</td>";
+                                        <td style='text-align: justify;'>".$comentarios."</td>";
                                         echo "
                                         
                                         </tr>";
@@ -338,11 +339,11 @@
                                    <!-- formulario en el cual se activa el metodo post para reasignar revisores -->
                                  <form class="form-horizontal" action="
                                     <?php echo base_url(); ?>index.php/articulo_editor/reasignar_revisores_editor/<?php echo $id_revista; ?>" method="POST">
-                                    <table id="articulos" class="display" width="100%" cellspacing="0">
+                                    <table id="articulos" class="table cell-border" width="100%" cellspacing="0">
                                        <thead>
                                           <tr>
-                                             <th align="center";>
-                                                &nbsp;&nbsp;
+                                             <th align="center";  width="2%">
+                                                ID
                                              </th>
                                              <th align="left";>
                                                 &nbsp;
@@ -354,7 +355,7 @@
                                                 <?php echo lang('allanav_academico'); ?>
                                                 &nbsp;
                                              </th>
-                                             <th align="left";>
+                                             <th align="left";  width="2%">
                                                 &nbsp;
                                                 <?php echo lang('allanav_cantidad'); ?>
                                                 &nbsp;
@@ -370,6 +371,7 @@
                                              <?php
                                                 $id_revisor = $row->ID;
                                                 $nombre_r = $row->nombre;
+                                                $email_r = $row->email;
                                                 $academico = $row->titulo_academico;
                                                 $tema_r = $row->tema;
                                                 $cantidad_a = $row->cantidad;
@@ -393,7 +395,7 @@
                                                 }
                                                 //nombre
                                                 echo "
-                                                <td align='left'>"; echo $nombre_r; echo "</td>";
+                                                <td align='left'>"; echo $nombre_r."<br>".$email_re; echo "</td>";
                                                 //grado academico
                                                 echo "
                                                 <td align='left'>"; echo $academico; echo "</td>";
@@ -446,9 +448,10 @@
    </div>
 </div>
 
-		<div class="widget clearfix">
+		
 						<?php
                      $this->load->view('include/menu_editor');
                     ?>
-					</div>
+                    </div>
+				
 		

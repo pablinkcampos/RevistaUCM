@@ -4,6 +4,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -79,34 +80,36 @@
                         </div>
                         <div class="body table-responsive">
                         
-                        <table  class="table table-bordered table-striped table-hover dataTable js-exportable" id="articulos" class="display" width="100%" cellspacing="0">
+                        <table  class="table cell-border dataTable js-exportable" id="articulos" class="display" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>
+                            
+                                <th width="2%">
                                    ID
                                 </th>
-                                <th>
-                                    <?php echo lang('allaa_fecha ingreso articulo'); ?>
+                                <th width="2%">
+                                    Versión
+                                </th>
+                                <th width="2%">
+                                    Fecha ingreso
                                 </th>
                                 <th>
                                     <?php echo lang('aar_tema'); ?>
                                 </th>
-                                <th>
-                                    Versión
-                                </th>
+                                
                                 <th>
                                     <?php echo lang('allaa_titulo articulo'); ?>
                                 </th>
-                                <th>
+                                <th width="2%">
                                     <?php echo lang('allaa_estado'); ?>
                                 </th>
                                 <th>
                                     <?php echo lang('allaa_autor'); ?>
                                 </th>
-                                <th>
+                                <th width="2%">
                                     <?php echo lang('allaa_calificados'); ?>
                                 </th>
-                                <th>
+                                <th width="2%">
                                     <?php echo lang('aaa_ver'); ?>
                                 </th>
                             </tr>
@@ -153,9 +156,10 @@
                                         }
                                     }
                                          echo $id_revista; echo "</td>";
+                                         echo "<td>"; echo $version; echo "</td>";
                                         echo "<td>"; echo $fecha_ingreso; echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
-                                        echo "<td>"; echo $version; echo "</td>";
+                                      
                   					    echo "<td>"; echo $titulo_revista; echo "</td>";
 
                                               echo "<td>";
@@ -187,15 +191,16 @@
                                     ID
                                 </th>
                                 <th>
+                                    version
+                                </th>
+                                <th>
                                     <?php echo lang('allaa_fecha ingreso articulo'); ?>
                                 </th>
                                 <th>
                                     <?php echo lang('aar_tema'); ?>
                                 </th>
                                 
-                                <th>
-                                    version
-                                </th>
+                               
                                 <th>
                                     <?php echo lang('allaa_titulo articulo'); ?>
                                 </th>
@@ -224,24 +229,11 @@
   
     </section>
               <!-- menu -->
-   <div class="container-fluid  " style="margin-top: 200px;">
-	<div class="row">
+   
 
 
-            <div class="col-md-3">
-                <div class="sidebar nobottommargin clearfix">
-                    <div class="sidebar-widgets-wrap">
-                        <div class="widget clearfix">
+          
                             <?php
                      $this->load->view('include/menu_editor');
                     ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-           
-
-
-        </div>
-    </div>
+             

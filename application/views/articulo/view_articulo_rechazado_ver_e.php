@@ -128,7 +128,7 @@
 						            echo "</tr>";
 					            }else{
 					            	echo "<th style='text-align: right;'>".lang("aallav_comentarios").":</th>";
-						            echo "<td>".$comentarios."</td>";
+						            echo "<td style='text-align: justify;'>".$comentarios."</td>";
 						            echo "</tr>";
 
 					            }
@@ -165,14 +165,8 @@
 
 			</div>
 
-			<div class="sidebar nobottommargin clearfix">
-				<div class="sidebar-widgets-wrap">
-					<div class="widget clearfix">
+		
 						<?php
                      $this->load->view('include/menu_editor');
                     ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		

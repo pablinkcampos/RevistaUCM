@@ -1,7 +1,18 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
+ $info = $this->Articulo_Model->obtener_info_articulo2($articulo_id);
+                if ($info)
+                {
+
+                }
+                else
+                {
+                  redirect('index.php/System/editor');
+                }
 ?>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
     function validate_num() {
@@ -36,18 +47,7 @@
 
 
 
-<?php
- defined('BASEPATH') OR exit('No direct script access allowed');
- $info = $this->Articulo_Model->obtener_info_articulo2($articulo_id);
-                if ($info)
-                {
 
-                }
-                else
-                {
-                  redirect('index.php/System/editor');
-                }
-?>
 
 <div class="container-fluid  " style="margin-top: 200px;">
     
@@ -61,71 +61,68 @@
                         
                    
                 </div>
-                <center>
-                <div class="row">
-                <div  style="margin:10px" align='left' class="col-lg-12 clearfix">
-                    <b>Instrucciones:  </b> 
-                    <br>1)descargar Artículo<br> 
-                </div>
-                
-                <div class="col-lg-6" style="margin:10px">
+                <div class="body">
+                            <div id="wizard_vertical">
+                                <h2>Descargar Artículo</h2>
+                                <section>
+                                    <div  style="align='left';"  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <a Download href="<?php echo base_url() . 'uploads/' . $info->archivo ?>" class="btn btn-block waves-effect"><i class='material-icons' style='font-size:25px;'>file_download</i><?php echo lang('vap_descargar articulo'); ?></a>
+                                    </div>
+                                  
+                                   
+                                   
+                                </section>
 
-                    <a Download href="<?php echo base_url() . 'uploads/' . $info->archivo ?>" class="button right button-3d button button-rounded button-blue"><i class='material-icons' style='font-size:25px;'>file_download</i><?php echo lang('vap_descargar articulo'); ?></a>
-                </div>
-                <div  style="margin:10px" align='left' class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <br>2)subir y convertir Artículo descargado<br>
-                </div>
-                <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="https://v2.convertapi.com/docx/to/pdf?Secret=zLxh3oGBDrQ9kSwI&download=attachment" method="post" enctype="multipart/form-data">
+                                <h2>Subir y Convertir Artículo .docx</h2>
+                                <section>
+                                    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" action="https://v2.convertapi.com/docx/to/pdf?Secret=zLxh3oGBDrQ9kSwI&download=attachment" method="post" enctype="multipart/form-data">
                    
-                    <div style="text-align: right;" class="col-lg-1">
-                            <label for="final_file">Subir archivo .docx</label>
-                    </div>
-                    <div class="form-group col_full">
-                        <input type="file" name="File"  />
-                    </div>
-                    <div class="form-group m-1" style="margin:10px">
-                        <div class="col-lg-offset-2 col-lg-7">
-                              
-                            <button class="btn btn-info bg-blue waves-effect" type="submit">Convertir</button>
-                        </div>
-                         
-                    </div>
-                   
-                   
-                </form>
-           
-      
-            
-                <hr>
-                <div style="margin:10px" align='left' class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <br>3)subir Artículo convertido<br>    
-                </div>
-                <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form_23" action="<?php echo base_url(); ?>index.php/Articulo_autor/responder_solicitud" method="POST" onsubmit="return validate_num()" enctype="multipart/form-data">
-                
-                <div class="form-group col_full">
-                        <input type="hidden" value="<?php echo $articulo_id ?>" name="t_id" />   
-                    </div>
-              
-                    <div class="form-group col_full">
-                        <div style="text-align: right;" class="col-lg-1">
-                            <label for="final_file"><?php echo lang('vap_subir archivo'); ?> PDF</label>
-                        </div>
-                        <div class="col-lg-11">
-                            <input type="file" name = "final_file" accept=".pdf" class="filestyle" id="exampleInputFile" required="required" aria-describedby="fileHelp" data-buttonText="<i class='material-icons' style='font-size:20px;vertical-align:bottom'>file_upload</i> <?php echo lang('aa_seleccionar'); ?> ">
-                            <small id="fileHelp" class="form-text text-muted"><?php echo lang('vap_formato admitido'); ?> <b>(.pdf)</b></small>
-                        </div>
-                    </div>
+                                       
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input type="file" name="File" type="file" accept=".docx" required="required"/>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >
+                                            
 
-                        <div class="form-group m-1" style="margin:10px">
-                            <div class="col-lg-offset-2 col-lg-7">
-                              
-                                <button  type="submit" name="exit" class="btn btn-success waves-effect">subir PDF</button>
+                                                <button class="btn btn-block-info bg-blue waves-effect" type="submit">Convertir</button>
+                                        
+
+                                        </div>
+                  
+                  
+                                    </form>
+                                </section>
+
+                                <h2>Subir Artículo PDF</h2>
+                                <section>
+                                    <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form_23" action="<?php echo base_url(); ?>index.php/Articulo_autor/responder_solicitud" method="POST" onsubmit="return validate_num()" enctype="multipart/form-data">
+                
+                                        <div class="form-group col_full">
+                                           <input type="hidden" value="<?php echo $articulo_id ?>" name="t_id" />   
+                                       </div>
+
+                                   
+                                        
+                                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                               <input type="file" name = "final_file" accept=".pdf" class="filestyle" id="exampleInputFile" required="required" aria-describedby="fileHelp" data-buttonText="<i class='material-icons' style='font-size:20px;vertical-align:bottom'>file_upload</i> <?php echo lang('aa_seleccionar'); ?> ">
+                                               <small id="fileHelp" class="form-text text-muted"><?php echo lang('vap_formato admitido'); ?> <b>(.pdf)</b></small>
+                                           </div>
+                                    
+
+                                          
+                                               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                                                   <button  type="submit" name="exit" class="btn btn-success waves-effect">subir PDF</button>
+                                               </div>
+                                           
+
+                                    </form>
+                                </section>
+
+                                
                             </div>
                         </div>
-                        
-                    </form>
-                </div>
-                </center>
+               
             </div>
             
         </div>
@@ -134,7 +131,6 @@
 
 
 
-                <div class="widget clearfix">
                     <?php
                      $this->load->view('include/menu_editor');
                     ?>

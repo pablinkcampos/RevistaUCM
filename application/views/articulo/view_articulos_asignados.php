@@ -4,6 +4,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -79,16 +80,17 @@
                         </div>
                         <div class="body table-responsive">
                         
-                    <table id="articulos" class="table table-bordered table-striped table-hover dataTable js-exportable" width="100%" cellspacing="0">
+                    <table id="articulos" class="table cell-border dataTable js-exportable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
-                                  <th> ID</th>
+                                  <th  width="2%"> ID</th>
+                                  <th  width="1%"> Versión</th>
                                   <th> <?php echo lang('aaas_titulo'); ?></th>
                                   <th><?php echo lang('aaas_autor'); ?></th>
                                   <th><?php echo lang('aaas_tema'); ?></th>
-                                  <th><?php echo lang('aaas_fecha ingreso'); ?></th>
-                                  <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" ><?php echo lang('aaas_ver'); ?></th>
-                                  <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><?php echo lang('aaas_comentar'); ?></th>
+                                  <th  width="2%"><?php echo lang('aaas_fecha ingreso'); ?></th>
+                                  <th  width="2%" ><?php echo lang('aaas_ver'); ?></th>
+                                  <th  width="2%"><?php echo lang('aaas_comentar'); ?></th>
                               </tr>
                           </thead>
                           <tbody>
@@ -101,6 +103,7 @@
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;
+                                $version = $row->versiona;
                     
                                 $fecha_ingreso =date("d-m-y",strtotime($row->fecha_ingreso));
                                 $fecha_asignacion = $row->fecha_asignacion;
@@ -130,7 +133,8 @@
                                         echo "<td style='border-left: 6px solid red;'>";
                                     }
                                 }
-                                             echo  $id_revista;  echo "</td>";                		
+                                             echo  $id_revista;  echo "</td>"; 
+                                             echo "<td>"; echo $version; echo "</td>";               		
                                              echo "<td>";echo  $titulo_revista;  echo "</td>";                					    
 
                                               echo "<td>";

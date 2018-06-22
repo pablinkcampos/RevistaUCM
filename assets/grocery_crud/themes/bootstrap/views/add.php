@@ -1,3 +1,16 @@
+<style type="text/css">
+ 
+ .modal-backdrop{
+     display: none;
+ }
+ .sidebar{
+     position: absolute;
+     height: 100%
+ }
+ i{
+     font-size:30px;
+ }
+</style>
 <?php
     $this->set_css($this->default_theme_path.'/bootstrap/css/bootstrap/bootstrap.css');
     $this->set_css($this->default_theme_path.'/bootstrap/css/font-awesome/css/font-awesome.min.css');
@@ -25,7 +38,7 @@
             <div class="col-md-12">
                 <div class="table-label">
                     <div class="floatL l5">
-                        <?php echo $this->l('form_add'); ?> <?php echo $subject?>
+                        <?php echo $this->l('form_add'); ?> Datos
                     </div>
                     <div class="floatR r5 minimize-maximize-container minimize-maximize">
                         <i class="fa fa-caret-up"></i>
@@ -83,6 +96,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
 	var validation_url = '<?php echo $validation_url?>';

@@ -29,15 +29,29 @@
 
                             <?php
                              $ids = $this->Articulo_Model->get_8();
-                            
+                             $temas = $this->Model_for_login->get_temas();
+                          
+                        
                              echo '<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <select id="articulos" class="ms"  multiple="multiple" name="art[]" >';
-                                    echo'<option  disabled >seleccione articulos disponibles</option>';
-                          
+                                echo'<option  disabled >seleccione articulos disponibles</option>';
+                                
                              if ($ids) {
+                                foreach ($temas->result() as $tema) {
+                                    
+                                    
+                                    
+                                   
+                                    
                                  foreach ($ids as $row) {
-                                     echo'<option value="' . $row->ID . '" data-subtext="Paginas: ' . $row->pagina_inicio . ' -- ' . $row->pagina_fin . '">' . $row->titulo . '</option>';
+                                     if($tema->id_tema == $row->id_tema){
+                                        echo '<optgroup label="'.$tema->nombre.'">';
+                                        echo'<option value="' . $row->ID . '">' . $row->titulo . '</option>';
+                                     }
+                                     echo'</optgroup>';
                                  }
+                                
+                                }
                              }
                              echo'</select>
                             </div>';

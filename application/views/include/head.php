@@ -23,7 +23,7 @@
         <link href="<?php echo base_url(); ?>plugins/waitme/waitMe.css" rel="stylesheet" />
         <!-- JQuery DataTable Css -->
         <link href="<?php echo base_url(); ?>plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-
+ 
         <!-- Morris Chart Css-->
         <link href="<?php echo base_url(); ?>plugins/morrisjs/morris.css" rel="stylesheet" />
         <!-- Bootstrap Select Css -->
