@@ -17,6 +17,20 @@ height:10%;
 }
 </style>
 
+<style type="text/css">
+ 
+ .modal-backdrop{
+     display: none;
+ }
+ .sidebar{
+     position: absolute;
+     height: 100%
+ }
+ i{
+     font-size:30px;
+ }
+</style>
+
 <body class="theme-blue">
 
   
@@ -27,7 +41,7 @@ height:10%;
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" href="<?php echo base_url(); ?>index.php"><div class="centrar-imagen">
 
-                <img src="<?php echo base_url(); ?>img/logo.png" alt="UCM Logo" width="100%"  >
+                <img src="<?php echo base_url(); ?>img/logo.jpg" alt="UCM Logo" width="100%"  >
                 </div></a>
             </div>
           

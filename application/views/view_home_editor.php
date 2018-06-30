@@ -1,8 +1,46 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<?php //echo $id_usuario; echo $nombre_usuario; echo $email_usuario; echo $id_rol;           ?>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/bs-select.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        
+        
+
+            var table = $('#articulos').DataTable( {
+           
+            language: {
+            processing:     "Procesando ...",
+            search:         "Buscar:",
+            lengthMenu:    "Mostrar _MENU_ Elementos",
+            info:           "Visualización del elemento _START_ de _END_ en _TOTAL_ elementos",
+            infoEmpty:      "Mostrar 0 elemento 0 en 0 elementos",
+            infoFiltered:   "(filtro de  _MAX_ en total)",
+            infoPostFix:    "",
+            loadingRecords: "Cargando ...",
+            zeroRecords:    "No hay datos disponibles en la tabla",
+            emptyTable:     "No hay datos disponibles en la tabla",
+            paginate: {
+                first:      "Primero",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Último"
+            },
+            aria: {
+                sortAscending:  ": activar para ordenar la columna en orden ascendente",
+                sortDescending: ": active para ordenar la columna en orden descendente"
+            }
+            }
+            } );
+           
+ 
+    // Apply the search
+       
+
+      
+    });
+</script>
 <div class="container-fluid  " style="margin-top: 100px;">
        
     
@@ -57,12 +95,12 @@
                         
                         
                     
-                        echo '<div class="col-lg-12 col-md-12">
+                        echo '<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
                             <center>
                             <h2>'.lang("vhe_no existen articulos aun").'.</h2>
                             </center>
                             </div>';
-                            echo '<div class="col-lg-12 col-md-12">
+                            echo '<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" >
                             <center>
                             <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">Artículos por formatear</a>
                             <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
@@ -102,7 +140,7 @@
                     
                     
                 
-                    echo '<div class="col-lg-12 col-md-12">
+                    echo '<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
                         <center>
                         <h2>'.lang("vhe_articulos disponibles").'.</h2>
                         </center>
@@ -120,10 +158,10 @@
                       
                      
                     foreach ($consulta as $row) {
-                        echo ' <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
+                        echo ' <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
                                 <div class="card">
                                     <div class="icon">
-                                        <i class="material-icons col-blue">bookmark</i><b>'.$row->titulo_revista .'.</b>
+                                        <i class="material-icons col-blue">bookmark</i><b>'.substr($row->titulo_revista, 0, 30) .'...</b>
                                        
                                     </div>
                                    
@@ -138,7 +176,7 @@
                          $as = $row->id_estado;
                          if($as == 7 || $as == 5){
                             echo '            <li><span class="label label-info">falta formatear a pdf</span></li>';
-                            echo '            <li><i class="icon-time"></i> '.lang("vhe_actualizado el").' ' . obtenerFechaEnLetra($row->fecha_ultima_upd) . '</li>';
+                            echo '            <li><i class="icon-time"></i>  ' . obtenerFechaEnLetra($row->fecha_ultima_upd) . '</li>';
                             echo '        </ul>';
                             echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
                             echo '            <input type="hidden" value="' . $row->ID . '" name="articulo_id" />';
@@ -148,7 +186,7 @@
                          }else if($as == 13){
                             echo '            <li><span class="label label-success">'.lang("vla_listo para revista").'</span></li>';
                             $dat = $this->Articulo_Model->get_fecha_last($row->ID);
-                            echo '            <li><i class="icon-time"></i> '.lang("vla_actualizado el").' ' . obtenerFechaEnLetra($dat->fecha_ultima_upd) . '</li>';
+                            echo '            <li><i class="icon-time"></i>  ' . obtenerFechaEnLetra($dat->fecha_ultima_upd) . '</li>';
                      
                             echo '        </ul>';
                             echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';

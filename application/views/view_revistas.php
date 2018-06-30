@@ -33,7 +33,7 @@
                                     <div class="header">
                                  
                                         <h2>
-                                        <a href="'.base_url().'index.php/Home_principal/publicacion?revista=' . $row->ID . '">'.$row->titulo_revista.'</a>
+                                        <a href="'.base_url().'index.php/Home_principal/publicacion?revista=' . $row->ID . '">'.substr($row->titulo_revista, 0, 30).'</a>
                                         </h2>
                                     </div>
 

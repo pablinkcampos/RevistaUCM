@@ -133,86 +133,175 @@
                                     $cal_rev2 = $row->cal_rev2; 
                                     $cal_rev3 = $row->cal_rev3;
                              
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_titulo articulo").":</th>";
-                                    echo "<td>".$titulo_revista."</td>";
-                                    echo "</tr>";
-                           
-                           
-                           
+                                    echo "
+                                    
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_titulo articulo").":</th>";
+                                    echo "
+                                    
+                                    <td style='text-align: left;' >".$titulo_revista."</td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    
+                                    
                                     $CI =& get_instance();
                                     $CI->load->model('Articulo_model');
-                           
+                                    
                                     //Autor
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_autor").":</th>";
-                                  
-                           
-                                        echo "<td>";
-                                        echo $email_autor;
+                                    echo "
                                     
-                                        echo "</td>";
-                           
-                                    echo "</tr>";
-                           
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_autor").":</th>";
+                                    
+                                    
+                                       echo "
+                                    
+                                    <td style='text-align: left;'>";
+                                       echo $email_autor;
+                                    
+                                       echo "</td>";
+                                    
+                                    echo "
+                                    
+                                    </tr>";
+                                    
                                     //Campo de investigacion
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_campo de investigacion").":</th>";
-                              
-                                        echo "<td>";
-                                        echo $tema;
-                                        echo "</td>";
+                                    echo "
                                     
-                                    echo "</tr>";
-                           
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_campo de investigacion").":</th>";
+                                    
+                                       echo "
+                                    
+                                    <td style='text-align: left;'>";
+                                       echo $tema;
+                                       echo "</td>";
+                                    
+                                    echo "
+                                    
+                                    </tr>";
+                                    
                                     //Estado
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_estado").":</th>";
-                           
-                               
-                                        echo "<td>";
-                                        echo $row->estado;
-                                        echo "</td>";
-                                   
-                                    echo "</tr>";
-                           
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_palabras claves").":</th>";
-                                    echo "<td>".$palabras_claves."</td>";
-                                    echo "</tr>";
-                           
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_abstract").":</th>";
-                                    echo "<td style='text-align: justify;'>".$abstract."</td>";
-                                    echo "</tr>";
-                           
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_archivo:")."</th>";
-                                    echo "<td><a href='".base_url()."uploads/".$archivo."'>".$archivo."</a></td>";
-                                    echo "</tr>";
-                           
+                                    echo "
                                     
-                           
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_fecha ultima actualizacion").":</th>";
-                                    echo "<td>".$fecha_ultima_upd."</td>";
-                                    echo "</tr>";
-                           
-                                    echo "<tr>";
-                                    echo "<th style='text-align: right;'>".lang("allanav_fecha ingreso articulo").":</th>";
-                                    echo "<td>".$fecha_ingreso."</td>";
-                                    echo "</tr>";
-                                    echo "<tr>";
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_estado").":</th>";
+                                    
+                                    
+                                       echo "
+                                    
+                                    <td style='text-align: left;'>";
+                                       echo $row->estado;
+                                       echo "</td>";
+                                    
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    echo "
+                                    
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_palabras claves").":</th>";
+                                    echo "
+                                    
+                                    <td style='text-align: left;'>".$palabras_claves."</td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    echo "
+                                    
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_abstract").":</th>";
+                                    echo "
+                                    
+                                    <td  style='text-align: justify;'>".$abstract."</td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    echo "
+                                    
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_archivo:")."</th>";
+                                    echo "
+                                    
+                                    <td style='text-align: left;'>
+                                    <a href='".base_url()."uploads/".$archivo."'>".$archivo."</a>
+                                    </td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    echo "
+                                    
+                                    <tr>";
+                                    
+                                    
+                                    echo "
+                                    
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_fecha ultima actualizacion").":</th>";
+                                    echo "
+                                    
+                                    <td style='text-align: left;'>".$fecha_ultima_upd."</td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    echo "
+                                    
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_fecha ingreso articulo").":</th>";
+                                    echo "
+                                    
+                                    <td style='text-align: left;'>".$fecha_ingreso."</td>";
+                                    echo "
+                                    
+                                    </tr>";
                                     if($comentarios==""){
-                                        echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
-                                     echo "<td>-</td>";
-                                     echo "</tr>";
+                                        echo "
+                                        
+                                        <th style='text-align: left;'>".lang("allanav_comentarios").":</th>";
+                                        echo "
+                                        
+                                        <td style='text-align: left;'>-</td>";
+                                        echo "
+                                        
+                                        </tr>";
                                     }else{
-                                        echo "<th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
-                                     echo "<td>".$comentarios."</td>";
-                                     echo "</tr>";
-                           
+                                        echo "
+                                        
+                                        <th style='text-align: justify;'>".lang("allanav_comentarios").":</th>";
+                                        echo "
+                                        
+                                        <td >".$comentarios."</td>";
+                                        echo "
+                                        
+                                        </tr> <br>";
+                                        
                                     }
+                                    
                            
                            
                            

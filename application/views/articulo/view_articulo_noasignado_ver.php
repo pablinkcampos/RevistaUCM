@@ -176,10 +176,10 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_titulo articulo").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_titulo articulo").":</th>";
                                     echo "
                                     
-                                    <td>".$titulo_revista."</td>";
+                                    <td style='text-align: left;' >".$titulo_revista."</td>";
                                     echo "
                                     
                                     </tr>";
@@ -195,12 +195,12 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_autor").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_autor").":</th>";
                                     
                                     
                                        echo "
                                     
-                                    <td>";
+                                    <td style='text-align: left;'>";
                                        echo $email_autor;
                                     
                                        echo "</td>";
@@ -215,11 +215,11 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_campo de investigacion").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_campo de investigacion").":</th>";
                                     
                                        echo "
                                     
-                                    <td>";
+                                    <td style='text-align: left;'>";
                                        echo $tema;
                                        echo "</td>";
                                     
@@ -233,12 +233,12 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_estado").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_estado").":</th>";
                                     
                                     
                                        echo "
                                     
-                                    <td>";
+                                    <td style='text-align: left;'>";
                                        echo $row->estado;
                                        echo "</td>";
                                     
@@ -251,23 +251,10 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_palabras claves").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_palabras claves").":</th>";
                                     echo "
                                     
-                                    <td>".$palabras_claves."</td>";
-                                    echo "
-                                    
-                                    </tr>";
-                                    
-                                    echo "
-                                    
-                                    <tr>";
-                                    echo "
-                                    
-                                    <th style='text-align: right;'>".lang("allanav_abstract").":</th>";
-                                    echo "
-                                    
-                                    <td style='text-align: justify;'>".$abstract."</td>";
+                                    <td style='text-align: left;'>".$palabras_claves."</td>";
                                     echo "
                                     
                                     </tr>";
@@ -277,10 +264,23 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_archivo:")."</th>";
+                                    <th style='text-align: left;'>".lang("allanav_abstract").":</th>";
                                     echo "
                                     
-                                    <td>
+                                    <td  style='text-align: justify;'>".$abstract."</td>";
+                                    echo "
+                                    
+                                    </tr>";
+                                    
+                                    echo "
+                                    
+                                    <tr>";
+                                    echo "
+                                    
+                                    <th style='text-align: left;'>".lang("allanav_archivo:")."</th>";
+                                    echo "
+                                    
+                                    <td style='text-align: left;'>
                                     <a href='".base_url()."uploads/".$archivo."'>".$archivo."</a>
                                     </td>";
                                     echo "
@@ -297,10 +297,10 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_fecha ultima actualizacion").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_fecha ultima actualizacion").":</th>";
                                     echo "
                                     
-                                    <td>".$fecha_ultima_upd."</td>";
+                                    <td style='text-align: left;'>".$fecha_ultima_upd."</td>";
                                     echo "
                                     
                                     </tr>";
@@ -310,36 +310,36 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_fecha ingreso articulo").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_fecha ingreso articulo").":</th>";
                                     echo "
                                     
-                                    <td>".$fecha_ingreso."</td>";
+                                    <td style='text-align: left;'>".$fecha_ingreso."</td>";
                                     echo "
                                     
-                                    </tr>
-                                    <br>";
+                                    </tr>";
                                     if($comentarios==""){
                                         echo "
                                         
-                                        <th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
+                                        <th style='text-align: left;'>".lang("allanav_comentarios").":</th>";
                                         echo "
                                         
-                                        <td>-</td>";
-                                        echo "
-                                        
-                                        </tr>";
-                                        }else{
-                                        echo "
-                                        
-                                        <th style='text-align: right;'>".lang("allanav_comentarios").":</th>";
-                                        echo "
-                                        
-                                        <td style='text-align: justify;'>".$comentarios."</td>";
+                                        <td style='text-align: left;'>-</td>";
                                         echo "
                                         
                                         </tr>";
+                                    }else{
+                                        echo "
                                         
-                                        }
+                                        <th style='text-align: justify;'>".lang("allanav_comentarios").":</th>";
+                                        echo "
+                                        
+                                        <td >".$comentarios."</td>";
+                                        echo "
+                                        
+                                        </tr> <br>";
+                                        
+                                    }
+                                    
                                     
                                     
                                     

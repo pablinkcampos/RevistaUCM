@@ -41,7 +41,7 @@
     <div class="login-box">
         <div class="logo">
                     <center>
-                        <a><img width="350" height="80" src="<?php echo base_url(); ?>img/logo_flaco.png" alt="UCM Logo"></a>
+                        <a><img width="350" height="80" src="<?php echo base_url(); ?>img/logo.png" alt="UCM Logo"></a>
                     </center>
         </div>
         <div class="card">

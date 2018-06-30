@@ -264,6 +264,24 @@
         }
     }
 
+    public function editor_cambia_mensaje_ac() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $data["texto"] = $this->Articulo_Model->obtener_contenido("mensaje aceptado com");
+            $this->load->view('view_modificar_mensaje_aceptacion_com', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
     public function editor_cambia_datos_r() {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
@@ -305,6 +323,42 @@
         }
     }
 
+    public function editor_cambia_mensaje_re() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $data["texto"] = $this->Articulo_Model->obtener_contenido("mensaje rechazo");
+            $this->load->view('view_modificar_mensaje_rechazo', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function editor_cambia_mensaje_as() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $data["texto"] = $this->Articulo_Model->obtener_contenido("mensaje asignado");
+            $this->load->view('view_modificar_mensaje_asignado', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array('title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
     public function editor_cambia_mensaje_p() {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
@@ -332,6 +386,25 @@
                  $nombretemparchivo = $_FILES['file_logo']['tmp_name'];
                  if (in_array($ext, $formatos)) {
                      if (move_uploaded_file($nombretemparchivo, "img/logo.png") == true) {
+                        $path ="img/logo.png";
+                        $resize = array(717, 150);
+                        $img_size = getimagesize($path);
+                        $lienzo = imagecreatetruecolor( $resize[0], $resize[1]);//Crea el fondo donde se colocará la imagen
+                        imagealphablending($lienzo, false);
+                        imagesavealpha($lienzo,true);
+                        $func_images = array(
+                            '.jpeg' => array('imagecreatefromjpeg', 'imagejpeg'),
+                            '.jpg' => array('imagecreatefromjpeg', 'imagejpeg'),
+                            '.png' => array('imagecreatefrompng', 'imagepng'),
+                            '.gif' => array('imagecreatefromgif', 'imagegif')
+                        );
+
+                        $img = call_user_func($func_images[$ext][0], $path);
+                        $transparent = imagecolorallocatealpha($lienzo, 255, 255, 255, 127);
+                        imagefilledrectangle($lienzo, 0, 0, $resize[0], $resize[1], $transparent);
+                        imagecopyresampled($lienzo, $img, 0, 0, 0, 0, $resize[0], $resize[1],$img_size[0], $img_size[1]);//Copia y cambia el tamaño de parte de una imagen redimensionándola
+                
+                        call_user_func($func_images[$ext][1], $lienzo, $path);
 
                         $aviso = array('title' => '¡Logo cambiado!',
                             'text' => 'Hecho.',
@@ -439,38 +512,20 @@
      }
      
      public function editor_crud_campos(){
-        $crud = new grocery_CRUD();
-        $crud->set_theme('bootstrap');
-        $crud->set_table('campo_investigacion');
-        $crud->set_language('spanish');
-        $crud->unset_read();
-        $crud->unset_export();
-        $crud->unset_print();
-        $crud->set_crud_url_path(site_url('index.php/System/editor_crud_campos'));
-        $output = $crud->render();
 
-        $this->load->view('include/head_gc');
+
+        $this->load->view('include/head');
         $this->load->view('include/header_editor');
-        $this->load->view('view_modificar_campos',$output);
-        $this->load->view('include/footer_gc');
+        $this->load->view('view_areas');
+        $this->load->view('include/footer');
 
      }
      public function editor_crud_temas(){
-        $crud = new grocery_CRUD();
-        $crud->set_theme('bootstrap');
-        $crud->set_table('temas');
-        $crud->set_relation('nombre_campo', 'campo_investigacion', 'nombre_campo');
-        $crud->set_language('spanish');
-        $crud->unset_read();
-        $crud->unset_export();
-        $crud->unset_print();
-        $crud->set_crud_url_path(site_url('index.php/System/editor_crud_temas'));
-        $output = $crud->render();
-
-        $this->load->view('include/head_gc');
+        $data["campo"] = $this->Articulo_Model->campos_investigacion();
+        $this->load->view('include/head');
         $this->load->view('include/header_editor');
-        $this->load->view('view_modificar_temas',$output);
-        $this->load->view('include/footer_gc');
+        $this->load->view('view_temas',$data);
+        $this->load->view('include/footer');
 
      }
      public function editor_contenido() {
@@ -651,18 +706,42 @@
              $form_dat['id_estado'] = 8;
 
              if ($this->Articulo_Model->actualizar_a_publicado($form_dat, $form_datos['ID_articulo']) == true) {
-
+                $mensaje_publicado = $this->Articulo_Model->obtener_contenido("mensaje publicacion");
+                $msj=$mensaje_publicado->texto;
                  $subject = "Articulo publicado en revista UCM";
                  $mensaje = '<html>' .
-                         '<body><h4>Su artículo ha sido publicado en la revista UCM. Lo puede encontrar en la página web de la revista.</h4><br>' .
+                         '<body><h4>'.$msj.'</h4><br>' .
                          '</body>' .
                          '</html>';
                  $mensaje.= "<b>Enviado desde wwww.publicacionesucm.cl</b><br>";
                  $headers = "From: avisos@mPublicacionesucm.cl \r\n";
-                 $headers.= 'Bcc: moises.intech@gmail.com' . "\r\n";
+                 $headers.= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
                  $headers.= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                  if (mail($correo, $subject, $mensaje, $headers)) {
+                    $correos = $this->Articulo_Model->obtener_email_lector($form_datos['ID_articulo']);
+                    $i=0;
+                    $correo='';
+                    foreach($correos as $co){
+                        if($i==0){
+                            $correo = $co->email;
+                        }
+                        else{
+                            $correo = $correo.','.$co->email;
+                        }
+                        $i++;
+
+                    }
+                    $subject = "Articulo publicado en revista UCM";
+                    $mensaje = '<html>' .
+                         '<body><h4>Se ha publicado un artículo en la revista de tu interes, por favor revisa la página.</h4><br>' .
+                         '</body>' .
+                         '</html>';
+                    $mensaje.= "<b>Enviado desde wwww.publicacionesucm.cl</b><br>";
+                    $headers = "From: avisos@mPublicacionesucm.cl \r\n";
+                    $headers.= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+                    $headers.= 'Content-type: text/html; charset=utf-8' . "\r\n";
+                    mail($correo, $subject, $mensaje, $headers);
                      echo '<script type="text/javascript">';
                      echo 'setTimeout(function () { swal("Articulo publicado","Se ha agregado el artículo a la revista.","success");';
                      echo '}, 350);</script>';
@@ -1102,6 +1181,104 @@
                            'text' => 'Hecho.',
                            'tipoaviso' => 'success',
                            'windowlocation' => base_url() . "index.php/System/editor_contenido"
+                       );
+                       $this->load->view('include/aviso', $aviso);
+                       $this->load->view('include/footer_esencial');
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta más tarde.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+        } else {
+            $aviso = array('title' => 'Acceso denegado',
+                'text' => 'Acceso denegado',
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+    public function modifica_mensaje_aceptacion_com() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['texto_espanol'] = $this->input->post('ta_ma');
+            $nosotros = "mensaje aceptado com";
+                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                       $aviso = array('title' => '¡Información cambiada!',
+                           'text' => 'Hecho.',
+                           'tipoaviso' => 'success',
+                           'windowlocation' => base_url() 
+                       );
+                       $this->load->view('include/aviso', $aviso);
+                       $this->load->view('include/footer_esencial');
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta más tarde.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+        } else {
+            $aviso = array('title' => 'Acceso denegado',
+                'text' => 'Acceso denegado',
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function modifica_mensaje_rechazo() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['texto_espanol'] = $this->input->post('ta_mr');
+            $nosotros = "mensaje rechazo";
+                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                       $aviso = array('title' => '¡Información cambiada!',
+                           'text' => 'Hecho.',
+                           'tipoaviso' => 'success',
+                           'windowlocation' => base_url() . "index.php/"
+                       );
+                       $this->load->view('include/aviso', $aviso);
+                       $this->load->view('include/footer_esencial');
+                    } else {
+                        echo '<script type="text/javascript">';
+                        echo 'setTimeout(function () { swal("Opsss... ocurrio un error","Intenta más tarde.","error");';
+                        echo '}, 350);</script>';
+
+                        $this->load->view('include/head');
+                        $this->load->view('include/header_editor');
+                        $this->load->view('view_home_editor');
+                        $this->load->view('include/footer');
+                    }
+        } else {
+            $aviso = array('title' => 'Acceso denegado',
+                'text' => 'Acceso denegado',
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function modifica_mensaje_asignacion() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            $data['texto_espanol'] = $this->input->post('ta_ma');
+            $nosotros = "mensaje asignado";
+                    if ($this->Articulo_Model->upd_contenido($nosotros, $data) == true) {
+                       $aviso = array('title' => '¡Información cambiada!',
+                           'text' => 'Hecho.',
+                           'tipoaviso' => 'success',
+                           'windowlocation' => base_url() . "index.php/"
                        );
                        $this->load->view('include/aviso', $aviso);
                        $this->load->view('include/footer_esencial');

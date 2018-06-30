@@ -139,7 +139,7 @@ left:0;
                }
                 // Parametros
                 $group_no = 0;
-                $content_per_page = 6;
+                $content_per_page = 3;
 
 
                 // Datos get
@@ -201,10 +201,10 @@ left:0;
                            
                             echo ' <div class="row">';
                           }
-                          echo '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">';
+                          echo '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">';
                           echo '    <div class="card">';
                           echo '        <div class="header">';
-                          echo '            <h2>'. $row->titulo_revista .' <i>('. $row->fecha_publicacion .')'.' </h2>';
+                          echo '            <h2>'.substr($row->titulo_revista, 0, 30).' <i>('. $row->fecha_publicacion .')'.' </h2>';
                           echo '        </div>';
                           echo '        <ul class="entry-meta clearfix">';
                           echo '            <li><i class="icon-time"></i> '.lang("vnes_creada el").' '. obtenerFechaEnLetra($row->fecha_creacion) .'</li>';

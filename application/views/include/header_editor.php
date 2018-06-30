@@ -1,13 +1,14 @@
 <style type="text/css">
 .centrar-imagen {
-
+    margin-top:0px;
 }
 
 .centrar-imagen img {
-    width: 50%; /* Siempre que la resolución de pantalla sea inferior que el ancho de la imagen, ocupará el 100% */
+    width: 53%; /* Siempre que la resolución de pantalla sea inferior que el ancho de la imagen, ocupará el 100% */
     max-width: 500px; /* Definimos el ancho máximo; el ancho de la imagen original, para evitar que siga ampliándose cuando la resolución de pantalla sea superior a éste */
-    height: auto; /* Dejamos que el navegador muestre automáticamente el alto siempre proporcional al ancho de la imagen */
+    height: 100px; /* Dejamos que el navegador muestre automáticamente el alto siempre proporcional al ancho de la imagen */
     min-width: 200px;
+    margin-top:0px;
 
 
 html,body{
@@ -16,21 +17,35 @@ height:10%;
 }
 </style>
 
+<style type="text/css">
+ 
+ .modal-backdrop{
+     display: none;
+ }
+ .sidebar{
+    
+     height: 100%
+ }
+ i{
+     font-size:30px;
+ }
+</style>
+
 <body class="theme-blue theme-blue ls-closed">
 
   
-    <nav class="navbar" >
-        <div class="container-fluid">
-            <div class="navbar-header">
+    <nav class="navbar" style="margin-bottom:10px;">
+        <div class="container-fluid" style="margin-top:0px;">
+            <div class="navbar-header" style="margin-top:0px;">
                 <div class="row">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true"></a>
                 <a href="javascript:void(0);" class="bars" style="padding-right:40px;"></a>
                 </div>
                 
-                <a class="navbar-brand" href="<?php echo base_url(); ?>index.php"><div class="centrar-imagen">
+                <a href="<?php echo base_url(); ?>index.php">
 
-                <img src="<?php echo base_url(); ?>img/logo.png" alt="UCM Logo" width="100%" style="padding-left:40px;">
-                </div></a>
+                <img src="<?php echo base_url(); ?>img/logo.png" alt="UCM Logo" height="50px" style="padding-left:40px; ">
+                </a>
             </div>
           
                
@@ -67,11 +82,7 @@ height:10%;
        
     </nav>
 
-<body class="stretched">
+
     
 
-        <header id="header">
-            
-            
-           
-        </header>
+     

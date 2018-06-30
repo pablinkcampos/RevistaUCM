@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="header bg-blue">
                       
-                          <h3>Mensaje aviso artículo aceptado</h3>
+                          <h3>Parametros de Control</h3>
                         
                    
                 </div>
@@ -56,16 +56,16 @@
 
                         <div class="form-group col_full">
                            <div style="text-align: right;" class="col-lg-3">
-                               <label class="control-label" for="text">MÁXIMA CANTIDAD DE DIAS PARA REENVIAR UN ARTICULO</label>
+                               <label class="control-label" for="text">Máxima Cantidad de días para reenviar un artículo aceptado</label>
                            </div>
                            <div class="col-lg-9">
                                <input type="number" max=30 min=1 class="form-control" name="max_dia_reev_art" value="" id="max_dia_reev_art" placeholder="Ingrese días para reenviar un artículo" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
                            </div>
                        </div>
                         <div class="form-group">
-                            <div class="col-lg-offset-2 col-lg-7">
-                                <br><br>
-                                <button type="submit" name="go" class="btn btn-success waves-effect"><?php echo lang("vmma_modificar");?></button>
+                            <div class="col-lg-offset-1 col-lg-7">
+    
+                                <button  style="margin:10px" type="submit" name="go" class="btn btn-success waves-effect"><?php echo lang("vmma_modificar");?></button>
                             </div>
                         </div>
                     </form>

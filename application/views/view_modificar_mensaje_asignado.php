@@ -10,19 +10,19 @@
             <div class="card">
                 <div class="header bg-blue">
                       
-                         <h3>Mensaje de aviso Recepción</h3>
+                         <h3>Mensaje de aviso Asignación</h3>
                       
                 </div>
                 <center>
                 <div class="row">
                    
-                <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_mensaje_recepcion" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_mensaje_asignacion" method="POST" enctype="multipart/form-data">
                         <div class="form-group col_full">
                             <div style="text-align: right;" class="col-lg-3">
                                 <label class="control-label" for="text"><?php echo lang("vmmr_ingrese_texto");?></label>
                             </div>                        
                             <div class="col-lg-12">
-                                <textarea class="ckeditor" name="ta_mr" id="ta_ma" rows="20" cols="100" required="true"><?php echo  $texto->texto; ?></textarea>
+                                <textarea class="ckeditor" name="ta_ma" id="ta_ma" rows="20" cols="100" required="true"><?php echo  $texto->texto; ?></textarea>
              
                             </div>
                         </div>

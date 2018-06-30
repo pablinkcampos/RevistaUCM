@@ -75,8 +75,14 @@ class Articulo_editor extends MY_Controller {
         $this->Articulo_Model->actualizar_articulo_estado($datos);
         
         $correo  = $email_autor;
-        $subject = "Rechazado como revisor - Revista UCM";
-        $mensaje = '<html>' . '<body><h4>Hola <br><br>El editor ha rechazado su artículo por estar fuera de plazo.</h4><br>' . '</body>' . '</html>';
+        $mensaje_rechazado = $this->Articulo_Model->obtener_contenido("mensaje rechazo");
+        $msj=$mensaje_rechazado->texto;
+    
+        $subject = "Rechazado - Revista UCM";
+        $mensaje = '<html>' .
+        '<body><h4>'.$msj.'</h4><br>' .
+        '</body>' .
+        '</html>';
         $mensaje .= "<b>Saludos</br><br>";
         $mensaje .= "<b>Equipo Revista UCM</b><br>";
         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -86,6 +92,119 @@ class Articulo_editor extends MY_Controller {
         mail($correo->correo, $subject, $mensaje, $headers);
         
         redirect('index.php/Articulo_editor/all_articulos_espera_final');
+    }
+
+    public function eliminar_area($id){
+        $this->Articulo_Model->eliminar_area($id);
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Área eliminada","acción realizada con exito.","success");';
+        echo ' document.location.href="System/editor_crud_campos";}, 350); </script>';
+
+        
+        $this->load->view('include/head');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_areas');
+        $this->load->view('include/footer');
+       
+    }
+
+    public function insert_area(){
+
+        $datos = array(
+            'nombre_campo' => $this->input->post('nombre'),
+        );
+
+        $this->Articulo_Model->insert_area($datos);
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Área agregada","acción realizada con exito.","success");';
+        echo 'document.location.href="System/editor_crud_campos";}, 350);</script>';
+
+        
+        $this->load->view('include/head');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_areas');
+        $this->load->view('include/footer');
+        
+    }
+
+    public function editar_area($id){
+
+        $datos = array(
+            'id_campo' => $id,
+            'nombre_campo' => $this->input->post('nombre'),
+        );
+
+        $this->Articulo_Model->actualizar_area($datos);
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Área eliminada","acción realizada con exito.","success");';
+        echo ' document.location.href="System/editor_crud_campos";}, 350); </script>';
+
+        
+        $this->load->view('include/head');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_areas');
+        $this->load->view('include/footer');
+      
+        
+    }
+
+    public function eliminar_tema($id){
+        $this->Articulo_Model->eliminar_tema($id);
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Área eliminada","acción realizada con exito.","success");';
+        echo ' document.location.href="System/editor_crud_campos";}, 350); </script>';
+        $data["campo"] = $this->Articulo_Model->campos_investigacion();
+        
+        $this->load->view('include/head');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_temas',$data);
+        $this->load->view('include/footer');
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Tema eliminado","acción realizada con exito.","success");';
+        echo 'document.location.href="System/editor_crud_temas";}, 350);</script>';
+        
+    }
+
+    public function insert_tema(){
+
+        $datos = array(
+            'nombre' => $this->input->post('nombre'),
+            'nombre_campo' => $this->input->post('area_aplicable'),
+        );
+
+        $this->Articulo_Model->insert_tema($datos);
+        $data["campo"] = $this->Articulo_Model->campos_investigacion();
+
+        
+        $this->load->view('include/head');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_temas',$data);
+        $this->load->view('include/footer');
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Tema agregado","acción realizada con exito.","success");';
+        echo 'document.location.href="System/editor_crud_temas";}, 350);</script>';
+        
+    }
+
+    public function editar_tema($id){
+       
+        $datos = array(
+            'id_tema' => $id,
+            'nombre' =>  $this->input->post('nombre'),
+            'nombre_campo' =>$this->input->post('nombre_campo'),
+        );
+        $this->Articulo_Model->actualizar_tema($datos);
+        $data["campo"] = $this->Articulo_Model->campos_investigacion();
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Tema editado","acción realizada con exito.","success");';
+        echo 'document.location.href="System/editor_crud_temas";}, 350);</script>';
+
+        
+        $this->load->view('include/head');
+        $this->load->view('include/header_editor');
+        $this->load->view('view_temas',$data);
+        $this->load->view('include/footer');
+        
     }
 
     public function aceptar_peticion_articulo($id_revista) {
@@ -116,10 +235,16 @@ class Articulo_editor extends MY_Controller {
 
         $this->Articulo_Model->actualizar_articulo_estado($datos);
         $this->Articulo_Model->actualizar_post($post);
+       
         
         $correo  = $email_autor;
-        $subject = "Rechazado como revisor - Revista UCM";
-        $mensaje = '<html>' . '<body><h4>Hola <br><br>El editor ha rechazado su artículo por estar fuera de plazo.</h4><br>' . '</body>' . '</html>';
+        $mensaje_ac = $this->Articulo_Model->obtener_contenido("mensaje aceptado com");
+        $msj=$mensaje_ac->texto;
+        $subject = "Aceptado Con Comentarios - Revista UCM";
+        $mensaje = '<html>' .
+        '<body><h4>'.$msj.'</h4><br>' .
+        '</body>' .
+        '</html>';
         $mensaje .= "<b>Saludos</br><br>";
         $mensaje .= "<b>Equipo Revista UCM</b><br>";
         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -826,8 +951,15 @@ class Articulo_editor extends MY_Controller {
                                 );
                                 
                                 $correo  = $this->Articulo_Model->getmail($datos['ID']);
+                                
                                 $subject = "Articulo aceptado - Revista UCM";
-                                $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha aceptado un articulo para la revista UCM. Ingrese a la plataforma para ver más detalles.</h4><br>' . '</body>' . '</html>';
+                                $mensaje_ac = $this->Articulo_Model->obtener_contenido("mensaje aceptación");
+                                $msj=$mensaje_ac->texto;
+                               
+                                $mensaje = '<html>' .
+                                '<body><h4>'.$msj.'</h4><br>' .
+                                '</body>' .
+                                '</html>';
                                 $mensaje .= "<b>Saludos</br><br>";
                                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                 $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -892,8 +1024,12 @@ class Articulo_editor extends MY_Controller {
                                     'windowlocation' => base_url() . "index.php/articulo_editor/comentarios_de_revisores"
                                 );
                                 $correo  = $this->Articulo_Model->getmail($datos['ID']);
-                                $subject = "Articulo aceptado - Revista UCM";
-                                $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha aceptado un articulo para la revista UCM. Ingrese a la plataforma para ver más detalles.</h4><br>' . '</body>' . '</html>';
+                                
+                                $mensaje_ac = $this->Articulo_Model->obtener_contenido("mensaje aceptado com");
+                                $msj=$mensaje_ac->texto;
+                                $subject = "Aceptado Con Comentarios - Revista UCM";
+                                $mensaje = '<html>' .
+                                '<body><h4>'.$msj.'</h4><br>' .'<h4 align="left">Observaciones:</h4><br>' . '<p align="left">' . $comentarios . '</p>' . '</body>' . '</html>';
                                 $mensaje .= "<b>Saludos</br><br>";
                                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                 $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -931,9 +1067,15 @@ class Articulo_editor extends MY_Controller {
                                 'tipoaviso' => 'success',
                                 'windowlocation' => base_url() . "index.php/articulo_editor/comentarios_de_revisores"
                             );
+                          
                             $correo  = $this->Articulo_Model->getmail($datos['ID']);
-                            $subject = "Articulo rechazado - Revista UCM";
-                            $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha rechazado un articulo para la revista UCM. Ingrese a la plataforma para ver más detalles.</h4><br>' . '</body>' . '</html>';
+                            $mensaje_re = $this->Articulo_Model->obtener_contenido("mensaje rechazo");
+                            $msj=$mensaje_re->texto;
+                            $subject = "Artículo Rechazado - Revista UCM";
+                            $mensaje = '<html>' .
+                            '<body><h4>'.$msj.'</h4><br>' .
+                            '</body>' .
+                            '</html>';
                             $mensaje .= "<b>Saludos</br><br>";
                             $mensaje .= "<b>Equipo Revista UCM</b><br>";
                             $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1059,8 +1201,12 @@ class Articulo_editor extends MY_Controller {
                             'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_recibidos"
                         );
                         $correo  = $this->Articulo_Model->getmail($datos['ID']);
-                        $subject = "Articulo rechazado - Revista UCM";
-                        $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha rechazado un articulo para la revista UCM. </h4><br>' . '<h4>Motivos:' . $comentario . ' </h4><br>' . '</body>' . '</html>';
+                        $mensaje_re = $this->Articulo_Model->obtener_contenido("mensaje rechazo");
+                        $msj=$mensaje_re->texto;
+                        $subject = "Artículo Rechazado - Revista UCM";
+                        $mensaje = '<html>' .
+                        '<body><h4>'.$msj.'</h4><br>' .
+                        '</body>' .'<br>' . '<h4>Motivos:' . $comentario . ' </h4><br>' . '</body>' . '</html>';
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1144,8 +1290,12 @@ class Articulo_editor extends MY_Controller {
                         );
                         
                         $correo  = $this->Articulo_Model->getmail($datos['ID']);
-                        $subject = "art&iacuteculo ha sido aceptado - Revista UCM";
-                        $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha aceptado el art&iacuteculo a&uacuten agradecemos su colaboración de revista UCM. Ingrese a la plataforma para ver más detalles.</h4><br>' . '<h4>ID de su art&iacuteculo :' . $datos['ID'] . '<br> Contrase&ntildea:' . $correo->email_autor . ' </h4><br>' . '</body>' . '</html>';
+                        $subject = "Articulo aceptado - Revista UCM";
+                        $mensaje_ac = $this->Articulo_Model->obtener_contenido("mensaje aceptación");
+                        $msj=$mensaje_ac->texto;
+                       
+                        $mensaje = '<html>' .
+                        '<body><h4>'.$msj.'</h4><br>'. '<h4>ID de su art&iacuteculo :' . $datos['ID'] . '<br> Contrase&ntildea:' . $correo->email_autor . ' </h4><br>' . '</body>' . '</html>';
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1190,8 +1340,11 @@ class Articulo_editor extends MY_Controller {
                             'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_revisados"
                         );
                         $correo  = $this->Articulo_Model->getmail($datos['ID']);
-                        $subject = "Articulo rechazado - Revista UCM";
-                        $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha rechazado un articulo para la revista UCM. </h4><br>' . '<h4 align="left">Motivos:</h4><br>' . '<p align="left">' . $comentario . '</p><br>' . '<p align="left">' . $comentario1 . '</p><br>' . '<p align="left">' . $comentario2 . '</p><br>' . '<p align="left">' . $comentario3 . '</p><br>' . '</body>' . '</html>';
+                        $mensaje_re = $this->Articulo_Model->obtener_contenido("mensaje rechazo");
+                        $msj=$mensaje_re->texto;
+                        $subject = "Artículo Rechazado - Revista UCM";
+                        $mensaje = '<html>' .
+                        '<body><h4>'.$msj.'</h4><br>' . '<h4 align="left">Motivos:</h4><br>' . '<p align="left">' . $comentario . '</p><br>' . '<p align="left">' . $comentario1 . '</p><br>' . '<p align="left">' . $comentario2 . '</p><br>' . '<p align="left">' . $comentario3 . '</p><br>' . '</body>' . '</html>';
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1237,8 +1390,11 @@ class Articulo_editor extends MY_Controller {
                             'windowlocation' => base_url() . "index.php/articulo_editor/all_articulos_revisados"
                         );
                         $correo  = $this->Articulo_Model->getmail($datos['ID']);
-                        $subject = "Articulo Aceptado con Comentarios - Revista UCM";
-                        $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha aceptado su articulo para la revista UCM, pero se debe hacer corregir las siguientes observaciones: </h4><br>' . '<h4 align="left">Observaciones:</h4><br>' . '<p align="left">' . $comentario . '</p><br>' . '<p align="left">' . $comentario1 . '</p><br>' . '<p align="left">' . $comentario2 . '</p><br>' . '<p align="left">' . $comentario3 . '</p><br>' . '</body>' . '</html>';
+                        $mensaje_ac = $this->Articulo_Model->obtener_contenido("mensaje aceptado com");
+                        $msj=$mensaje_ac->texto;
+                        $subject = "Aceptado Con Comentarios - Revista UCM";
+                        $mensaje = '<html>' .
+                        '<body><h4>'.$msj.'</h4><br>'  . '<h4 align="left">Observaciones:</h4><br>' . '<p align="left">' . $comentario . '</p><br>' . '<p align="left">' . $comentario1 . '</p><br>' . '<p align="left">' . $comentario2 . '</p><br>' . '<p align="left">' . $comentario3 . '</p><br>' . '</body>' . '</html>';
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1326,8 +1482,11 @@ class Articulo_editor extends MY_Controller {
             }
             if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
                 
-                $subject = "Articulo asignado Revista UCM";
-                $mensaje = '<html>' . '<body><h4>Hola <br><br>Se le ha asignado un artículo para ser evaluado. Puede encontrarlo en la plataforma Revista UCM.</h4><br>' . '</body>' . '</html>';
+                $mensaje_as = $this->Articulo_Model->obtener_contenido("mensaje asignado");
+                $msj=$mensaje_as->texto;
+                $subject = "Artículo Asignado - Revista UCM";
+                $mensaje = '<html>' .
+                '<body><h4>'.$msj.'</h4><br>' . '</body>' . '</html>';
                 $mensaje .= "<b>Saludos</br><br>";
                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                 $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1455,8 +1614,11 @@ class Articulo_editor extends MY_Controller {
                 
                 if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
                     
-                    $subject = "Articulo asignado Revista UCM";
-                    $mensaje = '<html>' . '<body><h4>Hola <br><br>Se le ha asignado un artículo para ser evaluado. Puede encontrarlo en la plataforma Revista UCM.</h4><br>' . '</body>' . '</html>';
+                    $mensaje_as = $this->Articulo_Model->obtener_contenido("mensaje asignado");
+                    $msj=$mensaje_as->texto;
+                    $subject = "Artículo Asignado - Revista UCM";
+                    $mensaje = '<html>' .
+                    '<body><h4>'.$msj.'</h4><br>' . '</body>' . '</html>';
                     $mensaje .= "<b>Saludos</br><br>";
                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                     $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1708,8 +1870,11 @@ class Articulo_editor extends MY_Controller {
                  //se actualiza los revisores
                 if ($this->Articulo_Model->actualizar_articulo_estado($datos)) {
                     
-                    $subject = "Articulo asignado Revista UCM";
-                    $mensaje = '<html>' . '<body><h4>Hola <br><br>Se le ha asignado un artículo para ser evaluado. Puede encontrarlo en la plataforma Revista UCM.</h4><br>' . '</body>' . '</html>';
+                    $mensaje_as = $this->Articulo_Model->obtener_contenido("mensaje asignado");
+                    $msj=$mensaje_as->texto;
+                    $subject = "Artículo Asignado - Revista UCM";
+                    $mensaje = '<html>' .
+                    '<body><h4>'.$msj.'</h4><br>' . '</body>' . '</html>';
                     $mensaje .= "<b>Saludos</br><br>";
                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                     $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1960,8 +2125,11 @@ class Articulo_editor extends MY_Controller {
                                 );
                                 if ($this->Articulo_Model->actualizar_articulo_estado($datos_estado3)) {
                                     
-                                    $subject = "Articulo asignado Revista UCM";
-                                    $mensaje = '<html>' . '<body><h4>Hola <br><br>Se le ha asignado un artículo para ser evaluado. Puede encontrarlo en la plataforma Revista UCM.</h4><br>' . '</body>' . '</html>';
+                                    $mensaje_as = $this->Articulo_Model->obtener_contenido("mensaje asignado");
+                                    $msj=$mensaje_as->texto;
+                                    $subject = "Artículo Asignado - Revista UCM";
+                                    $mensaje = '<html>' .
+                                    '<body><h4>'.$msj.'</h4><br>' . '</body>' . '</html>';
                                     $mensaje .= "<b>Saludos</br><br>";
                                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                     $headers = "From: RevistaUCM@ucm.cl \r\n";

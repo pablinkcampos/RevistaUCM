@@ -59,14 +59,15 @@
                     <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
-                            <span>Artículos</span>
+                            <span>Estado del Artículo</span>
                         </a>
+                     
                         <ul class="ml-menu">
-							<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_recibidos"><?php echo lang('ME_recibidos');?></a></li>
-                			<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_noasignados"><?php echo lang('ME_noasignados');?></a></li>
-			    			<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_asignados"><?php echo lang('ME_asignados');?></a></li>
-							<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_revisados"><?php echo lang('ME_Revisados');?></a></li>
-                			<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_rechazado_editor"><?php echo lang('ME_Rechazado por Editor');?></a></li>
+							<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_recibidos">Recibido</a></li>
+                			<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_noasignados">No Asignado</a></li>
+			    			<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_asignados">Asignado</a></li>
+							<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_revisados">Revisado</a></li>
+                			<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_rechazado_editor">Rechazado</a></li>
                 			<li><a  href="<?php echo base_url(); ?>index.php/Articulo_editor/all_articulos_espera_final"><?php echo lang('ME_Espera Version Final');?></a></li>
                         </ul>
                     </li>
@@ -79,7 +80,7 @@
                             <span><?php echo lang('ME_revista');?></span>
                         </a>
                         <ul class="ml-menu">
-							<li><a  href="<?php echo base_url(); ?>index.php/System/editor_magazine"><?php echo lang('ME_revistas');?></a></li>
+							<li><a  href="<?php echo base_url(); ?>index.php/System/editor_magazine">Revistas Publicadas</a></li>
 							<li><a  href="<?php echo base_url(); ?>index.php/System/newm"><?php echo lang('ME_asignar articulo');?></a></li>
 
                         </ul>
@@ -87,14 +88,14 @@
 					<li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">unarchive</i>
-                            <span>Editar Contenido</span>
+                            <span>Configuración</span>
                         </a>
                         <ul class="ml-menu">
                            
                             <li>
                                 <a href="javascript:void(0);" class="menu-toggle">
 									<i class="material-icons">http</i>
-                                    <span>Página web</span>
+                                    <span>Página Principal</span>
                                 </a>
                                 <ul class="ml-menu">
                                     <li>
@@ -126,17 +127,33 @@
 										<ul class="ml-menu">
                                             <li>
                                                 <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_mensaje_r">
-                                                    <span><?php echo lang('vmc_Mensaje recepcion de articulos');?></span>
+                                                    <span>Artículo recibido</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_mensaje_as">
+                                                    <span>Artículo Asignado</span>
                                                 </a>
                                             </li>
 											<li>
                                                 <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_mensaje_a">
-                                                    <span><?php echo lang('vmc_Mensaje aceptacion de articulo');?></span>
+                                                    <span>Artículo Aceptado</span>
+                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_mensaje_ac">
+                                                    <span>Artículo Aceptado con Comentarios</span>
                                                 </a>
                                             </li>
 											<li>
                                                 <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_mensaje_p">
-                                                    <span><?php echo lang('vmc_Mensaje publicacion efectiva');?></span>
+                                                    <span>Artículo Publicado</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_mensaje_re">
+                                                    <span>Artículo Rechazado</span>
                                                 </a>
                                             </li>
                                     	</ul>
@@ -175,14 +192,14 @@
 					<li>
                         <a href="<?php echo base_url(); ?>index.php/System/dar_alta_revisor">
                             <i class="material-icons">check</i>
-                            <span>Dar de Alta revisor</span>
+                            <span>Aceptación de revisores</span>
                         </a>
                     </li>
 
 					<li>
                         <a href="<?php echo base_url(); ?>index.php/System/cambiar_configuracion">
                             <i class="material-icons">settings_applications</i>
-                            <span>Configuraciones <br> Generales</span>
+                            <span>Parametros <br> de Control</span>
                         </a>
                     </li>
 

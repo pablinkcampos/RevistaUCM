@@ -48,6 +48,15 @@ class Articulo_Model extends CI_Model {
         }
     }
 
+    function getallTemas() {
+        $query = $this->db->query("SELECT t.id_tema as id_tema , t.nombre as nombre, c.nombre_campo as nombre_campo FROM temas as t INNER JOIN campo_investigacion as c ON t.nombre_campo = c.id_campo");
+        if ($query) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+
     function getCalificaciones() {
         $query = $this->db->select('*');
         $query = $this->db->from('calificaciones');
@@ -563,6 +572,84 @@ class Articulo_Model extends CI_Model {
         }
     }
 
+    function insert_area($data) {
+        $query = $this->db->insert('campo_investigacion', $data);
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+
+    function eliminar_area($id) {
+
+        $query = $this->db->where('id_campo', $id);
+        $query = $this->db->delete('campo_investigacion');
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function actualizar_area($datos) {
+        $this->db->where('id_campo', $datos['id_campo']);
+        $this->db->update('campo_investigacion', $datos);
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function insert_tema($data) {
+        $query = $this->db->insert('temas', $data);
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+
+    function actualizar_tema($datos) {
+        $this->db->where('id_tema', $datos['id_tema']);
+        $this->db->update('temas', $datos);
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function eliminar_tema($id) {
+
+        $query = $this->db->where('id_tema', $id);
+        $query = $this->db->delete('temas');
+
+        $rows = $this->db->affected_rows();
+
+        if ($rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function articulo($id) {
         $query = $this->db->select('*');
         $query = $this->db->from('revista');
@@ -952,6 +1039,17 @@ class Articulo_Model extends CI_Model {
     function obtener_contenido($nombre) {
         $query = $this->db->query("SELECT texto_espanol as texto FROM contenidos WHERE contenido = ?", array($nombre));
         $result = $query->row();
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+    function obtener_email_lector($id) {
+        $query = $this->db->query("SELECT l.email as email FROM lector as l INNER JOIN temas_usuario as tu ON l.ID = tu.id_usuario INNER JOIN revista as r ON tu.id_tema = r.id_tema WHERE r.ID = ?", array($id));
+        $result = $query->result();
 
         if ($result) {
             return $result;

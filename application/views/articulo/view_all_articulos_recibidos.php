@@ -104,7 +104,7 @@
                             <?php
 
                                 $id_revista = $row->ID;
-                                $titulo_revista = $row->titulo_revista;
+                                $titulo_revista = substr($row->titulo_revista, 0, 60);
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;

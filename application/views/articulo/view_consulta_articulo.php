@@ -73,50 +73,50 @@
                         </div>
                         <div id="collapseOne_1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne_1">
                            <div class="panel-body">
-						   <table class="table" style="width:100%; text-align: right;">
+						   <table class="table" style="width:100%; text-align: left;">
 								<?php foreach ( $datos->result() as $row ): ?>
-								<?php $id_revista=$row->ID; $titulo_revista = $row->titulo_revista; $email_autor = $row->email_autor; $tema = $row->tema; $estado = $row->estado; $id_estado = $row->id_estado; $palabras_claves = $row->palabras_claves; $abstract = $row->abstract; $archivo = $row->archivo; $comentarios = $row->com_autor; $fecha_ultima_upd = date("d-m-y",strtotime($row->fecha_ultima_upd)); $fecha_asignacion = date("d-m-y",strtotime($row->fecha_asr)); $fecha_cal = date("d-m-y",strtotime($row->fecha_cal)); $fecha_calf = date("d-m-y",strtotime($row->fecha_calf)); $fecha_ingreso = date("d-m-y",strtotime($row->fecha_ingreso)); $n_rev1 = $row->rev_1; $n_rev2 = $row->rev_2; $n_rev3 = $row->rev_3; $id_rev1 = $row->id_rev1; $id_rev2 = $row->id_rev2; $id_rev3 = $row->id_rev3; $cal_rev1 = $row->cal_rev1; $cal_rev2 = $row->cal_rev2; $cal_rev3 = $row->cal_rev3; $com_rev1 = $row->com_rev1; $com_rev2 = $row->com_rev2; $com_rev3 = $row->com_rev3; $comentarios_editor = $row->com_edit; $fecha_final = $row->fecha_timeout; echo "
+								<?php $id_revista=$row->ID; $titulo_revista = $row->titulo_revista; $email_autor = $row->email_autor; $tema = $row->tema; $estado = $row->estado; $id_estado = $row->id_estado; $palabras_claves = $row->palabras_claves; $abstract = $row->abstract; $archivo = $row->archivo; $comentarios = $row->com_autor; $fecha_ultima_upd = date("d-m-y",strtotime($row->fecha_ultima_upd)); $fecha_asignacion = date("d-m-y",strtotime($row->fecha_asr)); $fecha_cal = date("d-m-y",strtotime($row->fecha_cal)); $fecha_calf = date("d-m-y",strtotime($row->fecha_calf)); $fecha_ingreso = date("d-m-y",strtotime($row->fecha_ingreso)); $n_rev1 = $row->rev_1; $n_rev2 = $row->rev_2; $n_rev3 = $row->rev_3; $id_rev1 = $row->id_rev1; $id_rev2 = $row->id_rev2; $id_rev3 = $row->id_rev3; $cal_rev1 = $row->cal_rev1; $cal_rev2 = $row->cal_rev2; $cal_rev3 = $row->cal_rev3; $com_rev1 = $row->com_rev1; $com_rev2 = $row->com_rev2; $com_rev3 = $row->com_rev3; $comentarios_editor = $row->com_edit; $fecha_final = $row->fecha_timeout; $vert = $row->vert; echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_titulo articulo" ) . ":
+									<th style='text-align: left;'>" . lang( "allarvv_titulo articulo" ) . ":
 									</th>"; echo "
 									<td>" . $titulo_revista . "</td>"; echo "
 								</tr>"; $CI =& get_instance(); $CI->load->model( 'Articulo_model' ); echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_autor" ) . ":</th>"; echo "
+									<th style='text-align: left;'>" . lang( "allarvv_autor" ) . ":</th>"; echo "
 									<td>"; echo $email_autor; echo "
 									</td>"; echo "</tr>"; echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_campo de investigacion" ) . ":
+									<th style='text-align: left;'>" . lang( "allarvv_campo de investigacion" ) . ":
 									</th>"; echo "
 									<td>"; echo $tema; echo "
 									</td>"; echo "
 								</tr>"; echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_estado" ) . ":</th>"; echo "
+									<th style='text-align: left;'>" . lang( "allarvv_estado" ) . ":</th>"; echo "
 									<td>"; echo $row->estado; echo "
 									</td>"; echo "</tr>"; echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_abstract" ) . ":</th>"; echo "
+									<th style='text-align: left;'>" . lang( "allarvv_abstract" ) . ":</th>"; echo "
 									<td style='text-align:justify;'>" . $abstract . "</td>"; echo "</tr>"; echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_archivo:" ) . "</th>"; echo "
+									<th style='text-align: left;'>" . lang( "allarvv_archivo:" ) . "</th>"; echo "
 									<td><a href='" . base_url() . "uploads/" . $archivo . "'>" . $archivo . "</a>
 									</td>"; echo "</tr>";  echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_fecha ultima actualizacion" ) . ":</th>"; echo "
+									<th style='text-align:left;'>" . lang( "allarvv_fecha ultima actualizacion" ) . ":</th>"; echo "
 									<td>" . $fecha_ultima_upd . "
 									</td>"; echo "
 								</tr>"; echo "
 								<tr>"; echo "
-									<th style='text-align: right;'>" . lang( "allarvv_fecha ingreso articulo" ) . ":
+									<th style='text-align:left;'>" . lang( "allarvv_fecha ingreso articulo" ) . ":
 									</th>"; echo "
 									<td>" . $fecha_ingreso . "</td>"; echo "
 								</tr>"; 
 								echo "
 								<tr>"; if ( $comentarios == "" ) { echo "
-									<th style='text-align: right;'>" . lang( "allarvv_comentarios" ) . ":</th>"; echo "
+									<th style='text-align:left;'>" . lang( "allarvv_comentarios" ) . ":</th>"; echo "
 									<td>-</td>"; echo "</tr>"; } else { echo "
-								<th style='text-align: right;'>" . lang( "allarvv_comentarios" ) . ":</th>"; echo "
+								<th style='text-align:left;'>" . lang( "allarvv_comentarios" ) . ":</th>"; echo "
 								<td style='text-align: justify;'>" . $comentarios . "</td>"; echo "</tr>"; }?>
 								<?php endforeach; ?>
 							</table>
@@ -150,8 +150,8 @@
 											
 											} elseif ( $id_estado==14 ) { 
 												echo "<th style='text-align: left;' width='2%'>Fecha Revisión</th>"; 
-												echo "<th style='text-align: left;'>Recomendaciones</th>"; 
-											} elseif ( $id_estado==5 || $id_estado==4 || $id_estado==6 || $id_estado==9 ) { 
+												echo "<th style='text-align: left;'>Observación</th>"; 
+											} elseif ( $id_estado==5 || $id_estado==4 || $id_estado==6 || $id_estado==9 && $vert==1 ) { 
 												echo "<th style='text-align: left;' width='2%'>Fecha Calificación</th>"; 
 												echo "<th style='text-align: left;'>Recomendaciones</th>"; 
 												echo "<th style='text-align: left;'>Recomendacion Editor</th>"; 
@@ -161,44 +161,30 @@
 								<tbody>
 									<div id='form1'>
 										<?php 
+											echo "<tr>"; 
+											echo "<td>"; echo $id_revista; echo "</td>"; 
+											echo "<td>"; echo $estado; echo "</td>"; 
 											if ( $id_estado==3 ) { 
-												echo "<tr>"; 
-												echo "<td>"; echo $id_revista; echo "</td>"; 
-												echo "<td>"; echo $estado; echo "</td>"; 
+											
 												echo "<td>"; echo $fecha_asignacion; echo "</td>"; 
-												echo "<td>"; 
-												if ( $id_rev1 !=0 ) { 
-													echo $com_rev1 . "<br>"; 
-												} 
-												if ( $id_rev2 !=0 ) { 
-													echo $com_rev2 . "<br>"; 
-												} 
-												if ( $id_rev3 !=0 ) { 
-													echo $com_rev3 . "<br>"; 
-												} 
+												echo "<td> En espera de revisión"; 
+													
 												echo "</td>"; 
 												echo "</tr>"; 
 											} elseif ( $id_estado==14 ) { 
 												echo "<tr>"; 
-												echo "<td>"; echo $id_revista; echo "</td>"; 
-												echo "<td>"; echo $estado; echo "</td>"; 
+												 
+												
 												echo "<td>"; echo $fecha_cal; echo "</td>"; 
-												echo "<td>"; 
-												if ( $id_rev1 !=0 ) { 
-													echo $com_rev1 . "<br>"; 
-												} 
-												if ( $id_rev2 !=0 ) { 
-													echo $com_rev2 . "<br>"; 
-												} if ( $id_rev3 !=0 ) { 
-													echo $com_rev3 . "<br>"; 
-												} "</td>"; 
-												echo "</tr>"; 
-												} elseif ( $id_estado==5 || $id_estado==4 || $id_estado==6 || $id_estado == 9) { 
-													echo "<tr>"; echo "<td>"; echo $id_revista; echo "</td>"; echo "<td>"; echo $estado; echo "</td>"; echo "<td>"; echo $fecha_calf; echo "</td>";  echo "<td>"; 
+												echo "<td> Espera revision de editor</td>"; 
+												
+											
+												} elseif ( ($id_estado==5 || $id_estado==4 || $id_estado==6 || $id_estado == 9) && $vert==1) { 
+													echo "<tr>";  echo "<td>"; echo $fecha_calf; echo "</td>";  echo "<td>"; 
 													if ( $id_rev1 !=0 ) { echo $com_rev1 . "<br>"; } if ( $id_rev2 !=0 ) { echo $com_rev2 . "<br>"; } if ( $id_rev3 !=0 ) { echo $com_rev3 . "<br>"; } "</td>"; echo "<td>"; echo $comentarios_editor; echo "</td>"; 
 													if ( $id_estado==6 ) { 
-														echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_correcion'><center><i class='material-icons' style='font-size:25px;'>autorenew</i></center></span></center></span></a>"; echo "</td>"; 
-													} elseif ( $id_estado==4 || date("d-m-y",strtotime($fecha_final)) < date( 'd-m-y' ) || $id_estado == 9) { 
+														echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_correcion'><center><i class='material-icons' style='font-size:25px;color:orange'>create</i></center></span></center></span></a>"; echo "</td>"; 
+													} elseif ( ($id_estado==4 || date("d-m-y",strtotime($fecha_final)) < date( 'd-m-y' ) || $id_estado == 9) && $vert==1) { 
 														echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_peticion'><center><i class='material-icons' style='font-size:25px;'>assignment_ind</i></center></span></center></span></a>"; echo "</td>"; 
 													} echo "</tr>"; } ?>
 										
