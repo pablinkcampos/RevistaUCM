@@ -65,7 +65,7 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 150px;">
+        <div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
           
             <!-- Basic Table -->
             <div class="row clearfix">
@@ -87,7 +87,7 @@
                                    ID
                                 </th>
                                 <th width="2%">
-                                    <?php echo lang('allaa_fecha ingreso articulo'); ?>
+                                    Fecha limite
                                 </th>
                                 <th>
                                     <?php echo lang('aar_tema'); ?>
@@ -124,7 +124,7 @@
                                     $date2 = new DateTime($fecha_vencimiento);
                                     $now = new DateTIme('now');
                                     $diff = $date1->diff($date2);
-                                    $diff2 = $date2->diff($now);
+                                    $diff2 = $now->diff($date1);
                                     $dife = intval($diff2->days);
                                     $limite = intval($diff->days);
                                 
@@ -132,12 +132,12 @@
                                     //calcula el tiempo que deberia ser asignado y asigna un color
                                  
                                     echo "<tr>";
-                                    if($dife > $limite/2 ){
+                                    if($dife < $limite/2  ){
                                        
                                         echo "<td style='border-left: 6px solid green;'>";
                                     }
                                     else{
-                                        if($dife < $limite/2 && $dife > 0 ){
+                                        if( $dife < $limite ){
                                             
                                             echo "<td style='border-left: 6px solid orange;'>";
                                         }
@@ -147,7 +147,7 @@
                                         }
                                     } 
                                         echo $id_revista; echo "</td>";
-                                        echo "<td>"; echo $fecha_ingreso; echo "</td>";
+                                        echo "<td>"; echo date("d-m-y",strtotime($fecha_vencimiento)); echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
                   					    echo "<td>"; echo $titulo_revista; echo "</td>";
 

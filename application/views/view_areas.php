@@ -60,7 +60,7 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 150px;">
+        <div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
           
             <!-- Basic Table -->
             <div class="row clearfix">
@@ -227,7 +227,7 @@
   
     </section>
               <!-- menu -->
-   <div class="container-fluid  " style="margin-top: 200px;">
+   <div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
 	<div class="row">
 
 

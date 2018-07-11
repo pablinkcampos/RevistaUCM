@@ -4,7 +4,7 @@
 
 
 
-<div class="container-fluid  " style="margin-top: 200px;">
+<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
 	<div class="row">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">

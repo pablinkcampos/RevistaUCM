@@ -115,7 +115,7 @@
    });
 </script>
 <section class="content">
-<div class="container-fluid" style="margin-top: 150px;">
+<div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
    <!-- Basic Examples -->
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="card">
@@ -421,8 +421,8 @@
 										<label  class="control-label" for="text">Decisión de Aceptación: </label>
 									</div>
 									<div class="col-xs-9 ol-sm-9 col-md-4 col-lg-4">
-										<select class="form-control" name="opcion" id="opcionid">
-											<option value="3">Selecciona Calificación</option>
+										<select class="form-control" name="opcion" id="opcionid" required="true">
+											<option value="">Selecciona Calificación</option>
 											<?php foreach ($estados->result() as $row) { if($row->id_estado == 4 || $row->id_estado == 5 || $row->id_estado == 6 ){ if ($row->nombre_estado == $estado) { $string = ' selected="selected" '; } else { $string = ""; } echo '
 											<option value="' . $row->id_estado . '" ' . $string . '>' . $row->nombre_estado . '</option>'; } } ?>
 										</select>

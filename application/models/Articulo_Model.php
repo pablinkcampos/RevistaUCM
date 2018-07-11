@@ -572,6 +572,20 @@ class Articulo_Model extends CI_Model {
         }
     }
 
+    function obtener_id_revista($id) {
+        $query = $this->db->select('ID_magazine');
+        $query = $this->db->from('final_magazine');
+        $query = $this->db->where('ID_articulo', $id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return FALSE;
+        }
+        
+    }
+
     function insert_area($data) {
         $query = $this->db->insert('campo_investigacion', $data);
 
@@ -695,7 +709,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function articulos_asignados() {
-        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.version as versiona, r.Fecha_asig_revision as fecha_asignacion, DATE_ADD(r.Fecha_asig_revision,INTERVAL c.max_dia_res_art DAY) as fecha_vencimiento,r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6,re.email as rev_1,re2.email as rev_2,re3.email as rev_3, r.id_revisor_1 as rev1,r.calificaRev1 as cal1, r.id_revisor_2 as rev2,r.calificaRev2 as cal2, r.id_revisor_1 as id_rev1,r.calificaRev2 as cal2, (CASE WHEN r.id_revisor_1 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_2 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_3 !=0 THEN 1 ELSE 0 END) as total_asig, (CASE WHEN r.calificaRev1 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev2 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev3 !=3 THEN 1 ELSE 0 END) as total_rev FROM configuracion as c,  revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado  LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.VerificacionTexto = 1 AND (r.id_revisor_1 != 0 OR r.id_revisor_2 != 0 OR r.id_revisor_3 != 0) AND c.id_configuracion = (SELECT MAX(id_configuracion) FROM configuracion) HAVING total_asig != total_rev ORDER by fecha_vencimiento ASC, t.nombre");
+        $query = $this->db->query("SELECT r.ID as ID, e.nombre_estado as estado, r.version as versiona, r.Fecha_asig_revision as fecha_asignacion, DATE_ADD(r.Fecha_asig_revision,INTERVAL c.max_dia_res_art DAY) as fecha_vencimiento,r.titulo_revista as titulo_revista, r.abstract as abstract, r.palabras_claves, r.archivo, t.nombre as tema, r.fecha_ingreso as fecha_ingreso, r.email_autor as email_autor , r.autor_1, r.email_add1, r.autor_2, r.email_add2,r.autor_3,r.email_add3,r.autor_4,r.email_add4,r.autor_5, r.email_add5,r.autor_6,re.email as rev_1,re2.email as rev_2,re3.email as rev_3, r.id_revisor_1 as rev1,r.calificaRev1 as cal1, r.id_revisor_2 as rev2,r.calificaRev2 as cal2, r.id_revisor_3 as rev3,r.calificaRev3 as cal3, (CASE WHEN r.id_revisor_1 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_2 !=0 THEN 1 ELSE 0 END)+(CASE WHEN r.id_revisor_3 !=0 THEN 1 ELSE 0 END) as total_asig, (CASE WHEN r.calificaRev1 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev2 !=3 THEN 1 ELSE 0 END)+(CASE WHEN r.calificaRev3 !=3 THEN 1 ELSE 0 END) as total_rev FROM configuracion as c,  revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN estado as e ON r.id_estado = e.id_estado  LEFT JOIN revisor as re ON r.id_revisor_1 = re.ID LEFT JOIN revisor as re2 ON r.id_revisor_2 = re2.ID LEFT JOIN revisor as re3 ON r.id_revisor_3 = re3.ID WHERE r.VerificacionTexto = 1 AND (r.id_revisor_1 != 0 OR r.id_revisor_2 != 0 OR r.id_revisor_3 != 0) AND c.id_configuracion = (SELECT MAX(id_configuracion) FROM configuracion) HAVING total_asig != total_rev ORDER by fecha_vencimiento ASC, t.nombre");
         if ($query) {
             return $query;
         } else {

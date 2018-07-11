@@ -4,7 +4,7 @@
 <?php //echo $id_usuario; echo $nombre_usuario; echo $email_usuario; echo $id_rol;        ?>
 
 
-<div class="container-fluid  " style="margin-top: 200px;">
+<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
        
       
 

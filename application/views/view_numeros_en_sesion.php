@@ -115,7 +115,7 @@ left:0;
 
 </style>
 
-        <div class="container-fluid  " style="margin-top: 200px;">
+        <div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
         <h2>
                                      Revistas Publicadas
                                     

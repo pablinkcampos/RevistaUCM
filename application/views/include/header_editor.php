@@ -34,8 +34,8 @@ height:10%;
 <body class="theme-blue theme-blue ls-closed">
 
   
-    <nav class="navbar" style="margin-bottom:10px;">
-        <div class="container-fluid" style="margin-top:0px;">
+    <nav class="navbar" >
+        <div class="container-fluid" style="margin-top:0px; ">
             <div class="navbar-header" style="margin-top:0px;">
                 <div class="row">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true"></a>
@@ -54,7 +54,7 @@ height:10%;
 
                           if ($consult)
                           {
-                            $cantidad_articulos = $consult->total;
+                            $cantidad_articulos = ($consult->total)+1;
                           }
                          ?>
 
@@ -69,7 +69,10 @@ height:10%;
                   
                 </ul>
             </div>
+            <?php $titulo = $this->Articulo_Model->obtener_contenido("titulo_revista");  ?>
+            <b   style="font-size:14px; color:white" ><?php echo $titulo->texto; ?></b>
             <ol class="breadcrumb breadcrumb-bg-cyan align-center">
+                   
                     <li><a href="<?php echo base_url(); ?>"><i class="material-icons">home</i> Home</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/Home_principal/nosotros"><i class="material-icons">library_books</i>Nosotros</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><i class="material-icons">library_books</i>Politica editorial</a></li>

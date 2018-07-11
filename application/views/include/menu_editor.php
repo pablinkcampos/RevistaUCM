@@ -15,7 +15,7 @@
  ?>
         <!-- Left Sidebar -->
 		<?php 	$user_data = $this->session->userdata('userdata');	?>
-        <aside id="leftsidebar" class="sidebar" style="margin-top: 50px; ">
+        <aside id="leftsidebar" class="sidebar" style="margin-top: 85px;">
             <!-- User Info -->
             <div class="user-info">
            
@@ -112,6 +112,12 @@
                                     <li>
                                         <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_imagen">
                                             <span><?php echo lang('vmc_logo del sistema');?></span>
+                                        </a>
+                                        
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo base_url(); ?>index.php/System/editor_cambia_titulo">
+                                            <span>Titulo de Revista</span>
                                         </a>
                                         
                                     </li>

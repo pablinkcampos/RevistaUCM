@@ -65,7 +65,7 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 150px;">
+        <div class="container-fluid" style="margin-top: 200px;"250px;"300px;">
           
             <!-- Basic Table -->
             <div class="row clearfix">
@@ -76,7 +76,9 @@
                             <h2>
                                 <?php echo lang('allaa_articulo_asignado'); ?>
                             </h2>
-                        
+                            <a data-toggle='modal' data-target='#modal_alerta'><button   style="position: absolute;left:80%;" type="button" class="btn bg-red waves-effect ">
+                                    <i class="material-icons">report_problem</i> Alertar a Revisores atrasados.
+                            </button></a>
                         </div>
                         <div class="body table-responsive">
                         
@@ -91,7 +93,7 @@
                                     Versión
                                 </th>
                                 <th width="2%">
-                                    Fecha ingreso
+                                    Fecha limite
                                 </th>
                                 <th>
                                     <?php echo lang('aar_tema'); ?>
@@ -116,7 +118,8 @@
                         </thead>
                         <tbody>
                             <?php if($datos){ ?>
-                            <?php foreach ($datos->result() as $row): ?>
+                            <?php $revisores_pendientes=""; 
+                            foreach ($datos->result() as $row): ?>
                             <?php
 
                                 $id_revista = $row->ID;
@@ -132,32 +135,73 @@
                                 $fecha_vencimiento = $row->fecha_vencimiento;
                                 $date1 = new DateTime($fecha_asignacion);
                                 $date2 = new DateTime($fecha_vencimiento);
+                               
                                 $now = new DateTIme('now');
                                 $diff = $date1->diff($date2);
-                                $diff2 = $date2->diff($now);
+                                $diff2 = $now->diff($date1);
                                 $dife = intval($diff2->days);
                                 $limite = intval($diff->days);
+                               
+
                                 
                                   
                                     //calcula el tiempo que deberia ser asignado y asigna un color
                                     echo "<tr>";
-                                    if($dife > $limite/2 ){
+                                    if($dife < $limite/2  ){
                                        
                                         echo "<td style='border-left: 6px solid green;'>";
                                     }
                                     else{
-                                        if($dife < $limite/2 && $dife > 0 ){
+                                        if( $dife < $limite ){
                                             
                                             echo "<td style='border-left: 6px solid orange;'>";
                                         }
                                         else{
+                                           //se definen los articulos que tienen el plazo vencido.
+                                            $rev1= $row->rev1;
+                                            $rev2= $row->rev2;
+                                            $rev3= $row->rev3;
+                                            $cal1 = $row->cal1;
+                                            $cal2 = $row->cal2;
+                                            $cal3 = $row->cal3;
+                                          
+                                            
                                            
+                                            
+                            
+                                            if($rev1 != 0 && $cal1==3){
+                                                
+                                                if($revisores_pendientes != ""){
+                                                    $revisores_pendientes .=",";
+                                                }
+                                                $revisores_pendientes .=$row->rev_1;
+                                                
+                                            }
+                                            if($rev2 != 0 && $cal2==3){
+                                                
+                                                if($revisores_pendientes != ""){
+                                                    $revisores_pendientes .=",";
+                                                }
+                                                
+                                                $revisores_pendientes .=$row->rev_2;
+                                                
+                                            }
+                                            if($rev3 != 0 && $cal3==3){
+                                                
+                                                if($revisores_pendientes != ""){
+                                                    $revisores_pendientes .=",";
+                                                }
+                                                $revisores_pendientes .=$row->rev_3;
+                                               
+                                            }
+
+                    
                                             echo "<td style='border-left: 6px solid red;'>";
                                         }
                                     }
                                          echo $id_revista; echo "</td>";
                                          echo "<td>"; echo $version; echo "</td>";
-                                        echo "<td>"; echo $fecha_ingreso; echo "</td>";
+                                        echo "<td>"; echo date("d-m-y",strtotime($fecha_vencimiento)); echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
                                       
                   					    echo "<td>"; echo $titulo_revista; echo "</td>";
@@ -226,8 +270,44 @@
             </div>
             <!-- #END# Basic Table -->
             <!-- Striped Rows -->
+            <div class="modal fade" id="modal_alerta" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+							<h4 class="modal-title" id="myModalLabel">Información Importante!</h4>
+                        </div>
+                        <div class="modal-body">
+                        <h4 class="modal-title" >¿Esta seguro de enviar un mensaje de alerta a todos los revisores atrasados?</h4>
+						<form name="form_art" class="form-horizontal" action="<?php echo base_url();?>index.php/Articulo_editor/alertar_revisores" method="post"  enctype="multipart/form-data">
+					
+							<div class="form-group col-md-12">
+								<div class="form-group">
+                                <input type="hidden" value="<?php echo $revisores_pendientes ?>" name="rv_p" /> 
+							</div>
+							<div class="form-group">
+                                <center>
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									
+									<button type="submit" style="margin:20px;" name="upload" id="upload" class="btn bg-green btn-block btn-lg waves-effect">
+										Aceptar
+									</button>
+                                </div>
+                                </center>
+							</div>
+						</form>
+                        </div>
+                        <div class="modal-footer">
+                          
+                                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
   
     </section>
+
+    
               <!-- menu -->
    
 

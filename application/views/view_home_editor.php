@@ -41,7 +41,7 @@
       
     });
 </script>
-<div class="container-fluid  " style="margin-top: 100px;">
+<div class="container-fluid  " style="margin-top: 200px;"250px;"100px;">
        
     
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

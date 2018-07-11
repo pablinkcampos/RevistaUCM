@@ -1414,12 +1414,13 @@ class Articulo_editor extends MY_Controller {
                         $this->load->view('include/aviso', $aviso);
                     }
                 }
+
             } else {
                 $aviso = array(
                     'title' => lang("tswal_acceso denegado"),
                     'text' => lang("cswal_acceso denegado"),
                     'tipoaviso' => 'error',
-                    'windowlocation' => base_url() . "index.php/"
+                    'windowlocation' => base_url()
                 );
                 $this->load->view('include/aviso', $aviso);
             }
@@ -1691,8 +1692,11 @@ class Articulo_editor extends MY_Controller {
             //obtiene datos del articulo
             foreach ($data['datos']->result() as $row) {
                 $id_rev1  = $row->id_rev1;
+               
                 $id_rev2  = $row->id_rev2;
+          
                 $id_rev3  = $row->id_rev3;
+              
                 $cal_rev1 = $row->cal_rev1;
                 $cal_rev2 = $row->cal_rev2;
                 $cal_rev3 = $row->cal_rev3;
@@ -1725,7 +1729,7 @@ class Articulo_editor extends MY_Controller {
                     $bloq3 = 1;
                 }
                 
-          
+               
                 if (empty($this->input->post('revisor[]'))) {
                     
                 }
@@ -1734,18 +1738,22 @@ class Articulo_editor extends MY_Controller {
                     foreach ($this->input->post('revisor[]') as $row) {
                         //el primer revisor obtenido se comprueba se es que coincide con otro revisor del articulo y se reemplaza,
                         //sino se asigna a una posicion vacia y se bloquea esa posicion.
-                        if ($i == 0) {
+                      
                             $id_rev1_new = $this->input->post('revisor[0]');
+                           
                             if ($id_rev1_new == $id_rev1) {
                                 $id_revisor_1 = $id_rev1_new;
+                               
                                 $bloq1        = 1;
                             } else {
                                 if ($id_rev1_new == $id_rev2) {
                                     $id_revisor_2 = $id_rev1_new;
+                                    
                                     $bloq2        = 1;
                                 } else {
                                     if ($id_rev1_new == $id_rev3) {
                                         $id_revisor_3 = $id_rev1_new;
+                                        
                                         $bloq3        = 1;
                                     } else {
                                         if ($id_rev1_new != $id_rev1 && $bloq1 == 0) {
@@ -1768,23 +1776,27 @@ class Articulo_editor extends MY_Controller {
                                 }
                             }
                             
-                        }
+                        
                         
                         //segundo revisor se compara con los demas revisores si es distinto se agrega en algun lugar vacio.
-                        if ($i == 1) {
+                       
                             $id_rev2_new = $this->input->post('revisor[1]');
+                            
                             
                             if ($id_rev2_new == $id_rev1) {
                                 $id_revisor_1 = $id_rev2_new;
                                 $bloq1        = 1;
+                                
                             } else {
                                 if ($id_rev2_new == $id_rev2) {
                                     $id_revisor_2 = $id_rev2_new;
                                     $bloq2        = 1;
+                                    
                                 } else {
                                     if ($id_rev2_new == $id_rev3) {
                                         $id_revisor_3 = $id_rev2_new;
                                         $bloq3        = 1;
+                                    
                                     } else {
                                         if ($id_rev2_new != $id_rev1 && $bloq1 == 0) {
                                             $id_revisor_1 = $id_rev2_new;
@@ -1805,11 +1817,12 @@ class Articulo_editor extends MY_Controller {
                                     }
                                 }
                             }
-                        }
+                        
                         //tercerrevisor se compara con los demas revisores si es distinto se agrega en algun lugar vacio y se bloquea ese lugar.
-                        if ($i == 2) {
+                       
                             
                             $id_rev3_new = $this->input->post('revisor[2]');
+                            
                             
                             if ($id_rev3_new == $id_rev1) {
                                 $id_revisor_1 = $id_rev3_new;
@@ -1845,14 +1858,17 @@ class Articulo_editor extends MY_Controller {
                         }
                         $i++;
                     }
-                }
+                
                 
                 
                 //si todos los revisores calificaron sus articulos pasa a estado revisado
                 if (($id_revisor_1 != 0 && $id_revisor_2 == 0 && $id_revisor_3 == 0 && $cal_rev1 != 3) || ($id_revisor_2 != 0 && $id_revisor_1 == 0 && $id_revisor_3 == 0 && $cal_rev2 != 3) || ($id_revisor_3 != 0 && $id_revisor_2 == 0 && $id_revisor_1 == 0 && $cal_rev3 != 3) || ($id_revisor_1 != 0 && $id_revisor_2 == 0 && $id_revisor_3 != 0 && $cal_rev1 != 3 && $cal_rev3 != 3) || ($id_revisor_1 != 0 && $id_revisor_2 != 0 && $id_revisor_3 == 0 && $cal_rev1 != 3 && $cal_rev2 != 3) || ($id_revisor_3 != 0 && $id_revisor_2 != 0 && $id_revisor_1 == 0 && $cal_rev3 != 3 && $cal_rev2 != 3) || ($id_revisor_1 != 0 && $id_revisor_2 != 0 && $id_revisor_3 != 0 && $cal_rev1 != 3 && $cal_rev2 != 3 && $cal_rev3 != 3)) {
                     $estado = 14;
                 //sino sigue en estado asignado
-                } else {
+                } elseif($id_revisor_1 == 0 && $id_revisor_2 == 0 && $id_revisor_3 == 0) {
+                    $estado = 2;
+                }
+                else{
                     $estado = 3;
                 }
                 
@@ -2212,6 +2228,67 @@ class Articulo_editor extends MY_Controller {
                 'text' => lang("cswal_acceso denegado"),
                 'tipoaviso' => 'error',
                 'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function alertar_revisores() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
+            
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $emails = $this->input->post('rv_p');
+               
+                
+          
+                
+                if ($emails== "") {
+                    
+                    $aviso = array(
+                        'title' => "Error",
+                        'text' => "No existen revisores fuera de plazo",
+                        'tipoaviso' => 'error',
+                        'windowlocation' => base_url() . "index.php/Articulo_editor/all_articulos_asignados"
+                    );
+                    $this->load->view('include/aviso', $aviso);
+                } else {
+                    
+                    $subject = "Alerta - Revista UCM";
+                    $mensaje = '<html>' . '<body><h4>Hola <br><br>Hemos notado que tiene un articulo con plazo vencido esperamos pueda revisarlo a la brevedad.</h4><br>' . '</body>' . '</html>';
+                    $mensaje .= "<b>Saludos</br><br>";
+                    $mensaje .= "<b>Equipo Revista UCM</b><br>";
+                    $headers = "From: RevistaUCM@ucm.cl \r\n";
+                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+                    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+                    
+                    mail($emails, $subject, $mensaje, $headers);
+                    
+                    $aviso = array(
+                        'title' => lang("tswal_asignacion exitosa"),
+                        'text' => lang("cswal_articulo actualizado con exito"),
+                        'tipoaviso' => 'success',
+                        'windowlocation' => base_url() . "index.php/Articulo_editor/all_articulos_asignados"
+                    );
+                    $this->load->view('include/aviso', $aviso);
+                }
+            } else {
+                $aviso = array(
+                    'title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/Articulo_editor/all_articulos_asignados"
+                );
+                $this->load->view('include/aviso', $aviso);
+                
+            }
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/Articulo_editor/all_articulos_asignados"
             );
             $this->load->view('include/aviso', $aviso);
         }

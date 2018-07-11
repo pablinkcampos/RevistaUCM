@@ -15,7 +15,7 @@
  ?>
         <!-- Left Sidebar -->
 		<?php 	$user_data = $this->session->userdata('userdata');	?>
-        <aside id="leftsidebar" class="sidebar" style="margin-top: 50px; ">
+        <aside id="leftsidebar" class="sidebar" style="margin-top: 80px; ">
             <!-- User Info -->
             <div class="user-info">
            

@@ -65,7 +65,7 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 150px;">
+        <div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
           
             <!-- Basic Table -->
             <div class="row clearfix">
@@ -88,7 +88,7 @@
                                   <th> <?php echo lang('aaas_titulo'); ?></th>
                                   <th><?php echo lang('aaas_autor'); ?></th>
                                   <th><?php echo lang('aaas_tema'); ?></th>
-                                  <th  width="2%"><?php echo lang('aaas_fecha ingreso'); ?></th>
+                                  <th  width="2%">Fecha limite</th>
                                   <th  width="2%" ><?php echo lang('aaas_ver'); ?></th>
                                   <th  width="2%"><?php echo lang('aaas_comentar'); ?></th>
                               </tr>
@@ -110,29 +110,32 @@
                                 $fecha_vencimiento = $row->fecha_vencimiento;
                                 $date1 = new DateTime($fecha_asignacion);
                                 $date2 = new DateTime($fecha_vencimiento);
+                               
                                 $now = new DateTIme('now');
                                 $diff = $date1->diff($date2);
-                                $diff2 = $date2->diff($now);
+                                $diff2 = $now->diff($date1);
                                 $dife = intval($diff2->days);
                                 $limite = intval($diff->days);
+                               
+
                                 
                                   
-
-                                echo "<tr>";
-                                if($dife > $limite/2 ){
-                                   
-                                    echo "<td style='border-left: 6px solid green;'>";
-                                }
-                                else{
-                                    if($dife < $limite/2 && $dife > 0 ){
-                                        
-                                        echo "<td style='border-left: 6px solid orange;'>";
+                                    //calcula el tiempo que deberia ser asignado y asigna un color
+                                    echo "<tr>";
+                                    if($dife < $limite/2  ){
+                                       
+                                        echo "<td style='border-left: 6px solid green;'>";
                                     }
                                     else{
+                                        if( $dife < $limite ){
+                                            
+                                            echo "<td style='border-left: 6px solid orange;'>";
+                                        }
+                                        else{
                                        
-                                        echo "<td style='border-left: 6px solid red;'>";
+                                            echo "<td style='border-left: 6px solid red;'>";
+                                        }
                                     }
-                                }
                                              echo  $id_revista;  echo "</td>"; 
                                              echo "<td>"; echo $version; echo "</td>";               		
                                              echo "<td>";echo  $titulo_revista;  echo "</td>";                					    
@@ -143,7 +146,7 @@
                                               echo "<td>"; echo $tema; echo "</td>";
                                           
                                             
-                                              echo "<td>"; echo $fecha_ingreso; echo "</td>";
+                                              echo "<td>"; echo date("d-m-y",strtotime($fecha_vencimiento)); echo "</td>";
                   						
                   						    echo "<td>"; echo "<a href='".base_url()."index.php/articulo_revisor/articulos_asignados_ver/".$id_revista."'><center><i class='material-icons' style='font-size:25px;'>zoom_in</i></center></a>"; echo "</td>";
 

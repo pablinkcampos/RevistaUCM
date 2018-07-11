@@ -46,7 +46,7 @@
    });
 </script>
 <section class="content">
-<div class="container-fluid" style="margin-top: 150px;">
+<div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
    <!-- Basic Examples -->
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="card">

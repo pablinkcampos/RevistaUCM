@@ -74,7 +74,7 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 150px;">
+        <div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
           
             <!-- Basic Table -->
             <div class="row clearfix">
@@ -139,9 +139,15 @@
                                 $date2 = new DateTime($fecha);
                                 $now = new DateTIme('now');
                                 $diff = $date1->diff($date2);
-                                $diff2 = $date2->diff($now);
+                                $diff2 = $now->diff($date1);
                                 $dife = intval($diff2->days);
                                 $limite = intval($diff->days);
+                                                            
+
+                                
+                                  
+                                  
+                                    
                                 $i = $i + 1;
                                 
                               $url = base_url()."index.php/articulo_editor/extender_plazo/".$id_revista;
@@ -191,15 +197,15 @@
                                 
                                   
 
+                              
                               echo "<tr>";
-                              if($dife > $limite/2 ){
-                                 
-                                  echo "<td style='border-left: 6px solid green;'>";
+                              if($dife < $limite/2  ){
+                                    echo "<td style='border-left: 6px solid green;'>";
                               }
                               else{
-                                  if($dife < $limite/2 && $dife > 0 ){
-                                      
-                                      echo "<td style='border-left: 6px solid orange;'>";
+                                  if( $dife < $limite ){
+                                            
+                                    echo "<td style='border-left: 6px solid orange;'>";
                                   }
                                   else{
                                      

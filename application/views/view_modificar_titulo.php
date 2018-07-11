@@ -10,7 +10,7 @@
 				<div class="card">
 					<div class="header bg-blue">
                   
-                    <h3><?php echo lang("vmsn_modificar quienes somos");?></h3>
+                    <h3>Titulo de Revista</h3>
                         <br>
                        
                    
@@ -18,11 +18,11 @@
 					<div class="row">
                        
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_nosotros" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_titulo" method="POST" enctype="multipart/form-data">
                         <div class="form-group col_full">
                             <center>             
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <textarea class="ckeditor" name="t_com" id="abstract"rows="6" required="true"><?php echo  $texto->texto; ?></textarea>
+                                <textarea class="ckeditor" name="t_rev" id="abstract"rows="6" required="true"><?php echo  $texto->texto; ?></textarea>
                             </div>
                             </center>
                         </div>
@@ -45,9 +45,13 @@
 
 
       
-                <div class="widget clearfix">
+                
                     <?php
                      $this->load->view('include/menu_editor');
                     ?>
-                </div>
+                
+
+
+
+
 
