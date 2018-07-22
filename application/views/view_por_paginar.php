@@ -135,14 +135,14 @@
                        
                          $as = $row->id_estado;
                          if($as == 7 || $as == 5){
-                            echo '            <li><span class="label label-info">falta formatear a pdf</span></li>';
+                            echo '     <ul>       <li><span class="label label-info">falta formatear a pdf</span></li>';
                             echo '            <li><i class="icon-time"></i> '.lang("vhe_actualizado el").' ' . obtenerFechaEnLetra($row->fecha_ultima_upd) . '</li>';
                             echo '        </ul>';
                             echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
                             echo '            <input type="hidden" value="' . $row->ID . '" name="articulo_id" />';
                             echo '            <input type="hidden" value="' . $row->email_autor . '" name="email_autors" />';
                             echo '            <center><button class="submit btn btn-primary waves-effect center">formater artículo</button>';
-                            echo '          </center></form>';
+                            echo '          </center></form></div></div></div>';
                          }
                         }
                     }

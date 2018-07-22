@@ -456,7 +456,435 @@ class Articulo_editor extends MY_Controller {
             $this->load->view('include/aviso', $aviso);
         }
     }
+
+    public function informe_recibido() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
+            $fecha_fin= date('Y-m-d');
+            $fecha_inicio = date("Y-m-d",strtotime($fecha_fin."- 30 days")); 
+            $data['informe']          = $this->Articulo_Model->informe_recibidos($fecha_inicio,$fecha_fin);
+            $data["informe_area"] = $this->Articulo_Model->informe_recibidos_total_area($fecha_inicio,$fecha_fin);
+            $data["informe_pais"]        = $this->Articulo_Model->informe_recibidos_total_pais($fecha_inicio,$fecha_fin);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_informe_recibido', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_recibido_filtro() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $f_i =$this->input->post('f_ini');
+                $f_t =$this->input->post('f_ter');
+                $date = new DateTime($f_i);
+                $datet = new DateTime($f_t);
+                $fecha_inicio = date_format($date, ("Y-m-d")); 
+                $fecha_fin = date_format($datet, ("Y-m-d")); 
+                if($fecha_inicio < $fecha_fin){
+                    $data['informe']          = $this->Articulo_Model->informe_recibidos($fecha_inicio,$fecha_fin);
+                    $data["informe_area"] = $this->Articulo_Model->informe_recibidos_total_area($fecha_inicio,$fecha_fin);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_recibidos_total_pais($fecha_inicio,$fecha_fin);
+
+                }
+                else{
+                    $data['informe']          = $this->Articulo_Model->informe_recibidos($fecha_fin,$fecha_inicio);
+                    $data["informe_area"] = $this->Articulo_Model->informe_recibidos_total_area($fecha_fin,$fecha_inicio);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_recibidos_total_pais($fecha_fin,$fecha_inicio);
+                }
+                
+                $this->load->view('include/head');
+                $this->load->view('include/header_editor');
+                $this->load->view('articulo/view_informe_recibido', $data);
+                $this->load->view('include/footer');
+            } else {
+                $aviso = array(
+                    'title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/"
+                );
+                $this->load->view('include/aviso', $aviso);
+            }
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_aceptado() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
+            $fecha_fin= date('Y-m-d');
+            $fecha_inicio = date("Y-m-d",strtotime($fecha_fin."- 30 days")); 
+            $data['informe']          = $this->Articulo_Model->informe_aceptados($fecha_inicio,$fecha_fin);
+            $data["informe_tema"] = $this->Articulo_Model->informe_aceptados_total_tema($fecha_inicio,$fecha_fin);
+            $data["informe_pais"]        = $this->Articulo_Model->informe_aceptados_total_pais($fecha_inicio,$fecha_fin);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_informe_aceptado', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_aceptado_filtro() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $f_i =$this->input->post('f_ini');
+                $f_t =$this->input->post('f_ter');
+                $date = new DateTime($f_i);
+                $datet = new DateTime($f_t);
+                $fecha_inicio = date_format($date, ("Y-m-d")); 
+                $fecha_fin = date_format($datet, ("Y-m-d")); 
+                if($fecha_inicio < $fecha_fin){
+                    $data['informe']          = $this->Articulo_Model->informe_aceptados($fecha_inicio,$fecha_fin);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_aceptados_total_tema($fecha_inicio,$fecha_fin);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_aceptados_total_pais($fecha_inicio,$fecha_fin);
+
+                }
+                else{
+                    $data['informe']          = $this->Articulo_Model->informe_aceptados($fecha_fin,$fecha_inicio);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_aceptados_total_tema($fecha_fin,$fecha_inicio);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_aceptados_total_pais($fecha_fin,$fecha_inicio);
+                }
+                
+                $this->load->view('include/head');
+                $this->load->view('include/header_editor');
+                $this->load->view('articulo/view_informe_aceptado', $data);
+                $this->load->view('include/footer');
+            } else {
+                $aviso = array(
+                    'title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/"
+                );
+                $this->load->view('include/aviso', $aviso);
+            }
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_rechazado() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
+            $fecha_fin= date('Y-m-d');
+            $fecha_inicio = date("Y-m-d",strtotime($fecha_fin."- 30 days")); 
+            $data['informe']          = $this->Articulo_Model->informe_rechazados($fecha_inicio,$fecha_fin);
+            $data["informe_tema"] = $this->Articulo_Model->informe_rechazados_total_tema($fecha_inicio,$fecha_fin);
+            $data["informe_pais"]        = $this->Articulo_Model->informe_rechazados_total_pais($fecha_inicio,$fecha_fin);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_informe_rechazado', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_rechazado_filtro() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $f_i =$this->input->post('f_ini');
+                $f_t =$this->input->post('f_ter');
+                $date = new DateTime($f_i);
+                $datet = new DateTime($f_t);
+                $fecha_inicio = date_format($date, ("Y-m-d")); 
+                $fecha_fin = date_format($datet, ("Y-m-d")); 
+                if($fecha_inicio < $fecha_fin){
+                    $data['informe']          = $this->Articulo_Model->informe_rechazados($fecha_inicio,$fecha_fin);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_rechazados_total_tema($fecha_inicio,$fecha_fin);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_rechazados_total_pais($fecha_inicio,$fecha_fin);
+
+                }
+                else{
+                    $data['informe']          = $this->Articulo_Model->informe_rechazados($fecha_fin,$fecha_inicio);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_rechazados_total_tema($fecha_fin,$fecha_inicio);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_rechazados_total_pais($fecha_fin,$fecha_inicio);
+                }
+                
+                $this->load->view('include/head');
+                $this->load->view('include/header_editor');
+                $this->load->view('articulo/view_informe_rechazado', $data);
+                $this->load->view('include/footer');
+            } else {
+                $aviso = array(
+                    'title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/"
+                );
+                $this->load->view('include/aviso', $aviso);
+            }
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
     
+    public function informe_espera() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
+            $fecha_fin= date('Y-m-d');
+            $fecha_inicio = date("Y-m-d",strtotime($fecha_fin."- 30 days")); 
+            $data['informe']          = $this->Articulo_Model->informe_espera_final($fecha_inicio,$fecha_fin);
+            $data["informe_tema"] = $this->Articulo_Model->informe_espera_final_total_tema($fecha_inicio,$fecha_fin);
+            $data["informe_pais"]        = $this->Articulo_Model->informe_espera_final_total_pais($fecha_inicio,$fecha_fin);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_informe_espera', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_espera_filtro() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $f_i =$this->input->post('f_ini');
+                $f_t =$this->input->post('f_ter');
+                $date = new DateTime($f_i);
+                $datet = new DateTime($f_t);
+                $fecha_inicio = date_format($date, ("Y-m-d")); 
+                $fecha_fin = date_format($datet, ("Y-m-d")); 
+                if($fecha_inicio < $fecha_fin){
+                    $data['informe']          = $this->Articulo_Model->informe_espera_final($fecha_inicio,$fecha_fin);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_espera_final_total_tema($fecha_inicio,$fecha_fin);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_espera_final_total_pais($fecha_inicio,$fecha_fin);
+
+                }
+                else{
+                    $data['informe']          = $this->Articulo_Model->informe_espera_final($fecha_fin,$fecha_inicio);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_espera_final_total_tema($fecha_fin,$fecha_inicio);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_espera_final_total_pais($fecha_fin,$fecha_inicio);
+                }
+                
+                $this->load->view('include/head');
+                $this->load->view('include/header_editor');
+                $this->load->view('articulo/view_informe_espera', $data);
+                $this->load->view('include/footer');
+            } else {
+                $aviso = array(
+                    'title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/"
+                );
+                $this->load->view('include/aviso', $aviso);
+            }
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_paginado() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
+            $fecha_fin= date('Y-m-d');
+            $fecha_inicio = date("Y-m-d",strtotime($fecha_fin."- 30 days")); 
+            $data['informe']          = $this->Articulo_Model->informe_listos($fecha_inicio,$fecha_fin);
+            $data["informe_tema"] = $this->Articulo_Model->informe_listos_total_tema($fecha_inicio,$fecha_fin);
+            $data["informe_pais"]        = $this->Articulo_Model->informe_listos_total_pais($fecha_inicio,$fecha_fin);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_informe_paginado', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+   
+    //carga pagina de informe paginados cuando se filtra por fechas
+    public function informe_paginado_filtro() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $f_i =$this->input->post('f_ini');
+                $f_t =$this->input->post('f_ter');
+                $date = new DateTime($f_i);
+                $datet = new DateTime($f_t);
+                $fecha_inicio = date_format($date, ("Y-m-d")); 
+                $fecha_fin = date_format($datet, ("Y-m-d")); 
+                if($fecha_inicio < $fecha_fin){
+                    $data['informe']          = $this->Articulo_Model->informe_listos($fecha_inicio,$fecha_fin);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_listos_total_tema($fecha_inicio,$fecha_fin);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_listos_total_pais($fecha_inicio,$fecha_fin);
+
+                }
+                else{
+                    $data['informe']          = $this->Articulo_Model->informe_listos($fecha_fin,$fecha_inicio);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_listos_total_tema($fecha_fin,$fecha_inicio);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_listos_total_pais($fecha_fin,$fecha_inicio);
+                }
+                
+                $this->load->view('include/head');
+                $this->load->view('include/header_editor');
+                $this->load->view('articulo/view_informe_paginado', $data);
+                $this->load->view('include/footer');
+            } else {
+                $aviso = array(
+                    'title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/"
+                );
+                $this->load->view('include/aviso', $aviso);
+            }
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
+    public function informe_publicado() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            
+            $fecha_fin= date('Y-m-d');
+            $fecha_inicio = date("Y-m-d",strtotime($fecha_fin."- 30 days")); 
+            $data['informe']          = $this->Articulo_Model->informe_publicados($fecha_inicio,$fecha_fin);
+            $data["informe_tema"] = $this->Articulo_Model->informe_publicados_total_tema($fecha_inicio,$fecha_fin);
+            $data["informe_pais"]        = $this->Articulo_Model->informe_publicados_total_pais($fecha_inicio,$fecha_fin);
+            
+            $this->load->view('include/head');
+            $this->load->view('include/header_editor');
+            $this->load->view('articulo/view_informe_publicado', $data);
+            $this->load->view('include/footer');
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+   
+    //carga pagina de informe publicados cuando se filtra por fechas
+    public function informe_publicado_filtro() {
+        $user_data = $this->session->userdata('userdata');
+        if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
+            if ($this->input->server('REQUEST_METHOD') == 'POST') {
+                $f_i =$this->input->post('f_ini');
+                $f_t =$this->input->post('f_ter');
+                $date = new DateTime($f_i);
+                $datet = new DateTime($f_t);
+                $fecha_inicio = date_format($date, ("Y-m-d")); 
+                $fecha_fin = date_format($datet, ("Y-m-d")); 
+                if($fecha_inicio < $fecha_fin){
+                    $data['informe']          = $this->Articulo_Model->informe_publicados($fecha_inicio,$fecha_fin);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_publicados_total_tema($fecha_inicio,$fecha_fin);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_publicados_total_pais($fecha_inicio,$fecha_fin);
+
+                }
+                else{
+                    $data['informe']          = $this->Articulo_Model->informe_publicados($fecha_fin,$fecha_inicio);
+                    $data["informe_tema"] = $this->Articulo_Model->informe_publicados_total_tema($fecha_fin,$fecha_inicio);
+                    $data["informe_pais"]        = $this->Articulo_Model->informe_publicados_total_pais($fecha_fin,$fecha_inicio);
+                }
+                
+                $this->load->view('include/head');
+                $this->load->view('include/header_editor');
+                $this->load->view('articulo/view_informe_publicado', $data);
+                $this->load->view('include/footer');
+            } else {
+                $aviso = array(
+                    'title' => lang("tswal_acceso denegado"),
+                    'text' => lang("cswal_acceso denegado"),
+                    'tipoaviso' => 'error',
+                    'windowlocation' => base_url() . "index.php/"
+                );
+                $this->load->view('include/aviso', $aviso);
+            }
+        } else {
+            $aviso = array(
+                'title' => lang("tswal_acceso denegado"),
+                'text' => lang("cswal_acceso denegado"),
+                'tipoaviso' => 'error',
+                'windowlocation' => base_url() . "index.php/"
+            );
+            $this->load->view('include/aviso', $aviso);
+        }
+    }
+
     public function all_articulos_ver($id_revista) {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {

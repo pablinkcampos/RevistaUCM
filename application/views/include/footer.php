@@ -50,14 +50,29 @@
 	<script src="<?php echo base_url(); ?>plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
 	<script src="<?php echo base_url(); ?>plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
 	<script src="<?php echo base_url(); ?>plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+	  <!-- Flot Chart Plugins Js -->
+	<script src="<?php echo base_url(); ?>plugins/flot-charts/jquery.flot.js"></script>
+    <script src="<?php echo base_url(); ?>plugins/flot-charts/jquery.flot.resize.js"></script>
+    <script src="<?php echo base_url(); ?>plugins/flot-charts/jquery.flot.pie.js"></script>
+    <script src="<?php echo base_url(); ?>plugins/flot-charts/jquery.flot.categories.js"></script>
+    <script src="<?php echo base_url(); ?>plugins/flot-charts/jquery.flot.time.js"></script>
 
-	  <!-- Multi Select Plugin Js -->
+
+	<!-- Multi Select Plugin Js -->
     <script src="<?php echo base_url(); ?>plugins/multi-select/js/jquery.multi-select.js"></script>
+	<script src="<?php echo base_url(); ?>js/pages/forms/basic-form-elements.js"></script>
+
+	<!-- Moment Plugin Js -->
+	<script src="<?php echo base_url(); ?>plugins/momentjs/moment.js"></script>
+
+	<!-- Bootstrap Material Datetime Picker Plugin Js -->
+	<script src="<?php echo base_url(); ?>plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
 	<!-- Custom Js -->
 
 	<script src="<?php echo base_url(); ?>js/pages/tables/jquery-datatable.js"></script>
 	<script src="<?php echo base_url(); ?>js/admin.js"></script>
+
     
 
     <!-- Demo Js -->

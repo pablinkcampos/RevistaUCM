@@ -85,6 +85,48 @@
 
                         </ul>
                     </li>
+                    
+                    <li>
+                                        <a href="javascript:void(0);" class="menu-toggle">
+											<i class="material-icons">mail</i>
+                                            <span>Informes</span>
+                                        </a>
+										<ul class="ml-menu">
+                                            <li>
+                                                <a href="<?php echo base_url(); ?>index.php/Articulo_editor/informe_recibido">
+                                                    <span>Artículos Recibidos</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo base_url(); ?>index.php/Articulo_editor/informe_aceptado">
+                                                    <span>Artículos Aceptados</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo base_url(); ?>index.php/Articulo_editor/informe_rechazado">
+                                                    <span>Artículos Rechazados</span>
+                                                </a>
+                                            </li>
+											<li>
+                                                <a href="<?php echo base_url(); ?>index.php/Articulo_editor/informe_espera">
+                                                    <span>Artículos Espera versión final</span>
+                                                </a>
+                                            </li>
+                                            
+                                            <li>
+                                                <a href="<?php echo base_url(); ?>index.php/Articulo_editor/informe_paginado">
+                                                    <span>Artículos Paginados</span>
+                                                </a>
+                                            </li>
+											<li>
+                                                <a href="<?php echo base_url(); ?>index.php/Articulo_editor/informe_publicado">
+                                                    <span>Artículos Publicados</span>
+                                                </a>
+                                            </li>
+                                            
+                                    	</ul>
+                                        
+                            </li>
 					<li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">unarchive</i>
@@ -165,6 +207,7 @@
                                     	</ul>
                                         
                             </li>
+
 									
                         	
 							<li>

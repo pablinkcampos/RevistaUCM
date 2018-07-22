@@ -1,6 +1,5 @@
-$(function () {
-    //Textare auto growth
-    autosize($('textarea.auto-growth'));
+$(function() {
+
 
     //Datetimepicker plugin
     $('.datetimepicker').bootstrapMaterialDatePicker({
@@ -10,7 +9,7 @@ $(function () {
     });
 
     $('.datepicker').bootstrapMaterialDatePicker({
-        format: 'dddd DD MMMM YYYY',
+        format: 'DD-MM-YYYY',
         clearButton: true,
         weekStart: 1,
         time: false
