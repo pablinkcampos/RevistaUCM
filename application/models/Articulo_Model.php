@@ -809,7 +809,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_publicados($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, m.titulo_revista as titulo, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN final_magazine as fm ON r.ID = fm.ID_articulo INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' AND DATE_FORMAT(m.fecha_publicacion, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d') GROUP BY p.nombre, titulo,tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, m.titulo_revista as revista, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY p.nombre, tema, m.titulo_revista", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -818,7 +818,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_publicados_total_tema($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN final_magazine as fm ON r.ID = fm.ID_articulo INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' AND DATE_FORMAT(m.fecha_publicacion, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d') GROUP BY tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY tema", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -827,7 +827,16 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_publicados_total_pais($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN final_magazine as fm ON r.ID = fm.ID_articulo INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' AND DATE_FORMAT(m.fecha_publicacion, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d') GROUP BY p.nombre", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY p.nombre", array($fecha_inicio,$fecha_fin));
+        if ($query) {
+            return $query;
+        } else {
+            return false;
+        }
+        
+    }
+    function informe_publicados_total_revista($fecha_inicio,$fecha_fin){
+        $query = $this->db->query("SELECT  m.titulo_revista as revista, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY m.titulo_revista", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {

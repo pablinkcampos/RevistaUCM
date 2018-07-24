@@ -141,7 +141,7 @@
 
                                 $nombre = $row->nombre;
                                 $tema= $row->tema;
-                                $titulo= $row->titulo;
+                                $titulo= $row->revista;
                                 $cantidad = $row->cantidad;
                          
                                
@@ -228,6 +228,31 @@
                     </div>
                 </div>
                 <!-- #END# Bar Chart -->
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid" style="margin-top:-80px;">
+
+            <!-- Real-Time Chart -->
+            
+            <div class="row clearfix">
+                <!-- Pie Chart -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Gráfico de Revista</h2>
+                          
+                        </div>
+                        <div class="body">
+                            <div id="revista_chart" class="flot-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Pie Chart -->
+                <!-- Bar Chart -->
+                
             </div>
         </div>
     </section>
@@ -331,6 +356,67 @@
 
     
     $.plot('#pais_chart', pieChartData, {
+        series: {
+            pie: {
+                show: true,
+                radius: 1,
+                label: {
+                    show: true,
+                    radius: 3 / 4,
+                    formatter: labelFormatter,
+                    background: {
+                        opacity: 0.5
+                    }
+                }
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+    function labelFormatter(label, series) {
+        return '<div style="font-size:8pt; text-align:center; padding:2px; color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+    }
+    //====================================================================================================
+});
+   </script>
+
+<script>
+   $(function () {
+    var pieChartData = []; 
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    <?php 
+                            $i=0;
+                            foreach ($informe_revista->result() as $row): ?>
+                            <?php
+
+                               
+                                $nombre= $row->revista;
+                                $cantidad = $row->cantidad;
+                                
+                                ?>
+                               
+                                pieChartData[ <?php echo $i ?>] = {
+                                    label: '<?php echo $nombre.": ".$cantidad ?>',
+                                    data: <?php echo $cantidad ?>,
+                                    color: getRandomColor()
+                                }
+                              
+
+                                <?php   $i++; endforeach ?>
+    //PIE CHART ==========================================================================================
+  
+    
+
+    
+    $.plot('#revista_chart', pieChartData, {
         series: {
             pie: {
                 show: true,

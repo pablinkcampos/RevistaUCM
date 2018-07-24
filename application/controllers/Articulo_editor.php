@@ -822,6 +822,7 @@ class Articulo_editor extends MY_Controller {
             $data['informe']          = $this->Articulo_Model->informe_publicados($fecha_inicio,$fecha_fin);
             $data["informe_tema"] = $this->Articulo_Model->informe_publicados_total_tema($fecha_inicio,$fecha_fin);
             $data["informe_pais"]        = $this->Articulo_Model->informe_publicados_total_pais($fecha_inicio,$fecha_fin);
+            $data["informe_revista"]        = $this->Articulo_Model->informe_publicados_total_revista($fecha_inicio,$fecha_fin);
             
             $this->load->view('include/head');
             $this->load->view('include/header_editor');
@@ -853,12 +854,14 @@ class Articulo_editor extends MY_Controller {
                     $data['informe']          = $this->Articulo_Model->informe_publicados($fecha_inicio,$fecha_fin);
                     $data["informe_tema"] = $this->Articulo_Model->informe_publicados_total_tema($fecha_inicio,$fecha_fin);
                     $data["informe_pais"]        = $this->Articulo_Model->informe_publicados_total_pais($fecha_inicio,$fecha_fin);
+                    $data["informe_revista"]        = $this->Articulo_Model->informe_publicados_total_revista($fecha_inicio,$fecha_fin);
 
                 }
                 else{
                     $data['informe']          = $this->Articulo_Model->informe_publicados($fecha_fin,$fecha_inicio);
                     $data["informe_tema"] = $this->Articulo_Model->informe_publicados_total_tema($fecha_fin,$fecha_inicio);
                     $data["informe_pais"]        = $this->Articulo_Model->informe_publicados_total_pais($fecha_fin,$fecha_inicio);
+                    $data["informe_revista"]        = $this->Articulo_Model->informe_publicados_total_revista($fecha_inicio,$fecha_fin);
                 }
                 
                 $this->load->view('include/head');
