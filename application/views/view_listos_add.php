@@ -123,7 +123,7 @@
                         echo ' <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" >
                         <div class="card">
                             <div class="icon">
-                                <i class="material-icons col-blue">bookmark</i><b>'.$row->titulo .'.</b>
+                                <i class="material-icons col-blue">bookmark</i><b>'.substr($row->titulo, 0, 30) .'.</b>
                                
                             </div>
                            

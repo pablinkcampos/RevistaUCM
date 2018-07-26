@@ -824,8 +824,7 @@ class Articulo_autor extends MY_Controller {
                 $titulo_art = $consulta->titulo_revista;
             }
             $form_up['titulo'] = $titulo_art;
-            $form_up['pagina_inicio'] = 1;
-            $form_up['pagina_fin'] = 1;
+         
             $form_up['ID_articulo'] = $id_art;
             $form_up['ID_magazine'] = 9999;
             $formi['id_estado'] = 7;

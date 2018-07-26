@@ -622,8 +622,6 @@
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
              $form_datos['ID_articulo'] = $this->input->post('articulo_id');
              $form_datos['titulo'] = $this->input->post('titulos');
-             $form_datos['pagina_inicio'] = $this->input->post('pagina_ini');
-             $form_datos['pagina_fin'] = $this->input->post('pagina_fin');
              $form_dat['id_estado'] = 12;
 
              if ($this->Articulo_Model->solicitar_paginacion($form_datos) == true) {
@@ -647,7 +645,7 @@
                      $this->load->view('include/footer');
 
                      //eliminacion de tupla insertada anteriormente
-                     $this->Articulo_Model->eliminar_paginacion_fallo($form_datos['ID_articulo'], $form_datos['titulo'], $form_datos['pagina_inicio'], $form_datos['pagina_fin']);
+                     $this->Articulo_Model->eliminar_paginacion_fallo($form_datos['ID_articulo'], $form_datos['titulo']);
                  }
              } else {
                  echo '<script type="text/javascript">';
@@ -864,7 +862,10 @@
                  if (in_array($ext, $formatos)) {
                      if (move_uploaded_file($nombretemparchivo, "img/logo.png") == true) {
                          $form['titulo_revista'] = $this->input->post('t_rev');
-                         $form['fecha_publicacion'] = $this->input->post('f_rev');
+                         $f_t=$this->input->post('f_rev');
+                         $date = new DateTime($f_t);
+                         $fecha_p = date_format($date, ("Y-m-d")); 
+                         $form['fecha_publicacion'] = $fecha_p;
                          $form['logo_revista'] = $name_rev;
 
                          if ($this->Articulo_Model->new_magazine($form) == true) {
@@ -1481,27 +1482,14 @@
        $data['id_revista'] = $id_revista;
 
 
-       $this->load->library('form_validation');
 
-       $this->form_validation->set_rules('t_rev', 'Título revista', 'required');
-       $this->form_validation->set_rules('f_rev', 'Fecha de edición', 'required');
-       $this->form_validation->set_rules('p_edit', 'Palabras de editor', 'required');
-
-       $this->form_validation->set_message('required', lang("fv_debes ingresar el campo"));
-
-       if ($this->form_validation->run() == FALSE) {
-           echo '<script type="text/javascript">';
-           echo 'setTimeout(function () { swal("Datos incorrectos","Ingrese todos los campos en el formato requerido","info");';
-             echo '}, 350);</script>';
-
-             $this->load->view('view_editar_revista', $data);
-             $this->load->view('include/footer');
-       }
-       else
-       {
-         $formulario['titulo'] = $this->input->post('t_rev');
-         $formulario['fecha'] = $this->input->post('f_rev');
-         $formulario['palabras'] = $this->input->post('p_edit');
+   
+         $formulario['titulo_revista'] = $this->input->post('t_rev');
+         $f_t=$this->input->post('f_rev');
+         $date = new DateTime($f_t);
+         $fecha_p = date_format($date, ("Y-m-d")); 
+         $formulario['fecha_publicacion'] = $fecha_p;
+         $formulario['palabras_editor'] = $this->input->post('p_edit');
          $formulario['ID'] = $id_revista;
 
          $resp = $this->Articulo_Model->actualizar_revista($formulario);
@@ -1538,6 +1526,6 @@
          }
          $this->load->view('view_editar_revista', $data);
          $this->load->view('include/footer');
-       }
+       
      }
  }

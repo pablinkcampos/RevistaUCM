@@ -65,7 +65,7 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 200px;"250px;"300px;">
+        <div class="container-fluid" style="margin-top: 200px;">
           
             <!-- Basic Table -->
             <div class="row clearfix">
@@ -86,7 +86,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >Fecha Inicial</label>
                                         <div class="form-line">
-                                            <input type="text" class="datepicker form-control" name="f_ini" placeholder="fecha de inicio" required="requerid">
+                                            <input type="text" class="datepicker form-control" name="f_ini" value="<?php if (isset($_POST['f_ini'])) echo $_POST['f_ini']; ?>"  placeholder="fecha de inicio" required="requerid">
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >Fecha Final</label>
                                         <div class="form-line">
-                                            <input type="text" class="datepicker form-control" name="f_ter" placeholder="fecha de termino" required="requerid">
+                                            <input type="text" class="datepicker form-control" name="f_ter" value="<?php if (isset($_POST['f_ter'])) echo $_POST['f_ter']; ?>"  placeholder="fecha de termino" required="requerid">
                                         </div>
                                     </div>
                                 </div>

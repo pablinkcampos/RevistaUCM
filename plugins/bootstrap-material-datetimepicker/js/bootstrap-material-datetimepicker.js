@@ -19,8 +19,7 @@
             date: true,
             time: true,
             format: 'YYYY-MM-DD',
-            minDate: null,
-            maxDate: new Date(),
+        
             currentDate: null,
             lang: 'es',
             weekStart: 0,

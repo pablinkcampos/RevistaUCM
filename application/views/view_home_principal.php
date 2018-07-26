@@ -149,7 +149,7 @@
 </script>
 <br>
 
-  <div class="container-fluid  " style="margin-top: 200px;"250px;"100px;">
+  <div class="container-fluid  " style="margin-top: 150px;">
        
        <!-- Portfolio Single Content
        ============================================= -->
@@ -157,6 +157,21 @@
          
            <br>
            <?php
+             function obtenerFechaEnLetra($fecha) {
+                $dia = conocerDiaSemanaFecha($fecha);
+                $num = date("j", strtotime($fecha));
+                $anno = date("Y", strtotime($fecha));
+                $mes = array(lang('enero'), lang('febrero'), lang('marzo'), lang('abril'), lang('mayo'), lang('junio'), lang('julio'), lang('agosto'), lang('septiembre'), lang('octubre'), lang('noviembre'), lang('diciembre'));
+                $mes = $mes[(date('m', strtotime($fecha)) * 1) - 1];
+                return $dia . ', ' . $num . lang('vhe_de') . $mes . lang('vhe_del') . $anno;
+            }
+
+            function conocerDiaSemanaFecha($fecha)
+            {
+              $dias = array(lang('domingo'), lang('lunes'), lang('martes'), lang('miercoles'), lang('jueves'), lang('viernes'), lang('sabado'));
+              $dia = $dias[date('w', strtotime($fecha))];
+              return $dia;
+            }
             $id_get = $this->input->get('revista');
 
             $logo = false;
@@ -186,8 +201,8 @@
                  
                    echo '<div class="header">';
              
-                   echo ' <center>    <h2>' . $magazine->titulo_revista;
-                   echo '        <br>' . $magazine->fecha_publicacion . '</h2>';
+                   echo ' <center>    <h1>' . $magazine->titulo_revista;
+                   echo '        </h1><br><h5>' . obtenerFechaEnLetra($magazine->fecha_publicacion) . '</h5>';
                    echo '</center></div>';
 
                    echo '<div class="row-fluid">';

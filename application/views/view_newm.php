@@ -65,7 +65,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vne_titulo revista');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="t_rev" value="<?php if (isset($_POST['t_rev'])) echo $_POST['t_rev']; ?>" id="t_art" placeholder="<?php echo lang('vne_ingrese titulo');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                                <input type="text" class="form-control" name="t_rev" value="<?php if (isset($_POST['t_rev'])) echo $_POST['t_rev']; ?>" id="t_art" placeholder="<?php echo lang('vne_ingrese titulo');?>" required="requerid" >
                             </div>
                         </div>
                         <div class="form-group col_full">
@@ -73,7 +73,8 @@
                                 <label class="control-label" for="text"><?php echo lang('vne_fecha edicion');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="f_rev" value="<?php if (isset($_POST['f_rev'])) echo $_POST['f_rev']; ?>" id="t_aut" placeholder="<?php echo lang('vne_ejemplo');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                                <input type="text" class="datepicker form-control" name="f_rev"  value="<?php if (isset($_POST['f_rev'])) echo $_POST['f_rev']; ?>"  placeholder="<?php echo lang('vne_fecha edicion');?>" required="requerid">
+                        
                             </div>
                         </div>                        
                         <div class="form-group col_full">
@@ -81,7 +82,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vne_palabras del editor');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <textarea class="ckeditor" name="p_edit" id="abstract" value="<?php if (isset($_POST['p_edit'])) echo $_POST['p_edit']; ?>" placeholder="<?php echo lang('vne_descripcion');?>." rows="2" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" ></textarea>
+                                <textarea class="ckeditor" name="p_edit" id="abstract" value="<?php if (isset($_POST['p_edit'])) echo $_POST['p_edit']; ?>" placeholder="<?php echo lang('vne_descripcion');?>." rows="2" required="requerid"  ></textarea>
                             </div>
                         </div>
 
@@ -113,6 +114,15 @@
 
   $(document).ready(function () {
     $('#articulos').multiSelect();
+
+    $('.datepicker').bootstrapMaterialDatePicker({
+        format: 'DD-MM-YYYY',
+        clearButton: true,
+        weekStart: 1,
+        time: false,
+        minDate: new Date(),
+       
+    });
 
 
 $('#select-all').click(function(){

@@ -4,7 +4,7 @@
 
 
 
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+<div class="container-fluid  " style="margin-top: 200px;">
 	<div class="row">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">
@@ -21,6 +21,22 @@
                 </div>
                 <?php
                     $ids = $this->Articulo_Model->obtener_magazine_titulo();
+                    function obtenerFechaEnLetra($fecha)
+                    {
+                       $dia= conocerDiaSemanaFecha($fecha);
+                       $num = date("j", strtotime($fecha));
+                       $anno = date("Y", strtotime($fecha));
+                       $mes = array(lang('enero'), lang('febrero'), lang('marzo'), lang('abril'), lang('mayo'), lang('junio'), lang('julio'), lang('agosto'), lang('septiembre'), lang('octubre'), lang('noviembre'), lang('diciembre'));
+                       $mes = $mes[(date('m', strtotime($fecha))*1)-1];
+                       return $dia.', '.$num.lang('vnes_de').$mes.lang('vnes_del').$anno;
+                   }
+    
+                   function conocerDiaSemanaFecha($fecha)
+                   {
+                       $dias = array(lang('domingo'), lang('lunes'), lang('martes'), lang('miercoles'), lang('jueves'), lang('viernes'), lang('sabado'));
+                       $dia = $dias[date('w', strtotime($fecha))];
+                       return $dia;
+                   }
                     if($ids){
 
                             foreach($ids->result() as $row)   {
@@ -41,7 +57,7 @@
                                             
                                             <div class="body">
                                                 
-                                                <div class="text"> <i class="material-icons">date_range</i>'.$row->fecha_publicacion.'</div>
+                                                <div class="text"> <i class="material-icons">event_available</i>'.obtenerFechaEnLetra($row->fecha_publicacion).'</div>
                                                 <div class="text"><a href="'.base_url().'index.php/Home_principal/publicacion?revista=' . $row->ID . '"><i class="icon-comments"></i>'.$num->cantidad.' '.lang("vrev_articulos").'</a></div>
                                                 <a href="'.base_url().'index.php/System/editar?revista=' . $row->ID . '" ><button type="button"  class="btn bg-amber waves-effect">
                                                 <i class="material-icons">create</i>

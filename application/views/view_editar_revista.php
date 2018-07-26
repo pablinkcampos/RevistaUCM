@@ -1,8 +1,12 @@
 <?php
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+
+
+<div  class="container-fluid  " style="margin-top: 200px;">
     
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -40,7 +44,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vne_titulo revista');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="t_rev" value="<?php echo $titulo; ?>" id="t_rev" placeholder="<?php echo lang('vne_ingrese titulo');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                                <input type="text" class="form-control" name="t_rev" value="<?php echo $titulo; ?>" id="t_rev" placeholder="<?php echo lang('vne_ingrese titulo');?>" required="requerid"  >
                             </div>
                         </div>
                         <div class="form-group col_full">
@@ -48,7 +52,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vne_fecha edicion');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" name="f_rev" value="<?php echo $fecha; ?>" id="f_rev" placeholder="<?php echo lang('vne_ejemplo');?>" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" >
+                            <input  type="text" class="datepicker form-control" name="f_rev"  value="<?php echo $fecha; ?>"  placeholder="<?php echo lang('vne_fecha edicion');?>" required="requerid">
                             </div>
                         </div>
                         <div class="form-group col_full">
@@ -56,7 +60,7 @@
                                 <label class="control-label" for="text"><?php echo lang('vne_palabras del editor');?></label>
                             </div>
                             <div class="col-lg-9">
-                                <textarea class="form-control" name="p_edit" id="p_edit" value="<?php echo $palabras; ?>" placeholder="<?php echo lang('vne_descripcion');?>." rows="2" required="True" oninvalid="setCustomValidity('<?php echo lang("fv_campo requerido");?>')" oninput="setCustomValidity('')" ><?php echo $palabras; ?></textarea>
+                                <textarea class="ckeditor" name="p_edit" id="p_edit" value="<?php echo $palabras; ?>" placeholder="<?php echo lang('vne_descripcion');?>." rows="2" required="requerid"  ><?php echo $palabras; ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -81,6 +85,23 @@
                      $this->load->view('include/menu_editor');
                     ?>
                 </div>
+
+ <script>
+
+
+    $(document).ready(function() {
+  
+        $('.datepicker').bootstrapMaterialDatePicker({
+            format: 'DD-MM-YYYY',
+            clearButton: true,
+            weekStart: 1,
+            time: false,
+            minDate: new Date(),
+        });
+    });
+</script>
+          
+
  
 
 

@@ -1,3 +1,48 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        
+        
+
+            var table = $('#articulos').DataTable( {
+            lengthMenu: [[5,10, 25, 50, -1], [5,10, 25, 50, "Todos"]],
+            language: {
+            processing:     "Procesando ...",
+            search:         "Buscar:",
+            lengthMenu:    "Mostrar _MENU_ Elementos",
+            info:           "Visualización del elemento _START_ de _END_ en _TOTAL_ elementos",
+            infoEmpty:      "Mostrar 0 elemento 0 en 0 elementos",
+            infoFiltered:   "(filtro de  _MAX_ en total)",
+            infoPostFix:    "",
+            loadingRecords: "Cargando ...",
+            zeroRecords:    "No hay datos disponibles en la tabla",
+            emptyTable:     "No hay datos disponibles en la tabla",
+            
+            paginate: {
+                first:      "Primero",
+                previous:   "Anterior",
+                next:       "Siguiente",
+                last:       "Último",
+                
+            },
+            aria: {
+                sortAscending:  ": activar para ordenar la columna en orden ascendente",
+                sortDescending: ": active para ordenar la columna en orden descendente"
+            }
+            }
+            } );
+           
+ 
+    // Apply the search
+       
+
+      
+    });
+</script>
 <style>
 
     body {
@@ -116,6 +161,21 @@
 
             $logo = false;
             $resultado = $this->Articulo_Model->count_magazine();
+            function obtenerFechaEnLetra($fecha) {
+                $dia = conocerDiaSemanaFecha($fecha);
+                $num = date("j", strtotime($fecha));
+                $anno = date("Y", strtotime($fecha));
+                $mes = array(lang('enero'), lang('febrero'), lang('marzo'), lang('abril'), lang('mayo'), lang('junio'), lang('julio'), lang('agosto'), lang('septiembre'), lang('octubre'), lang('noviembre'), lang('diciembre'));
+                $mes = $mes[(date('m', strtotime($fecha)) * 1) - 1];
+                return $dia . ', ' . $num . lang('vhe_de') . $mes . lang('vhe_del') . $anno;
+            }
+
+            function conocerDiaSemanaFecha($fecha)
+            {
+              $dias = array(lang('domingo'), lang('lunes'), lang('martes'), lang('miercoles'), lang('jueves'), lang('viernes'), lang('sabado'));
+              $dia = $dias[date('w', strtotime($fecha))];
+              return $dia;
+            }
 
             if ($resultado->cantidad > 0) {
                 if ($id_get) {
@@ -141,8 +201,8 @@
                  
                    echo '<div class="header">';
              
-                   echo ' <center>    <h2>' . $magazine->titulo_revista;
-                   echo '        <br>' . $magazine->fecha_publicacion . '</h2>';
+                   echo ' <center>    <h1>' . $magazine->titulo_revista;
+                   echo '        </h1><br><h5>' . obtenerFechaEnLetra($magazine->fecha_publicacion) . '</h5>';
                    echo '</center></div>';
 
                    echo '<div class="row-fluid">';
@@ -229,8 +289,8 @@
                              echo "<tr>";
                               
                            
-                                echo "<td>"; echo $row->titulo; echo '</td>';
-                                echo "<td>"; echo $tema; echo '</td>';
+                                echo "<td>"; echo substr($row->titulo, 0, 60); echo '</td>';
+                                echo "<td>"; echo substr($tema, 0, 60); echo '</td>';
                                 echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_info".$i."'><center><i class='material-icons' style='font-size:25px;'>assignment_ind</i></center></span></center></span></a>";  echo "</td>";
                                 echo "<td>";echo '  <a href=' . base_url() . 'uploads/' . $row->file_papper . '><i class="material-icons" style="font-size:25px;">file_download</i></a><a href = ' . base_url() . 'uploads/' . $row->file_papper . '></a>';echo "</td>";
                            

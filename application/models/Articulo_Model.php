@@ -145,9 +145,11 @@ class Articulo_Model extends CI_Model {
     }
 
     function obtener_magazines_limit($start, $content_per_page) {
+        $now       = date('Y-m-d');
         $query = $this->db->select('*');
         $query = $this->db->from('magazines');
-        $query = $this->db->order_by('ID', 'desc');
+        $query = $this->db->where('fecha_publicacion <=',$now);
+        $query = $this->db->order_by('fecha_publicacion', 'desc');
 
         $query = $this->db->get();
 
@@ -1350,7 +1352,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function info_final_magazine($id) {
-        $query = $this->db->query("SELECT titulo, pagina_inicio, pagina_fin, file_papper FROM final_magazine WHERE id_articulo = ?", array($id));
+        $query = $this->db->query("SELECT titulo, file_papper FROM final_magazine WHERE id_articulo = ?", array($id));
 
         $result = $query->row();
 
@@ -1430,7 +1432,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function get_pagina_ini($id) {
-        $query = $this->db->query("SELECT pagina_inicio FROM final_magazine WHERE ID_articulo = ?", array($id));
+        $query = $this->db->query("SELECT * FROM final_magazine WHERE ID_articulo = ?", array($id));
 
         $result = $query->row();
 
@@ -1442,7 +1444,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function get_pagina_fin($id) {
-        $query = $this->db->query("SELECT pagina_fin FROM final_magazine WHERE ID_articulo = ?", array($id));
+        $query = $this->db->query("SELECT * FROM final_magazine WHERE ID_articulo = ?", array($id));
 
         $result = $query->row();
 
@@ -1466,7 +1468,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function get_8() {
-        $query = $this->db->query("SELECT  fm.ID as ID, fm.titulo as titulo, r.id_tema as id_tema  FROM final_magazine as fm INNER JOIN revista as r ON r.ID = fm.ID_articulo INNER JOIN temas as t ON r.id_tema = t.id_tema  WHERE ID_magazine = 9999 ORDER BY pagina_inicio");
+        $query = $this->db->query("SELECT  fm.ID as ID, fm.titulo as titulo, r.id_tema as id_tema  FROM final_magazine as fm INNER JOIN revista as r ON r.ID = fm.ID_articulo INNER JOIN temas as t ON r.id_tema = t.id_tema  WHERE ID_magazine = 9999 ORDER BY id_tema");
 
         $result = $query->result();
 
@@ -1581,7 +1583,8 @@ class Articulo_Model extends CI_Model {
 
     function actualizar_revista($datos)
     {
-      $query = $this->db->query("UPDATE magazines SET titulo_revista = ?, fecha_publicacion = ?, palabras_editor = ?  WHERE ID = ?", array($datos['titulo'], $datos['fecha'], $datos['palabras'], $datos['ID']));
+      
+      $query = $this->db->query("UPDATE magazines SET titulo_revista = ?, fecha_publicacion = ?, palabras_editor = ?  WHERE ID = ?", array($datos['titulo_revista'], $datos['fecha_publicacion'], $datos['palabras_editor'], $datos['ID']));
 
       if ($this->db->affected_rows() > 0) {
           return true;
