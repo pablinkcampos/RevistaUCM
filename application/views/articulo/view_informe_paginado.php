@@ -74,7 +74,7 @@
                         <div class="header">
                             
                             <h2>
-                                Informe Artículos Páginados
+                                Informe Artículos Convertidos
                             </h2>
                             
                         </div>

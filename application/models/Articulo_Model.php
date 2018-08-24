@@ -1137,12 +1137,10 @@ class Articulo_Model extends CI_Model {
 
         $query = $this->db->get();
 
-        $result = $query->row();
-
-        if ($result) {
-            return $result;
+        if ($query->num_rows() > 0) {
+            return $query;
         } else {
-            return false;
+            return FALSE;
         }
     }
 

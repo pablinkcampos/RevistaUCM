@@ -53,7 +53,7 @@ height:10%;
 
                           if ($consult)
                           {
-                            $cantidad_articulos = ($consult->total)+1;
+                            $cantidad_articulos = ($consult->total);
                             
                           }
                          ?>

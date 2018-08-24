@@ -163,10 +163,10 @@ left:0;
                               <div class="card">
                               
                                   <div class="body">
-                                    <h2>
+                                    <h2>'
                                       .lang("vnes_no tienes articulos").
                                     
-                                    </h2>
+                                    '</h2>
                                   </div>
                               </div>
                               </center>

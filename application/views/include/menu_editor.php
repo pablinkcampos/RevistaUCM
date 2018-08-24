@@ -5,7 +5,7 @@
     $CI->load->model('Articulo_model');
     $data_usuario=$CI->session->userdata('userdata');
     $email_select=$data_usuario['email_usuario'];
-    $est1 = $CI->Articulo_model->revisor_direct($email_select);
+    $est1 = $CI->Articulo_model-> autor_direct($email_select);
     $datos=$est1->result();
     $nombre="";
     if(isset($est1)){
@@ -48,7 +48,7 @@
             <div class="menu scroll-menu-2x">
                 <ul class="list">
                     <li class="header">Acciones Editor</li>
-                    <li>
+                    <li class="active">
                         <a href="<?php echo base_url(); ?>index.php/System/editor">
                             <i class="material-icons">home</i>
                             <span>Home Editor</span>
@@ -56,7 +56,7 @@
                     </li>
                    
                      
-                    <li class="active">
+                    <li >
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
                             <span>Estado del Artículo</span>
@@ -115,7 +115,7 @@
                                             
                                             <li>
                                                 <a href="<?php echo base_url(); ?>index.php/Articulo_editor/informe_paginado">
-                                                    <span>Artículos Paginados</span>
+                                                    <span>Artículos Convertidos</span>
                                                 </a>
                                             </li>
 											<li>

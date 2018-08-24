@@ -404,6 +404,8 @@ class Articulo_autor extends MY_Controller {
         $this->load->view('include/head');
         $this->load->view('view_login_articulo');
     }
+
+    //funcion para que el autor consulte sobre el estado de su articulo.
     public function consultar_articulo(){
         if ($this->input->post('login-form-id')) {
             $id_revista = $this->input->post('login-form-id');
@@ -449,6 +451,8 @@ class Articulo_autor extends MY_Controller {
             }
         }
     }
+
+    //editar un articulo creado.
     public function editar_articulo($id){
 
         if (isset($_POST['upload'])) {
@@ -630,7 +634,7 @@ class Articulo_autor extends MY_Controller {
         }
     }
     
-    //Ingresasr Artículo
+    //Ingresar Artículo nuevo
     public function ingresar_articulo() {
 
         
@@ -670,6 +674,7 @@ class Articulo_autor extends MY_Controller {
                     $data['email_add5'] = $this->input->post('email_add5');
                     $data['institucion'] = $this->input->post('institucion');
                     $data['pais'] = $this->input->post('pais');
+                    $data['fecha_ingreso'] = date("Y-m-d");
                     
                     $nombre_articulo = substr($data['titulo_revista'], 0, 10) . $data['email_autor']. date('Y-m-d_H_i_s');
                     $nombre_articulo .= $ext;

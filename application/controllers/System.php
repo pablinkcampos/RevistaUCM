@@ -30,7 +30,7 @@
         $this->load->view('view_configuracion');
         $this->load->view('include/footer');
      }
-
+     //agregar configuracion parametros
      public function agregar_configuracion() {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
@@ -80,7 +80,7 @@
         }
     
     }
-
+    //modificar articulo.
      public function mod_articulo($id_articulo){
         $data["campo"] = $this->Articulo_Model->campos_investigacion();
         $data["datos"] = $this->Articulo_Model->articulo($id_articulo);
@@ -868,7 +868,7 @@
                          $form['fecha_publicacion'] = $fecha_p;
                          $form['logo_revista'] = $name_rev;
 
-                         if ($this->Articulo_Model->new_magazine($form) == true) {
+                         if ($this->Articulo_Model->in_rev($form) == true) {
                             $aviso = array('title' => '¡Revista creada!',
                                 'text' => 'Ha creado una revista',
                                 'tipoaviso' => 'success',
@@ -1038,7 +1038,7 @@
              $this->load->view('include/aviso', $aviso);
          }
      }
-
+     //creacion de una nueva revista.
      public function termino() {
          $user_data = $this->session->userdata('userdata');
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {

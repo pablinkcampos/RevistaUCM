@@ -116,7 +116,7 @@
     $('#articulos').multiSelect();
 
     $('.datepicker').bootstrapMaterialDatePicker({
-        format: 'DD-MM-YYYY',
+        format: 'YYYY-MM-DD',
         clearButton: true,
         weekStart: 1,
         time: false,
