@@ -388,7 +388,7 @@ class Articulo_autor extends MY_Controller {
         }
     }
 
-    
+    //ver formulario_articulo
     public function art(){
         $data["campo"] = $this->Articulo_Model->campos_investigacion();
         $data["paises"] = $this->Model_for_login->get_paises();
@@ -936,7 +936,7 @@ class Articulo_autor extends MY_Controller {
 
                     $this->load->view('include/head');
                     $this->load->view('include/header_editor');
-                    $this->load->view('view_por_paginar');
+                    $this->load->view('view_por_convertir');
                     $this->load->view('include/footer');
                 }
             }

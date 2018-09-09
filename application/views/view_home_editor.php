@@ -102,8 +102,8 @@
                             </div>';
                             echo '<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" >
                             <center>
-                            <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">Artículos por formatear</a>
-                            <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                            <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por formatear</a>
+                            <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                             </center>
                             </div>';
      
@@ -147,8 +147,8 @@
                         </div>';
                         echo '<div class="col-lg-12 col-md-12">
                         <center>
-                        <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">artículos por formatear</a>
-                        <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                        <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">artículos por formatear</a>
+                        <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                         </center>
                         </div>';
  

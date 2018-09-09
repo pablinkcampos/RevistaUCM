@@ -16,7 +16,7 @@
                 </div>
                 <div class="row">
                    
-                <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="<?php echo base_url(); ?>index.php/System/termino" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="<?php echo base_url(); ?>index.php/System/nueva_revista" method="POST" enctype="multipart/form-data">
                         <div class="body">
                             <div style="text-align: right;" class="col-lg-3">
                                 <label class="control-label" for="text"><?php echo lang('vne_articulos');?></label>

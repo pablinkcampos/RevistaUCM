@@ -59,8 +59,8 @@
                             </div>';
                             echo '<div class="col-lg-12 col-md-12">
                             <center>
-                            <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">artículos por formatear</a>
-                            <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                            <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">artículos por convertir</a>
+                            <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                             </center>
                             </div>';
      
@@ -104,8 +104,8 @@
                         </div>';
                         echo '<div class="col-lg-12 col-md-12">
                         <center>
-                        <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">Artículos por formatear</a>
-                        <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                        <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por formatear</a>
+                        <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                         </center>
                         </div>';
  
@@ -159,15 +159,15 @@
              echo '<ul class="pager nomargin">';
              if ($group_no == 0 && $group_no + 1 < $cant_group) {
                  $next = $group_no + 1;
-                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/editor_ve13?page=' . $next . '">'.lang("vla_siguiente").' &rarr;</a></li>';
+                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/articulos_convertidos?page=' . $next . '">'.lang("vla_siguiente").' &rarr;</a></li>';
              } else if ($group_no + 1 == $cant_group && $group_no > 0) {
                  $back = $group_no - 1;
-                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/editor_ve13?page=' . $back . '">&larr; '.lang("vla_anterior").'</a></li>';
+                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/articulos_convertidos?page=' . $back . '">&larr; '.lang("vla_anterior").'</a></li>';
              } else if ($group_no + 1 < $cant_group) {
                  $next = $group_no + 1;
-                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/editor_ve13?page=' . $next . '">'.lang("vla_siguiente").' &rarr;</a></li>';
+                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/articulos_convertidos?page=' . $next . '">'.lang("vla_siguiente").' &rarr;</a></li>';
                  $back = $group_no - 1;
-                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/editor_ve13?page=' . $back . '">&larr; '.lang("vla_anterior").'</a></li>';
+                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/articulos_convertidos?page=' . $back . '">&larr; '.lang("vla_anterior").'</a></li>';
              }
              echo '</ul>';
             ?>

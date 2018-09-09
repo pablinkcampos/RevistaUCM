@@ -25,9 +25,10 @@
      }
 
      public function cambiar_configuracion() {
+        $data["datos"]=$this->Configuracion_Model->consulta_ultima_configuracion();
         $this->load->view('include/head');
         $this->load->view('include/header_editor');
-        $this->load->view('view_configuracion');
+        $this->load->view('view_configuracion',$data);
         $this->load->view('include/footer');
      }
      //agregar configuracion parametros
@@ -982,13 +983,13 @@
          }
      }
 
-     public function editor_ve7() {
+     public function articulos_por_convertir() {
          $user_data = $this->session->userdata('userdata');
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
 
              $this->load->view('include/head');
              $this->load->view('include/header_editor');
-             $this->load->view('view_por_paginar');
+             $this->load->view('view_por_convertir');
              $this->load->view('include/footer');
          } else {
              $aviso = array('title' => lang("tswal_acceso denegado"),
@@ -1000,7 +1001,7 @@
          }
      }
 
-     public function editor_ve13() {
+     public function articulos_convertidos() {
          $user_data = $this->session->userdata('userdata');
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
 
@@ -1039,7 +1040,7 @@
          }
      }
      //creacion de una nueva revista.
-     public function termino() {
+     public function nueva_revista() {
          $user_data = $this->session->userdata('userdata');
          if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
 
@@ -1474,7 +1475,7 @@
             $this->load->view('include/aviso', $aviso);
         }
     }
-
+     //editar_revusta
      public function editar_revista() {
        $this->load->view('include/head');
        $this->load->view('include/header_editor');

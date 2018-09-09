@@ -2,7 +2,7 @@
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <?php //echo $id_usuario; echo $nombre_usuario; echo $email_usuario; echo $id_rol;           ?>
-<div class="container-fluid  " style="margin-top: 200px;"250px;"100px;">
+<div class="container-fluid  " style="margin-top: 200px;">
        
     
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -62,8 +62,8 @@
                             </div>';
                             echo '<div class="col-lg-12 col-md-12">
                             <center>
-                            <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">Artículos por formatear</a>
-                            <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                            <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por formatear</a>
+                            <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                             </center>
                             </div>';
      
@@ -107,8 +107,8 @@
                         </div>';
                         echo '<div class="col-lg-12 col-md-12">
                         <center>
-                        <a href="'.base_url().'index.php/System/editor_ve7" class="btn btn-primary waves-effect">artículos por formatear</a>
-                        <a href="'.base_url().'index.php/System/editor_ve13" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
+                        <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">artículos por formatear</a>
+                        <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                         </center>
                         </div>';
  
@@ -154,15 +154,15 @@
              echo '<ul class="pager nomargin">';
              if ($group_no == 0 && $group_no + 1 < $cant_group) {
                  $next = $group_no + 1;
-                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/editor_ve7?page=' . $next . '">'.lang("vpp_siguiente").' &rarr;</a></li>';
+                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/articulos_por_convertir?page=' . $next . '">'.lang("vpp_siguiente").' &rarr;</a></li>';
              } else if ($group_no + 1 == $cant_group && $group_no > 0) {
                  $back = $group_no - 1;
-                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/editor_ve7?page=' . $back . '">&larr; '.lang("vpp_anterior").'</a></li>';
+                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/articulos_por_convertir?page=' . $back . '">&larr; '.lang("vpp_anterior").'</a></li>';
              } else if ($group_no + 1 < $cant_group) {
                  $next = $group_no + 1;
-                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/editor_ve7?page=' . $next . '">'.lang("vpp_siguiente").' &rarr;</a></li>';
+                 echo '<li class="next"><a href="' . base_url() . 'index.php/System/articulos_por_convertir?page=' . $next . '">'.lang("vpp_siguiente").' &rarr;</a></li>';
                  $back = $group_no - 1;
-                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/editor_ve7?page=' . $back . '">&larr; '.lang("vpp_anterior").'</a></li>';
+                 echo '<li class="previous"><a href="' . base_url() . 'index.php/System/articulos_por_convertir?page=' . $back . '">&larr; '.lang("vpp_anterior").'</a></li>';
              }
              echo '</ul>';
             ?>

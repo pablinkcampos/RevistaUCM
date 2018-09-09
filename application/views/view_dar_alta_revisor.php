@@ -101,7 +101,7 @@
                           	<?php foreach ($datos->result() as $row): ?>
                   				<?php
                             $id = $row->id_revisor;
-                  					$nombre	=	$row->nombre . ' ' . $row->apellido_1 .' '. $row->apellido_1;
+                  					$nombre	=	$row->nombre . ' ' . $row->apellido_1 .' '. $row->apellido_2;
                             $correo = $row->correo;
                             $titulo = $row->titulo_academico;
                             $organizacion = $row->organizacion;
@@ -120,7 +120,7 @@
 
                               $url = base_url()."index.php/articulo_editor/aceptar_revisor/".md5($correo .'ox');
 
-                              echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_aprobar".$i."'><center><i class='material-icons' style='font-size:25px;'>assignment_ind</i></center></span></center></span></a>";  echo "</td>";
+                              echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_aprobar".$i."'><center><i class='material-icons' style='font-size:25px;'>assignment_turned_in</i></center></span></center></span></a>";  echo "</td>";
 
                               echo '<div class="modal fade" id="modal_aprobar'.$i.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
                               echo '  <div class="modal-dialog" role="document">';
@@ -179,7 +179,7 @@
   
     </section>
               <!-- menu -->
-   <div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+   <div class="container-fluid  " style="margin-top: 200px;">
 	<div class="row">
 
 

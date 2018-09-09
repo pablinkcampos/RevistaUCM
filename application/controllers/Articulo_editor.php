@@ -1586,8 +1586,8 @@ class Articulo_editor extends MY_Controller {
                         );
                         
                         $correo  = $this->Articulo_Model->getmail($datos['ID']);
-                        $subject = "El formato del art&iacuteculo ha sido aceptado - Revista UCM";
-                        $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha aceptado el formato del un art&iacuteculo a&uacuten debe ser revisado por nuestros expertos de revista UCM. Ingrese a la plataforma para ver más detalles.</h4><br>' . '<h4>ID de su art&iacuteculo :' . $datos['ID'] . '<br> Contrase&ntildea:' . $correo->email_autor . ' </h4><br>' . '</body>' . '</html>';
+                        $subject = "El formato del artículo ha sido aceptado - Revista UCM";
+                        $mensaje = '<html>' . '<body><h4>Hola <br><br>Se ha aceptado el formato del un artículo a&uacuten debe ser revisado por nuestros expertos de revista UCM. Ingrese a la plataforma para ver más detalles.</h4><br>' . '<h4>ID de su artículo :' . $datos['ID'] . '<br> Contraseña:' . $correo->email_autor . ' </h4><br>' . '</body>' . '</html>';
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -1726,7 +1726,7 @@ class Articulo_editor extends MY_Controller {
                         $msj=$mensaje_ac->texto;
                        
                         $mensaje = '<html>' .
-                        '<body><h4>'.$msj.'</h4><br>'. '<h4>ID de su art&iacuteculo :' . $datos['ID'] . '<br> Contrase&ntildea:' . $correo->email_autor . ' </h4><br>' . '</body>' . '</html>';
+                        '<body><h4>'.$msj.'</h4><br>'. '<h4>ID de su artículo :' . $datos['ID'] . '<br> Contraseña:' . $correo->email_autor . ' </h4><br>' . '</body>' . '</html>';
                         $mensaje .= "<b>Saludos</br><br>";
                         $mensaje .= "<b>Equipo Revista UCM</b><br>";
                         $headers = "From: RevistaUCM@ucm.cl \r\n";
@@ -2007,7 +2007,7 @@ class Articulo_editor extends MY_Controller {
             $this->load->view('include/aviso', $aviso);
         }
     }
-    
+    //Se asignan revisores al articulo
     public function asignar_revisores_editor($id_revista) {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {
