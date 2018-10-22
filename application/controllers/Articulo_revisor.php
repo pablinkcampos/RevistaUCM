@@ -242,7 +242,8 @@ class Articulo_revisor extends MY_Controller {
                 }
                 elseif($rev3==$id_revisor){
                     $cal_rev3 = $calificacion;
-                    if(($rev1 == 0 && $rev2 == 0 && $rev3 != 0 && $cal_rev3 !=3) || ($rev1 != 0 && $rev2 = 0 && $rev3 != 0  && $cal_rev1!=3 && $cal_rev3!=3) || ($rev1 == 0 && $rev2 != 0 && $rev3 != 0  && $cal_rev2!=3 && $cal_rev3!=3) || ($rev1 != 0 && $rev2 != 0 && $rev3 != 0 && $cal_rev1!=3 && $cal_rev2!=3 && $cal_rev3!=3) ){
+                   
+                    if(($rev1 == 0 && $rev2 == 0 && $rev3 != 0 && $cal_rev3 !=3) || ($rev1 != 0 && $rev2 == 0 && $rev3 != 0  && $cal_rev1!=3 && $cal_rev3!=3) || ($rev1 == 0 && $rev2 != 0 && $rev3 != 0  && $cal_rev2!=3 && $cal_rev3!=3) || ($rev1 != 0 && $rev2 != 0 && $rev3 != 0 && $cal_rev1!=3 && $cal_rev2!=3 && $cal_rev3!=3) ){
                         $estado=14;
                     }
                     $datos          = array(

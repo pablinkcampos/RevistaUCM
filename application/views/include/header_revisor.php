@@ -81,7 +81,7 @@ height:10%;
                     <li><a href="<?php echo base_url(); ?>index.php/Home_principal/politica"><i class="material-icons">library_books</i>Politica editorial</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/Home_principal/numeros"><i class="material-icons">library_books</i>Publicacion efectiva</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/Home_principal/cuerpo_editorial"><i class="material-icons">library_books</i>Cuerpo editorial</a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/Home_principal/plantilla"><i class="material-icons">library_books</i>Guía autor</a></li>            
+                    <li><a href="<?php echo base_url(); ?>index.php/Home_principal/guia_revisor"><i class="material-icons">library_books</i>Guía revisor</a></li>            
             </ol>
             
         </div>

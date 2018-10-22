@@ -86,7 +86,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >Fecha Inicial</label>
                                         <div class="form-line">
-                                            <input type="text" class="datepicker form-control" name="f_ini" value="<?php if (isset($_POST['f_ini'])) echo $_POST['f_ini']; ?>"  placeholder="fecha de inicio" required="requerid">
+                                            <input type="text" class="datepicker form-control" name="f_ini" value="<?php if (isset($_POST['f_ini'])) echo $_POST['f_ini']; else echo date("d-m-Y",strtotime(date("Y-m-d")."- 30 days"));  ?>"  placeholder="fecha de inicio" required="requerid">
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                     <div class="form-group">
                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >Fecha Final</label>
                                         <div class="form-line">
-                                            <input type="text" class="datepicker form-control" name="f_ter" value="<?php if (isset($_POST['f_ter'])) echo $_POST['f_ter']; ?>"  placeholder="fecha de termino" required="requerid">
+                                            <input type="text" class="datepicker form-control" name="f_ter" value="<?php if (isset($_POST['f_ter'])) echo $_POST['f_ter']; else echo date("d-m-Y"); ?>"  placeholder="fecha de termino" required="requerid">
                                         </div>
                                     </div>
                                 </div>

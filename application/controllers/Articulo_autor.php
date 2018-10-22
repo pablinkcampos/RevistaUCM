@@ -515,7 +515,7 @@ class Articulo_autor extends MY_Controller {
                                 $mensaje .= "<b>Saludos</br><br>";
                                 $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                 $headers = "From: RevistaUCM@ucm.cl \r\n";
-                                $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+                                $headers .= 'Bcc: autorucm@gmail.com' . "\r\n";
                                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                                 mail($email_autor, $subject, $mensaje, $headers);
@@ -603,7 +603,7 @@ class Articulo_autor extends MY_Controller {
             $mensaje .= "<b>Saludos</br><br>";
             $mensaje .= "<b>Equipo Revista UCM</b><br>";
             $headers = "From: RevistaUCM@ucm.cl \r\n";
-            $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+            $headers .= 'Bcc: autorucm@gmail.com' . "\r\n";
             $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
             mail($email_autor, $subject, $mensaje, $headers);
@@ -633,7 +633,16 @@ class Articulo_autor extends MY_Controller {
         
         }
     }
-    
+    function normaliza ($cadena){
+        $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞ
+        ßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ?¡¿()';
+        $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuy
+        bsaaaaaaaceeeeiiiidnoooooouuuyybyRr_____';
+        $cadena = utf8_decode($cadena);
+        $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+        $cadena = strtolower($cadena);
+        return utf8_encode($cadena);
+    }
     //Ingresar Artículo nuevo
     public function ingresar_articulo() {
 
@@ -675,8 +684,8 @@ class Articulo_autor extends MY_Controller {
                     $data['institucion'] = $this->input->post('institucion');
                     $data['pais'] = $this->input->post('pais');
                     $data['fecha_ingreso'] = date("Y-m-d");
-                    
-                    $nombre_articulo = substr($data['titulo_revista'], 0, 10) . $data['email_autor']. date('Y-m-d_H_i_s');
+                    $titulo_limpio= $this->normaliza($data['titulo_revista']);
+                    $nombre_articulo = substr($titulo_limpio, 0, 10) . $data['email_autor']. date('Y-m-d_H_i_s');
                     $nombre_articulo .= $ext;
                     $nombre_articulo = str_replace(' ', '_', $nombre_articulo);
                     $data['archivo'] = $nombre_articulo;
@@ -697,7 +706,7 @@ class Articulo_autor extends MY_Controller {
                                     $mensaje .= "<b>Saludos</br><br>";
                                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                                     $headers = "From: RevistaUCM@ucm.cl \r\n";
-                                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+                                    $headers .= 'Bcc: autorucm@gmail.com' . "\r\n";
                                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                                     mail($data['email_autor'], $subject, $mensaje, $headers);
@@ -817,7 +826,7 @@ class Articulo_autor extends MY_Controller {
             $this->load->view('include/aviso', $aviso);
         }
     }
-
+    //articulo convertido en pdf
     public function responder_solicitud() {
         $user_data = $this->session->userdata('userdata');
         if ($user_data['id_rol'] == '1' || $user_data['id_rol2'] == '1' || $user_data['id_rol3'] == '1') {

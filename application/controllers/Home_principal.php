@@ -143,7 +143,7 @@
      }
 
      
-    public function plantilla() {
+    public function guia_autor() {
          $this->load->view('include/head');
          $user_data = $this->session->userdata('userdata');
          if (($user_data['email_usuario'])) {
@@ -157,9 +157,45 @@
          } else {
              $this->load->view('include/header_principal');
          }
-         $this->load->view('view_plantilla');
+         $this->load->view('view_guia_autor');
          $this->load->view('include/footer');
-     }
+    }
+
+     public function guia_editor() {
+        $this->load->view('include/head');
+        $user_data = $this->session->userdata('userdata');
+        if (($user_data['email_usuario'])) {
+            if ($user_data["id_rol"] == 1) {
+                $this->load->view('include/header_editor');
+            } elseif ($user_data["id_rol"] == 2) {
+                $this->load->view('include/header_revisor');
+            } elseif ($user_data["id_rol"] == 3) {
+                $this->load->view('include/header_autor');
+            }
+        } else {
+            $this->load->view('include/header_principal');
+        }
+        $this->load->view('view_guia_editor');
+        $this->load->view('include/footer');
+    }
+
+    public function guia_revisor() {
+        $this->load->view('include/head');
+        $user_data = $this->session->userdata('userdata');
+        if (($user_data['email_usuario'])) {
+            if ($user_data["id_rol"] == 1) {
+                $this->load->view('include/header_editor');
+            } elseif ($user_data["id_rol"] == 2) {
+                $this->load->view('include/header_revisor');
+            } elseif ($user_data["id_rol"] == 3) {
+                $this->load->view('include/header_autor');
+            }
+        } else {
+            $this->load->view('include/header_principal');
+        }
+        $this->load->view('view_guia_revisor');
+        $this->load->view('include/footer');
+    }
 
          
     public function cuerpo_editorial() {

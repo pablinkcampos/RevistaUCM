@@ -46,7 +46,7 @@
                     $aviso = array('title' => '¡configuración creada!',
                     'text' => 'Ha creado una nueva configuración del sistema',
                     'tipoaviso' => 'success',
-                    'windowlocation' => base_url() . "index.php/System/editor_magazine"
+                    'windowlocation' => base_url() . "index.php/"
                 );
                 $this->load->view('include/aviso', $aviso);
                 $this->load->view('include/footer_esencial');
@@ -733,7 +733,7 @@
                          '</html>';
                  $mensaje.= "<b>Enviado desde wwww.publicacionesucm.cl</b><br>";
                  $headers = "From: avisos@mPublicacionesucm.cl \r\n";
-                 $headers.= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+                 $headers.= 'Bcc: autorucm@gmail.com' . "\r\n";
                  $headers.= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                  if (mail($correo, $subject, $mensaje, $headers)) {
@@ -757,7 +757,7 @@
                          '</html>';
                     $mensaje.= "<b>Enviado desde wwww.publicacionesucm.cl</b><br>";
                     $headers = "From: avisos@mPublicacionesucm.cl \r\n";
-                    $headers.= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+                    $headers.= 'Bcc: autorucm@gmail.com' . "\r\n";
                     $headers.= 'Content-type: text/html; charset=utf-8' . "\r\n";
                     mail($correo, $subject, $mensaje, $headers);
                      echo '<script type="text/javascript">';

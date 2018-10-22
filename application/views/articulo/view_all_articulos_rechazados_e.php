@@ -58,7 +58,7 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
+        <div class="container-fluid" style="margin-top: 200px;">
           
             <!-- Basic Table -->
             <div class="row-fluid">
@@ -109,12 +109,12 @@
                                 $email_autor = $row->email_autor;
                                 $estado = $row->estado;
                                 $tema = $row->tema;
-                                $fecha = $row->fecha_timeout;
+                                $fecha = $row->fecha_ingreso;
                                 $e_post = $row->e_post;
                                 $peticion = $row->peticion;
-                                $fecha_reenvio = NULL;
+                                $fecha_ingreso = NULL;
                                 if($fecha != NULL){
-                                    $fecha_reenvio = date("d-m-y",strtotime($fecha));
+                                    $fecha_ingreso = date("d-m-y",strtotime($fecha));
                                 }
                                 
                                 
@@ -157,7 +157,7 @@
                                                                  
                             
                                         echo $id_revista; echo "</td>";
-                                        echo "<td>";echo $fecha_reenvio; echo "</td>";
+                                        echo "<td>";echo $fecha_ingreso; echo "</td>";
                                         echo "<td>"; echo $tema; echo "</td>";
                   					    echo "<td>"; echo $titulo_revista; echo "</td>";
 
@@ -173,6 +173,11 @@
                                               
                   						if($e_post == 1){
                                             echo "<td>"; echo "<a data-toggle='modal' data-target='#modal_aprobar".$i."'><center><i class='material-icons' style='font-size:25px;'>assignment_ind</i></center></span></center></span></a>";  echo "</td>";
+                                        }
+                                        else{
+                                            echo "<td>";
+                                           
+                                            echo "</td>";
                                         }
                                               
                                              

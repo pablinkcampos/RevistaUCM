@@ -105,7 +105,7 @@ class Registro_revisor extends MY_Controller {
                     $mensaje .= "<b>Saludos</br><br>";
                     $mensaje .= "<b>Equipo Revista UCM</b><br>";
                     $headers = "From: RevistaUCM@ucm.cl \r\n";
-                    $headers .= 'Bcc: pablo.acm.ti@gmail.com' . "\r\n";
+                    $headers .= 'Bcc: autorucm@gmail.com' . "\r\n";
                     $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
                     mail($formulario['email'], $subject, $mensaje, $headers);
