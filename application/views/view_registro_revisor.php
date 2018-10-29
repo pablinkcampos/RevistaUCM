@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																		<div class="form-line">
 																			<?php if (form_error('correo')) echo '<div class="alert alert-danger">' . form_error('correo') . '</div>'; ?>
 																			<label class="form-label" ><?php echo lang('vrr_correo');?>:</label>
-																			<input type="email" name="correo" class="form-control" id="correo" minlength=3 value="<?php if (isset($_POST['correo'])) echo $_POST['correo'];?>" required>
+																			<input type="email" name="correo" class="form-control" id="correo" minlength=3 value="<?php if (isset($_POST['correo'])) echo $_POST['correo'];?>" maxlength="30" required>
 																		</div>
 																	</div>
 																  <div class="form-group form-float">
@@ -85,14 +85,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																    <div class="form-line">
 																			<label class="form-label" ><?php echo lang('vrr_contrasenia');?>:</label>
 																			<?php if (form_error('clave1')) echo '<div class="alert alert-danger">' . form_error('clave1') . '</div>'; ?>
-																      <input type="password" name="clave1" class="form-control" id="pwd1" minlength=6 value="<?php if (isset($_POST['clave1'])) echo $_POST['clave1'];?>" required>
+																      <input type="password" name="clave1" class="form-control" id="pwd1" minlength=6 value="<?php if (isset($_POST['clave1'])) echo $_POST['clave1'];?>" maxlength="30" required>
 																    </div>
 																  </div>
 																	<div class="form-group form-float">
 																    
 																    <div class="form-line">
 																		<label class="form-label" ><?php echo lang('vrr_reingresar contrasenia');?>:</label>
-																      <input type="password" name="clave2" class="form-control" id="pwd2" minlength=6 value="<?php if (isset($_POST['clave2'])) echo $_POST['clave2'];?>" required>
+																      <input type="password" name="clave2" class="form-control" id="pwd2" minlength=6 value="<?php if (isset($_POST['clave2'])) echo $_POST['clave2'];?>" maxlength="30" required>
 																    </div>
 																  </div>
 															
@@ -103,38 +103,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <fieldset>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="nombre" id="nombre" class="form-control" value="<?php if (isset($_POST['nombre'])) echo $_POST['nombre'];?>" required>
+                                            <input type="text" name="nombre" id="nombre" class="form-control" value="<?php if (isset($_POST['nombre'])) echo $_POST['nombre'];?>" maxlength="30" required>
 																						<label class="form-label col-sm-2" for="dato1"><?php echo lang('vrr_nombre');?>:</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="apellido1" class="form-control" value="<?php if (isset($_POST['apellido1'])) echo $_POST['apellido1'];?>" required>
+                                            <input type="text" name="apellido1" class="form-control" value="<?php if (isset($_POST['apellido1'])) echo $_POST['apellido1'];?>" maxlength="30" required>
 																						<label class="form-label col-sm-2" for="dato2"><?php echo lang('vrr_apellido paterno');?>:</label>
                                         </div>
                                     </div>
 																		<div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="apellido2" class="form-control" value="<?php if (isset($_POST['apellido2'])) echo $_POST['apellido2'];?>" required>
+                                            <input type="text" name="apellido2" class="form-control" value="<?php if (isset($_POST['apellido2'])) echo $_POST['apellido2'];?>" maxlength="30" required>
 																						<label class="form-label col-sm-2" ><?php echo lang('vrr_apellido materno');?>:</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input type="text" name="titulo" class="form-control" id="titulo"  value="<?php if (isset($_POST['titulo'])) echo $_POST['titulo'];?>" required>
+                                            <input type="text" name="titulo" class="form-control" id="titulo"  value="<?php if (isset($_POST['titulo'])) echo $_POST['titulo'];?>" maxlength="30" required>
                                             <label class="form-label col-sm-2"><?php echo lang('vrr_titulo academico');?>:</label>
                                         </div>
                                     </div>
 																		
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input  type="text" name="organizacion" class="form-control" id="organizacion" value="<?php if (isset($_POST['organizacion'])) echo $_POST['organizacion'];?>" required></input>
+                                            <input  type="text" name="organizacion" class="form-control" id="organizacion" value="<?php if (isset($_POST['organizacion'])) echo $_POST['organizacion'];?>" maxlength="30" required></input>
                                             <label class="form-label col-sm-2" ><?php echo lang('vrr_organizacion');?>:</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-float">
                                         <div class="form-line">
-                                            <input maxlenght="9" type="number" name="telefono" class="form-control" id="telefono" value="<?php if (isset($_POST['telefono'])) echo $_POST['telefono'];?>"  required>
+                                            <input  type="text"  name="telefono" class="form-control" id="telefono"  onkeypress="return event.charCode >= 48 && event.charCode <=57" name="telefono" class="form-control" id="telefono" value="<?php if (isset($_POST['telefono'])) echo $_POST['telefono'];?>"  maxlength="9" required>
 																						<label class="form-label col-sm-2" ><?php echo lang('vrr_telefono');?>:</label>
                                         </div>
                                         <div class="help-info">debe ingresar 9 digitos</div>
