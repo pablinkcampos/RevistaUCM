@@ -2,6 +2,9 @@
 
     body {
         background:#fff;
+        margin:10px;
+        height:10%;
+        min-width: 100%;
     }
 
     .bookWrap {
@@ -15,12 +18,15 @@
         -moz-perspective: 1200px;
         perspective: 1200px;
     }
+    .card{
+        width:100%;
+    }
 
     .book {
         background:#000;
         height:346px;
         width:230px;
-        position:absolute;
+        position:fixed;
         left:16px;
         top:0;
 
@@ -109,9 +115,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        
-        
-
             var table = $('#articulos').DataTable( {
             lengthMenu: [[5,10, 25, 50, -1], [5,10, 25, 50, "Todos"]],
             language: {
@@ -147,10 +150,16 @@
       
     });
 </script>
-<br>
 
-  <div class="container-fluid  " style="margin-top: 150px;">
-       
+ 
+
+  <div class="card" style="margin-top: 150px;">  
+  </div>
+  <div class="container-fluid" >
+  <div class="card" style="min-width:538px">  
+  <div class="row">
+        
+  
        <!-- Portfolio Single Content
        ============================================= -->
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -193,23 +202,17 @@
                    if ($magazine->logo_revista) {
                        $logo = true;
                    }
-                   
-                  
-                       
-                   echo ' <div class="card">';
-                   
-                 
-                   echo '<div class="header">';
-             
                    echo ' <center>    <h1>' . $magazine->titulo_revista;
-                   echo '        </h1><br><h5>' . obtenerFechaEnLetra($magazine->fecha_publicacion) . '</h5>';
-                   echo '</center></div>';
+                   echo '</h1><br><h5>' . obtenerFechaEnLetra($magazine->fecha_publicacion) . '</h5>';
+                   echo '</center>';
 
                    echo '<div class="row-fluid">';
                    if ($logo ) {
                        echo '
-                               <div class=" col-lg-12 col-md-12">
-                               <div class=" col-lg-3 col-md-3">
+                              
+                         
+                            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class=" col-lg-3 col-md-3">
                
                                          <a href="#" class="nobg"><div class="bookWrap">
                                            <div class="book">
@@ -219,20 +222,13 @@
                                            </div>
                                          </a>
                                    
-                               </div>
-                               </div>
-                               
-                           ';
+                              </div> </div>';
                    }
                    
-               
-                 
-
-
                    $row = null;
                    if ($articulos_en_revista) { 
-                    echo '<div class="col-lg-9 col-md-9">';
-                  echo '<table id="articulos" class="table" width="100%" cellspacing="0">
+                    echo '<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">';
+                  echo '<table id="articulos" class="table"  cellspacing="0">
                     <thead>
                        <tr>
                           <th align="left";>
@@ -277,15 +273,7 @@
                                     $fecha_ultima_upd  =   $row2->fecha_ultima_upd ;
                                     $institucion  =   $row2->institucion ;
                         endforeach ;
-                        $i = $i + 1;                     
-
-                       
-
-                     
-                      
-                      
-
-
+                        $i = $i + 1;                
                              echo "<tr>";
                               
                            
@@ -335,13 +323,11 @@
                              echo "                          <b text-align: right>";echo $institucion;echo "</b>";
                              echo "                      </br>";
                              echo "                      <br>";
-                             echo "                          <b style='text-align: left;'>".lang("allanav_abstract").":</b>";
+                             echo "                          <b style='text-align: justify;'>".lang("allanav_abstract").":</b>";
                              echo "                          <b text-align: justify>";echo $abstract;echo "</b>";
                              echo "                      </br>";
                              echo "                      <br>";
-                             echo "                          <b style='text-align: left;'>".lang("allanav_fecha ultima actualizacion").":</b>";
-                             echo "                          <b text-align: right>";echo $fecha_ultima_upd;echo "</b>";
-                             echo "                      </br>";
+                        
 
                              echo '                  </div>';
                              echo '                 </div>';
@@ -359,24 +345,20 @@
                              
                              
                                  } 
-                          
-                        
-                       
                     echo '</tbody>
                         </table>
-                    </div>';
-                    echo '<div class="col-lg-9 col-md-9">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                               
                       
-                    <p><b>' . lang("vhp_palabras del editor") . ':</b><b>' . $magazine->palabras_editor . '</b></p>
-                   
-                   </div>
-                    
-                 </div>
-                 </div>
+                        <center><h5>Palabras del editor: '.$magazine->palabras_editor . '<h5><center>
+                  
+                  
+                        </div>
+                    </div>
                  </div>'; ?>
                  <?php
                    } else {
-                       echo '<h4>' . lang("vres_no hay articulos asociados") . '</h4>';
+                       echo '<center><h4>' . lang("vres_no hay articulos asociados") . '</h4></center>';
                    }
                } else {
                    echo '<br><br>';
@@ -385,12 +367,15 @@
                }
            } else {
                echo '<br><br>';
-               echo '<h3>' . lang("vres_bienvenidos a nuestra plataforma de revistas") . '</h3>';
+               echo '<center><h3>' . lang("vres_bienvenidos a nuestra plataforma de revistas") . '</h3></center>';
            }
+          
            ?>
-      
-    
-      
+            
+       
+        </div>
+        </div>
+        </div>
 
 
  
@@ -419,9 +404,9 @@
                 $book.removeClass('bookIntro');
             }, 3000);
 
-
+     
         }, 1000);
-
+        
 
     });
 </script>

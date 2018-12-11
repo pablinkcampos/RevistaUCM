@@ -124,10 +124,11 @@
    });
 </script>
 <section class="content">
-<div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
-   <!-- Basic Examples -->
-   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="card">
+<div class="container-fluid" style="margin-top: 200px;">
+   <!-- Basic Table -->
+   <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <div class="card" style="min-width:600px;left:-30px;">
          <div class="header">
             <h2>
                Artículo No Asignado
@@ -377,7 +378,7 @@
                                  </div>
                                    <!-- formulario en el cual se activa el metodo post para reasignar revisores -->
                                    <form class="form-horizontal" action="<?php echo base_url(); ?>index.php/articulo_editor/asignar_revisores_editor/<?php echo $id_revista; ?>" method="POST">
-                                    <table id="articulos" class="cell-border" style="width:100%">
+                                    <table id="articulos" class="table responsive" style="min-width:523px">
                                        <thead>
                                           <tr>
                                              <th align="center"; width="2%">
@@ -445,10 +446,11 @@
                                       
                                      
                                     </table>
-                                    <div class="row" style="position:fixed;left:91%;top:68.3%;"> 
-                                        <button name="asignar" type="submit" class="btn btn-success waves-effect">
-                                            <span><i class="material-icons">assignment_ind</i>  <?php echo lang('allanav_asignar'); ?></span>
-                                        </button>
+                                    <div class="col-md-12" align="right" >
+							   				
+                                       <button name="asignar" type="submit" class="btn btn-success waves-effect">
+                                            	<span><i class="material-icons">assignment_ind</i>  asignar</span>
+                                       </button>
                                     </div>
                                     <br>
                                  </form>

@@ -20,17 +20,7 @@ $(document).ready(function() {
     });
 } );
 </script>
-<!--
-<script>
-$(function() {
 
-    setTimeout(function() {
-        $(".successMessage").animate({ height: 'toggle', opacity: 'toggle' }, 1000);
-    }, 3000);
-
-});
--->
-</script>
 
 <div class="content-wrap">
     <div class="container clearfix">

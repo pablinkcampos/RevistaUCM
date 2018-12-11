@@ -1,10 +1,14 @@
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+<div class="card">
+              
+</div>
+<div class="container-fluid  " style="margin-top: 200px;">
     
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         
-            <div class="card">
+            <div class="card" style="min-width:538px">
                 <div class="header">
+                    Sobre Nosotros
                     <a href="<?php echo base_url(); ?>img/about.png" data-sub-html="imagenPolitica">
                         <img class="img-responsive thumbnail" src="<?php echo base_url(); ?>img/about.png">
                     </a>
@@ -19,11 +23,11 @@
                         </p>
                     
                 </div>
-            </div>
+       
             
-        </div>
-    </div>
-</div>
+      
+   
+
 
 
 

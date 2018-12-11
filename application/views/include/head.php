@@ -65,5 +65,5 @@
                 <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
         <![endif]-->
 
-        <title><?php echo lang('H_Sistema de publicaciones');?></title>
+        <title>Revista UCM</title>
     </head>

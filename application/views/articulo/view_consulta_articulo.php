@@ -50,10 +50,11 @@
    });
 </script>
 <section class="content">
-<div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
-   <!-- Basic Examples -->
-   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="card">
+<div class="container-fluid" style="margin-top: 200px;">
+   <!-- Basic Table -->
+   <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <div class="card" style="min-width:600px;left:-30px;">
          <div class="header">
             <h2>
                Estado Artículo
@@ -393,7 +394,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-md-offset-2 col-md-7">
+								<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
 									<br>
 									<br>
 									<button type="submit" name="upload" id="upload" class="btn btn-success waves-effect">
@@ -434,7 +435,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-md-offset-2 col-md-8">
+								<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
 									<br>
 									<br>
 									<button type="submit" name="upload" id="upload" class="btn btn-success waves-effect">

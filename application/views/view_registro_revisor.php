@@ -45,9 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<!-- Page Title
 		============================================= -->
-		<section id="page-title" style = "background-color: #3f51b5;">
+		<section id="page-title" style = "background-color: #3f51b5; min-width:538px;">
 
-			<div class="container clearfix">
+			<div class="container clearfix " style="min-width:538px">
 				<h1 style = "color:#fff"><?php echo lang('vrr_registro de revisor');?></h1>
 				<span style = "color:#fff"><?php echo lang('vrr_part1');?><br>
           <?php echo lang('vrr_part2');?></span>
@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           
 		<div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" style="min-width:538px">
                         
                         <div class="body">
                             <form id="wizard_with_validation" name = "wizard_with_validation" action="<?php echo base_url();?>index.php/Registro_revisor" method="POST" onsubmit="return verificar();" enctype="multipart/form-data">
@@ -178,8 +178,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																						$seleccionado = 'checked';
 																					}
 																					if($rowt->nombre_campo==$row->id_campo){
-																						echo '&nbsp;&nbsp;';
-																						echo '  <input style="margin:10px" onchange="verificar()" type="checkbox" name="c'. $rowt->id_tema .'" id="c'. $rowt->id_tema .'" value='.$rowt->id_tema.' class="filled-in chk-col-blue" '.$seleccionado.'>';
+																						
+																						echo '  <input style="margin:15px" onchange="verificar()" type="checkbox" name="c'. $rowt->id_tema .'" id="c'. $rowt->id_tema .'" value='.$rowt->id_tema.' class="filled-in chk-col-blue" '.$seleccionado.'>';
 																						echo '  <label for="c'. $rowt->id_tema .'">' . $rowt->nombre.'</label>';
 																					
 																					}

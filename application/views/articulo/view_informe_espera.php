@@ -4,6 +4,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js></script>
 <link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <script type="text/javascript">
@@ -67,10 +68,10 @@
   <section class="content">
         <div class="container-fluid" style="margin-top: 200px;">
           
-            <!-- Basic Table -->
+             <!-- Basic Table -->
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                 <div class="card" style="min-width:600px;left:-30px;">     
                         <div class="header">
                             
                             <h2>
@@ -98,8 +99,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                       
                                         <button type="submit" style="margin:20px;" name="upload" id="upload" class="btn bg-green btn-block  waves-effect">
 										    filtrar
@@ -199,28 +200,30 @@
             <!-- Real-Time Chart -->
             
             <div class="row clearfix">
-                <!-- Pie Chart -->
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                         <!-- Pie Chart -->
+                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="min-width:600px;left:-30px;">
                     <div class="card">
                         <div class="header">
                             <h2>Gráfico de Temas</h2>
                           
                         </div>
                         <div class="body">
-                            <div id="pie_chart" class="flot-chart"></div>
+                            <canvas id="areaPie" width="600" height="400"></canvas>
+                           
                         </div>
                     </div>
                 </div>
                 <!-- #END# Pie Chart -->
                 <!-- Bar Chart -->
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" style="min-width:600px;left:-30px;">
                         <div class="header">
                             <h2>Gráfico de países</h2>
                            
                         </div>
                         <div class="body">
-                            <div id="pais_chart" class="flot-chart"></div>
+                            <canvas id="paisPie" width="600" height="400"></canvas>
+                            
                         </div>
                     </div>
                 </div>
@@ -231,9 +234,14 @@
 
     
               <!-- menu -->
-   <script>
+       
+              <!-- menu -->
+              <script>
    $(function () {
     var pieChartData = []; 
+    var datos =[];
+    var colores = [];
+    var label = [];
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -243,6 +251,7 @@
         return color;
     }
     <?php 
+        
                             $i=0;
                             foreach ($informe_tema->result() as $row): ?>
                             <?php
@@ -257,37 +266,39 @@
                                     label: '<?php echo $area.": ".$cantidad ?>',
                                     data: <?php echo $cantidad ?>,
                                     color: getRandomColor()
-                                }
-                              
-
+                                },
+                                
+                                datos[<?php echo $i ?>] = <?php echo $cantidad ?>;
+                                label[<?php echo $i ?>] = '<?php echo $area.": ".$cantidad ?>';
+                                colores[<?php echo $i ?>] = getRandomColor();
                                 <?php   $i++; endforeach ?>
     //PIE CHART ==========================================================================================
-  
+    var Areacanvas = document.getElementById("areaPie");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 14;
+
+
+var oilData = {
+    labels: label,
+    datasets: [
+        {
+            data: datos,
+            backgroundColor: colores
+        }],
+
+};
+
+window.pie = new Chart(Areacanvas, {
+  type: 'pie',
+  data: oilData,
+
+
+});                           
     
 
     
-    $.plot('#pie_chart', pieChartData, {
-        series: {
-            pie: {
-                show: true,
-                radius: 1,
-                label: {
-                    show: true,
-                    radius: 3 / 4,
-                    formatter: labelFormatter,
-                    background: {
-                        opacity: 0.5
-                    }
-                }
-            }
-        },
-        legend: {
-            show: false
-        }
-    });
-    function labelFormatter(label, series) {
-        return '<div style="font-size:8pt; text-align:center; padding:2px; color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-    }
+
     //====================================================================================================
 });
    </script>
@@ -295,6 +306,9 @@
  <script>
    $(function () {
     var pieChartData = []; 
+    var datos =[];
+    var colores = [];
+    var label = [];
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
@@ -303,6 +317,7 @@
         }
         return color;
     }
+   
     <?php 
                             $i=0;
                             foreach ($informe_pais->result() as $row): ?>
@@ -319,39 +334,42 @@
                                     data: <?php echo $cantidad ?>,
                                     color: getRandomColor()
                                 }
+                                datos[<?php echo $i ?>] = <?php echo $cantidad ?>;
+                                label[<?php echo $i ?>] = '<?php echo $nombre.": ".$cantidad ?>';
+                                colores[<?php echo $i ?>] = getRandomColor();
+
                               
 
                                 <?php   $i++; endforeach ?>
     //PIE CHART ==========================================================================================
-  
-    
 
     
-    $.plot('#pais_chart', pieChartData, {
-        series: {
-            pie: {
-                show: true,
-                radius: 1,
-                label: {
-                    show: true,
-                    radius: 3 / 4,
-                    formatter: labelFormatter,
-                    background: {
-                        opacity: 0.5
-                    }
-                }
-            }
-        },
-        legend: {
-            show: false
-        }
-    });
-    function labelFormatter(label, series) {
-        return '<div style="font-size:8pt; text-align:center; padding:2px; color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-    }
-    //====================================================================================================
+
+        var Areacanvas = document.getElementById("paisPie");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 10;
+
+
+var oilData = {
+    labels: label,
+    datasets: [
+        {
+            data: datos,
+            backgroundColor: colores
+        }],
+
+};
+
+window.pie = new Chart(Areacanvas, {
+  type: 'pie',
+  data: oilData,
+
+
+});   
 });
    </script>
+
 
 
           

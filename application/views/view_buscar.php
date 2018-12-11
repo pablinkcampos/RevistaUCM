@@ -47,20 +47,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
 
 </script>
-
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+  <div class="card" style="margin-top: 150px;">  
+  </div>
+<div class="container-fluid  " >
     
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         
-            <div class="card">
+            <div class="card" style="min-width:538px">
                 <div class="header">
                     <h3 style = "color: black;"><?php echo lang('vb_buscar en todos los articulos'); ?></h3>
                    
                 </div>
                 <div class="body">
                    
-                <table id="articulos" class="display" width="100%" cellspacing="0">
+                <table id="articulos" class="table" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th><?php echo lang('vb_titulo'); ?></th>

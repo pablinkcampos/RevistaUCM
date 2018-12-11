@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<!-- Page Title
 		============================================= -->
-		<section id="page-title" style = "background-color: #3f51b5;">
+		<section id="page-title" style = "background-color: #3f51b5;min-width:538px;">
 
 			<div class="container clearfix">
 			<h1 style = "color:#fff"><?php echo lang('vrl_registro de lector');?></h1>
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           
 		<div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" style="min-width:538px">
                         
                         <div class="body">
                             <form id="wizard_with_validation" name = "wizard_with_validation" action="<?php echo base_url();?>index.php/Registro_lector" method="POST" enctype="multipart/form-data">
@@ -131,7 +131,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																		if ($areas)
 																		{
 																		
-																			echo '<h3 style = "color: #3f51b5;">'.'Áreas de especialidad'.'</h3>';
+																			echo '<h3 style = "color: #3f51b5; margin:15px;">'.'Áreas de especialidad'.'</h3>';
 																			echo '<hr>';
 
 																			if ($mensaje_error != "Seleccionado") echo '<div class="alert alert-danger">' . $mensaje_error . '</div>';
@@ -148,8 +148,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 																					}
 																					if($rowt->nombre_campo==$row->id_campo){
 
-																						echo '<input '.$seleccionado.' type="checkbox" name="c'. $rowt->id_tema .'" id="c'. $rowt->id_tema .'" value='.$rowt->id_tema.' class="filled-in chk-col-blue">';
-																						echo '<label for="c'. $rowt->id_tema .'">' . $rowt->nombre.'</label>';
+																						echo '<input style="margin:15px"'.$seleccionado.' type="checkbox" name="c'. $rowt->id_tema .'" id="c'. $rowt->id_tema .'" value='.$rowt->id_tema.' class="filled-in chk-col-blue">';
+																						echo '<label for="c'. $rowt->id_tema .'">  ' . $rowt->nombre.' &nbsp </label> ';
 																					
 																					}
 																				

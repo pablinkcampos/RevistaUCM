@@ -1,9 +1,11 @@
-        
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+<div class="card">
+					
+</div>     
+<div class="container-fluid  " style="margin-top: 200px;">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<center>
-				<div class="card">
+				<div class="card" style="min-width:538px">
 					<div class="header">
 						<h2>
 							Video Tutoriales para Autor

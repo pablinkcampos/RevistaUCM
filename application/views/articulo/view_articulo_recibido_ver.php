@@ -114,10 +114,10 @@
    });
 </script>
 <section class="content">
-<div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
+<div class="container-fluid" style="margin-top: 200px;">
    <!-- Basic Examples -->
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="card">
+      <div class="card" style="min-width:538px;">
          <div class="header">
             <h2>
                Artículo Recibido
@@ -374,15 +374,18 @@
 
 											<div class="col-md-12" id="comentario" style="display:none;">
 							   					<textarea class="ckeditor"  name="comentarioRechazo" id="comentarioID" rows="20" cols="100" required="true"></textarea>
-						   					</div>
+                                      
+                                 </div>
+                                 <div class="col-md-12" align="right" >
+							   				
+                                       <button name="asignar" type="submit" class="btn btn-success waves-effect">
+                                            	<span><i class="material-icons">assignment_ind</i>  ingresar</span>
+                                       </button>
+                                 </div>
                                           
 
                                           
-										  <div class="row" style="position:fixed;left:91%;top:68.3%;"> 
-                                        		<button name="asignar" type="submit" class="btn btn-success waves-effect">
-                                            	<span><i class="material-icons">assignment_ind</i>  ingresar</span>
-                                        		</button>
-                                    		</div>
+										 
 
                             	</form>
                               </div>

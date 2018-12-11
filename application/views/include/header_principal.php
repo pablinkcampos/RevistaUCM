@@ -11,12 +11,8 @@
 
 
 
-html,body{
-margin:100px;
-height:10%;
 }
-</style>
-<style type="text/css">
+
  
  .modal-backdrop{
      display: none;
@@ -28,13 +24,21 @@ height:10%;
  i{
      font-size:30px;
  }
+ 
+.contenedor{
+    margin:10px;
+    height:10%;
+    min-width: 100%;
+}
+
+ 
 </style>
 
-<body class="theme-blue">
+<body class="theme-blue" >
 
   
   <nav class="navbar" >
-        <div class="container-fluid" style="margin-top:0px;">
+        <div class="container-fluid" style="margin-bottom:10px;">
             <div class="navbar-header" style="margin-top:0px; ">
                 <div class="row">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true"></a>

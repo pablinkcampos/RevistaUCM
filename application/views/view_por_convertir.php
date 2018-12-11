@@ -42,7 +42,7 @@
                      $cant_group = $cant_group_aux;
 
                      if ($filas->cantidad == 0) {
-                        echo ' <div class="card">';
+                        echo ' <div class="card" style="min-width:538px;">';
                    
                  
                         echo '<div class="header">';
@@ -62,7 +62,7 @@
                             </div>';
                             echo '<div class="col-lg-12 col-md-12">
                             <center>
-                            <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por formatear</a>
+                            <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículo por Convertir</a>
                             <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                             </center>
                             </div>';
@@ -107,7 +107,7 @@
                         </div>';
                         echo '<div class="col-lg-12 col-md-12">
                         <center>
-                        <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">artículos por formatear</a>
+                        <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por convertir</a>
                         <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                         </center>
                         </div>';
@@ -135,7 +135,7 @@
                        
                          $as = $row->id_estado;
                          if($as == 7 || $as == 5){
-                            echo '     <ul>       <li><span class="label label-info">falta formatear a pdf</span></li>';
+                            echo '     <ul>       <li><span class="label label-info">Falta Convertir a pdf</span></li>';
                             echo '            <li><i class="icon-time"></i> '.lang("vhe_actualizado el").' ' . obtenerFechaEnLetra($row->fecha_ultima_upd) . '</li>';
                             echo '        </ul>';
                             echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';

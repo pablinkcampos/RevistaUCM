@@ -24,7 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://138.197.90.127/mak_hum/';
-$config['base_url'] = 'http://localhost/mak_hum/';
+//$config['base_url'] = 'http://localhost/mak_hum/';
+$config['base_url'] = 'http://192.168.18.12/mak_hum/';
 //$config['base_url'] = '';
 /*
 |--------------------------------------------------------------------------

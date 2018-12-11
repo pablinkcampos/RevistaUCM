@@ -85,10 +85,11 @@
    });
 </script>
 <section class="content">
-<div class="container-fluid" style="margin-top: 200px;"250px;"150px;">
-   <!-- Basic Examples -->
-   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="card">
+<div class="container-fluid" style="margin-top: 200px;">
+ <!-- Basic Table -->
+      <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card" style="min-width:600px;left:-30px;">
          <div class="header">
             <h2>
                Artículo Asignado
@@ -137,7 +138,7 @@
                                     <tr>";
                                     echo "
                                     
-                                    <th style='text-align: right;'>".lang("allanav_titulo articulo").":</th>";
+                                    <th style='text-align: left;'>".lang("allanav_titulo articulo").":</th>";
                                     echo "
                                     
                                     <td>".$titulo_revista."</td>";
@@ -434,12 +435,14 @@
                                       
                                      
                                     </table>
-                                    <div class="row" style="position:fixed;left:91%;top:68.3%;"> 
-                                        <button name="asignar" type="submit" class="btn btn-success waves-effect">
-                                            <span><i class="material-icons">assignment_ind</i>  <?php echo lang('allanav_asignar'); ?></span>
-                                        </button>
+                                    <div class="col-md-12" align="right" >
+							   				
+                                       <button name="asignar" type="submit" class="btn btn-success waves-effect">
+                                            	<span><i class="material-icons">assignment_ind</i>  asignar</span>
+                                       </button>
                                     </div>
                                     <br>
+                                
                                  </form>
                               </div>
                            </div>

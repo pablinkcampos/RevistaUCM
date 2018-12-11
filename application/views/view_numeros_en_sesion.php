@@ -114,12 +114,15 @@ left:0;
 
 
 </style>
+  <div class="card" style="margin-top: 180px;">  
+  </div>
+  <div class="container-fluid" >
 
-        <div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
-        <h2>
+  <div class="row">
+        <center><h2>
                                      Revistas Publicadas
                                     
-        </h2>
+        </h2></center>
         <?php
                 function obtenerFechaEnLetra($fecha)
                 {
@@ -204,7 +207,7 @@ left:0;
                           echo '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">';
                           echo '    <div class="card">';
                           echo '        <div class="header">';
-                          echo '            <h4>'.substr($row->titulo_revista, 0, 30).' ('. obtenerFechaEnLetra($row->fecha_publicacion) .')'.' </h4>';
+                          echo '            <center><h4>'.substr($row->titulo_revista, 0, 30).' <p>('. obtenerFechaEnLetra($row->fecha_publicacion) .')</p>'.' </h4></center>';
                           echo '        </div>';
                           echo '        <ul class="entry-meta clearfix">';
                           echo '            <li><i class="material-icons">event_available</i> '.lang("vnes_creada el").' '. obtenerFechaEnLetra($row->fecha_creacion) .'</li>';

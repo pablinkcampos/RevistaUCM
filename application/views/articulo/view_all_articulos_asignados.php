@@ -65,24 +65,27 @@
 
 
   <section class="content">
-        <div class="container-fluid" style="margin-top: 200px;"250px;"300px;">
+        <div class="container-fluid" style="margin-top: 200px;">
           
-            <!-- Basic Table -->
-            <div class="row clearfix">
+
+             <!-- Basic Table -->
+           <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" style="min-width:600px;left:-30px;">
                         <div class="header">
                             
                             <h2>
                                 <?php echo lang('allaa_articulo_asignado'); ?>
-                            </h2>
-                            <a data-toggle='modal' data-target='#modal_alerta'><button   style="position: absolute;left:80%;" type="button" class="btn bg-red waves-effect ">
+                            </h2><br>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" align="right">
+                            <a data-toggle='modal' data-target='#modal_alerta'><button  type="button" class="btn bg-red waves-effect ">
                                     <i class="material-icons">report_problem</i> Alertar a Revisores atrasados.
                             </button></a>
+                           </div>
                         </div>
                         <div class="body table-responsive">
                         
-                        <table  class="table cell-border dataTable js-exportable" id="articulos" class="display" width="100%" cellspacing="0">
+                        <table  class="table cell-border dataTable js-exportable" id="articulos" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                             
@@ -303,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
   
     </section>
 

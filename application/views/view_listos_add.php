@@ -2,7 +2,7 @@
  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <?php //echo $id_usuario; echo $nombre_usuario; echo $email_usuario; echo $id_rol;           ?>
-<<div class="container-fluid  " style="margin-top: 200px;"250px;"100px;">
+<<div class="container-fluid  " style="margin-top: 200px;">
        
     
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -39,7 +39,7 @@
                      $cant_group_aux = ceil($filas->cantidad / $content_per_page);
                      $cant_group = $cant_group_aux;
                      if ($filas->cantidad == 0) {
-                        echo ' <div class="card">';
+                        echo ' <div class="card" style="min-width:538px;">';
                    
                  
                         echo '<div class="header">';
@@ -59,7 +59,7 @@
                             </div>';
                             echo '<div class="col-lg-12 col-md-12">
                             <center>
-                            <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">artículos por convertir</a>
+                            <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por Convertir</a>
                             <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                             </center>
                             </div>';
@@ -84,7 +84,7 @@
 
                  $consulta = $this->Articulo_Model->obtener_articulos_limit_listos2($start, $content_per_page);
                  if ($consulta && $filas) {
-                    echo ' <div class="card">';
+                    echo ' <div class="card" style="min-width:538px;">';
                    
                  
                     echo '<div class="header">';
@@ -104,7 +104,7 @@
                         </div>';
                         echo '<div class="col-lg-12 col-md-12">
                         <center>
-                        <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por formatear</a>
+                        <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por Convertir</a>
                         <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
                         </center>
                         </div>';
@@ -141,7 +141,7 @@
                     echo '        </ul>';
                     echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
                     echo '            <input type="hidden" value="' .$row->ID_articulo . '" name="articulo_id" />';
-                    echo '            <center><button class="submit btn btn-primary waves-effect center">Volver a formatear</button>';
+                    echo '            <center><button class="submit btn btn-primary waves-effect center">Volver a Convertir</button>';
                     echo '          </center></form>';
                  
                  echo '    </div>';

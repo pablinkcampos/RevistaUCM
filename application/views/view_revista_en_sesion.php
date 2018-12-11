@@ -147,9 +147,12 @@
     }
 
 </style>
-<br>
+     <div class="card" style="margin-top: 150px;">  
+  </div>
+  <div class="container-fluid" >
+  <div class="card" style="min-width:538px">  
+  <div class="row">
 
-  <div class="container-fluid  " style="margin-top: 200px;"250px;"100px;">
        
        <!-- Portfolio Single Content
        ============================================= -->
@@ -196,14 +199,11 @@
                    
                   
                        
-                   echo ' <div class="card">';
-                   
-                 
-                   echo '<div class="header">';
+                  
              
                    echo ' <center>    <h1>' . $magazine->titulo_revista;
                    echo '        </h1><br><h5>' . obtenerFechaEnLetra($magazine->fecha_publicacion) . '</h5>';
-                   echo '</center></div>';
+                   echo '</center>';
 
                    echo '<div class="row-fluid">';
                    if ($logo ) {
@@ -279,13 +279,6 @@
                         endforeach ;
                         $i = $i + 1;                     
 
-                       
-
-                     
-                      
-                      
-
-
                              echo "<tr>";
                               
                            
@@ -338,11 +331,6 @@
                              echo "                          <b style='text-align: left;'>".lang("allanav_abstract").":</b>";
                              echo "                          <b text-align: justify>";echo $abstract;echo "</b>";
                              echo "                      </br>";
-                             echo "                      <br>";
-                             echo "                          <b style='text-align: left;'>".lang("allanav_fecha ultima actualizacion").":</b>";
-                             echo "                          <b text-align: right>";echo $fecha_ultima_upd;echo "</b>";
-                             echo "                      </br>";
-
                              echo '                  </div>';
                              echo '                 </div>';
                              echo '               </div>';

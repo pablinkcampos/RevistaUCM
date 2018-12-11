@@ -15,8 +15,8 @@
     
         if(nextinput<6){
  
-            campo = '<h6>Autor adicional '+nextinput+'</h6><label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Nombre Autor adicional:</label><div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><div class="form-line">  <input type="text" value="" class="form-control" placeholder="Nombre autor adicional:" name="autor_'+nextinput+'" id="autor_'+nextinput+'" "> </div></div>';
-            campo_email ='<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Email Autor adicional:</label><div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><div class="form-line"><input type="email" value="" placeholder="<?php echo lang('aa_email_adicional'); ?>:" class="form-control" name="email_add'+nextinput+'" id="email_add'+nextinput+'" "></div></div>';
+            campo = '<p>Autor adicional '+nextinput+' </p><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12><label  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >Nombre Autor adicional:</label></div><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="form-line">  <input type="text" value="" class="form-control" placeholder="Nombre autor adicional:" name="autor_'+nextinput+'" id="autor_'+nextinput+'" "> </div></div>';
+            campo_email ='<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12><label   class="col-lg-12 col-md-12 col-sm-12 col-xs-12"  >Email Autor adicional: </label></div><div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><div class="form-line"><input type="email" value="" placeholder="<?php echo lang('aa_email_adicional'); ?>:" class="form-control" name="email_add'+nextinput+'" id="email_add'+nextinput+'" "></div></div></div>';
             $("#campos").append(campo+campo_email);
         }
     }                  
@@ -49,12 +49,12 @@
 
 
    
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+<div class="container-fluid  " style="margin-top: 200px;">
        
        <div class="row">
            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                <center>
-               <div class="card">
+               <div class="card" style="min-width:538px">
                    <div class="header">
                        <h2>
                        <h3 style = "color: black;"><?php echo lang('aa_ingrese informacion de articulo'); ?></h3>
@@ -70,8 +70,8 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <br><br><br><br><?php echo lang('vap_part3'); ?>.<br><?php echo lang('vap_part4'); ?>: "<b>Pablo Campos M.</b>" <?php echo lang('vap_part5'); ?>.</p>
                                     </div>
-                                    <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Autor de Contacto:</label>
-                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Autor de Contacto:</label>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 									<div class="form-group form-float">
 										
 										<div class="form-line">
@@ -81,8 +81,8 @@
 									</div>
                                     </div>
                                    
-                                    <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Email de Contacto:</label>
-                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Email de Contacto:</label>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                                     <div class="form-group ">
                                         <div class="form-line">
                                         
@@ -92,11 +92,11 @@
                                        
                                     </div>
                                     </div>
-                                
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float" data-toggle="tooltip" data-placement="bottom" title="añadir autor adicional">
                                                 <i  onclick=AgregarCampos(); class="material-icons" >add</i>
                                             </button>
-                           
+                                    </div>
                                    
 								 
 
@@ -105,8 +105,8 @@
                           
                                         </div>
                                     </div>
-                                    <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Institución:</label>
-                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                    <label  class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Institución:</label>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                                         <div class="form-group form-float">
                                             <div class="form-line">
                                               
@@ -148,8 +148,8 @@
                              </fieldset>                             
                                 <h3><?php echo lang('aa_ingrese informacion de articulo'); ?></h3>
                              <fieldset>
-                                <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Titulo artículo:</label>
-                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Titulo artículo:</label>
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                                     <div class="form-group ">
                                         <div class="form-line">
                                         
@@ -163,11 +163,11 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								
 										<div class="form-line">
-                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                             <label for="abstract"><?php echo lang('aa_abstract'); ?> (*):</label>
                                            
                                         </div>
-                                        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                                             <textarea class="ckeditor" name="abstract" id="abstract" rows="20" cols="90" required="requerid" placeholder="ingrese un resumen del articulo" ></textarea>
                                         </div>
                                         </div>
@@ -177,10 +177,10 @@
                                     <div class="form-group col-md-12">
                   
                   <div class="form-group">
-                      <div style="text-align: right;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                      <div style="text-align: right;" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                           <label for="tema"><?php echo lang('aa_area aplicable'); ?> (*):</label>
                       </div>
-                      <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                           <select class="form-control" id="area_aplicable" name="area_aplicable"  required="required" onchange="load(this.value)">
                             <option value="">Selecciona Area Aplicable</option>
                               <?php
@@ -201,10 +201,10 @@
               </div>
 
               <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                 <div style="text-align: right;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                 <div style="text-align: right;" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                           <label for="tema_interes"><?php echo lang('aa_tema'); ?> (*):</label>
                   </div>
-                  <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                    
                   
                           <select class="form-control" name="tema_interes" id="tema_interes" required="required">
@@ -215,8 +215,8 @@
                   </div>
            
               </div>
-              <label class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >Palabras Clave:</label>	
-                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+              <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Palabras Clave:</label>	
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                    
 			    <div class="form-group form-float">
 				    <div class="form-line ">	
@@ -229,10 +229,10 @@
 
                                 <div class="form-group form-float">
 				                	<div class="form-line">
-                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                             <label for="comentarios">Comentarios (*):</label> 
                                         </div>
-                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                             <textarea class="ckeditor" name="comentarios" id="comentarios" rows="3" placeholder="ingrese comentarios" ><?php  if (isset($_POST['comentarios'])) echo $_POST['comentarios']; ?></textarea>
                                         </div>
                                     </div>
@@ -244,23 +244,23 @@
                             </fieldset>                             
                                 <h3>Articulo</h3>
                           <fieldset>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <div style="text-align: right;" class="col-md-3">
+                                    <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                         <label for="exampleInputFile"><?php echo lang('aa_subir archivo'); ?> (*):</label>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                         <input type="file" name = "userfile" accept=".doc, .docx" class="filestyle" id="exampleInputFile" required="required" data-buttonText="<i class='material-icons' style='font-size:20px;vertical-align:bottom'>file_upload</i> <?php echo lang('aa_seleccionar'); ?> ">
                                         <small id="fileHelp" class="form-text text-muted"><?php echo lang('aa_archivos de extension'); ?> .doc o .docx. Max: 5MB</small>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <div style="text-align: right;" class="col-md-3">
+                                    <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                         <label for="fecha_ingreso">Fecha de Ingreso (*):</label>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                         <input type="text" maxlength="80" value="<?php echo date('d-m-Y'); ?>" name="fecha_ingreso" id="fecha_ingreso" disabled="disabled">
                                     </div>
                                 </div>
