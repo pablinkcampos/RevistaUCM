@@ -6,7 +6,7 @@
     <div class="container clearfix">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">
-ASD_3
+
 
             </div>
 

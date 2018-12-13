@@ -127,7 +127,7 @@
 
                  $consulta = $this->Articulo_Model->obtener_articulos_limit_listos($start, $content_per_page, $num1, $num2);
                  if ($consulta && $filas) {
-                    echo ' <div class="card">';
+                    echo ' <div class="card" style="min-width:538px;">';
                    
                  
                     echo '<div class="header">';
@@ -159,7 +159,7 @@
                      
                     foreach ($consulta as $row) {
                         echo ' <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
-                                <div class="card">
+                                <div class="card" style="min-width:538px;">
                                     <div class="icon">
                                         <i class="material-icons col-blue">bookmark</i><b>'.substr($row->titulo_revista, 0, 30) .'...</b>
                                        

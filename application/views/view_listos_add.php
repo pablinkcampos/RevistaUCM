@@ -121,7 +121,7 @@
 
                     foreach ($consulta as $row) {
                         echo ' <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" >
-                        <div class="card">
+                        <div class="card"  style="min-width:538px;">
                             <div class="icon">
                                 <i class="material-icons col-blue">bookmark</i><b>'.substr($row->titulo, 0, 30) .'.</b>
                                

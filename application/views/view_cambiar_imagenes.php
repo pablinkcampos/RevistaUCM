@@ -20,11 +20,11 @@
  </script>
 
          
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+<div class="container-fluid  " style="margin-top: 200px;">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<center>
-				<div class="card">
+				<div class="card" style="min-width:800px;left:-30px;">
 					<div class="header bg-blue">
                   
                         <h2><?php echo lang('vci_cambiar logo');?></h2>

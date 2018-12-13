@@ -279,22 +279,47 @@ Chart.defaults.global.defaultFontFamily = "Lato";
 Chart.defaults.global.defaultFontSize = 14;
 
 
-var oilData = {
-    labels: label,
-    datasets: [
-        {
-            data: datos,
-            backgroundColor: colores
-        }],
-
+var config = {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data:datos,
+      backgroundColor: colores,
+   
+    }],
+    labels: label
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'bottom',
+    },
+    title: {
+      display: false,
+      text: 'pie'
+    },
+    animation: {
+      animateScale: true,
+      animateRotate: true
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+        	var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var precentage = Math.floor(((currentValue/total) * 100)+0.5);         
+          return data.labels[tooltipItem.index] + " ( " +precentage + "%"+" )";
+        }
+      }
+    }
+  }
 };
 
-window.pie = new Chart(Areacanvas, {
-  type: 'pie',
-  data: oilData,
-
-
-});                           
+window.pie = new Chart(Areacanvas, config); {
+};                   
     
 
     
@@ -351,22 +376,47 @@ Chart.defaults.global.defaultFontFamily = "Lato";
 Chart.defaults.global.defaultFontSize = 10;
 
 
-var oilData = {
-    labels: label,
-    datasets: [
-        {
-            data: datos,
-            backgroundColor: colores
-        }],
-
+var config = {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data:datos,
+      backgroundColor: colores,
+   
+    }],
+    labels: label
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'bottom',
+    },
+    title: {
+      display: false,
+      text: 'pie'
+    },
+    animation: {
+      animateScale: true,
+      animateRotate: true
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+        	var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var precentage = Math.floor(((currentValue/total) * 100)+0.5);         
+          return data.labels[tooltipItem.index] + " ( " +precentage + "%"+" )";
+        }
+      }
+    }
+  }
 };
 
-window.pie = new Chart(Areacanvas, {
-  type: 'pie',
-  data: oilData,
-
-
-});   
+window.pie = new Chart(Areacanvas, config); {
+};  
 });
    </script>
 

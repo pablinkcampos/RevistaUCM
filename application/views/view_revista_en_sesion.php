@@ -208,8 +208,8 @@
                    echo '<div class="row-fluid">';
                    if ($logo ) {
                        echo '
-                               <div class=" col-lg-12 col-md-12">
-                               <div class=" col-lg-3 col-md-3">
+                               <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                               <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3">
                
                                          <a href="#" class="nobg"><div class="bookWrap">
                                            <div class="book">
@@ -231,7 +231,7 @@
 
                    $row = null;
                    if ($articulos_en_revista) { 
-                    echo '<div class="col-lg-9 col-md-9">';
+                    echo '<div col-lg-12 col-md-12 col-sm-12 col-xs-12">';
                   echo '<table id="articulos" class="table" width="100%" cellspacing="0">
                     <thead>
                        <tr>
@@ -353,7 +353,7 @@
                     echo '</tbody>
                         </table>
                     </div>';
-                    echo '<div class="col-lg-9 col-md-9">
+                    echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       
                     <p><b>' . lang("vhp_palabras del editor") . ':</b><b>' . $magazine->palabras_editor . '</b></p>
                    

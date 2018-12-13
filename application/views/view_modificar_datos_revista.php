@@ -4,67 +4,69 @@
 
 
 
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+<div class="container-fluid  " style="margin-top: 200px;">
     
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             
-            <div class="card">
+            <div class="card" style="min-width:600px;right:-30px;">
                 <div class="header">
-                        <div class="col-md-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <br>
+                          <center>
                           <h3 style = "color: black;">Modificar Editorial Revista</h3>
                           <hr>
+                          </center>
                         </div>
                    
                 </div>
                 <center>
                 <div class="row">
                    
-                <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_datos_revista" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="<?php echo base_url(); ?>index.php/System/modifica_datos_revista" method="POST" enctype="multipart/form-data">
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
-                                <label class="control-label" for="ta_e"><?php echo lang("vmdr_editor");?>:</label>
+                            <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <label class="control-label" for="ta_e"> <?php echo lang("vmdr_editor");?>:</label>
                             </div>                        
-                            <div class="col-lg-12">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <textarea class="ckeditor" name="ta_e" id="ta_e" rows="20" cols="100" required="true"><?php echo  $editor->texto; ?></textarea>
              
                             </div>
                         </div>
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
-                                <label class="control-label" for="text"><?php echo lang("vmdr_coEditor");?>:</label>
+                            <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <label class="control-label" for="text"> <?php echo lang("vmdr_coEditor");?>:</label>
                             </div>                        
-                            <div class="col-lg-12">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <textarea class="ckeditor" name="ta_ce" id="ta_ce" rows="20" cols="100" required="true"><?php echo  $coeditor->texto; ?></textarea>
              
                             </div>
                         </div>
 
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
-                                <label class="control-label" for="text"><?php echo lang("vmdr_comite_ea");?>:</label>
+                            <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <label class="control-label" for="text"> <?php echo lang("vmdr_comite_ea");?>:</label>
                             </div>                        
-                            <div class="col-lg-12">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <textarea class="ckeditor" name="ta_cea" id="ta_cea" rows="20" cols="100" required="true"><?php echo  $comite_editor_asesor->texto; ?></textarea>
              
                             </div>
                         </div>
 
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
-                                <label class="control-label" for="text"><?php echo lang("vmdr_comite");?>:</label>
+                            <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <label class="control-label" for="text"> <?php echo lang("vmdr_comite");?>:</label>
                             </div>                        
-                            <div class="col-lg-12">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <textarea class="ckeditor" name="ta_coe" id="ta_coe" rows="20" cols="100" required="true"><?php echo  $comite_editor->texto; ?></textarea>
              
                             </div>
                         </div>
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
-                                <label class="control-label" for="text"><?php echo lang("vmdr_produccion_editorial");?>:</label>
+                            <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <label class="control-label" for="text"> <?php echo lang("vmdr_produccion_editorial");?>:</label>
                             </div>                        
-                            <div class="col-lg-12">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <textarea class="ckeditor" name="ta_pe" id="ta_pe" rows="20" cols="100" required="true"><?php echo  $produccion_editorial->texto; ?></textarea>
              
                             </div>

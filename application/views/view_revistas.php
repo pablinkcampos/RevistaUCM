@@ -41,7 +41,7 @@
 
                             foreach($ids->result() as $row)   {
                                 $num = $this->Articulo_Model->count_magaziness($row->ID);
-                                echo ' <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                echo ' <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 <div class="card">
                                     <div class="icon">
                                         <i class="material-icons col-blue">bookmark</i>

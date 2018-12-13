@@ -667,7 +667,7 @@ class Articulo_Model extends CI_Model {
     }
     
     function informe_recibidos($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, c.nombre_campo as area, COUNT(1)  as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN campo_investigacion as c  ON t.nombre_campo = c.id_campo WHERE r.fecha_ingreso BETWEEN ? AND ? GROUP BY nombre, area", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, c.nombre_campo as area, COUNT(1)  as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN campo_investigacion as c  ON t.nombre_campo = c.id_campo WHERE r.fecha_ingreso BETWEEN ? AND ? GROUP BY nombre, area ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -677,7 +677,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_recibidos_total_area($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT c.nombre_campo as area, COUNT(1)  as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN campo_investigacion as c  ON t.nombre_campo = c.id_campo WHERE r.fecha_ingreso BETWEEN ? AND ? GROUP BY area", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT c.nombre_campo as area, COUNT(1)  as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN campo_investigacion as c  ON t.nombre_campo = c.id_campo WHERE r.fecha_ingreso BETWEEN ? AND ? GROUP BY area ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -687,7 +687,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_recibidos_total_pais($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(1)  as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN campo_investigacion as c  ON t.nombre_campo = c.id_campo WHERE r.fecha_ingreso BETWEEN ? AND ? GROUP BY nombre", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(1)  as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN campo_investigacion as c  ON t.nombre_campo = c.id_campo WHERE r.fecha_ingreso BETWEEN ? AND ? GROUP BY nombre ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -697,7 +697,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_aceptados($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=5 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY p.nombre, tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=5 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY p.nombre, tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -707,7 +707,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_aceptados_total_pais($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=5 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY p.nombre", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=5 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY p.nombre ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -717,7 +717,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_aceptados_total_tema($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=5 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=5 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -727,7 +727,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_rechazados($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE (r.id_estado=4 OR r.id_estado=9) AND r.fecha_ingreso BETWEEN ? AND ? GROUP BY p.nombre, tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE (r.id_estado=4 OR r.id_estado=9) AND r.fecha_ingreso BETWEEN ? AND ? GROUP BY p.nombre, tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -736,7 +736,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_rechazados_total_pais($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE (r.id_estado=4 OR r.id_estado=9) AND r.fecha_ingreso BETWEEN ? AND ? GROUP BY p.nombre", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE (r.id_estado=4 OR r.id_estado=9) AND r.fecha_ingreso BETWEEN ? AND ? GROUP BY p.nombre ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -745,7 +745,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_rechazados_total_tema($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE (r.id_estado=4 OR r.id_estado=9) AND r.fecha_ingreso BETWEEN ? AND ?  GROUP BY tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE (r.id_estado=4 OR r.id_estado=9) AND r.fecha_ingreso BETWEEN ? AND ?  GROUP BY tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -755,7 +755,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_espera_final($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=6 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY p.nombre, tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=6 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY p.nombre, tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -764,7 +764,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_espera_final_total_tema($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=6 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=6 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -773,7 +773,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_espera_final_total_pais($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=6 AND r.fecha_ingreso BETWEEN ? AND ? GROUP BY p.nombre", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=6 AND r.fechaCalificaFInal BETWEEN ? AND ? GROUP BY p.nombre ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -783,7 +783,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_listos($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=13 AND DATE_FORMAT(r.fecha_ultima_upd, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d') GROUP BY p.nombre, tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=13 AND DATE_FORMAT(r.fecha_ultima_upd, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d') GROUP BY p.nombre, tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -792,7 +792,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_listos_total_tema($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=13 AND DATE_FORMAT(r.fecha_ultima_upd, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d')GROUP BY tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=13 AND DATE_FORMAT(r.fecha_ultima_upd, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d')GROUP BY tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -801,7 +801,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_listos_total_pais($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=13 AND DATE_FORMAT(r.fecha_ultima_upd, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d') GROUP BY p.nombre", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre,  COUNT(p.nombre) as cantidad FROM revista as r INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID WHERE r.id_estado=13 AND DATE_FORMAT(r.fecha_ultima_upd, '%Y%m%d') BETWEEN DATE_FORMAT(?, '%Y%m%d') AND DATE_FORMAT(?, '%Y%m%d') GROUP BY p.nombre ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -811,7 +811,7 @@ class Articulo_Model extends CI_Model {
     }
 
     function informe_publicados($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, m.titulo_revista as revista, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY p.nombre, tema, m.titulo_revista", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, t.nombre as tema, m.titulo_revista as revista, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY p.nombre, tema, m.titulo_revista ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -820,7 +820,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_publicados_total_tema($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY tema", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT t.nombre as tema, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY tema ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -829,7 +829,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_publicados_total_pais($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT p.nombre as nombre, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY p.nombre", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT p.nombre as nombre, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY p.nombre ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {
@@ -838,7 +838,7 @@ class Articulo_Model extends CI_Model {
         
     }
     function informe_publicados_total_revista($fecha_inicio,$fecha_fin){
-        $query = $this->db->query("SELECT  m.titulo_revista as revista, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY m.titulo_revista", array($fecha_inicio,$fecha_fin));
+        $query = $this->db->query("SELECT  m.titulo_revista as revista, COUNT(p.nombre) as cantidad FROM final_magazine as fm INNER JOIN revista as r ON fm.ID_articulo= r.ID INNER JOIN temas as t ON r.id_tema = t.id_tema INNER JOIN paises as p ON r.pais = p.ID INNER JOIN magazines as m ON m.ID = fm.ID_magazine WHERE fm.ID_magazine != '9999' and m.fecha_publicacion BETWEEN ? AND ? GROUP BY m.titulo_revista ORDER BY cantidad DESC", array($fecha_inicio,$fecha_fin));
         if ($query) {
             return $query;
         } else {

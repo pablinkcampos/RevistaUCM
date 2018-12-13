@@ -163,7 +163,7 @@ left:0;
                     echo ' <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                               <center>
-                              <div class="card">
+                              <div class="card" style="min-width:600px;left:-30px;">
                               
                                   <div class="body">
                                     <h2>'

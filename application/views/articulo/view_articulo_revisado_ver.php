@@ -6,7 +6,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
-	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.min_spanish.js"></script>
 	<script>
           $(function() {
 
@@ -410,35 +409,34 @@
 							<div class="container-fluid col-xs-12 ol-sm-12 col-md-12 col-lg-12">
 								<form class="form-horizontal" action="<?php echo base_url(); ?>index.php/articulo_editor/aceptar_rechazar_articulo_revisado/<?php echo $id_revista; ?>" method="POST">
 							
-
-
-									<div class="col-xs-1 ol-sm-1 col-md-1 col-lg-1">
+									<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
 										<label class="control-label" for="text">Fecha de Reenvio: </label>
 									</div>
-							        <div class="col-xs-11 ol-sm-11 col-md-4 col-lg-4">
+							        <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4">
 							            <input type="text" class="form-control" maxlength="80" value="<?php echo date("d-m-Y",$mod_date); ?>" name="fecha_reenvio" id="fecha_reenvio" disabled="disabled">
 							        </div>
-									<div align="left" ; class="col-xs-2 ol-sm-2 col-md-2 col-lg-2">
+									<div align="left" class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
 										<label  class="control-label" for="text">Decisión de Aceptación: </label>
 									</div>
-									<div class="col-xs-9 ol-sm-9 col-md-4 col-lg-4">
+									<div class="col-xs-8 col-sm-8 col-md-4 col-lg-4">
 										<select class="form-control" name="opcion" id="opcionid" required="true">
 											<option value="">Selecciona Calificación</option>
 											<?php foreach ($estados->result() as $row) { if($row->id_estado == 4 || $row->id_estado == 5 || $row->id_estado == 6 ){ if ($row->nombre_estado == $estado) { $string = ' selected="selected" '; } else { $string = ""; } echo '
 											<option value="' . $row->id_estado . '" ' . $string . '>' . $row->nombre_estado . '</option>'; } } ?>
 										</select>
 									</div>
-									<div class="col-md-2">
-										<label class="control-label" for="text">Comentario</label>
+									<div align="left" class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+										<label  class="control-label" for="comentarioID">Comentario: </label>
 									</div>
-									<div class="col-md-9" id="comentario">
+									<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8"   id="comentario">
 										<textarea class="ckeditor" style="dislplay:true;" name="comentarioRechazo" id="comentarioID" rows="20" cols="72" required="true"></textarea>
 									</div>
-									<div class="row" style="position:fixed;left:91%;top:68.3%;"> 
-                                        		<button name="asignar" type="submit" class="btn btn-success waves-effect">
-                                            	<span><i class="material-icons">assignment_ind</i>  ingresar</span>
-                                        		</button>
-                                    </div>
+                           <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12" align="right" >
+							   				
+                                    <button name="asignar" type="submit" class="btn btn-success waves-effect">
+                                            <span><i class="material-icons">assignment_ind</i>  ingresar</span>
+                                    </button>
+                           </div>
 								</form>
 							</div>
                            </div>

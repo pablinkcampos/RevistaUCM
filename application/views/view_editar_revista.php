@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             
-            <div class="card">
+            <div class="card" style="min-width:600px;left:-30px;">
                 <div class="header bg-blue">
                       
                     <h3>Editar revista</h3>
@@ -40,26 +40,26 @@
                           }
                          ?>
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
+                            <div style="text-align: right;" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <label class="control-label" for="text"><?php echo lang('vne_titulo revista');?></label>
                             </div>
-                            <div class="col-lg-9">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                 <input type="text" class="form-control" name="t_rev" value="<?php echo $titulo; ?>" id="t_rev" placeholder="<?php echo lang('vne_ingrese titulo');?>" required="requerid"  >
                             </div>
                         </div>
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
+                            <div style="text-align: right;" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <label class="control-label" for="text"><?php echo lang('vne_fecha edicion');?></label>
                             </div>
-                            <div class="col-lg-9">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <input  type="text" class="datepicker form-control" name="f_rev"  value="<?php echo $fecha; ?>"  placeholder="<?php echo lang('vne_fecha edicion');?>" required="requerid">
                             </div>
                         </div>
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
+                            <div style="text-align: right;" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <label class="control-label" for="text"><?php echo lang('vne_palabras del editor');?></label>
                             </div>
-                            <div class="col-lg-9">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                 <textarea class="ckeditor" name="p_edit" id="p_edit" value="<?php echo $palabras; ?>" placeholder="<?php echo lang('vne_descripcion');?>." rows="2" required="requerid"  ><?php echo $palabras; ?></textarea>
                             </div>
                         </div>

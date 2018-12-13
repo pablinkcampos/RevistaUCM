@@ -44,7 +44,7 @@
                         <a><img width="350" height="80" src="<?php echo base_url(); ?>img/logo.png" alt="UCM Logo"></a>
                     </center>
         </div>
-        <div class="card">
+        <div class="card" style="min-width:600px;left:-30px;">
             <div class="body">
                 <form name= "login-form" id="login-form" class="nobottommargin" action="<?php echo base_url(); ?>index.php/Login/cambiar_pass" method="post" onsubmit="return validate()">
                     <div class="msg">Cambiar Password</div>

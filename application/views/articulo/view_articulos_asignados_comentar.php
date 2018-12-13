@@ -95,7 +95,7 @@
          </div>
          <div class="body">
             <div class="row clearfix">
-               <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
                      <div class="panel panel-primary">
                         <div class="panel-heading" role="tab" id="headingOne_1">
@@ -307,14 +307,8 @@
                            
                            
                            ?>
-                            <div class="col-md-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                        
-                         <div class="col-md-4"></div>
-                     </div>
-
-                     
-                         <div class="col-md-4"></div>
-                     </div>
                  </div>
                         <?php endforeach ?>
                              <?php
@@ -337,27 +331,27 @@
                         </div>
                         <div id="collapseTwo_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_1">
                            <div class="panel-body">
-                              <div class="col-md-12">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                              
                                    <!-- formulario en el cual se activa el metodo post para reasignar revisores -->
                                    <form method="POST" action="<?php echo base_url(); ?>index.php/articulo_revisor/articulos_asignados_comentar/<?php echo $id_revista; ?>">
                                     
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <label for="comment"><?php echo lang('aaac_comentario'); ?></label>
                                         <textarea class="ckeditor" rows="40" id="comentario" name="comentario" > <?php echo $comentario; ?></textarea>
                                     </div>
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                    <div style="text-align: left; color:red;" class="col-md-12">
+                                    <div style="text-align: left; color:red;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <h3 style="text-align: left; color:red; bold" >Advertencia: Al Calificar este artículo el sistema asumira que esta revisado.</h3>
                                     </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                        
-                                        <div style="text-align: right;" class="col-md-3">
+                                        <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                         <label for="calificacion"><?php echo lang('aaac_calificacion'); ?> (*):</label>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                             <select class="form-control" name="calificacion" id="calificacion" >
                                                 <option value="3">Selecciona Calificación</option>
                                                 <?php

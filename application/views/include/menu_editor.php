@@ -28,12 +28,6 @@
 					
 						<?php
                   
-               
-                     if ($user_data['id_rol'] == 2 || $user_data['id_rol2'] == 2 || $user_data['id_rol3'] == 2 ) {
-                         
-                         echo '    <li><a href="' . base_url() . 'index.php/System/revisor"><i class="material-icons">person</i>Cambiar menu a <br><center> Revisor</center></a></li>';
-                         
-                     } 
                 ?>
 							    
                             <li role="seperator" class="divider"></li>

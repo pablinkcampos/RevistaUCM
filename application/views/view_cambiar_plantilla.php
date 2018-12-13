@@ -20,11 +20,11 @@
  </script>
 
 
-<div class="container-fluid  " style="margin-top: 200px;"250px;"300px;">
+<div class="container-fluid  " style="margin-top: 200px;">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<center>
-				<div class="card">
+				<div class="card" style="min-width:600px;left:-30px;">
 					<div class="header bg-blue">
                   
                         <h2><?php echo lang('vcp_cambia estructura base para articulos');?></h2>
@@ -37,7 +37,7 @@
 					<div class="row">
                         <p><?php echo lang('vci_part1');?>  '.PNG'. <?php echo lang('vci_part2');?> 717x93
                             <?php echo lang('vci_part3');?>.</p>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <form name= "logo-form" class="nobottommargin" action="<?php echo base_url(); ?>index.php/System/insert_base" method="post" enctype="multipart/form-data" onsubmit="return validate_logo()">
                                 <div class="col-lg-9">
                                     <input type="file" name="file_base"/><?php echo lang('vcp_formato aceptado');?>: PDF

@@ -8,16 +8,16 @@
             <div id="posts" class="events small-thumbs">
         <div class="postcontent nobottommargin col_last">
             <div id="posts" class="events small-thumbs">
-                <div class="entry clearfix col-lg-12">
+                <div class="entry clearfix col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="entry-title"><h3><?php echo lang("vmsn_modificar quienes somos");?></h3></div>
                 </div>
-                <div class="clearfix col-lg-12">
-                    <form class="form-horizontal col-lg-9" action="<?php echo base_url(); ?>index.php/System/modifica_nosotros" method="POST" enctype="multipart/form-data">
+                <div class="clearfix col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="<?php echo base_url(); ?>index.php/System/modifica_nosotros" method="POST" enctype="multipart/form-data">
                         <div class="form-group col_full">
-                            <div style="text-align: right;" class="col-lg-3">
-                                <label class="control-label" for="text"<?php echo lang("vmsn_ingrese texto");?></label>
+                            <div style="text-align: right;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <label class="control-label" for="text"><?php echo lang("vmsn_ingrese texto");?></label>
                             </div>                        
-                            <div class="col-lg-9">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                 <textarea class="form-control" name="t_com" id="abstract"rows="6" required="true"><?php echo  $texto->texto; ?></textarea>
                             </div>
                         </div>

@@ -55,12 +55,12 @@
                         
                         
                     
-                        echo '<div class="col-lg-12 col-md-12">
+                        echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <center>
                             <h2>'.lang("vhe_no existen articulos aun").'.</h2>
                             </center>
                             </div>';
-                            echo '<div class="col-lg-12 col-md-12">
+                            echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <center>
                             <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículo por Convertir</a>
                             <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
@@ -87,7 +87,7 @@
 
                  $consulta = $this->Articulo_Model->obtener_articulos_limit_listos($start, $content_per_page, $num1, $num2);
                  if ($consulta && $filas) {
-                        echo ' <div class="card">';
+                        echo ' <div class="card"  style="min-width:538px;"> ' ;
                    
                  
                         echo '<div class="header">';
@@ -100,12 +100,12 @@
                     
                     
                 
-                        echo '<div class="col-lg-12 col-md-12">
+                        echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <center>
                         <h2>'.lang("vhe_articulos disponibles").'.</h2>
                         </center>
                         </div>';
-                        echo '<div class="col-lg-12 col-md-12">
+                        echo '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <center>
                         <a href="'.base_url().'index.php/System/articulos_por_convertir" class="btn btn-primary waves-effect">Artículos por convertir</a>
                         <a href="'.base_url().'index.php/System/articulos_convertidos" class="btn btn-success waves-effect">'.lang("vhe_articulos listos").'</a>
@@ -119,7 +119,7 @@
                      
                     foreach ($consulta as $row) {
                         echo ' <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" >
-                                <div class="card">
+                                <div class="card"  style="min-width:538px;">
                                     <div class="icon">
                                         <i class="material-icons col-blue">bookmark</i><b>'.substr($row->titulo_revista, 0, 30).'.</b>
                                        
@@ -141,7 +141,7 @@
                             echo '            <form name="input" action="' . base_url() . 'index.php/System/editor_pagina" method="post">';
                             echo '            <input type="hidden" value="' . $row->ID . '" name="articulo_id" />';
                             echo '            <input type="hidden" value="' . $row->email_autor . '" name="email_autors" />';
-                            echo '            <center><button class="submit btn btn-primary waves-effect center">formater artículo</button>';
+                            echo '            <center><button class="submit btn btn-primary waves-effect center">Convertir artículo</button>';
                             echo '          </center></form></div></div></div>';
                          }
                         }

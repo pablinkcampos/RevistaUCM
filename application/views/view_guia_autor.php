@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<center>
-				<div class="card" style="min-width:538px">
+				<div class="card" style="min-width:600px">
 					<div class="header">
 						<h2>
 							Video Tutoriales para Autor
